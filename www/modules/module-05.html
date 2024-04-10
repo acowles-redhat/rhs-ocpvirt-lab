@@ -3,9 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Managing an Application from GitHub :: Red Hat Summit 2024: Experience Red Hat OpenShift Virtualization: A Modern Application Platform for Virtual Machines</title>
+    <title>Migrating Virtual Machines :: Experience Red Hat OpenShift Virtualization</title>
     <link rel="prev" href="module-04.html">
-    <link rel="next" href="module04.html">
+    <link rel="next" href="orig/index.html">
     <meta name="generator" content="Antora 3.1.7">
 <link rel="stylesheet" href="../_/css/site.css"><link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -19,7 +19,7 @@
         <img src="https://www.redhat.com/rhdc/managed-files/Red-Hat-Summit-logo.svg" alt="Red Hat Summit logo" width="90px" class="hero-summit-logo dx-block dx-mb-1">
         <img src="https://gpte-public.s3.amazonaws.com/rh-ansiblefest-2021-logo-pool-reverse-rgb_0.svg" alt="AnsibleFest logo" width="auto" class="hero-ansiblefest-logo dx-block dx-mb-2">
       </div>
-      <a class="navbar-item site-title" target="__blank" style="color: #fff !important;" href="..">Red Hat Summit 2024: Experience Red Hat OpenShift Virtualization: A Modern Application Platform for Virtual Machines</a>
+      <a class="navbar-item site-title" target="__blank" style="color: #fff !important;" href="..">Experience Red Hat OpenShift Virtualization</a>
     </div>
     <div id="topbar-nav" class="navbar-menu">
       <div class="navbar-end">
@@ -45,20 +45,38 @@
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="index.html">Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="module-01.html">1. Bare Metal Management </a>
+    <a class="nav-link" href="module-00.html">1. Virtual Machine Management </a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="module-01.html#repositories">Repositories</a>
+    <a class="nav-link" href="module-00.html#repositories">Repositories</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="module-01.html#software">Software</a>
+    <a class="nav-link" href="module-00.html#software">Software</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="module-02.html">2. Storage</a>
+    <a class="nav-link" href="module-01.html">2. Bare Metal Management </a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="module-01.html#review_nodes">Review Nodes and Machines</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="module-01.html#review_hosts">Review Bare Metal Hosts</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="module-01.html#scaling_cluster">Scaling the Cluster with a New Bare Metal Host</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="module-02.html">3. Storage Management</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="module-02.html#prerequisites">Install Prerequisites</a>
@@ -70,7 +88,7 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="module-03.html">3. Networking</a>
+    <a class="nav-link" href="module-03.html">4. Network Management</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="module-03.html#prerequisites">Install Prerequisites</a>
@@ -82,7 +100,7 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="module-04.html">4. Creating VM Templates</a>
+    <a class="nav-link" href="module-04.html">5. Template Management</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="module-04.html#prerequisites">Install Prerequisites</a>
@@ -94,13 +112,13 @@
   </li>
   <li class="nav-item is-current-page" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="module-05.html">5. Migrating VMs</a>
+    <a class="nav-link" href="module-05.html">6. Migrating Virtual Machines</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#prerequisites">Install Prerequisites</a>
+    <a class="nav-link" href="#prerequisites">Prerequisites for the VMware Provider</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#container">Enable Container</a>
+    <a class="nav-link" href="#migrating_vms">Migrating Virtual Machines from VMware</a>
   </li>
 </ul>
   </li>
@@ -110,9 +128,6 @@
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Dev Mode</span>
 <ul class="nav-list">
-  <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="module04.html">Managing an Application from GitHub</a>
-  </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="orig/index.html">Red Hat Summit 2024</a>
   </li>
@@ -155,35 +170,120 @@
   <a href="index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
-    <li><a href="module-05.html">5. Migrating VMs</a></li>
+    <li><a href="module-05.html">6. Migrating Virtual Machines</a></li>
   </ul>
 </nav>
 </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">Managing an Application from GitHub</h1>
-<div id="preamble">
+<h1 class="page">Migrating Virtual Machines</h1>
+<div class="sect1">
+<h2 id="_introduction"><a class="anchor" href="#_introduction"></a>Introduction</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In the first half of this workshop, we packaged an application into this portable container format manually using rpms.
-In the second half, we will consider that you may want to manage software from GitHub or some kind of software versioning application.
-Rather than installing rpms, we have individual software files and pull them out of that version control into a group of systems.</p>
+<p>This portion of our lab uses the <a href="https://access.redhat.com/documentation/en-us/migration_toolkit_for_virtualization/">Migration Toolkit for Virtualization</a> (MTV) to import a virtual machine from VMware vSphere to OpenShift. The migration toolkit supports two "modes" of import:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Cold migration turns off the source virtual machine before starting the migration. This is the default migration type.</p>
+</li>
+<li>
+<p>Warm migration copies data while the source virtual machine continues to run. Once the bulk of data has been migrated, the VM is shutdown and the final data is copied to the destination. The new VM can then be started, resulting in a much shorter period of downtime for the VM-hosted application.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The migration toolkit has already been deployed to your cluster using the Operator.</p>
+</div>
+<div class="paragraph">
+<p>Documentation for how to install and configure the Operator can be found <a href="https://access.redhat.com/documentation/en-us/migration_toolkit_for_virtualization/">here</a>.</p>
+</div>
+<div class="paragraph">
+<p>If you would like to learn more about how to configure the Migration Toolkit for Virtualization, please see the documentation <a href="https://access.redhat.com/documentation/en-us/migration_toolkit_for_virtualization/2.5/html/installing_and_using_the_migration_toolkit_for_virtualization/prerequisites#rhv-prerequisites_mtv">here</a> for use with Red Hat Virtualization, or <a href="https://access.redhat.com/documentation/en-us/migration_toolkit_for_virtualization/2.4/html/installing_and_using_the_migration_toolkit_for_virtualization/prerequisites#vmware-prerequisites_mtv">here</a> for use with VMware vSphere.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_install_rhel_8_ubi"><a class="anchor" href="#_install_rhel_8_ubi"></a>Install RHEL 8 UBI</h2>
+<h2 id="prerequisites"><a class="anchor" href="#prerequisites"></a>Prerequisites for the VMware Provider</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this lab, we will be using a different Red Hat Enterprise Linux version in my container.</p>
+<p>The following prerequisites apply to all migrations:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>ISO/CD-ROM disks must be unmounted.</p>
+</li>
+<li>
+<p>Each NIC must contain one IPv4 and/or one IPv6 address.</p>
+</li>
+<li>
+<p>The VM operating system must be certified and supported for use as a <a href="https://access.redhat.com/articles/973163#ocpvirt">guest operating system with OpenShift Virtualization</a>.</p>
+</li>
+<li>
+<p>VM names must contain only lowercase letters (a-z), numbers (0-9), or hyphens (-), up to a maximum of 253 characters. The first and last characters must be alphanumeric. The name must not contain uppercase letters, spaces, periods (.), or special characters.</p>
+</li>
+<li>
+<p>VM names must not duplicate the name of an existing VM in the OpenShift Virtualization environment.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The <strong>Migration Toolkit for Virtualization</strong> will automatically assign a new name to a VM that does not comply with the rules. If this happens, MTV will automatically generate a new VM name to allow the migration to proceed smoothly.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="migrating_vms"><a class="anchor" href="#migrating_vms"></a>Migrating Virtual Machines from VMware</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A three-tier application has been deployed on VMware for you to migrate to OpenShift.</p>
+</div>
+<div class="paragraph">
+<p>The application consists of the following four virtual machines:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>One HAproxy system that redirects traffic to the web servers</p>
+</li>
+<li>
+<p>Two Microsoft Windows servers with IIS hosting a PHP application connecting to the database</p>
+</li>
+<li>
+<p>One Linux system running a MariaDB database</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The application is accessible from the following link: <a href="http://webapp.vc.opentlc.com/" class="bare">http://webapp.vc.opentlc.com/</a></p>
+</div>
+<div class="paragraph">
+<p>You will migrate three of the four virtual machines using cold migration - you will not need to migrate the HAproxy (load balancer) VM because OpenShift handles network traffic and load balancing natively for VMs connected to the SDN using a <code>Service</code>.</p>
+</div>
+<div class="sect2">
+<h3 id="_review_the_vmware_environment"><a class="anchor" href="#_review_the_vmware_environment"></a>Review the VMware environment</h3>
+<div class="paragraph">
+<p>To help understand the process of mapping resources, such as datastores and port groups, from vSphere into OpenShift&#8217;s equivalents, network attachment definitions and storage classes, let&#8217;s begin by reviewing the source environment for the migrations.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Verify the host system release</p>
-<div class="listingblock">
+<p>Navigate to vCenter via <a href="https://portal.vc.opentlc.com/ui/app/folder;nav=v/urn:vmomi:Folder:group-d1:ee1bef3e-6179-4c1f-9d2a-004c7b0df4e5/vms/vms" target="_blank" rel="noopener">https://portal.vc.opentlc.com</a></p>
+</li>
+</ol>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Login with the user <code>%<a href="mailto:vcenter_user%@vc.opentlc.com">vcenter_user%@vc.opentlc.com</a></code> and the password <code>%vcenter_password%</code></p>
+</li>
+<li>
+<p>By default you&#8217;ll see the VMs and Folders view, where you can see the four VMs representing the application.</p>
+<div class="imageblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cat /etc/redhat-release</code></pre>
+<img src="_images/module-05/100_vSphere_VM_List.png" alt="100 vSphere VM List">
 </div>
 </div>
 <div class="admonitionblock note">
@@ -193,21 +293,178 @@ Rather than installing rpms, we have individual software files and pull them out
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The <code>bastion</code> system is Red Hat Enterprise Linux 9, and when you built the previous container, you used the UBI9 image. This means both the image and the container were built off the same Red Hat Enterprise Linux packages.
+The VMs with the suffix <code>_running</code> are the active ones. As for the migration have to be stopped, a clone of the VMs were created for the migration. Those VMs are the ones without that suffix.
 </td>
 </tr>
 </table>
 </div>
 </li>
 <li>
-<p>As we did previously in this lab, Use <code>buildah from</code> to pull down the Red Hat Enterprise Linux 8 UBI.</p>
-<div class="listingblock">
+<p>Change to the networks view (or click <a href="https://portal.vc.opentlc.com/ui/app/dvportgroup;nav=n/urn:vmomi:DistributedVirtualPortgroup:dvportgroup-1916:ee1bef3e-6179-4c1f-9d2a-004c7b0df4e5/ports" target="_blank" rel="noopener"> this link</a>), then expand the tree to view the port group used by the virtual machines. Note that the name is <code>segment-migrating-to-ocpvirt</code>.</p>
+<div class="imageblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">buildah from registry.access.redhat.com/ubi8/ubi</code></pre>
+<img src="_images/module-05/101_vSphere_Network.png" alt="101 vSphere Network">
+</div>
+</div>
+</li>
+<li>
+<p>Finally, review the datastore by browsing to the datastores view (or using <a href="https://portal.vc.opentlc.com/ui/app/datastore;nav=s/urn:vmomi:Datastore:datastore-48:ee1bef3e-6179-4c1f-9d2a-004c7b0df4e5/vms/vms" target="_blank" rel="noopener">this link</a>). Expand the tree to see the name of the datastore, <code>WorkloadDatastore</code>, and optionally browse to the <strong>VMs</strong> sub-tab to view the capacity used by each virtual machine.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-05/102_vSphere_Datastore.png" alt="102 vSphere Datastore">
 </div>
 </div>
 </li>
 </ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_review_the_vmware_provider_to_the_migration_toolkit"><a class="anchor" href="#_review_the_vmware_provider_to_the_migration_toolkit"></a>Review the VMware provider to the migration toolkit</h3>
+<div class="paragraph">
+<p>The <strong>Migration Toolkit for Virtualization</strong> (<strong>MTV</strong>) uses the VMware Virtual Disk Development Kit (<strong>VDDK</strong>) SDK to transfer virtual disks from VMware vSphere. This VDDK has already been set up for you in this environment.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Navigate in the left menu to <strong>Migration</strong> &#8594; <strong>Providers for virtualization</strong></p>
+</li>
+<li>
+<p>Select project <code>openshift-mtv</code></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-05/91_MTV_Providers.png" alt="91 MTV Providers">
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+MTV 2.4 and later are project/namespace aware and do not require administrator privileges. You can delegate VM imports to application teams and VM users so that they can self-serve and migrate at their own pace!
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>By default, there is a provider called <code>host</code> which represents the <strong>OpenShift Virtualization</strong> as a target platform</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-05/92_MTV_Provider_list.png" alt="92 MTV Provider list">
+</div>
+</div>
+</li>
+<li>
+<p>The lab is already configured with the VMWare provider named <code>vmware</code>.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_create_storage_and_network_mappings"><a class="anchor" href="#_create_storage_and_network_mappings"></a>Create storage and network mappings</h3>
+<div class="paragraph">
+<p>Storage and networking resources are managed differently in VMware vSphere and Red Hat OpenShift Virtualization. Therefore it is necessary to create mappings from the source datastores and networks in VMware vSphere to the equivalent resources in OpenShift so that the migration toolkit understands how to connect and place virtual machines after they are imported.</p>
+</div>
+<div class="paragraph">
+<p>These only need to be configured once and are then reused in subsequent VM Migration Plans.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Navigate in the left menu to <strong>Migration</strong> &#8594; <strong>NetworkMaps for virtualization</strong> and press <strong>Create NetworkMap</strong></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-05/96_MTV_NetworkMaps.png" alt="96 MTV NetworkMaps">
+</div>
+</div>
+</li>
+<li>
+<p>Fill in the following information in the appeared dialog. Press <strong>Create</strong>.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p><strong>Name</strong>: <code>mapping-segment</code></p>
+</li>
+<li>
+<p><strong>Source provider</strong>: <code>vmware</code></p>
+</li>
+<li>
+<p><strong>Target provider</strong>: <code>host</code></p>
+</li>
+<li>
+<p><strong>Source networks</strong>: <code>segment-migrating-to-ocpvirt</code></p>
+</li>
+<li>
+<p><strong>Target network</strong>: <code>Pod network (default)</code></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-05/97_Add_VMWARE_Mapping_Network.png" alt="97 Add VMWARE Mapping Network">
+</div>
+</div>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Ensure the created mapping has the <strong>Status</strong> <code>Ready</code></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-05/98_List_VMWARE_Mapping_Network.png" alt="98 List VMWARE Mapping Network">
+</div>
+</div>
+</li>
+<li>
+<p>Navigate in the left menu to <strong>Migration</strong> &#8594; <strong>StorageMaps for virtualization</strong> and press <strong>Create StorageMap</strong></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-05/99_MTV_StorageMaps.png" alt="99 MTV StorageMaps">
+</div>
+</div>
+</li>
+<li>
+<p>Fill in the following information. Press <strong>Create</strong>.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p><strong>Name</strong>: <code>mapping-datastore</code></p>
+</li>
+<li>
+<p><strong>Source provider</strong>: <code>vmware</code></p>
+</li>
+<li>
+<p><strong>Target provider</strong>: <code>host</code></p>
+</li>
+<li>
+<p><strong>Source storage</strong>: <code>WorkloadDatastore</code></p>
+</li>
+<li>
+<p><strong>Target storage classs</strong>: <code>ocs-storagecluster-ceph-rbd (default)</code></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-05/100_Add_VMWARE_Mapping_Storage.png" alt="100 Add VMWARE Mapping Storage">
+</div>
+</div>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Ensure the created mapping has the <strong>Status</strong> <code>Ready</code></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-05/101_List_VMWARE_Mapping_Storage.png" alt="101 List VMWARE Mapping Storage">
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_create_a_migration_plan"><a class="anchor" href="#_create_a_migration_plan"></a>Create a Migration Plan</h3>
+<div class="paragraph">
+<p>Now that you have the virtualization provider and the two mappings (network &amp; storage) you can create a Migration Plan - this plan selects which VMs to migrate from VMware vSphere to Red Hat OpenShift Virtualization and how to execute the migration (cold/warm, network mapping, storage mapping, pre-/post-hooks, etc.).</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -216,210 +473,159 @@ The <code>bastion</code> system is Red Hat Enterprise Linux 9, and when you buil
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Because you already pulled one image named <code>ubi-working-container</code> this one is called <code>ubi-working-container-1</code>.
+Depending on order of you doing the modules, you might be missing required <code>vmexamples</code> namespace here. If you haven&#8217;t done yet, do chapter <strong>OpenShift Virtualization Basics</strong> &#8594; <strong>Create a new Project</strong>)
 </td>
 </tr>
 </table>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="prerequisites"><a class="anchor" href="#prerequisites"></a>Install Prerequisites</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Now that you have a working container, you will use the same process as before installing all the prerequisites, changing config files, and manipulating the contents of this container to be in the desired state.</p>
-</div>
-<div class="paragraph">
-<p>The software you will install is a JavaScript-based game that runs on a web browser. As before in the lab, use dnf to install software inside the container.</p>
-</div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Use <code>buildah run</code> and install Apache (<code>httpd</code>) into the <code>ubi-working-container-1</code> container.</p>
-<div class="listingblock">
+<p>Navigate in the left menu to <strong>Migration</strong> &#8594; <strong>Plans for virtualization</strong> and press <strong>Create plan</strong></p>
+<div class="imageblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">buildah run ubi-working-container-1 -- dnf -y install httpd</code></pre>
+<img src="_images/module-05/102_Create_VMWARE_Plan.png" alt="102 Create VMWARE Plan">
+</div>
+</div>
+</li>
+<li>
+<p>On the wizard fill the following information on the <strong>General settings</strong> step. Press <strong>Next</strong> when done.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p><strong>Plan name</strong>: <code>move-webapp-vmware</code></p>
+</li>
+<li>
+<p><strong>Source provider</strong>: <code>vmware</code></p>
+</li>
+<li>
+<p><strong>Target provider</strong>: <code>host</code></p>
+</li>
+<li>
+<p><strong>Target namespace</strong>: <code>vmexamples</code></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-05/52_General_VMWARE_Plan.png" alt="52 General VMWARE Plan">
 </div>
 </div>
 </li>
 </ol>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_enable_service"><a class="anchor" href="#_enable_service"></a>Enable Service</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The next thing to do is to use a systemctl to enable the service. The ubi-init provides full systemd service to the container.
-This will start up any of the services that are enabled.</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
+</li>
 <li>
-<p>Enable the <code>httpd</code> service using <code>buildah run</code></p>
-<div class="listingblock">
+<p>On the next step, select <code>All datacenters</code>  and press <strong>Next</strong></p>
+<div class="imageblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">buildah run ubi-working-container-1 -- systemctl enable httpd</code></pre>
+<img src="_images/module-05/53_VM_Filter_VMWARE_Plan.png" alt="53 VM Filter VMWARE Plan">
 </div>
 </div>
 </li>
-</ol>
+<li>
+<p>On the next step select the database VM, as the one we would like to move. Press <strong>Next</strong>:</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-05/54_VM_Select_VMWARE_Plan.png" alt="54 VM Select VMWARE Plan">
 </div>
-<div class="admonitionblock note">
+</div>
+</li>
+<li>
+<p>On the <strong>Network mapping</strong> step select <code>mapping-segment</code> and press <strong>Next</strong></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-05/55_Network_VMWARE_Plan.png" alt="55 Network VMWARE Plan">
+</div>
+</div>
+</li>
+<li>
+<p>On the <strong>Storage mapping</strong> step select <code>mapping-datastore</code> and press <strong>Next</strong></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-05/56_Storage_VMWARE_Plan.png" alt="56 Storage VMWARE Plan">
+</div>
+</div>
+</li>
+<li>
+<p>Press <strong>Next</strong> on the steps <strong>Type</strong> and <strong>Hooks</strong></p>
+</li>
+<li>
+<p>Review the configuration specified and press <strong>Finish</strong></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-05/57_Finish_VMWARE_Plan.png" alt="57 Finish VMWARE Plan">
+</div>
+</div>
+</li>
+<li>
+<p>Ensure the status of the plan is <strong>Ready</strong></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-05/58_Ready_VMWARE_Plan.png" alt="58 Ready VMWARE Plan">
+</div>
+</div>
+</li>
+<li>
+<p>Press <strong>Start</strong> to begin the migration of the three VMs</p>
+</li>
+<li>
+<p>After around 10 minutes the migration is completed</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-05/59_Completed_VMWARE_Plan.png" alt="59 Completed VMWARE Plan">
+</div>
+</div>
+<div class="admonitionblock important">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-note" title="Note"></i>
+<i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-The UBI standard image doesn&#8217;t have systemd installed on it by default. The <code>ubi-init</code> container image does include systemd. Plan accordingly to which image you use to build applications.
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_explore_source_materials"><a class="anchor" href="#_explore_source_materials"></a>Explore Source Materials</h2>
-<div class="sectionbody">
 <div class="paragraph">
-<p>A GitHub repository has already been synchronized to <code>/home/devops/clumsy-bird/</code> This repository contains the configurations for your application.</p>
+<p>Having many participants performing the same task in parallel can cause this task to perform slower than in a real environment. Please be patient.</p>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Verify the repository is cloned inside the <code>/home/devops/</code> directory</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cd /home/devops/</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git clone https://github.com/ellisonleao/clumsy-bird</code></pre>
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The output states that the software has already been checked out.
 </td>
 </tr>
 </table>
 </div>
 </li>
-<li>
-<p>Explore the JavaScript contents, index files, and everything else that we need for this web-based JavaScript software.</p>
-<div class="listingblock execute">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ls clumsy-bird</code></pre>
-</div>
-</div>
-</li>
 </ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_review_and_configure_migrated_virtual_machines"><a class="anchor" href="#_review_and_configure_migrated_virtual_machines"></a>Review and configure migrated Virtual Machines</h3>
+<div class="paragraph">
+<p>The selected VM has now been migrated and can be started on OpenShift Virtualization. You could connect to the VM&#8217;s console and interact with it, just as you would in VMware vCenter.</p>
+</div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_add_source_materials_to_container"><a class="anchor" href="#_add_source_materials_to_container"></a>Add Source Materials to Container</h2>
-<div class="sectionbody">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Now that you have verified the source materials exist, you will put the software inside of my container image using the <code>buildah copy</code> command.</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">buildah copy ubi-working-container-1 clumsy-bird /var/www/html</code></pre>
-</div>
-</div>
-</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="container"><a class="anchor" href="#container"></a>Enable Container in Background</h2>
+<h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In the previous section of this lab, you ran the game natively through interactive mode. Because you are now building a web application you will need to run the container in the background and access it through a web address.</p>
+<p>In addition to the Migration Toolkit for Virtualization, there are three other migration toolkits. The combination of these can be used to move many workloads into and within OpenShift clusters depending on your organization&#8217;s needs.</p>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
+<div class="ulist">
+<ul>
 <li>
-<p>Execute <code>buildah config</code> to specify a port and initialize the container.</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">buildah config --port 80 --cmd "/usr/sbin/init" ubi-working-container-1</code></pre>
-</div>
-</div>
-</li>
-</ol>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The command makes a configuration change to this container. I&#8217;m configuring this container to accept connections to its port 80. When the container starts up, it should run the init command, which, in this case, is going to be the Apache daemon right from earlier when I enabled it.
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_commit_container_and_deploy"><a class="anchor" href="#_commit_container_and_deploy"></a>Commit Container and Deploy</h2>
-<div class="sectionbody">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Now that we have a container in a working configured state, it is time to make that permanent by committing it to a container image called <code>clumsy-bird</code></p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">buildah commit ubi-working-container-1 clumsy-bird</code></pre>
-</div>
-</div>
+<p><a href="https://developers.redhat.com/products/mtr/overview">Migration Toolkit for Runtimes</a> - Assist and accelerate Java application modernization and migration.</p>
 </li>
 <li>
-<p>Verify that the image was created with <code>podman</code></p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman images</code></pre>
-</div>
-</div>
+<p><a href="https://access.redhat.com/documentation/en-us/migration_toolkit_for_applications/">Migration Toolkit for Applications</a> - Accelerate large-scale application modernization efforts to containers and Kubernetes.</p>
 </li>
 <li>
-<p>Run the container Now it&#8217;s time to run the container.</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman run -d -p 8500:80 clumsy-bird</code></pre>
-</div>
-</div>
+<p><a href="https://docs.openshift.com/container-platform/4.12/migration_toolkit_for_containers/about-mtc.html">Migration Toolkit for Containers</a> - Migrate stateful application workloads between OpenShift clusters.</p>
 </li>
-</ol>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_verify_application"><a class="anchor" href="#_verify_application"></a>Verify Application</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Verify that the application is running by navigating to</p>
+</ul>
 </div>
 <div class="paragraph">
-<p><a href="http://bastion.my-guid.example.opentlc.com:8500" class="bare">http://bastion.my-guid.example.opentlc.com:8500</a></p>
+<p>For more information about these, please reach out to your Red Hat account team.</p>
 </div>
 </div>
 </div>
 <nav class="pagination">
-  <span class="prev"><a href="module-04.html" class="query-params-link">4. Creating VM Templates</a></span>
-  <span class="next"><a href="module04.html" class="query-params-link">Managing an Application from GitHub</a></span>
+  <span class="prev"><a href="module-04.html" class="query-params-link">5. Template Management</a></span>
+  <span class="next"><a href="orig/index.html" class="query-params-link">Red Hat Summit 2024</a></span>
 </nav>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">

@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Building an Application with rpms :: Red Hat Summit 2024: Experience Red Hat OpenShift Virtualization: A Modern Application Platform for Virtual Machines</title>
-    <link rel="prev" href="index.html">
+    <title>Bare Metal Machine Management :: Experience Red Hat OpenShift Virtualization</title>
+    <link rel="prev" href="module-00.html">
     <link rel="next" href="module-02.html">
     <meta name="generator" content="Antora 3.1.7">
 <link rel="stylesheet" href="../_/css/site.css"><link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
@@ -19,7 +19,7 @@
         <img src="https://www.redhat.com/rhdc/managed-files/Red-Hat-Summit-logo.svg" alt="Red Hat Summit logo" width="90px" class="hero-summit-logo dx-block dx-mb-1">
         <img src="https://gpte-public.s3.amazonaws.com/rh-ansiblefest-2021-logo-pool-reverse-rgb_0.svg" alt="AnsibleFest logo" width="auto" class="hero-ansiblefest-logo dx-block dx-mb-2">
       </div>
-      <a class="navbar-item site-title" target="__blank" style="color: #fff !important;" href="..">Red Hat Summit 2024: Experience Red Hat OpenShift Virtualization: A Modern Application Platform for Virtual Machines</a>
+      <a class="navbar-item site-title" target="__blank" style="color: #fff !important;" href="..">Experience Red Hat OpenShift Virtualization</a>
     </div>
     <div id="topbar-nav" class="navbar-menu">
       <div class="navbar-end">
@@ -44,21 +44,39 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="1">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="index.html">Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="module-01.html">1. Bare Metal Management </a>
+    <a class="nav-link" href="module-00.html">1. Virtual Machine Management </a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#repositories">Repositories</a>
+    <a class="nav-link" href="module-00.html#repositories">Repositories</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#software">Software</a>
+    <a class="nav-link" href="module-00.html#software">Software</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="module-01.html">2. Bare Metal Management </a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#review_nodes">Review Nodes and Machines</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#review_hosts">Review Bare Metal Hosts</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#scaling_cluster">Scaling the Cluster with a New Bare Metal Host</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="module-02.html">2. Storage</a>
+    <a class="nav-link" href="module-02.html">3. Storage Management</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="module-02.html#prerequisites">Install Prerequisites</a>
@@ -70,7 +88,7 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="module-03.html">3. Networking</a>
+    <a class="nav-link" href="module-03.html">4. Network Management</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="module-03.html#prerequisites">Install Prerequisites</a>
@@ -82,7 +100,7 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="module-04.html">4. Creating VM Templates</a>
+    <a class="nav-link" href="module-04.html">5. Template Management</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="module-04.html#prerequisites">Install Prerequisites</a>
@@ -94,13 +112,13 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="module-05.html">5. Migrating VMs</a>
+    <a class="nav-link" href="module-05.html">6. Migrating Virtual Machines</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="module-05.html#prerequisites">Install Prerequisites</a>
+    <a class="nav-link" href="module-05.html#prerequisites">Prerequisites for the VMware Provider</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="module-05.html#container">Enable Container</a>
+    <a class="nav-link" href="module-05.html#migrating_vms">Migrating Virtual Machines from VMware</a>
   </li>
 </ul>
   </li>
@@ -110,9 +128,6 @@
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Dev Mode</span>
 <ul class="nav-list">
-  <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="module04.html">Managing an Application from GitHub</a>
-  </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="orig/index.html">Red Hat Summit 2024</a>
   </li>
@@ -155,77 +170,192 @@
   <a href="index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
-    <li><a href="module-01.html">1. Bare Metal Management </a></li>
+    <li><a href="module-01.html">2. Bare Metal Management </a></li>
   </ul>
 </nav>
 </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">Building an Application with rpms</h1>
+<h1 class="page">Bare Metal Machine Management</h1>
 <div class="sect1">
-<h2 id="_downloading_the_ubi"><a class="anchor" href="#_downloading_the_ubi"></a>Downloading the UBI</h2>
+<h2 id="_introduction"><a class="anchor" href="#_introduction"></a>Introduction</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this lab, you will be installing software into the container
-image running as an interactive application. To do this you will
-need <code>yum</code>, but do not need <code>systemd</code> for managing services within the
-container environment.  For that reason, you will be using the <strong>Standard</strong>
-UBI image (as opposed to the Minimal or Multi-service images).</p>
+<p>In this lab, you will review the physical environment used during this workshop, including an overview of OpenShift deployed to bare metal hosts. This evironment runs on bare metal hosts in the Equinix cloud. This review will help provide you with an understanding of how the nodes are configured in the cluster, and what their current hardware capabilities are. You will then be tasked with adding an additional machine and scaling the number of cluster nodes using the Red Hat OpenShift web console.</p>
+</div>
+<div class="ulist">
+<div class="title">Goals</div>
+<ul>
+<li>
+<p>Explore the nodes and machines in your <strong>Red Hat OpenShift Container Platform</strong> cluster</p>
+</li>
+<li>
+<p>Scale the baremetal cluster using the web console</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="_supported_platforms"><a class="anchor" href="#_supported_platforms"></a>Supported Platforms</h3>
+<div class="paragraph">
+<p>Today, OpenShift virtualization is fully supported in the following environments that provide bare metal resources:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Self-managed <em>bare metal servers</em> on-premises or at a hosted site that provides bare metal resources. The lab you&#8217;re using today is an OpenShift cluster deployed to an Equinix colocation facility.</p>
+</li>
+<li>
+<p>Amazon Web Services (AWS) bare metal instances, as well as ROSA (Red Hat OpenShift Services on AWS) with bare metal instances, are fully supported. See <a href="https://www.redhat.com/en/blog/managing-virtual-machines-and-containers-as-code-with-openshift-virtualization-on-red-hat-openshift-service-on-aws">OpenShift Virtualization on ROSA</a>.</p>
+</li>
+<li>
+<p>IBM Cloud Bare Metal Servers are currently <em>tech preview</em>. See <a href="https://access.redhat.com/articles/6738731">Deploy OpenShift Virtualization on IBM Cloud Bare Metal Nodes for details</a>.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Installing OpenShift Virtualization on IBM Cloud Bare Metal Servers is a Technology Preview feature only. Technology Preview features are not supported with Red Hat production service level agreements (SLAs) and might not be functionally complete. Red Hat does not recommend using them in production. Technology previews provide early access to upcoming product features, enabling customers to test functionality and provide feedback during the development process.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_requirements_for_openshift_virtualization"><a class="anchor" href="#_requirements_for_openshift_virtualization"></a>Requirements for OpenShift Virtualization</h3>
+<div class="paragraph">
+<p>Before you install OpenShift Virtualization for Red Hat OpenShift Container Platform, make sure that your Red Hat OpenShift Container Platform cluster meets the following requirements.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>CPU requirements</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Supported by Red Hat Enterprise Linux (RHEL) 8/9</p>
+</li>
+<li>
+<p>Support for Intel 64 or AMD64 CPU extensions</p>
+</li>
+<li>
+<p>Intel VT or AMD-V hardware virtualization extensions enabled</p>
+</li>
+<li>
+<p>NX (no execute) flag enabled</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Storage requirements</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Supported by OpenShift</p>
+</li>
+<li>
+<p>A CSI provisioner is strongly encouraged</p>
+</li>
+<li>
+<p><code>ReadWriteMany</code> (RWX) PVCs are required for live migration</p>
+</li>
+<li>
+<p>A CSI provisioner that supports accelerated volume creation via CSI clones or snapshots makes creating VMs from templates much faster. If one is not available, OpenShift Virtualization will fallback to using a host copy</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>OpenShift cluster node requirements</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Red Hat Enterprise Linux CoreOS (RHCOS) installed on worker nodes</p>
+</li>
+<li>
+<p>CPU, memory, and network capacity sufficient to host your virtual machine workload</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>Using the "buildah from" command will download and meld the container image. This particular image we are using is the Red Hat Universal Base Image or UBI. From the ourput of the command, you will notice that we are pulling down the latest one, which is for RHEL 9.</p>
+<p>Review <a href="https://docs.openshift.com/container-platform/4.15/virt/install/preparing-cluster-for-virt.html">the documentation</a> for specific requirements and guidance on hardware for use with OpenShift Virtualization.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If your cluster uses worker nodes with different CPUs, e.g. Intel and AMD, live migration failures can occur because different CPUs have different capabilities.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_review_red_hat_openshift_cluster"><a class="anchor" href="#_review_red_hat_openshift_cluster"></a>Review Red Hat OpenShift Cluster</h3>
+<div class="paragraph">
+<p>When deployed using the installer provisioned infrastructure (IPI) method, OpenShift uses <a href="https://metal3.io/">Metal3</a> to manage the hardware using the out-of-band management controller. This results in the hardware being represented in three different ways in the cluster:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Execute the  download the Standard UBI
-image from Red Hat&#8217;s registry.</p>
-<div class="listingblock execute">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">buildah from registry.access.redhat.com/ubi9/ubi</code></pre>
-</div>
-</div>
+<p><a href="https://docs.openshift.com/container-platform/4.13/nodes/index.html"><code>Node</code></a> - The node is viewed and used by the Kubernetes scheduler. This is the object which represents the usable resources in the cluster.</p>
+</li>
+<li>
+<p><a href="https://docs.openshift.com/container-platform/4.13/machine_management/index.html"><code>Machine</code></a> - An object managed by an infrastructure provider. In this lab, and when using OpenShift Virtualization, this is a physical server that is abstracted by the Metal3 Operator. These are grouped and managed as a set via the <code>MachineSet</code> paradigm.</p>
+</li>
+<li>
+<p><code>BareMetalHost</code> - This is the lowest level and direct interaction with the management of the physical server.</p>
 </li>
 </ol>
 </div>
 </div>
 </div>
+</div>
 <div class="sect1">
-<h2 id="repositories"><a class="anchor" href="#repositories"></a>Installing Repositories</h2>
+<h2 id="review_nodes"><a class="anchor" href="#review_nodes"></a>Review Nodes and Machines</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this lab, you are going to containerize a software package that is already
-packaged in RPM format and stored in the Extra Packages for Enterprise Linux
-(EPEL) repository.</p>
-</div>
-<div class="paragraph">
-<p>Software often has requirements for prerequisite software that must be installed
-on the machine for it to work properly.  <code>yum</code> will resolve those
-dependencies for you, as long as it can locate the required packages in
-repositories defined on the machine.  The Red Hat Universal Base Image (UBI)
-downloaded in the previous step has access to some Red Hat Enterprise Linux
-repositories.  However, the target package for the lab is from EPEL.</p>
+<p>Almost every interaction with Red Hat OpenShift can be done in the OpenShift Console. The console is a full-featured web application that allows administrators and users alike to use the platform in a guided manner. Wizards are provided for most tasks which makes it easy to administer the system.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>In the command below, <code>buildah</code> is going to run a command on the
-<code>ubi-working-container</code> image.  The <code>--</code> indicates that the command should be
-executed from within the container, which means the results will be applied into
-the container image.  Lastly, you are providing the <code>yum</code> command to install a
-package that defines all of the repositories from EPEL, <code>epel-release-latest-9</code>.</p>
-<div class="listingblock">
+<p>Navigate to %ocp_url% and login with user <code>admin</code> and the password <code>%ocp_password%</code>.</p>
+</li>
+<li>
+<p>From the navigation menu, select <strong>Compute</strong> &#8594; <strong>Nodes</strong>:</p>
+<div class="imageblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">buildah run ubi-working-container -- yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm</code></pre>
+<img src="_images/module-01/Compute_Nodes.png" alt="Compute Nodes">
 </div>
+</div>
+<div class="paragraph">
+<p>There are three control plane nodes and three worker nodes in the OpenShift 4 Cluster. In addition, the <code>ipmi</code> (Intelligent Platform Management Interface) is being used to manage the bare metal nodes.</p>
+</div>
+<div class="paragraph">
+<p>A node is a virtual or bare metal machine in an OpenShift cluster. Worker nodes host virtual machines and other workloads. The control plane nodes run services that are required to control and manage the OpenShift cluster.</p>
 </div>
 </li>
 <li>
-<p>You can verify that the above command did not install the RPM on the host system.</p>
-<div class="listingblock">
+<p>Click on one of the worker nodes to obtain resource information about the node:</p>
+<div class="imageblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">rpm -q epel-release</code></pre>
+<img src="_images/module-01/Worker0_Information.png" alt="Worker0 Information">
 </div>
+</div>
+<div class="paragraph">
+<p>The <strong>Overview</strong> tab is showing useful information about the utilization of the resources, such as CPU and memory. It also shows all the applications (<strong>Pods</strong>) that are running inside on this node.</p>
 </div>
 </li>
 </ol>
@@ -237,28 +367,18 @@ package that defines all of the repositories from EPEL, <code>epel-release-lates
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If your repository configurations are not distributed as an RPM, but instead as
-individual <code>.repo</code> files, you could use the <code>buildah copy</code> command to copy
-files from the host operating system into the container image.  You will see
-an example of using <code>buildah copy</code> later in this lab.
+At least one physical node is required for OpenShift Virtualization, "nesting" and emulation are not supported. However, other nodes in the cluster can be virtual machines, for example control plane and infrastructure nodes.
 </td>
 </tr>
 </table>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="software"><a class="anchor" href="#software"></a>Installing Software</h2>
-<div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Now that the yum repositories are defined within the container, execute
-another <code>yum install</code>, within the container, to install the target
-software: <code>moon-buggy</code>.</p>
-<div class="listingblock">
+<p>Navigate to the tab <strong>Details</strong> to obtain more information about the operating system.</p>
+<div class="imageblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">buildah run ubi-working-container -- yum -y install moon-buggy</code></pre>
+<img src="_images/module-01/Worker0_Details.png" alt="Worker0 Details">
 </div>
 </div>
 </li>
@@ -267,94 +387,209 @@ software: <code>moon-buggy</code>.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_committing_the_container_image"><a class="anchor" href="#_committing_the_container_image"></a>Committing the Container Image</h2>
-<div class="sectionbody">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>At this point, the container is configured.  It is time to transition from a
-working container into a committed image.  In the command below, you will use
-the <code>buildah</code> command to commit the working container to an image called:
-<code>moon-buggy</code>.</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">buildah commit ubi-working-container moon-buggy</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>The output of <code>podman image list</code> should confirm the image was created.</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman image list</code></pre>
-</div>
-</div>
-</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_deploy_the_container"><a class="anchor" href="#_deploy_the_container"></a>Deploy the Container</h2>
+<h2 id="review_hosts"><a class="anchor" href="#review_hosts"></a>Review Bare Metal Hosts</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Now the software has been installed and a new container image created.  It is
-time to spawn a runtime of the container image and validate the software.  The
-software we are using is a command line command.</p>
+<p>When using <code>Baseboard Management Console (BMC)</code> it is possible to manage the nodes using the <strong>Red Hat OpenShift</strong> console.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>When you <code>run</code> the container,
-it will be in interactive (<code>-it</code>) mode, based on the <code>moon-buggy</code> container
-image and the command run interactively will be <code>/usr/bin/moon-buggy</code>.</p>
-<div class="listingblock">
+<p>Select <strong>Compute</strong> &#8594; <strong>Bare Metal Hosts</strong>:</p>
+<div class="imageblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman run -it moon-buggy /usr/bin/moon-buggy</code></pre>
+<img src="_images/module-01/BMHosts.png" alt="BMHosts">
 </div>
 </div>
-<div class="listingblock">
+<div class="paragraph">
+<p>During installation, the <strong>Control Plane</strong> nodes are provisioned by the OpenShift Container Platform installation program (that is why the status is <code>Externally provisioned</code>) and when the control plane is ready, the <strong>Worker</strong> nodes are provisioned by cluster itself (hence the status <code>Provisioned</code>) and joined to the cluster. While not a part of this lab, it is possible to scale up the cluster by adding new hosts using the <strong>Add Host</strong> button.</p>
+</div>
+</li>
+<li>
+<p>Click on any of the worker nodes to obtain information about the physical (bare metal) node:</p>
+<div class="imageblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-textinfo hljs" data-lang="textinfo">&lt;&lt;&lt; OUTPUT ABRIDGED &gt;&gt;&gt;
-               MM     MM   OOOOO    OOOOO   NN     N
-               M M   M M  O     O  O     O  N N    N
-               M  M M  M  O     O  O     O  N  N   N
-               M   M   M  O     O  O     O  N   N  N
-               M       M  O     O  O     O  N    N N
-               M       M   OOOOO    OOOOO   N     NN
-
-                     BBBBBB   U     U   GGGGG    GGGGG   Y     Y
-                     B     B  U     U  G     G  G     G   Y   Y
-                     BBBBBB   U     U  G        G          Y Y
-                     B     B  U     U  G   GGG  G   GGG     Y
-                     B     B  U     U  G     G  G     G    Y
-                     BBBBBB    UUUUU    GGGGG    GGGGG   YY
-
-&lt;&lt;&lt; OUTPUT ABRIDGED &gt;&gt;&gt;</code></pre>
+<img src="_images/module-01/Worker0_BMhost.png" alt="Worker0 BMhost">
+</div>
+</div>
+<div class="paragraph">
+<p>The information shown is similar to the <strong>Nodes</strong> one, with the exception is providing information related to the hardware and the physical status of the bare metal node. Using the <strong>Actions</strong> menu, it is possible to manage aspects of the bare metal host, such as restarting or stopping the system using <code>BMC</code>.</p>
+</div>
+</li>
+<li>
+<p>Explore the other tabs in the interface to see more details about the hosts, including the network interfaces and disks. Additionally, the host can be <strong>Deprovisioned</strong>, which will result in it being removed from the cluster, RHCOS removed, and the machine marked as ready to configure.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="scaling_cluster"><a class="anchor" href="#scaling_cluster"></a>Scaling the Cluster with a New Bare Metal Host</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In many cases it becomes necessary to add additonal physical nodes to a cluster to meet workload demands. In a virtual deployment of OpenShift, this is as simple as clicking on the appropriate machine set and choosing the scale the number of nodes available, and the hypervisor responds by cloning a VM template and spinning up new workers. In a bare metal environment there are a few more steps involved, but it&#8217;s still a fairly simple process if you have the hardware available and access to the servers through a BMC that supports the IPMI protocol.</p>
+</div>
+<div class="paragraph">
+<p>To begin this process we are going to return to the bare metal hosts screen we reviewed earlier:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Select <strong>Compute</strong> &#8594; <strong>Bare Metal Hosts</strong>:</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-01/BMHosts.png" alt="BMHosts">
 </div>
 </div>
 </li>
 <li>
-<p>You can now play the Moon Buggy game, which is a text-based version of the
-popular Moon Patrol.  When you are finished, use the <code>q</code> command to quit the
-game, which will terminate the container.</p>
-<div class="paragraph">
-<p>Alternatively, you can use <code>podman</code> to kill the running container from
-<strong>Terminal 2</strong>.</p>
-</div>
-<div class="listingblock">
+<p>Click on the <strong>Add Host</strong> button in the upper right corner, and select the <strong>New with Dialog</strong> option.</p>
+<div class="imageblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman kill $(podman ps | grep -v CONTAINER | cut -f1 -d" " )</code></pre>
+<img src="_images/module-01/add_host_red.png" alt="add host red">
 </div>
 </div>
 </li>
+<li>
+<p>The dialog menu to add a bare metal host will ask you for the following information:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Host Name: <strong>worker4</strong></p>
+</li>
+<li>
+<p>Boot MAC Address: <strong>de:ad:be:ef:00:07</strong></p>
+</li>
+<li>
+<p>BMC Address: <strong>ipmi://192.168.123.1:6237</strong></p>
+</li>
+<li>
+<p>BMC Username: <strong>admin</strong></p>
+</li>
+<li>
+<p>BMC Password: <strong>redhat</strong></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>With this information filled out, click the <strong>Create</strong> button at the bottom of the dialog page.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-01/create_host_red.png" alt="create host red">
+</div>
+</div>
+</li>
+<li>
+<p>You will then be presented with the summary screen for <strong>worker4</strong>, and you will see the status update as it attempts to contact the machine and make it available as a host.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-01/worker4_summary_1.png" alt="worker4 summary 1">
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This step may take several minutes to update as it powers up the host, and collects hardware information.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>When host discovery and hardware inspection is complete you will see that it shows it&#8217;s status as <strong>Available</strong>.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-01/worker4_summary_2.png" alt="worker4 summary 2">
+</div>
+</div>
+</li>
+<li>
+<p>Once a host has been physically discovered the next step is to add it as a machine to be used by OpenShift. Click on the menu for <strong>MachineSets</strong> on the left under <strong>Compute</strong>.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-01/machinesets.png" alt="machinesets">
+</div>
+</div>
+</li>
+<li>
+<p>Click on the <strong>three-dot</strong> menu on the top-right side, and select <strong>Edit Machine count</strong> from the dropdown menu.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-01/edit_machine_count.png" alt="edit machine count">
+</div>
+</div>
+</li>
+<li>
+<p>A new menu will appear showing the current machine count of <strong>3</strong>, click the plus (+) sign to increase the machine count to <strong>4</strong>.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-01/edit_machine_count_4.png" alt="edit machine count 4">
+</div>
+</div>
+</li>
+<li>
+<p>You will be returned to the MachineSets page, and you can now see that the count of machines is 3/4 machines.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-01/machine_count_3_4.png" alt="machine count 3 4">
+</div>
+</div>
+</li>
+<li>
+<p>Next, click on the <strong>Machines</strong> button on the left to see a list of all the machines, and you should see worker4 in the <strong>Provisioning</strong> state.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-01/worker_4_provisioning.png" alt="worker 4 provisioning">
+</div>
+</div>
+</li>
+<li>
+<p>One provisioning is complete you will see the node listed with the Phase set to <strong>Provisioned as node</strong>.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-01/provisioned_as_node.png" alt="provisioned as node">
+</div>
+</div>
+</li>
+<li>
+<p>Since our new host has now been added to the machineset and provisioned as a node, we can click on the <strong>Nodes</strong> menu on the left.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-01/all_nodes.png" alt="all nodes">
+</div>
+</div>
+</li>
+<li>
+<p>We can also click directly on <strong>worker-4</strong> under the <strong>Name</strong> column to see it&#8217;s current status.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-01/worker_4_details.png" alt="worker 4 details">
+</div>
+</div>
+</li>
+<li>
+<p>The details screen for worker-4 is now populated with hardware information including CPU and Memory utilization, as well as the number of Pods assigned to our new worker node.</p>
+</li>
 </ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this lab, you became familiar with your Red Hat OpenShift cluster and the hardware that makes up this environment. You also used the web console to expand your cluster by discovering an additional bare metal node, and adding it to the cluster machineset used to scale the worker nodes that are available.</p>
 </div>
 </div>
 </div>
 <nav class="pagination">
-  <span class="prev"><a href="index.html" class="query-params-link">Sample Module Title</a></span>
-  <span class="next"><a href="module-02.html" class="query-params-link">2. Storage</a></span>
+  <span class="prev"><a href="module-00.html" class="query-params-link">1. Virtual Machine Management </a></span>
+  <span class="next"><a href="module-02.html" class="query-params-link">3. Storage Management</a></span>
 </nav>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">

@@ -1,19 +1,27 @@
-* xref:module-01.adoc[1. Bare Metal Management ]
-** xref:module-01.adoc#repositories[Repositories]
-** xref:module-01.adoc#software[Software]
 
-* xref:module-02.adoc[2. Storage]
+* xref:index.adoc[Introduction]
+
+* xref:module-00.adoc[1. Virtual Machine Management ]
+** xref:module-00.adoc#repositories[Repositories]
+** xref:module-00.adoc#software[Software]
+
+* xref:module-01.adoc[2. Bare Metal Management ]
+** xref:module-01.adoc#review_nodes[Review Nodes and Machines]
+** xref:module-01.adoc#review_hosts[Review Bare Metal Hosts]
+** xref:module-01.adoc#scaling_cluster[Scaling the Cluster with a New Bare Metal Host]
+
+* xref:module-02.adoc[3. Storage Management]
 ** xref:module-02.adoc#prerequisites[Install Prerequisites]
 ** xref:module-02.adoc#container[Enable Container]
 
-* xref:module-03.adoc[3. Networking]
+* xref:module-03.adoc[4. Network Management]
 ** xref:module-03.adoc#prerequisites[Install Prerequisites]
 ** xref:module-03.adoc#container[Enable Container]
 
-* xref:module-04.adoc[4. Creating VM Templates]
+* xref:module-04.adoc[5. Template Management]
 ** xref:module-04.adoc#prerequisites[Install Prerequisites]
 ** xref:module-04.adoc#container[Enable Container]
 
-* xref:module-05.adoc[5. Migrating VMs]
-** xref:module-05.adoc#prerequisites[Install Prerequisites]
-** xref:module-05.adoc#container[Enable Container]
+* xref:module-05.adoc[6. Migrating Virtual Machines]
+** xref:module-05.adoc#prerequisites[Prerequisites for the VMware Provider]
+** xref:module-05.adoc#migrating_vms[Migrating Virtual Machines from VMware]

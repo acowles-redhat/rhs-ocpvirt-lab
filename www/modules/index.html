@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Red Hat Summit 2024 :: Red Hat Summit 2024: Experience Red Hat OpenShift Virtualization: A Modern Application Platform for Virtual Machines</title>
-    <link rel="next" href="module-01.html">
+    <title>Red Hat Summit 2024 :: Experience Red Hat OpenShift Virtualization</title>
+    <link rel="next" href="module-00.html">
     <meta name="generator" content="Antora 3.1.7">
 <link rel="stylesheet" href="../_/css/site.css"><link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -18,7 +18,7 @@
         <img src="https://www.redhat.com/rhdc/managed-files/Red-Hat-Summit-logo.svg" alt="Red Hat Summit logo" width="90px" class="hero-summit-logo dx-block dx-mb-1">
         <img src="https://gpte-public.s3.amazonaws.com/rh-ansiblefest-2021-logo-pool-reverse-rgb_0.svg" alt="AnsibleFest logo" width="auto" class="hero-ansiblefest-logo dx-block dx-mb-2">
       </div>
-      <a class="navbar-item site-title" target="__blank" style="color: #fff !important;" href="..">Red Hat Summit 2024: Experience Red Hat OpenShift Virtualization: A Modern Application Platform for Virtual Machines</a>
+      <a class="navbar-item site-title" target="__blank" style="color: #fff !important;" href="..">Experience Red Hat OpenShift Virtualization</a>
     </div>
     <div id="topbar-nav" class="navbar-menu">
       <div class="navbar-end">
@@ -43,21 +43,39 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="index.html">Introduction</a>
+  </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="module-01.html">1. Bare Metal Management </a>
+    <a class="nav-link" href="module-00.html">1. Virtual Machine Management </a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="module-01.html#repositories">Repositories</a>
+    <a class="nav-link" href="module-00.html#repositories">Repositories</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="module-01.html#software">Software</a>
+    <a class="nav-link" href="module-00.html#software">Software</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="module-02.html">2. Storage</a>
+    <a class="nav-link" href="module-01.html">2. Bare Metal Management </a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="module-01.html#review_nodes">Review Nodes and Machines</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="module-01.html#review_hosts">Review Bare Metal Hosts</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="module-01.html#scaling_cluster">Scaling the Cluster with a New Bare Metal Host</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="module-02.html">3. Storage Management</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="module-02.html#prerequisites">Install Prerequisites</a>
@@ -69,7 +87,7 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="module-03.html">3. Networking</a>
+    <a class="nav-link" href="module-03.html">4. Network Management</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="module-03.html#prerequisites">Install Prerequisites</a>
@@ -81,7 +99,7 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="module-04.html">4. Creating VM Templates</a>
+    <a class="nav-link" href="module-04.html">5. Template Management</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="module-04.html#prerequisites">Install Prerequisites</a>
@@ -93,13 +111,13 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="module-05.html">5. Migrating VMs</a>
+    <a class="nav-link" href="module-05.html">6. Migrating Virtual Machines</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="module-05.html#prerequisites">Install Prerequisites</a>
+    <a class="nav-link" href="module-05.html#prerequisites">Prerequisites for the VMware Provider</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="module-05.html#container">Enable Container</a>
+    <a class="nav-link" href="module-05.html#migrating_vms">Migrating Virtual Machines from VMware</a>
   </li>
 </ul>
   </li>
@@ -109,9 +127,6 @@
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Dev Mode</span>
 <ul class="nav-list">
-  <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="module04.html">Managing an Application from GitHub</a>
-  </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="orig/index.html">Red Hat Summit 2024</a>
   </li>
@@ -154,7 +169,7 @@
   <a href="index.html" class="home-link is-current"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
-    <li><a href="index.html">Red Hat Summit 2024</a></li>
+    <li><a href="index.html">Introduction</a></li>
   </ul>
 </nav>
 </div>
@@ -162,72 +177,62 @@
 <article class="doc">
 <h1 class="page">Red Hat Summit 2024</h1>
 <div class="sect1">
-<h2 id="_experience_red_hat_openshift_virtualization_a_modern_application_platform_for_virtual_machines"><a class="anchor" href="#_experience_red_hat_openshift_virtualization_a_modern_application_platform_for_virtual_machines"></a>Experience Red Hat OpenShift Virtualization: A Modern Application Platform for Virtual Machines</h2>
+<h2 id="_experience_red_hat_openshift_virtualization"><a class="anchor" href="#_experience_red_hat_openshift_virtualization"></a>Experience Red Hat OpenShift Virtualization:</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_a_modern_application_platform_for_virtual_machines"><a class="anchor" href="#_a_modern_application_platform_for_virtual_machines"></a>A Modern Application Platform for Virtual Machines</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>OpenShift Virtualization enables you to bring virtual machines onto a modern, Kubernetes-based infrastructure. It enables the development and delivery of new applications as well as the modernization of existing ones and can create applications that consist of virtual machines, containers, and serverless functions - all managed together using Kubernetes-native tools and paradigms.</p>
 </div>
 <div class="paragraph">
-<p>This lab is a condensed version of our OpenShift Virtualization Roadshow, which we encourage you to attend if it comes to a city near you.</p>
+<p>This lab is a condensed version of our OpenShift Virtualization Roadshow, which we encourage you to attend in a city near you for a more in depth hands-on experience with all the functions of OpenShift Virtualization.</p>
 </div>
 <div class="paragraph">
-<p>There are five main sections to this lab:</p>
+<p>In this lab, we will focus primarily on Day 2 management activities that many virtual administrators may encounter in their day to day workflows.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_who_will_benefit_most_from_this_lab"><a class="anchor" href="#_who_will_benefit_most_from_this_lab"></a>Who Will Benefit Most from this Lab?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Virtual Machine Administrators</strong>&#8201;&#8212;&#8201;Those responsible for day to day management of virtual guests in OpenShift Virtualization. These users will often find themselves responsible for provisioning virtual guests, and day t
+o day management of the guests, and the applications running within.</p>
+</div>
+<div class="paragraph">
+<p><strong>Virtual Infrastructure Administrators</strong>&#8201;&#8212;&#8201;Those responsible for the physical infrastructure hosting the OpenShift Virtualization solution. These users will be responsible for physical hardware, storage, and networking changes to the environment, that will affect the day to day operations of the running virtual machines.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_what_content_is_covered_in_this_lab"><a class="anchor" href="#_what_content_is_covered_in_this_lab"></a>What Content Is Covered In This Lab?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>These are the six main sections that will be covered:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><em>Migrating Virtual Machines</em>: In this section, you will use the Migration Toolkit for Virtualization (MTV) to migrate a few VMs from an existing VMware vSphere environment to OpenShift Virtualization.</p>
+<p><em>Virtual Machine Management</em>: In this section we will provide a review of virtual machine management fundamentals, including creating a virtual machine, and modifying it&#8217;s allotted resources.</p>
 </li>
 <li>
-<p><em>OpenShift Virtualization Basics</em>: This lab focuses on how to create and use virtual machines with OpenShift Virtualization. It covers the most common tasks you would be expected to perform as a VM user/administrator.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Additionally, there are a number of optional modules which target activities that you may be interested in depending on your specific role, responsibilities, and/or what you&#8217;re curious about.</p>
-</div>
-<div class="paragraph">
-<p><strong>Virtual machine administrators</strong></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><em>Customize Virtual Machines</em>: One of the most important concepts when running virtual machines is to run the VMs from an existing disk image and also have the capability to customize the VMs.</p>
+<p><em>Bare Metal Infrastructure Management</em>: In this section, an administrator will learn how to scale their OpenShift environment by adding in an additional worker node to host virtualized workloads.</p>
 </li>
 <li>
-<p><em>Windows Virtual Machines</em>: Microsoft Windows Server is a commonly used operating system, no virtualization solution would be complete if it wasn&#8217;t supported! This lab shows one method of provisioning a Windows Server virtual machine, including customization with SysPrep.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><strong>Virtual infrastructure administrators</strong></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><em>Bare metal OpenShift overview</em>: Managing OpenShift nodes and resources is different than you might be used to. This module explores some aspects and concepts of OpenShift that are important if you&#8217;re responsible for the server hardware.</p>
+<p><em>Storage Management</em>: The storage paradigm familiar to many administrators changes with OpenShift Virtualization, this section will explore many actions related to storage management for VMs.</p>
 </li>
 <li>
-<p><em>Network Management</em>: Virtual machines, by default, connect to the OpenShift internal software defined network. This section will demonstrate how to connect VMs to an external physical network, such as a VLAN.</p>
+<p><em>Network Management</em>: By default VMs are connected to the pod network in OpenShift, in this section we will explore creating new L2 network mappings, and configuring policies for multiple networks.</p>
 </li>
 <li>
-<p><em>Storage Management</em>: This module will introduce you to the basics of storage on OpenShift and how OpenShift Virtualization automatically provides boot sources for some machine images. This module will also show how to perform operations with snapshots and how to clone a VM.</p>
+<p><em>Template Management</em>: In order to streamline deployment of virtual machines, administrators will often create templates to ease deployment operations. This section will focus on that process.</p>
 </li>
 <li>
-<p><em>Backup and Restore</em>: Protecting virtual machines, and their data, is just as important as the performance and availability. See how the OpenShift API for Data Protection (OADP) provides a storage agnostic way to protect VMs in this lab.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><strong>Virtual machine users</strong></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><em>Exposing apps using a Route</em>: This lab walks through the process of using a Service and Route to provide internal-only connectivity between application components, then expose only the application&#8217;s front end to the world.</p>
-</li>
-<li>
-<p><em>Exposing apps using MetalLB</em>: Providing connectivity to VM-hosted applications, without putting the VM on an external L2 network, is a powerful way to manage connectivity to the application. This lab walks through the process of exposing just the database to the world, without connecting the VM to the external network.</p>
+<p><em>Migrating Virtual Machines</em>: In this section, we will use the Migration Toolkit for Virtualization (MTV) to migrate a VM from an existing VMware vSphere environment to OpenShift Virtualization.</p>
 </li>
 </ul>
 </div>
@@ -313,7 +318,7 @@ The innovation in Kubernetes, serverless, service mesh, Kubernetes Operators, an
 </div>
 </div>
 <nav class="pagination">
-  <span class="next"><a href="module-01.html" class="query-params-link">1. Bare Metal Management </a></span>
+  <span class="next"><a href="module-00.html" class="query-params-link">1. Virtual Machine Management </a></span>
 </nav>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">

@@ -1,7 +1,7 @@
 = {lab_name}
 
-
-== Experience Red Hat OpenShift Virtualization: A Modern Application Platform for Virtual Machines
+== Experience Red Hat OpenShift Virtualization: 
+== A Modern Application Platform for Virtual Machines
 
 OpenShift Virtualization enables you to bring virtual machines onto a modern, Kubernetes-based infrastructure. It enables the development and delivery of new applications as well as the modernization of existing ones and can create applications that consist of virtual machines, containers, and serverless functions - all managed together using Kubernetes-native tools and paradigms.
 
@@ -20,17 +20,19 @@ o day management of the guests, and the applications running within.
 
 == What Content Is Covered In This Lab?
 
-These are the five main sections that will be covered:
+These are the six main sections that will be covered:
+
+* _Virtual Machine Management_: In this section we will provide a review of virtual machine management fundamentals, including creating a virtual machine, and modifying it's allotted resources.
 
 * _Bare Metal Infrastructure Management_: In this section, an administrator will learn how to scale their OpenShift environment by adding in an additional worker node to host virtualized workloads.
 
 * _Storage Management_: The storage paradigm familiar to many administrators changes with OpenShift Virtualization, this section will explore many actions related to storage management for VMs.
 
-* _Networking Management_: By default VMs are connected to the pod network in OpenShift, in this section we will explore creating new L2 network mappings, and configuring policies for multiple networks.
+* _Network Management_: By default VMs are connected to the pod network in OpenShift, in this section we will explore creating new L2 network mappings, and configuring policies for multiple networks.
 
 * _Template Management_: In order to streamline deployment of virtual machines, administrators will often create templates to ease deployment operations. This section will focus on that process. 
 
-* _Migrating Virtual Machines_: In this section, you will use the Migration Toolkit for Virtualization (MTV) to migrate a VM from an existing VMware vSphere environment to OpenShift Virtualization.
+* _Migrating Virtual Machines_: In this section, we will use the Migration Toolkit for Virtualization (MTV) to migrate a VM from an existing VMware vSphere environment to OpenShift Virtualization.
 
 
 == What is OpenShift Virtualization?
