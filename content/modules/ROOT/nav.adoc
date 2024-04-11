@@ -2,8 +2,11 @@
 * xref:index.adoc[Introduction]
 
 * xref:module-00.adoc[1. Virtual Machine Management ]
-** xref:module-00.adoc#repositories[Repositories]
-** xref:module-00.adoc#software[Software]
+** xref:module-00.adoc#create_project[Create a New Project]
+** xref:module-00.adoc#create_vm[Create a Linux Virtual Machine]
+** xref:module-00.adoc#admin_vms[Administering Virtual Machines]
+** xref:module-00.adoc#vm_state[Controlling Virtual Machine State]
+** xref:module-00.adoc#live_migrate[Live Migrate a Virtual Machine]
 
 * xref:module-01.adoc[2. Bare Metal Management ]
 ** xref:module-01.adoc#review_nodes[Review Nodes and Machines]
@@ -11,8 +14,10 @@
 ** xref:module-01.adoc#scaling_cluster[Scaling the Cluster with a New Bare Metal Host]
 
 * xref:module-02.adoc[3. Storage Management]
-** xref:module-02.adoc#prerequisites[Install Prerequisites]
-** xref:module-02.adoc#container[Enable Container]
+** xref:module-02.adoc#glossary_terms[Glossary of Familiar Terms]
+** xref:module-02.adoc#default_boot[Exploring Default Boot Sources]
+** xref:module-02.adoc#managing_snapshots[Managing Snapshots]
+** xref:module-02.adoc#clone_vm[Clone a Virtual Machine]
 
 * xref:module-03.adoc[4. Network Management]
 ** xref:module-03.adoc#prerequisites[Install Prerequisites]

@@ -52,10 +52,19 @@
     <a class="nav-link" href="module-00.html">1. Virtual Machine Management </a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="module-00.html#repositories">Repositories</a>
+    <a class="nav-link" href="module-00.html#create_project">Create a New Project</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="module-00.html#software">Software</a>
+    <a class="nav-link" href="module-00.html#create_vm">Create a Linux Virtual Machine</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="module-00.html#admin_vms">Administering Virtual Machines</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="module-00.html#vm_state">Controlling Virtual Machine State</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="module-00.html#live_migrate">Live Migrate a Virtual Machine</a>
   </li>
 </ul>
   </li>
@@ -79,10 +88,16 @@
     <a class="nav-link" href="module-02.html">3. Storage Management</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="module-02.html#prerequisites">Install Prerequisites</a>
+    <a class="nav-link" href="module-02.html#glossary_terms">Glossary of Familiar Terms</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="module-02.html#container">Enable Container</a>
+    <a class="nav-link" href="module-02.html#default_boot">Exploring Default Boot Sources</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="module-02.html#managing_snapshots">Managing Snapshots</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="module-02.html#clone_vm">Clone a Virtual Machine</a>
   </li>
 </ul>
   </li>
@@ -177,7 +192,237 @@
   <div class="content">
 <article class="doc">
 <h1 class="page">Network Management</h1>
-
+<div class="sect1">
+<h2 id="_introduction_to_network_management"><a class="anchor" href="#_introduction_to_network_management"></a>Introduction to Network Management</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>By default, all virtual machines are attached to the OpenShift software-defined network (SDN), which enables access from other workloads on the OpenShift cluster, including other VMs and any OpenShift native applications.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The SDN provides additional features for abstracting, connecting, and exposing applications in a controlled manner, whether deployed as VMs or Pods in the cluster. These include the <code>Service</code> and <code>Route</code> features of OpenShift.</p>
+</li>
+<li>
+<p>OpenShift&#8217;s network policy engine allows the VM user or administrator to create rules which allow or deny network traffic to and from individual VMs or entire projects/namespaces.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>However, virtual machines may also connect directly to one or more external networks, such as VLANs, when needed. This is in addition to the SDN, which means that, for example, the administrator can connect to the VM from an external IP address, but the application communicates across the SDN with other VMs hosted by OpenShift Virtualization.</p>
+</div>
+<div class="paragraph">
+<p>At a high level, this is done by configuring the host networking, such as creating a mode 4 (LACP) bond and a Linux bridge on top. This workshop segment will walk through the next step in that process, creating a network attachment definition to allow VMs to connect to that bridge and, therefore, directly to the external network.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The OpenShift environment has already been configured with a Linux Bridge on each compute node your virtual machines will connect to, thus allowing for easy connectivity with/from outside network resources.
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<div class="title">Goals</div>
+<ul>
+<li>
+<p>Create a network attachment definition</p>
+</li>
+<li>
+<p>Connect a VM to the external network</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_create_network_attachment_definition"><a class="anchor" href="#_create_network_attachment_definition"></a>Create Network Attachment Definition</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In order to use the Linux Bridge with your VM you need to create a <strong>Network Attachment Definition</strong>. This is what tells OpenShift about the network and allows the virtual machines to connect to it. Network Attachment Definitions are specific to the project/namespace they&#8217;re created in, unless they&#8217;re created in the <code>default</code> project. This gives you, the administrator, the ability to control which networks are and aren&#8217;t available to users who have access to manage their own Vms. Once the Network Attachment Definition has been created, it can then be used by virtual machines when configuring their network adapters.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+A network attachment definition instructs openshift to utilise an existing network device. In our case that device was previously created and is named br-flat. You must use that name or OpenShift won’t be able to place your VM on any compute nodes as it can only utilise nodes with that specifically named network device on it.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>How is this done?</p>
+</div>
+<div class="paragraph">
+<p>To manage an OpenShift node&#8217;s network configuration you use a tool, available as an operator, called nmstate. With nmstate you can create network interfaces on OpenShift compute nodes using Kubernetes constructs. You can do this following naming that suits your needs and network requirements. For more info about nmstate, and to learn more about the host networking and how to view and manage the configuration, see the ([nmstate documentation](<a href="https://docs.openshift.com/container-platform/latest/networking/k8s_nmstate/k8s-nmstate-observing-node-network-state.html)" class="bare">https://docs.openshift.com/container-platform/latest/networking/k8s_nmstate/k8s-nmstate-observing-node-network-state.html)</a>) or speak with your lab proctors."</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Navigate to <strong>Networking</strong> &#8594; <strong>Network Attachment Definitions</strong> and click <strong>Create network attachment definition</strong>:</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-03/01_NAD_Dashboard.png" alt="01 NAD Dashboard">
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Select project <code>vmexamples</code>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Complete the form for the <code>vmexamples</code> project as follows, then click <strong>Create network attachment definition</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Name</strong>: <code>flatnetwork</code></p>
+</li>
+<li>
+<p><strong>Network Type</strong>: <code>CNV Linux Bridge</code></p>
+</li>
+<li>
+<p><strong>Bridge Name</strong>: <code>br-flat</code></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-03/02_NAD_Create.png" alt="02 NAD Create">
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The form above has an input for <code>VLAN Tag Number</code>, which is used when connecting to a network that needs to have a VLAN tag assigned. This lab uses an untagged network, so no VLAN number is required here.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>A single Linux Bridge on the host can have many different VLANs. In this scenario, you only need to create a Network Attachment Definition for each one, not a separate host interface and bridge.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Examine the details of the network attachment definition. Because this was created in the <code>vmexamples</code> project, it will not be available in other projects.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-03/03_NAD_Created.png" alt="03 NAD Created">
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_connect_a_virtual_machine_to_the_external_network"><a class="anchor" href="#_connect_a_virtual_machine_to_the_external_network"></a>Connect a virtual machine to the external network</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Navigate to <strong>Virtualization</strong> &#8594; <strong>VirtualMachines</strong>, select the <code>fedora02</code> VM. Click <strong>Configuration</strong> tab and then click the <strong>Network Interfaces</strong> subtab:</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-03/04_VM_Network_Tab.png" alt="04 VM Network Tab">
+</div>
+</div>
+</li>
+<li>
+<p>Click <strong>Add Network Interface</strong>, complete the form as shown, then click <strong>Save</strong>.</p>
+<div class="paragraph">
+<p>Because this is a bridge connecting to the external network, we don&#8217;t need to rely on any OpenShift features or capabilities to enable access, such as masquerade (NAT) for the virtual machines using the network. As a result, <strong>type</strong> should be <code>Bridge</code> here.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-03/05_VM_Network_Attach.png" alt="05 VM Network Attach">
+</div>
+</div>
+</li>
+<li>
+<p>Use the <strong>Actions</strong> menu to restart the VM. After rebooting, navigate to the <strong>Console</strong> tab:</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-03/06_VM_Network_Console.png" alt="06 VM Network Console">
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>eth1</code> interface obtains an IP address from the flat network (<code>192.168.3.x/24</code>). That network has a DHCP server providing IPs to that network.</p>
+</div>
+</li>
+<li>
+<p>(Optional) Verify external connectivity of the VM using the OpenShift web terminal.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Open a terminal by pressing the right-top icon:</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-03/07_OCP_Terminal_Icon.png" alt="07 OCP Terminal Icon">
+</div>
+</div>
+</li>
+<li>
+<p>A console in the bottom part of the screen will appear</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-03/08_OCP_Terminal.png" alt="08 OCP Terminal">
+</div>
+</div>
+</li>
+<li>
+<p>Type the following command replacing the IP</p>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">curl 192.168.3.118:22</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Replace the IP which the IP assigned to the node.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">Sample Output</div>
+<div class="content">
+<pre class="nowrap">SSH-2.0-OpenSSH_8.7</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
 <nav class="pagination">
   <span class="prev"><a href="module-02.html" class="query-params-link">3. Storage Management</a></span>
   <span class="next"><a href="module-04.html" class="query-params-link">5. Template Management</a></span>

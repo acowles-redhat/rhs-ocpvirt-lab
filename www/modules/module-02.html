@@ -52,10 +52,19 @@
     <a class="nav-link" href="module-00.html">1. Virtual Machine Management </a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="module-00.html#repositories">Repositories</a>
+    <a class="nav-link" href="module-00.html#create_project">Create a New Project</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="module-00.html#software">Software</a>
+    <a class="nav-link" href="module-00.html#create_vm">Create a Linux Virtual Machine</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="module-00.html#admin_vms">Administering Virtual Machines</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="module-00.html#vm_state">Controlling Virtual Machine State</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="module-00.html#live_migrate">Live Migrate a Virtual Machine</a>
   </li>
 </ul>
   </li>
@@ -79,10 +88,16 @@
     <a class="nav-link" href="module-02.html">3. Storage Management</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#prerequisites">Install Prerequisites</a>
+    <a class="nav-link" href="#glossary_terms">Glossary of Familiar Terms</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#container">Enable Container</a>
+    <a class="nav-link" href="#default_boot">Exploring Default Boot Sources</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#managing_snapshots">Managing Snapshots</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#clone_vm">Clone a Virtual Machine</a>
   </li>
 </ul>
   </li>
@@ -177,7 +192,392 @@
   <div class="content">
 <article class="doc">
 <h1 class="page">Storage Management</h1>
-
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Red Hat OpenShift supports multiple types of storage, both for on-premises and cloud providers. OpenShift Virtualization can use any supported container storage interface (CSI) provisioner in the environment you&#8217;re running on. For example, OpenShift Data Foundation, NetApp, Dell/EMC, Fujitsu, Hitachi, Pure Storage, Portworx, and many others support on-premises, CSI provisioned, ReadWriteMany (RWX) volumes with OpenShift Virtualization.</p>
+</div>
+<div class="paragraph">
+<p>This workshop segment will explore Persistent Volume Claims (PVCs), which are used to request storage from the provider and store a VM disk. Many storage providers also support snapshots and clones of their devices, be sure to check with your vendor to verify the features supported by the CSI driver and storage device.</p>
+</div>
+<div class="paragraph">
+<p>Notably, there are no restrictions on storage protocol (e.g. NFS, iSCSI, FC, etc.) specific to OpenShift Virtualization. The only requirement is that the RWX access mode is available for live migration. Otherwise, the storage that best meets the needs of your VMs and applications is always the right choice.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-02/00_disk_concepts.png" alt="00 disk concepts">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="glossary_terms"><a class="anchor" href="#glossary_terms"></a>Glossary of Familiar Terms</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Working with storage in OpenShift Virtualization can be a different experience than working with other hypervisors. Understanding of the following terms may be helpful for this section of the lab:</p>
+</div>
+<div class="paragraph">
+<p><strong>Container Storage Interface (CSI)</strong>: An API specification for the management of container storage across different container orchestration (CO) systems. An OpenShift cluster can have many CSI provisioners from different vendors, and each VM can use storage from multiple vendors without conflicts.</p>
+</div>
+<div class="paragraph">
+<p><strong>Dynamic Provisioning</strong>: The storage framework allows you to create  volumes on-demand, eliminating the need for cluster administrators to pre-provision persistent storage. Each VM disk is stored in a dynamically created storage volume at a 1:1 ratio.</p>
+</div>
+<div class="paragraph">
+<p><strong>Persistent volumes (PV)</strong>: OpenShift Virtualization uses the Kubernetes persistent volume (PV) framework to allow cluster administrators to provision persistent storage for a cluster. VMs use a <em>PVC</em> to request PV resources without having specific knowledge of the underlying storage infrastructure.</p>
+</div>
+<div class="paragraph">
+<p><strong>Persistent volume claims (PVCs)</strong>: A <em>PVC</em> is a request for storage capacity and, when bound to a PV, how the system knows which storage volume to mount for the VM. As a VM user, you&#8217;re able to use the storage without knowing the details of the underlying infrastructure environment.</p>
+</div>
+<div class="paragraph">
+<p><strong>Storage class</strong>: A <em>storage class</em> provides a way for administrators to describe the classes of storage they offer, for example, "gold," "silver," and "bronze". Different classes might map to quality of service levels, backup policies, and arbitrary policies determined by the cluster administrators. These will be specific to your storage vendor.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="default_boot"><a class="anchor" href="#default_boot"></a>Exploring Default Boot Sources</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Persistent virtual machines require persistent storage. This lab environment has OpenShift Data Foundation deployed to provide access to shared persistent volumes to host application data and virtual machine disks. During the installation of the OpenShift Virtualization Operator, some <code>PersistentVolumeClaims</code> were automatically created to hold template disks for various Linux distributions. These include:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Red Hat Enterprise Linux 8</p>
+</li>
+<li>
+<p>Red Hat Enterprise Linux 9</p>
+</li>
+<li>
+<p>Fedora</p>
+</li>
+<li>
+<p>CentOS 7</p>
+</li>
+<li>
+<p>CentOS Stream 8</p>
+</li>
+<li>
+<p>CentOS Stream 9</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Using these OS images is optional, and the creation + download can be disabled via the appropriate setting in the Operator. However, they are a quick and convenient way to get started provisioning virtual machines with OpenShift Virtualization since they use the "cloud" image for each of the respective distributions. This image includes cloud-init and, often, is a reduced OS footprint optimized for virtualization. Additionally, Red Hat provided boot images are automatically updated when new templates are released.</p>
+</div>
+<div class="paragraph">
+<p>In this section, we will examine the PVCs created by the Operator along with PVCs used by a virtual machine.</p>
+</div>
+<div class="paragraph">
+<p>The project <code>openshift-virtualization-os-images</code> contains all available boot sources and is automatically enabled when <strong>OpenShift Virtualization</strong> is installed.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Navigate to <strong>Storage</strong> &#8594; <strong>PersistentVolumeClaims</strong>:</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-02/00_Left_Menu.png" alt="00 Left Menu">
+</div>
+</div>
+</li>
+<li>
+<p>Press in the dropdown for the projects, enable <code>Show default projects</code>, and select the project <code>openshift-virtualization-os-images</code></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-02/01_Select_Project.png" alt="01 Select Project">
+</div>
+</div>
+</li>
+<li>
+<p>List the boot sources that OpenShift Virtualization automatically created.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-02/02_List_PVCs.png" alt="02 List PVCs">
+</div>
+</div>
+</li>
+<li>
+<p>Select one from the list, for example, <code>fedora-XX</code>, to obtain detailed information.</p>
+<div class="paragraph">
+<p>In this lab, each of the PVCs will come from the <code>ocs-storagecluster-ceph-rbd</code> storage class provided by OpenShift Data Foundation. The details of the PVC show that it is a <code>ReadWriteMany</code> PVC, which is required for live migration and is using <code>block</code> mode. The mode can be <code>block</code> or <code>file</code>, depending on the storage vendor, and either will work equally well so long as <code>RWX</code> mode is available.</p>
+</div>
+<div class="paragraph">
+<p>The capacity should be large enough to hold the base operating system and any packages/software installed that will be used by any VMs created from this template disk. VMs created by cloning the disk can increase the size of the disk but cannot shrink it.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-02/03_PVC_Info.png" alt="03 PVC Info">
+</div>
+</div>
+</li>
+<li>
+<p>When a VM is created, the <em>Boot Source</em> image is cloned, and a new disk is created. Switch to the project <code>vmexamples</code> and review the list of the <em>PVCs</em> (disks). You will see a PVC for each of the disks for VMs in this project and a PVC for the Microsoft Windows Server 2019 disk image created in an earlier section of this workshop. This PVC, with the Microsoft Windows ISO, can be reused by other virtual machines to install the operating system if desired.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-02/04_List_PVCs_VMs.png" alt="04 List PVCs VMs">
+</div>
+</div>
+</li>
+<li>
+<p>Select the <code>fedora02</code> to obtain information</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-02/05_PVC_VM_Info.png" alt="05 PVC VM Info">
+</div>
+</div>
+</li>
+<li>
+<p>A <em>Persistent Volume Claim</em> will claim to a specific <em>storage class</em> or to the default one to provision a <em>volume</em>. Navigate to <strong>Storage</strong> &#8594; <strong>PersistentVolumes</strong> to obtain a list. Sort by <strong>Claim</strong>.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-02/07_PV_List.png" alt="07 PV List">
+</div>
+</div>
+</li>
+<li>
+<p>Now navigate to <strong>Virtualization</strong> &#8594; <strong>Bootable volumes</strong> to obtain a list of the available volumes</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-02/08_List_Bootable_Volumes.png" alt="08 List Bootable Volumes">
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="managing_snapshots"><a class="anchor" href="#managing_snapshots"></a>Managing Snapshots</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>OpenShift Virtualization relies on the CSI storage provider&#8217;s snapshot capability to create disk snapshots for the virtual machine, which can be taken "online" while the VM is running or "offline" while the VM is powered off. If the KVM integrations are installed to the VM, you will also have the option of quiescing the guest operating system (quiescing ensures that the snapshot of the disk represents a consistent state of the guest file systems, e.g., buffers are flushed and the journal is consistent).</p>
+</div>
+<div class="paragraph">
+<p>Since disk snapshots are dependent on the storage implementation, abstracted by CSI, performance impact and capacity used will depend on the storage provider. Work with your storage vendor to determine how the system will manage PVC snapshots and the impact they may or may not have.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Snapshots, by themselves, are not a backup or disaster recovery capability. The data needs to be protected in other ways, such as one or more copies stored in a different location, to recover from the storage system failing.</p>
+</div>
+<div class="paragraph">
+<p>In addition to the OpenShift API for Data Protection (OADP), partners such as Kasten by Veeam, Trilio, and Storware support the ability to backup and restore virtual machines to the same cluster or other clusters as needed.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>With the VM snapshots feature, cluster administrators and application developers can:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Create a new snapshot</p>
+</li>
+<li>
+<p>List all snapshots attached to a specific VM</p>
+</li>
+<li>
+<p>Revert a VM to a snapshot</p>
+</li>
+<li>
+<p>Delete an existing VM snapshot</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="_creating_and_using_snapshots"><a class="anchor" href="#_creating_and_using_snapshots"></a>Creating and Using Snapshots</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Navigate back to <strong>Virtualization</strong> &#8594; <strong>VirtualMachines</strong> and select a virtual machine, for example <code>fedora02</code> in the project <code>vmexamples</code>.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-02/09_VM_Overview.png" alt="09 VM Overview">
+</div>
+</div>
+</li>
+<li>
+<p>Navigate to the <strong>Snapshots</strong> tab</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-02/10_VM_Snapshots_Tab.png" alt="10 VM Snapshots Tab">
+</div>
+</div>
+</li>
+<li>
+<p>Press <strong>Take snapshot</strong> and a dialog will open</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+There is a warning about the <code>cloudinitdisk</code> not being included in the snapshot. This is expected and happens because it is an ephemeral disk.
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-02/11_VM_Snapshot_Dialog.png" alt="11 VM Snapshot Dialog">
+</div>
+</div>
+</li>
+<li>
+<p>Press <strong>Save</strong> and wait till the <em>Snapshot</em> has been created and the <strong>status</strong> shows as <code>Succeeded</code></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-02/12_VM_Snapshot_Taken.png" alt="12 VM Snapshot Taken">
+</div>
+</div>
+</li>
+<li>
+<p>Press the three dots and check that the <strong>Restore</strong> option is greyed out because the VM is running</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-02/13_VM_Restore_Disabled.png" alt="13 VM Restore Disabled">
+</div>
+</div>
+</li>
+<li>
+<p>Switch to the <strong>Console</strong> tab to perform a modification to your running VM. This small modification will break your VM, and it won&#8217;t be able to boot anymore.</p>
+<div class="paragraph">
+<p>Log in with the user <code>fedora</code> and password <code>ocpVirtIsGre@t</code> (or whatever you used in the previous module). Execute the command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">[fedora@fedora02 ~]$ sudo rm -rf /boot/grub2; sudo shutdown -r now</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>The <em>Virtual Machine</em> will not be able to boot.</p>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+In the previous step, the operating system was shutdown from within the guest. However, OpenShift Virtualization will restart it automatically by default. This behavior can be changed globally or on a per-VM basis.
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-02/14_VM_Crashed.png" alt="14 VM Crashed">
+</div>
+</div>
+</li>
+<li>
+<p>Using the <strong>Actions</strong> dropdown menu, stop the <em>Virtual Machine</em>. Wait until the VM is stopped.</p>
+</li>
+<li>
+<p>Navigate back to the <strong>Snapshots</strong> tab and press <strong>Restore</strong> on the previously created snapshot.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-02/15_VM_Restore.png" alt="15 VM Restore">
+</div>
+</div>
+</li>
+<li>
+<p>In the dialog shown, press <strong>Restore</strong></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-02/16_VM_Restore_Dialog.png" alt="16 VM Restore Dialog">
+</div>
+</div>
+</li>
+<li>
+<p>Wait until the VM is restored, and then start the VM</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-02/17_VM_Restored.png" alt="17 VM Restored">
+</div>
+</div>
+</li>
+<li>
+<p>Verify that the VM is booting correctly again.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-02/18_VM_Running.png" alt="18 VM Running">
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="clone_vm"><a class="anchor" href="#clone_vm"></a>Clone a Virtual Machine</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Cloning creates a new VM that uses its disk image for storage, but most of the clone&#8217;s configuration and stored data is identical to the source VM.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Press <strong>Clone</strong> from the <strong>Actions</strong> menu, and a dialog will open</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-02/19_VM_Clone_Dialog.png" alt="19 VM Clone Dialog">
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Notice the VM, if is powered on, it will be stopped to perform the clone. If you have a snapshot of the VM, you can also create a clone from the snapshot without powering off the VM.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>A new VM is created, the disks are cloned and automatically the portal will redirect you to the new VM.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-02/20_VM_Cloned.png" alt="20 VM Cloned">
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+The cloned VM will have the same identity as the source VM, which may cause conflicts with applications and other clients interacting with the VM. Use caution when cloning a VM connected to an external network or in the same project.
+</td>
+</tr>
+</table>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this section of our lab we explored the storage options that are available to us when managing virtual machines. We also performed several VM management functions that are dependant on the storage provisioned for the virtual machine, including taking snapshots of VMs and cloning VMs to be used in another project or to help streamline development.</p>
+</div>
+</div>
+</div>
 <nav class="pagination">
   <span class="prev"><a href="module-01.html" class="query-params-link">2. Bare Metal Management </a></span>
   <span class="next"><a href="module-03.html" class="query-params-link">4. Network Management</a></span>

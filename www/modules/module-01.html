@@ -52,10 +52,19 @@
     <a class="nav-link" href="module-00.html">1. Virtual Machine Management </a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="module-00.html#repositories">Repositories</a>
+    <a class="nav-link" href="module-00.html#create_project">Create a New Project</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="module-00.html#software">Software</a>
+    <a class="nav-link" href="module-00.html#create_vm">Create a Linux Virtual Machine</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="module-00.html#admin_vms">Administering Virtual Machines</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="module-00.html#vm_state">Controlling Virtual Machine State</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="module-00.html#live_migrate">Live Migrate a Virtual Machine</a>
   </li>
 </ul>
   </li>
@@ -79,10 +88,16 @@
     <a class="nav-link" href="module-02.html">3. Storage Management</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="module-02.html#prerequisites">Install Prerequisites</a>
+    <a class="nav-link" href="module-02.html#glossary_terms">Glossary of Familiar Terms</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="module-02.html#container">Enable Container</a>
+    <a class="nav-link" href="module-02.html#default_boot">Exploring Default Boot Sources</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="module-02.html#managing_snapshots">Managing Snapshots</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="module-02.html#clone_vm">Clone a Virtual Machine</a>
   </li>
 </ul>
   </li>
@@ -337,7 +352,7 @@ If your cluster uses worker nodes with different CPUs, e.g. Intel and AMD, live 
 <p>From the navigation menu, select <strong>Compute</strong> &#8594; <strong>Nodes</strong>:</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-01/Compute_Nodes.png" alt="Compute Nodes">
+<img src="_images/module-01/01_Compute_Nodes.png" alt="01 Compute Nodes">
 </div>
 </div>
 <div class="paragraph">
@@ -351,7 +366,7 @@ If your cluster uses worker nodes with different CPUs, e.g. Intel and AMD, live 
 <p>Click on one of the worker nodes to obtain resource information about the node:</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-01/Worker0_Information.png" alt="Worker0 Information">
+<img src="_images/module-01/02_Worker0_Information.png" alt="02 Worker0 Information">
 </div>
 </div>
 <div class="paragraph">
@@ -378,7 +393,7 @@ At least one physical node is required for OpenShift Virtualization, "nesting" a
 <p>Navigate to the tab <strong>Details</strong> to obtain more information about the operating system.</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-01/Worker0_Details.png" alt="Worker0 Details">
+<img src="_images/module-01/03_Worker0_Details.png" alt="03 Worker0 Details">
 </div>
 </div>
 </li>
@@ -398,7 +413,7 @@ At least one physical node is required for OpenShift Virtualization, "nesting" a
 <p>Select <strong>Compute</strong> &#8594; <strong>Bare Metal Hosts</strong>:</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-01/BMHosts.png" alt="BMHosts">
+<img src="_images/module-01/04_BMHosts.png" alt="04 BMHosts">
 </div>
 </div>
 <div class="paragraph">
@@ -409,7 +424,7 @@ At least one physical node is required for OpenShift Virtualization, "nesting" a
 <p>Click on any of the worker nodes to obtain information about the physical (bare metal) node:</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-01/Worker0_BMhost.png" alt="Worker0 BMhost">
+<img src="_images/module-01/05_Worker0_BMHost.png" alt="05 Worker0 BMHost">
 </div>
 </div>
 <div class="paragraph">
@@ -438,7 +453,7 @@ At least one physical node is required for OpenShift Virtualization, "nesting" a
 <p>Select <strong>Compute</strong> &#8594; <strong>Bare Metal Hosts</strong>:</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-01/BMHosts.png" alt="BMHosts">
+<img src="_images/module-01/04_BMHosts.png" alt="04 BMHosts">
 </div>
 </div>
 </li>
@@ -446,7 +461,7 @@ At least one physical node is required for OpenShift Virtualization, "nesting" a
 <p>Click on the <strong>Add Host</strong> button in the upper right corner, and select the <strong>New with Dialog</strong> option.</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-01/add_host_red.png" alt="add host red">
+<img src="_images/module-01/06_Add_Host_Red.png" alt="06 Add Host Red">
 </div>
 </div>
 </li>
@@ -476,7 +491,7 @@ At least one physical node is required for OpenShift Virtualization, "nesting" a
 <p>With this information filled out, click the <strong>Create</strong> button at the bottom of the dialog page.</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-01/create_host_red.png" alt="create host red">
+<img src="_images/module-01/07_Create_Host_Red.png" alt="07 Create Host Red">
 </div>
 </div>
 </li>
@@ -484,7 +499,7 @@ At least one physical node is required for OpenShift Virtualization, "nesting" a
 <p>You will then be presented with the summary screen for <strong>worker4</strong>, and you will see the status update as it attempts to contact the machine and make it available as a host.</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-01/worker4_summary_1.png" alt="worker4 summary 1">
+<img src="_images/module-01/08_Worker4_Summary_1.png" alt="08 Worker4 Summary 1">
 </div>
 </div>
 <div class="admonitionblock note">
@@ -504,7 +519,7 @@ This step may take several minutes to update as it powers up the host, and colle
 <p>When host discovery and hardware inspection is complete you will see that it shows it&#8217;s status as <strong>Available</strong>.</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-01/worker4_summary_2.png" alt="worker4 summary 2">
+<img src="_images/module-01/09_Worker4_Summary_2.png" alt="09 Worker4 Summary 2">
 </div>
 </div>
 </li>
@@ -512,7 +527,7 @@ This step may take several minutes to update as it powers up the host, and colle
 <p>Once a host has been physically discovered the next step is to add it as a machine to be used by OpenShift. Click on the menu for <strong>MachineSets</strong> on the left under <strong>Compute</strong>.</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-01/machinesets.png" alt="machinesets">
+<img src="_images/module-01/10_Machinesets.png" alt="10 Machinesets">
 </div>
 </div>
 </li>
@@ -520,7 +535,7 @@ This step may take several minutes to update as it powers up the host, and colle
 <p>Click on the <strong>three-dot</strong> menu on the top-right side, and select <strong>Edit Machine count</strong> from the dropdown menu.</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-01/edit_machine_count.png" alt="edit machine count">
+<img src="_images/module-01/11_Edit_Machine_Count.png" alt="11 Edit Machine Count">
 </div>
 </div>
 </li>
@@ -528,7 +543,7 @@ This step may take several minutes to update as it powers up the host, and colle
 <p>A new menu will appear showing the current machine count of <strong>3</strong>, click the plus (+) sign to increase the machine count to <strong>4</strong>.</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-01/edit_machine_count_4.png" alt="edit machine count 4">
+<img src="_images/module-01/12_Edit_Machine_Count_4.png" alt="12 Edit Machine Count 4">
 </div>
 </div>
 </li>
@@ -536,7 +551,7 @@ This step may take several minutes to update as it powers up the host, and colle
 <p>You will be returned to the MachineSets page, and you can now see that the count of machines is 3/4 machines.</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-01/machine_count_3_4.png" alt="machine count 3 4">
+<img src="_images/module-01/13_Machine_Count_3_4.png" alt="13 Machine Count 3 4">
 </div>
 </div>
 </li>
@@ -544,7 +559,7 @@ This step may take several minutes to update as it powers up the host, and colle
 <p>Next, click on the <strong>Machines</strong> button on the left to see a list of all the machines, and you should see worker4 in the <strong>Provisioning</strong> state.</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-01/worker_4_provisioning.png" alt="worker 4 provisioning">
+<img src="_images/module-01/14_Worker_4_Provisioning.png" alt="14 Worker 4 Provisioning">
 </div>
 </div>
 </li>
@@ -552,7 +567,7 @@ This step may take several minutes to update as it powers up the host, and colle
 <p>One provisioning is complete you will see the node listed with the Phase set to <strong>Provisioned as node</strong>.</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-01/provisioned_as_node.png" alt="provisioned as node">
+<img src="_images/module-01/15_Provisioned_As_Node.png" alt="15 Provisioned As Node">
 </div>
 </div>
 </li>
@@ -560,7 +575,7 @@ This step may take several minutes to update as it powers up the host, and colle
 <p>Since our new host has now been added to the machineset and provisioned as a node, we can click on the <strong>Nodes</strong> menu on the left.</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-01/all_nodes.png" alt="all nodes">
+<img src="_images/module-01/16_All_Nodes.png" alt="16 All Nodes">
 </div>
 </div>
 </li>
@@ -568,7 +583,7 @@ This step may take several minutes to update as it powers up the host, and colle
 <p>We can also click directly on <strong>worker-4</strong> under the <strong>Name</strong> column to see it&#8217;s current status.</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-01/worker_4_details.png" alt="worker 4 details">
+<img src="_images/module-01/17_Worker_4_Details.png" alt="17 Worker 4 Details">
 </div>
 </div>
 </li>

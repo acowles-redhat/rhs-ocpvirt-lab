@@ -1,1 +1,166 @@
 = Virtual Machine Management
+
+The beginning section of this lab will introduce you to the basics of creating and managing VMs in OpenShift Virtualization. You will see how the web console guides you through the whole process of creating a virtual machine from a pre-defined template. We will then review the properties of that VM, and do some basic customizations perform actions like live migration, that are often expected of virtual machine administrators. 
+
+.Goals
+
+* Create a new virtual machine
+* Review and modify resources for virtual machines
+* Understand how VM power states are managed using the OpenShift console
+* Live migrate a VM between two hosts
+
+[[create_project]]
+== Create a New Project
+
+Like other objects in OpenShift, Projects, which are an abstraction for Kubnernetes namespaces, are the boundaries for permissions and other aspects of using and manaing the resources. Creating a Project is an important first step for any deployment.
+
+. Browse to *Virtualization* -> *VirtualMachines* using the left navigation menu:
++
+image::module-00/01_Left_Menu.png[Navigation Menu,136,266]
++
+[NOTE]
+====
+The *Virtualization* tab is available only when Red Hat OpenShift Virtualization is installed and properly configured. In this lab environment the installation and configuration has already been performed for us.
+====
+
+. Examine the *VirtualMachines* dashboard that appears. There are currently several VMs listed, but are not turned on:
++
+image::module-00/02_VM_List.png[]
+
+. Before creating a VM we need to create a new project. Virtual machines are deployed to a specific project, or namespace, where, by default, users without permission to the namespace cannot access, manage, or control them. Administrators can access all projects, and therefore view all virtual machines, however regular users must be given access to projects as needed.
++
+.. Click *Project: All Projects* and then click *Create Project*.
++
+image::module-00/50_create_new_project.png[]
+.. In the *Name* field, type `vmexamples` to name the project, then click *Create*.
++
+image::module-00/03_Create_Project.png[]
+
+[[create_vm]]
+== Create a Linux Virtual Machine
+
+. From the Virtual Machines inventory, click *Create VirtualMachine*
++
+image::module-00/53_create_vm_button.png[]
+
+. The wizard will appear showing the available pre-defined VM templates. 
++
+Reviewing the list of available templates you’ll notice that some have a blue badge which indicates "Source available". These are templates which are using the automatically downloaded and stored template disks reviewed in the previous page. If you were deploying in your own environment, you have the option of preventing these from being created and/or removing those source disks, followed by creating and uploading custom disks for your organization.
++
+image::module-00/04_Create_VM_Templates.png[]
+
+. Select the *Fedora VM* tile, and a dialog opens.
++
+image::module-00/05_Create_VM_Quick.png[]
+
+. Change the name to `fedora01` and press *Quick create VirtualMachine*:
++
+image::module-00/05_Create_VM_Quick_Name.png[]
+
++
+. After a few seconds, expect to see the VM is `Running`. During this time, the storage provider has cloned the template disk so that it can be used by the newly created virtual machine. The amount of time this takes can vary based on the storage provider being used to create the boot disk.
++
+image::module-00/06_Fedora_Running.png[]
+
+. After the VM is created, examine the *Events* tab to see some details of the process. If there are any issues with the creation of the VM, they will show up on this tab as well.
++
+image::module-00/09_Fedora_Events.png[]
++
+* A _DataVolume_ is created. _DataVolumes_ are used to manage the creation of a VM disk, abstracting the clone or import process onto OpenShift native storage during the virtual machine's creation flow.
+* The _VM_ is started.
+
+. Click the *Details* tab to obtain information related to the VM. Note that for this template, the default is 1 CPU and 2 GiB of memory. As the administrator, you can create templates that customize the default configuration of virtual machines. Later in this lab we will have the opportunity to explore the creation of custom templates.
++
+The IP address of the virtual machine on the software-defined network (SDN) is also displayed here, along with information about the boot order, workload profile, the cluster node hosting the virtual machine, and more. By default VMs are attached to the default pod network. Later in this lab we will explore advanced networking options, and how to customize connectivity for VMs.
++
+image::module-00/10_Fedora_Details.png[]
+
+[[admin_vms]]
+== Administering Virtual Machines
+
+Administering and using virtual machines is more than simply creating and customizing their configuration. As the platform administrator, we also need to be able to control the VM states and trigger live migrations so that we can balance resources, perform maintenance tasks, and reconfigure nodes.
+
+. From the left navigation menu, browse to *Virtualization* -> *VirtualMachines*. Ensure you're using the correct project, `vmexamples`, then click the name of one of the available virtual machines.
++
+image::module-00/54_vm_management_navigation.png[]
+
+. Click the *Configuration* tab, this is the entry point to obtain information about the resources of the Virtual Machine. 
++
+image::module-00/55_configuration_tab_nav.png[]
++
+It includes five subtabs:
++
+image::module-00/56_config_tab_nav_2.png[]
++
+* *Scheduling*: It includes advanced configuration indicating where the VM should run and the strategy to follow for eviction. This is used to configure (anti)affinity rules, configure node selectors and tolerations, and other behaviors that affect which cluster nodes the VM can be scheduled to.
+* *Environment*: It is possible to attach _ConfigMaps_, _Secrets_, and _Service Accounts_ as extra disks. This is useful when passing configuration data to the application(s) running in the virtual machine.
+* *Network interfaces*: It shows the current network interfaces configured for the VM and add new ones.
+* *Disks*: It lists the disks attached to the system and allows to add new disks to the system. If the guest is configured with the agent, it lists the filesystems and the utilization.
+* *Scripts*: This tab allows us to configure _cloud-init_ for Linux or _sys-prep_ for Microsoft Windows, including setting the commands to be executed on the first boot, such as the injection of SSH keys, installation of applications, network configuration, and more.
+
+. Examine the network interfaces attached to the VM by clicking on the *Network interfaces* subtab:
++
+image::module-00/20_Network_Tab.png[]
++
+When a VM is created, an interface on the `PodNetworking` network of type `masquerade` is created by default. This connects the VM to the SDN and provides access from the VM to outside the OpenShift cluster. Other VMs, and Pods, in the cluster can access the virtual machine using this interface. Furthermore, a VM connected to the SDN can be accessed externally using a Route, or Service with type load balancer. Refer to the MetalLB module of this workshop to see how to configure and expose a VM using this method.
+
+. List the disks associated with the VM:
++
+image::module-00/21_Disks_Tab.png[]
++
+In this environment, the default StorageClass, which defines the source and type of storage used for the disk, is called `ocs-storagecluster-ceph-rbd`. This storage is the default type provided by OpenShift Data Foundation (ODF). Each storage provider has different storage classes that define the characteristics of the storage backing the VM disk.
+
+[[vm_state]]
+== Controlling Virtual Machine State
+
+As a user with permission to access Virtualization, you can stop, start, restart, pause, and unpause virtual machines from the web console.
+
+. In the left menu, go back to *Virtualization* -> *VirtualMachines*:
+
+. Select the _Virtual Machine_ `fedora02` from the list.
+
+. Press the top-right dropdown, *Actions*, to list the available 
+options:
++
+image::module-00/30_VM_Actions_List.png[]
++
+//Make note of new menu actions
+.. *Stop*: Starts a graceful shutdown of the _Virtual Machine_.
+.. *Restart*: This will send a signal to the operating system to reboot the _Virtual Machine_. Guest integrations are needed for this to work properly.
+.. *Pause*: The process is frozen without further access to CPU resources and I/O, but the memory used by the VM at the hypervisor level will stay allocated.
+
+. Press *Stop* and wait till the _Virtual Machine_ is in state `Stopped`.
++
+image::module-00/31_VM_Stopped.png[]
+. Clicking on *Actions*, the option *Start* appears, and the options *Restart* and *Pause* are greyed out. 
++
+image::module-00/32_VM_Actions_List_Stopped.png[]
+
+. Press *Start*, and wait for the `Running` status.
+
+. Using the *Actions* menu, press the *Pause* option. The _Virtual Machine_ state will change to `Paused`.
++
+image::module-00/33_VM_Actions_Paused.png[]
+
+. Unpause the _Virtual Machine_ using *Actions* and the option *Unpause*.
+
+[[live_migrate]]
+== Live Migrate a Virtual Machine
+
+In this section, we will migrate the VM from one OpenShift node to another without shutting down the VM. Live migration requires `ReadWriteMany` (RWX) storage so that the VM disks can be mounted on both the source and destination nodes at the same time. OpenShift Virtualization, unlike other virtualization solutions, does not use monolithic datastores mounted to each cluster member that hold many VM disks for many different VMs. Instead, each VM disk is stored in its own volume that is only mounted when and where it's needed. 
+
+. Navigate to the *Details* tab to see where the worker node is running:
++
+image::module-00/17_VM_Info_Node.png[]
+
+. Using the menu *Actions*, press *Migrate*
++
+image::module-00/19_VM_Dialog_Migrate.png[]
+
+. After a few seconds, the VM will change the status to `Migrating`. A few seconds later, it will return to the `Running` status, but on a different node. The VM has been successfully live migrated!
++
+image::module-00/21_Migrated.png[]
+
+== Summary
+
+In this lab, we explored virtual machine state management tasks and executed a live migration of that VM. Both of these are common and necessary tasks as platform administrators.

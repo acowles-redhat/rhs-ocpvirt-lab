@@ -52,10 +52,19 @@
     <a class="nav-link" href="module-00.html">1. Virtual Machine Management </a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="module-00.html#repositories">Repositories</a>
+    <a class="nav-link" href="module-00.html#create_project">Create a New Project</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="module-00.html#software">Software</a>
+    <a class="nav-link" href="module-00.html#create_vm">Create a Linux Virtual Machine</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="module-00.html#admin_vms">Administering Virtual Machines</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="module-00.html#vm_state">Controlling Virtual Machine State</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="module-00.html#live_migrate">Live Migrate a Virtual Machine</a>
   </li>
 </ul>
   </li>
@@ -79,10 +88,16 @@
     <a class="nav-link" href="module-02.html">3. Storage Management</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="module-02.html#prerequisites">Install Prerequisites</a>
+    <a class="nav-link" href="module-02.html#glossary_terms">Glossary of Familiar Terms</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="module-02.html#container">Enable Container</a>
+    <a class="nav-link" href="module-02.html#default_boot">Exploring Default Boot Sources</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="module-02.html#managing_snapshots">Managing Snapshots</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="module-02.html#clone_vm">Clone a Virtual Machine</a>
   </li>
 </ul>
   </li>
@@ -283,27 +298,15 @@
 <p>By default you&#8217;ll see the VMs and Folders view, where you can see the four VMs representing the application.</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-05/100_vSphere_VM_List.png" alt="100 vSphere VM List">
+<img src="_images/module-05/00_vSphere_VM_List.png" alt="00 vSphere VM List">
 </div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The VMs with the suffix <code>_running</code> are the active ones. As for the migration have to be stopped, a clone of the VMs were created for the migration. Those VMs are the ones without that suffix.
-</td>
-</tr>
-</table>
 </div>
 </li>
 <li>
 <p>Change to the networks view (or click <a href="https://portal.vc.opentlc.com/ui/app/dvportgroup;nav=n/urn:vmomi:DistributedVirtualPortgroup:dvportgroup-1916:ee1bef3e-6179-4c1f-9d2a-004c7b0df4e5/ports" target="_blank" rel="noopener"> this link</a>), then expand the tree to view the port group used by the virtual machines. Note that the name is <code>segment-migrating-to-ocpvirt</code>.</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-05/101_vSphere_Network.png" alt="101 vSphere Network">
+<img src="_images/module-05/01_vSphere_Network.png" alt="01 vSphere Network">
 </div>
 </div>
 </li>
@@ -311,7 +314,7 @@ The VMs with the suffix <code>_running</code> are the active ones. As for the mi
 <p>Finally, review the datastore by browsing to the datastores view (or using <a href="https://portal.vc.opentlc.com/ui/app/datastore;nav=s/urn:vmomi:Datastore:datastore-48:ee1bef3e-6179-4c1f-9d2a-004c7b0df4e5/vms/vms" target="_blank" rel="noopener">this link</a>). Expand the tree to see the name of the datastore, <code>WorkloadDatastore</code>, and optionally browse to the <strong>VMs</strong> sub-tab to view the capacity used by each virtual machine.</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-05/102_vSphere_Datastore.png" alt="102 vSphere Datastore">
+<img src="_images/module-05/02_vSphere_Datastore.png" alt="02 vSphere Datastore">
 </div>
 </div>
 </li>
@@ -332,7 +335,7 @@ The VMs with the suffix <code>_running</code> are the active ones. As for the mi
 <p>Select project <code>openshift-mtv</code></p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-05/91_MTV_Providers.png" alt="91 MTV Providers">
+<img src="_images/module-05/03_MTV_Providers.png" alt="03 MTV Providers">
 </div>
 </div>
 <div class="admonitionblock tip">
@@ -352,7 +355,7 @@ MTV 2.4 and later are project/namespace aware and do not require administrator p
 <p>By default, there is a provider called <code>host</code> which represents the <strong>OpenShift Virtualization</strong> as a target platform</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-05/92_MTV_Provider_list.png" alt="92 MTV Provider list">
+<img src="_images/module-05/04_MTV_Provider_list.png" alt="04 MTV Provider list">
 </div>
 </div>
 </li>
@@ -376,7 +379,7 @@ MTV 2.4 and later are project/namespace aware and do not require administrator p
 <p>Navigate in the left menu to <strong>Migration</strong> &#8594; <strong>NetworkMaps for virtualization</strong> and press <strong>Create NetworkMap</strong></p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-05/96_MTV_NetworkMaps.png" alt="96 MTV NetworkMaps">
+<img src="_images/module-05/08_MTV_NetworkMaps.png" alt="08 MTV NetworkMaps">
 </div>
 </div>
 </li>
@@ -400,7 +403,7 @@ MTV 2.4 and later are project/namespace aware and do not require administrator p
 <p><strong>Target network</strong>: <code>Pod network (default)</code></p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-05/97_Add_VMWARE_Mapping_Network.png" alt="97 Add VMWARE Mapping Network">
+<img src="_images/module-05/09_Add_VMWARE_Mapping_Network.png" alt="09 Add VMWARE Mapping Network">
 </div>
 </div>
 </li>
@@ -411,7 +414,7 @@ MTV 2.4 and later are project/namespace aware and do not require administrator p
 <p>Ensure the created mapping has the <strong>Status</strong> <code>Ready</code></p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-05/98_List_VMWARE_Mapping_Network.png" alt="98 List VMWARE Mapping Network">
+<img src="_images/module-05/10_List_VMWARE_Mapping_Network.png" alt="10 List VMWARE Mapping Network">
 </div>
 </div>
 </li>
@@ -419,7 +422,7 @@ MTV 2.4 and later are project/namespace aware and do not require administrator p
 <p>Navigate in the left menu to <strong>Migration</strong> &#8594; <strong>StorageMaps for virtualization</strong> and press <strong>Create StorageMap</strong></p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-05/99_MTV_StorageMaps.png" alt="99 MTV StorageMaps">
+<img src="_images/module-05/11_MTV_StorageMaps.png" alt="11 MTV StorageMaps">
 </div>
 </div>
 </li>
@@ -443,7 +446,7 @@ MTV 2.4 and later are project/namespace aware and do not require administrator p
 <p><strong>Target storage classs</strong>: <code>ocs-storagecluster-ceph-rbd (default)</code></p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-05/100_Add_VMWARE_Mapping_Storage.png" alt="100 Add VMWARE Mapping Storage">
+<img src="_images/module-05/12_Add_VMWARE_Mapping_Storage.png" alt="12 Add VMWARE Mapping Storage">
 </div>
 </div>
 </li>
@@ -454,7 +457,7 @@ MTV 2.4 and later are project/namespace aware and do not require administrator p
 <p>Ensure the created mapping has the <strong>Status</strong> <code>Ready</code></p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-05/101_List_VMWARE_Mapping_Storage.png" alt="101 List VMWARE Mapping Storage">
+<img src="_images/module-05/13_List_VMWARE_Mapping_Storage.png" alt="13 List VMWARE Mapping Storage">
 </div>
 </div>
 </li>
@@ -466,25 +469,13 @@ MTV 2.4 and later are project/namespace aware and do not require administrator p
 <div class="paragraph">
 <p>Now that you have the virtualization provider and the two mappings (network &amp; storage) you can create a Migration Plan - this plan selects which VMs to migrate from VMware vSphere to Red Hat OpenShift Virtualization and how to execute the migration (cold/warm, network mapping, storage mapping, pre-/post-hooks, etc.).</p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Depending on order of you doing the modules, you might be missing required <code>vmexamples</code> namespace here. If you haven&#8217;t done yet, do chapter <strong>OpenShift Virtualization Basics</strong> &#8594; <strong>Create a new Project</strong>)
-</td>
-</tr>
-</table>
-</div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
 <p>Navigate in the left menu to <strong>Migration</strong> &#8594; <strong>Plans for virtualization</strong> and press <strong>Create plan</strong></p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-05/102_Create_VMWARE_Plan.png" alt="102 Create VMWARE Plan">
+<img src="_images/module-05/14_Create_VMWARE_Plan.png" alt="14 Create VMWARE Plan">
 </div>
 </div>
 </li>
@@ -505,7 +496,7 @@ Depending on order of you doing the modules, you might be missing required <code
 <p><strong>Target namespace</strong>: <code>vmexamples</code></p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-05/52_General_VMWARE_Plan.png" alt="52 General VMWARE Plan">
+<img src="_images/module-05/15_General_VMWARE_Plan.png" alt="15 General VMWARE Plan">
 </div>
 </div>
 </li>
@@ -516,15 +507,15 @@ Depending on order of you doing the modules, you might be missing required <code
 <p>On the next step, select <code>All datacenters</code>  and press <strong>Next</strong></p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-05/53_VM_Filter_VMWARE_Plan.png" alt="53 VM Filter VMWARE Plan">
+<img src="_images/module-05/16_VM_Filter_VMWARE_Plan.png" alt="16 VM Filter VMWARE Plan">
 </div>
 </div>
 </li>
 <li>
-<p>On the next step select the database VM, as the one we would like to move. Press <strong>Next</strong>:</p>
+<p>On the next step select the three VMs we would like to move. Press <strong>Next</strong>:</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-05/54_VM_Select_VMWARE_Plan.png" alt="54 VM Select VMWARE Plan">
+<img src="_images/module-05/17_VM_Select_VMWARE_Plan.png" alt="17 VM Select VMWARE Plan">
 </div>
 </div>
 </li>
@@ -532,7 +523,7 @@ Depending on order of you doing the modules, you might be missing required <code
 <p>On the <strong>Network mapping</strong> step select <code>mapping-segment</code> and press <strong>Next</strong></p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-05/55_Network_VMWARE_Plan.png" alt="55 Network VMWARE Plan">
+<img src="_images/module-05/18_Network_VMWARE_Plan.png" alt="18 Network VMWARE Plan">
 </div>
 </div>
 </li>
@@ -540,7 +531,7 @@ Depending on order of you doing the modules, you might be missing required <code
 <p>On the <strong>Storage mapping</strong> step select <code>mapping-datastore</code> and press <strong>Next</strong></p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-05/56_Storage_VMWARE_Plan.png" alt="56 Storage VMWARE Plan">
+<img src="_images/module-05/19_Storage_VMWARE_Plan.png" alt="19 Storage VMWARE Plan">
 </div>
 </div>
 </li>
@@ -551,7 +542,7 @@ Depending on order of you doing the modules, you might be missing required <code
 <p>Review the configuration specified and press <strong>Finish</strong></p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-05/57_Finish_VMWARE_Plan.png" alt="57 Finish VMWARE Plan">
+<img src="_images/module-05/20_Finish_VMWARE_Plan.png" alt="20 Finish VMWARE Plan">
 </div>
 </div>
 </li>
@@ -559,7 +550,7 @@ Depending on order of you doing the modules, you might be missing required <code
 <p>Ensure the status of the plan is <strong>Ready</strong></p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-05/58_Ready_VMWARE_Plan.png" alt="58 Ready VMWARE Plan">
+<img src="_images/module-05/21_Ready_VMWARE_Plan.png" alt="21 Ready VMWARE Plan">
 </div>
 </div>
 </li>
@@ -570,7 +561,7 @@ Depending on order of you doing the modules, you might be missing required <code
 <p>After around 10 minutes the migration is completed</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-05/59_Completed_VMWARE_Plan.png" alt="59 Completed VMWARE Plan">
+<img src="_images/module-05/22_Completed_VMWARE_Plan.png" alt="22 Completed VMWARE Plan">
 </div>
 </div>
 <div class="admonitionblock important">

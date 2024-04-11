@@ -52,10 +52,19 @@
     <a class="nav-link" href="module-00.html">1. Virtual Machine Management </a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#repositories">Repositories</a>
+    <a class="nav-link" href="#create_project">Create a New Project</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#software">Software</a>
+    <a class="nav-link" href="#create_vm">Create a Linux Virtual Machine</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#admin_vms">Administering Virtual Machines</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#vm_state">Controlling Virtual Machine State</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#live_migrate">Live Migrate a Virtual Machine</a>
   </li>
 </ul>
   </li>
@@ -79,10 +88,16 @@
     <a class="nav-link" href="module-02.html">3. Storage Management</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="module-02.html#prerequisites">Install Prerequisites</a>
+    <a class="nav-link" href="module-02.html#glossary_terms">Glossary of Familiar Terms</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="module-02.html#container">Enable Container</a>
+    <a class="nav-link" href="module-02.html#default_boot">Exploring Default Boot Sources</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="module-02.html#managing_snapshots">Managing Snapshots</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="module-02.html#clone_vm">Clone a Virtual Machine</a>
   </li>
 </ul>
   </li>
@@ -177,7 +192,367 @@
   <div class="content">
 <article class="doc">
 <h1 class="page">Virtual Machine Management</h1>
-
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>The beginning section of this lab will introduce you to the basics of creating and managing VMs in OpenShift Virtualization. You will see how the web console guides you through the whole process of creating a virtual machine from a pre-defined template. We will then review the properties of that VM, and do some basic customizations perform actions like live migration, that are often expected of virtual machine administrators.</p>
+</div>
+<div class="ulist">
+<div class="title">Goals</div>
+<ul>
+<li>
+<p>Create a new virtual machine</p>
+</li>
+<li>
+<p>Review and modify resources for virtual machines</p>
+</li>
+<li>
+<p>Understand how VM power states are managed using the OpenShift console</p>
+</li>
+<li>
+<p>Live migrate a VM between two hosts</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="create_project"><a class="anchor" href="#create_project"></a>Create a New Project</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Like other objects in OpenShift, Projects, which are an abstraction for Kubnernetes namespaces, are the boundaries for permissions and other aspects of using and manaing the resources. Creating a Project is an important first step for any deployment.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Browse to <strong>Virtualization</strong> &#8594; <strong>VirtualMachines</strong> using the left navigation menu:</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-00/01_Left_Menu.png" alt="Navigation Menu" width="136" height="266">
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The <strong>Virtualization</strong> tab is available only when Red Hat OpenShift Virtualization is installed and properly configured. In this lab environment the installation and configuration has already been performed for us.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Examine the <strong>VirtualMachines</strong> dashboard that appears. There are currently several VMs listed, but are not turned on:</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-00/02_VM_List.png" alt="02 VM List">
+</div>
+</div>
+</li>
+<li>
+<p>Before creating a VM we need to create a new project. Virtual machines are deployed to a specific project, or namespace, where, by default, users without permission to the namespace cannot access, manage, or control them. Administrators can access all projects, and therefore view all virtual machines, however regular users must be given access to projects as needed.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Click <strong>Project: All Projects</strong> and then click <strong>Create Project</strong>.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-00/50_create_new_project.png" alt="50 create new project">
+</div>
+</div>
+</li>
+<li>
+<p>In the <strong>Name</strong> field, type <code>vmexamples</code> to name the project, then click <strong>Create</strong>.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-00/03_Create_Project.png" alt="03 Create Project">
+</div>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="create_vm"><a class="anchor" href="#create_vm"></a>Create a Linux Virtual Machine</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>From the Virtual Machines inventory, click <strong>Create VirtualMachine</strong></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-00/53_create_vm_button.png" alt="53 create vm button">
+</div>
+</div>
+</li>
+<li>
+<p>The wizard will appear showing the available pre-defined VM templates.</p>
+<div class="paragraph">
+<p>Reviewing the list of available templates you’ll notice that some have a blue badge which indicates "Source available". These are templates which are using the automatically downloaded and stored template disks reviewed in the previous page. If you were deploying in your own environment, you have the option of preventing these from being created and/or removing those source disks, followed by creating and uploading custom disks for your organization.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-00/04_Create_VM_Templates.png" alt="04 Create VM Templates">
+</div>
+</div>
+</li>
+<li>
+<p>Select the <strong>Fedora VM</strong> tile, and a dialog opens.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-00/05_Create_VM_Quick.png" alt="05 Create VM Quick">
+</div>
+</div>
+</li>
+<li>
+<p>Change the name to <code>fedora01</code> and press <strong>Quick create VirtualMachine</strong>:</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-00/05_Create_VM_Quick_Name.png" alt="05 Create VM Quick Name">
+</div>
+</div>
+</li>
+<li>
+<p>After a few seconds, expect to see the VM is <code>Running</code>. During this time, the storage provider has cloned the template disk so that it can be used by the newly created virtual machine. The amount of time this takes can vary based on the storage provider being used to create the boot disk.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-00/06_Fedora_Running.png" alt="06 Fedora Running">
+</div>
+</div>
+</li>
+<li>
+<p>After the VM is created, examine the <strong>Events</strong> tab to see some details of the process. If there are any issues with the creation of the VM, they will show up on this tab as well.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-00/09_Fedora_Events.png" alt="09 Fedora Events">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A <em>DataVolume</em> is created. <em>DataVolumes</em> are used to manage the creation of a VM disk, abstracting the clone or import process onto OpenShift native storage during the virtual machine&#8217;s creation flow.</p>
+</li>
+<li>
+<p>The <em>VM</em> is started.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Click the <strong>Details</strong> tab to obtain information related to the VM. Note that for this template, the default is 1 CPU and 2 GiB of memory. As the administrator, you can create templates that customize the default configuration of virtual machines. Later in this lab we will have the opportunity to explore the creation of custom templates.</p>
+<div class="paragraph">
+<p>The IP address of the virtual machine on the software-defined network (SDN) is also displayed here, along with information about the boot order, workload profile, the cluster node hosting the virtual machine, and more. By default VMs are attached to the default pod network. Later in this lab we will explore advanced networking options, and how to customize connectivity for VMs.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-00/10_Fedora_Details.png" alt="10 Fedora Details">
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="admin_vms"><a class="anchor" href="#admin_vms"></a>Administering Virtual Machines</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Administering and using virtual machines is more than simply creating and customizing their configuration. As the platform administrator, we also need to be able to control the VM states and trigger live migrations so that we can balance resources, perform maintenance tasks, and reconfigure nodes.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>From the left navigation menu, browse to <strong>Virtualization</strong> &#8594; <strong>VirtualMachines</strong>. Ensure you&#8217;re using the correct project, <code>vmexamples</code>, then click the name of one of the available virtual machines.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-00/54_vm_management_navigation.png" alt="54 vm management navigation">
+</div>
+</div>
+</li>
+<li>
+<p>Click the <strong>Configuration</strong> tab, this is the entry point to obtain information about the resources of the Virtual Machine.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-00/55_configuration_tab_nav.png" alt="55 configuration tab nav">
+</div>
+</div>
+<div class="paragraph">
+<p>It includes five subtabs:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-00/56_config_tab_nav_2.png" alt="56 config tab nav 2">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Scheduling</strong>: It includes advanced configuration indicating where the VM should run and the strategy to follow for eviction. This is used to configure (anti)affinity rules, configure node selectors and tolerations, and other behaviors that affect which cluster nodes the VM can be scheduled to.</p>
+</li>
+<li>
+<p><strong>Environment</strong>: It is possible to attach <em>ConfigMaps</em>, <em>Secrets</em>, and <em>Service Accounts</em> as extra disks. This is useful when passing configuration data to the application(s) running in the virtual machine.</p>
+</li>
+<li>
+<p><strong>Network interfaces</strong>: It shows the current network interfaces configured for the VM and add new ones.</p>
+</li>
+<li>
+<p><strong>Disks</strong>: It lists the disks attached to the system and allows to add new disks to the system. If the guest is configured with the agent, it lists the filesystems and the utilization.</p>
+</li>
+<li>
+<p><strong>Scripts</strong>: This tab allows us to configure <em>cloud-init</em> for Linux or <em>sys-prep</em> for Microsoft Windows, including setting the commands to be executed on the first boot, such as the injection of SSH keys, installation of applications, network configuration, and more.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Examine the network interfaces attached to the VM by clicking on the <strong>Network interfaces</strong> subtab:</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-00/20_Network_Tab.png" alt="20 Network Tab">
+</div>
+</div>
+<div class="paragraph">
+<p>When a VM is created, an interface on the <code>PodNetworking</code> network of type <code>masquerade</code> is created by default. This connects the VM to the SDN and provides access from the VM to outside the OpenShift cluster. Other VMs, and Pods, in the cluster can access the virtual machine using this interface. Furthermore, a VM connected to the SDN can be accessed externally using a Route, or Service with type load balancer. Refer to the MetalLB module of this workshop to see how to configure and expose a VM using this method.</p>
+</div>
+</li>
+<li>
+<p>List the disks associated with the VM:</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-00/21_Disks_Tab.png" alt="21 Disks Tab">
+</div>
+</div>
+<div class="paragraph">
+<p>In this environment, the default StorageClass, which defines the source and type of storage used for the disk, is called <code>ocs-storagecluster-ceph-rbd</code>. This storage is the default type provided by OpenShift Data Foundation (ODF). Each storage provider has different storage classes that define the characteristics of the storage backing the VM disk.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="vm_state"><a class="anchor" href="#vm_state"></a>Controlling Virtual Machine State</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As a user with permission to access Virtualization, you can stop, start, restart, pause, and unpause virtual machines from the web console.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>In the left menu, go back to <strong>Virtualization</strong> &#8594; <strong>VirtualMachines</strong>:</p>
+</li>
+<li>
+<p>Select the <em>Virtual Machine</em> <code>fedora02</code> from the list.</p>
+</li>
+<li>
+<p>Press the top-right dropdown, <strong>Actions</strong>, to list the available
+options:</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-00/30_VM_Actions_List.png" alt="30 VM Actions List">
+</div>
+</div>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p><strong>Stop</strong>: Starts a graceful shutdown of the <em>Virtual Machine</em>.</p>
+</li>
+<li>
+<p><strong>Restart</strong>: This will send a signal to the operating system to reboot the <em>Virtual Machine</em>. Guest integrations are needed for this to work properly.</p>
+</li>
+<li>
+<p><strong>Pause</strong>: The process is frozen without further access to CPU resources and I/O, but the memory used by the VM at the hypervisor level will stay allocated.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Press <strong>Stop</strong> and wait till the <em>Virtual Machine</em> is in state <code>Stopped</code>.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-00/31_VM_Stopped.png" alt="31 VM Stopped">
+</div>
+</div>
+</li>
+<li>
+<p>Clicking on <strong>Actions</strong>, the option <strong>Start</strong> appears, and the options <strong>Restart</strong> and <strong>Pause</strong> are greyed out.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-00/32_VM_Actions_List_Stopped.png" alt="32 VM Actions List Stopped">
+</div>
+</div>
+</li>
+<li>
+<p>Press <strong>Start</strong>, and wait for the <code>Running</code> status.</p>
+</li>
+<li>
+<p>Using the <strong>Actions</strong> menu, press the <strong>Pause</strong> option. The <em>Virtual Machine</em> state will change to <code>Paused</code>.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-00/33_VM_Actions_Paused.png" alt="33 VM Actions Paused">
+</div>
+</div>
+</li>
+<li>
+<p>Unpause the <em>Virtual Machine</em> using <strong>Actions</strong> and the option <strong>Unpause</strong>.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="live_migrate"><a class="anchor" href="#live_migrate"></a>Live Migrate a Virtual Machine</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this section, we will migrate the VM from one OpenShift node to another without shutting down the VM. Live migration requires <code>ReadWriteMany</code> (RWX) storage so that the VM disks can be mounted on both the source and destination nodes at the same time. OpenShift Virtualization, unlike other virtualization solutions, does not use monolithic datastores mounted to each cluster member that hold many VM disks for many different VMs. Instead, each VM disk is stored in its own volume that is only mounted when and where it&#8217;s needed.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Navigate to the <strong>Details</strong> tab to see where the worker node is running:</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-00/17_VM_Info_Node.png" alt="17 VM Info Node">
+</div>
+</div>
+</li>
+<li>
+<p>Using the menu <strong>Actions</strong>, press <strong>Migrate</strong></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-00/19_VM_Dialog_Migrate.png" alt="19 VM Dialog Migrate">
+</div>
+</div>
+</li>
+<li>
+<p>After a few seconds, the VM will change the status to <code>Migrating</code>. A few seconds later, it will return to the <code>Running</code> status, but on a different node. The VM has been successfully live migrated!</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-00/21_Migrated.png" alt="21 Migrated">
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this lab, we explored virtual machine state management tasks and executed a live migration of that VM. Both of these are common and necessary tasks as platform administrators.</p>
+</div>
+</div>
+</div>
 <nav class="pagination">
   <span class="prev"><a href="index.html" class="query-params-link">Introduction</a></span>
   <span class="next"><a href="module-01.html" class="query-params-link">2. Bare Metal Management </a></span>
