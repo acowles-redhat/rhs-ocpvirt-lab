@@ -261,11 +261,6 @@
 <ol class="loweralpha" type="a">
 <li>
 <p>Click <strong>Project: All Projects</strong> and then click <strong>Create Project</strong>.</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/module-00/50_create_new_project.png" alt="50 create new project">
-</div>
-</div>
 </li>
 <li>
 <p>In the <strong>Name</strong> field, type <code>vmexamples</code> to name the project, then click <strong>Create</strong>.</p>
@@ -288,10 +283,22 @@
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>From the Virtual Machines inventory, click <strong>Create VirtualMachine</strong></p>
+<p>From the Virtual Machines inventory, click on the <strong>Create VirtualMachine</strong> button and select <strong>From template</strong> from the drop-down menu.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+VMs can also be created from an InstanceType wizard as well as created by entering a custom YAML definition, but for this current lab scenario we are going to stick with creating VMs based on existing templates.
+</td>
+</tr>
+</table>
+</div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-00/53_create_vm_button.png" alt="53 create vm button">
+<img src="_images/module-00/04_Create_VM_Button.png" alt="04 Create VM Button">
 </div>
 </div>
 </li>
@@ -302,7 +309,7 @@
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-00/04_Create_VM_Templates.png" alt="04 Create VM Templates">
+<img src="_images/module-00/05_Create_VM_Templates.png" alt="05 Create VM Templates">
 </div>
 </div>
 </li>
@@ -310,7 +317,7 @@
 <p>Select the <strong>Fedora VM</strong> tile, and a dialog opens.</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-00/05_Create_VM_Quick.png" alt="05 Create VM Quick">
+<img src="_images/module-00/06_Create_VM_Quick.png" alt="06 Create VM Quick">
 </div>
 </div>
 </li>
@@ -318,7 +325,7 @@
 <p>Change the name to <code>fedora01</code> and press <strong>Quick create VirtualMachine</strong>:</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-00/05_Create_VM_Quick_Name.png" alt="05 Create VM Quick Name">
+<img src="_images/module-00/07_Create_VM_Quick_Name.png" alt="07 Create VM Quick Name">
 </div>
 </div>
 </li>
@@ -326,7 +333,7 @@
 <p>After a few seconds, expect to see the VM is <code>Running</code>. During this time, the storage provider has cloned the template disk so that it can be used by the newly created virtual machine. The amount of time this takes can vary based on the storage provider being used to create the boot disk.</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-00/06_Fedora_Running.png" alt="06 Fedora Running">
+<img src="_images/module-00/08_Fedora_Running.png" alt="08 Fedora Running">
 </div>
 </div>
 </li>
@@ -349,7 +356,7 @@
 </div>
 </li>
 <li>
-<p>Click the <strong>Details</strong> tab to obtain information related to the VM. Note that for this template, the default is 1 CPU and 2 GiB of memory. As the administrator, you can create templates that customize the default configuration of virtual machines. Later in this lab we will have the opportunity to explore the creation of custom templates.</p>
+<p>Click the <strong>Overview</strong> tab to return to the primary screen detailing information related to the VM. Note that for this template, the default is 1 CPU and 2 GiB of memory. As the administrator, you can create templates that customize the default configuration of virtual machines. Later in this lab we will have the opportunity to explore the creation of custom templates.</p>
 <div class="paragraph">
 <p>The IP address of the virtual machine on the software-defined network (SDN) is also displayed here, along with information about the boot order, workload profile, the cluster node hosting the virtual machine, and more. By default VMs are attached to the default pod network. Later in this lab we will explore advanced networking options, and how to customize connectivity for VMs.</p>
 </div>
@@ -372,68 +379,66 @@
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>From the left navigation menu, browse to <strong>Virtualization</strong> &#8594; <strong>VirtualMachines</strong>. Ensure you&#8217;re using the correct project, <code>vmexamples</code>, then click the name of one of the available virtual machines.</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/module-00/54_vm_management_navigation.png" alt="54 vm management navigation">
-</div>
-</div>
-</li>
-<li>
 <p>Click the <strong>Configuration</strong> tab, this is the entry point to obtain information about the resources of the Virtual Machine.</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-00/55_configuration_tab_nav.png" alt="55 configuration tab nav">
+<img src="_images/module-00/11_Configuration_Tab_Nav.png" alt="11 Configuration Tab Nav">
 </div>
 </div>
 <div class="paragraph">
-<p>It includes five subtabs:</p>
+<p>It includes seven subtabs:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-00/56_config_tab_nav_2.png" alt="56 config tab nav 2">
+<img src="_images/module-00/12_Configuration_Tab.png" alt="12 Configuration Tab">
 </div>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Scheduling</strong>: It includes advanced configuration indicating where the VM should run and the strategy to follow for eviction. This is used to configure (anti)affinity rules, configure node selectors and tolerations, and other behaviors that affect which cluster nodes the VM can be scheduled to.</p>
+<p><strong>Details</strong>: This tab presents all of the physical features of the VM in a single panel. From here you can make edits to various descriptors and basic hardware configurations including modifying the cpu or memory, changing the hostname, attaching passthrough devices, and modifying the boot order.</p>
 </li>
 <li>
-<p><strong>Environment</strong>: It is possible to attach <em>ConfigMaps</em>, <em>Secrets</em>, and <em>Service Accounts</em> as extra disks. This is useful when passing configuration data to the application(s) running in the virtual machine.</p>
+<p><strong>Storage</strong>: This tab lists the disks attached to the system and allows to add new disks to the system. If the guest is configured with the agent, it lists the filesystems and the utilization. Here it is possible to attach <em>ConfigMaps</em>, <em>Secrets</em>, and <em>Service Accounts</em> as extra disks. This is useful when passing configuration data to the application(s) running in the virtual machine.</p>
 </li>
 <li>
-<p><strong>Network interfaces</strong>: It shows the current network interfaces configured for the VM and add new ones.</p>
+<p><strong>Network</strong>: This Tab shows the current network interfaces configured for the VM and allows for you to add new ones.</p>
 </li>
 <li>
-<p><strong>Disks</strong>: It lists the disks attached to the system and allows to add new disks to the system. If the guest is configured with the agent, it lists the filesystems and the utilization.</p>
+<p><strong>Scheduling</strong>: This tab includes advanced configuration options indicating where the VM should run and the strategy to follow for eviction. This tab is used to configure (anti)affinity rules, configure node selectors and tolerations, and other behaviors that affect which cluster nodes the VM can be scheduled to.</p>
 </li>
 <li>
-<p><strong>Scripts</strong>: This tab allows us to configure <em>cloud-init</em> for Linux or <em>sys-prep</em> for Microsoft Windows, including setting the commands to be executed on the first boot, such as the injection of SSH keys, installation of applications, network configuration, and more.</p>
+<p><strong>SSH</strong>: This tab allows you to configure remote access to the machine by creating an SSH service on a configured load-balancer, or by injecting public SSH keys if the feature is enabled.</p>
+</li>
+<li>
+<p><strong>Initial run</strong>: This tab allows us to configure <em>cloud-init</em> for Linux or <em>sys-prep</em> for Microsoft Windows, including setting the commands to be executed on the first boot, such as the injection of SSH keys, installation of applications, network configuration, and more.</p>
+</li>
+<li>
+<p><strong>Metadata</strong>: This tab shows current Labels and Annotations applied to the virtual machine. Modifying these values can help us tag our machines for specific purposes, or help us enable automated workflows by uniquely identifying machines.</p>
 </li>
 </ul>
+</div>
+</li>
+<li>
+<p>List the disks associated with the VM by clicking on the <strong>Storage</strong> tab:</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-00/13_Storage_Tab.png" alt="13 Storage Tab">
+</div>
+</div>
+<div class="paragraph">
+<p>In this environment, the default StorageClass, which defines the source and type of storage used for the disk, is called <code>ocs-storagecluster-ceph-rbd-virtualization</code>. This storage is the default type provided by OpenShift Data Foundation (ODF) for running virtual machines. Each storage provider has different storage classes that define the characteristics of the storage backing the VM disk.</p>
 </div>
 </li>
 <li>
 <p>Examine the network interfaces attached to the VM by clicking on the <strong>Network interfaces</strong> subtab:</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-00/20_Network_Tab.png" alt="20 Network Tab">
+<img src="_images/module-00/14_Network_Tab.png" alt="14 Network Tab">
 </div>
 </div>
 <div class="paragraph">
-<p>When a VM is created, an interface on the <code>PodNetworking</code> network of type <code>masquerade</code> is created by default. This connects the VM to the SDN and provides access from the VM to outside the OpenShift cluster. Other VMs, and Pods, in the cluster can access the virtual machine using this interface. Furthermore, a VM connected to the SDN can be accessed externally using a Route, or Service with type load balancer. Refer to the MetalLB module of this workshop to see how to configure and expose a VM using this method.</p>
-</div>
-</li>
-<li>
-<p>List the disks associated with the VM:</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/module-00/21_Disks_Tab.png" alt="21 Disks Tab">
-</div>
-</div>
-<div class="paragraph">
-<p>In this environment, the default StorageClass, which defines the source and type of storage used for the disk, is called <code>ocs-storagecluster-ceph-rbd</code>. This storage is the default type provided by OpenShift Data Foundation (ODF). Each storage provider has different storage classes that define the characteristics of the storage backing the VM disk.</p>
+<p>When a VM is created, an interface on the <code>PodNetworking</code> network of type <code>masquerade</code> is created by default. This connects the VM to the SDN and provides access from the VM to outside the OpenShift cluster. Other VMs, and Pods, in the cluster can access the virtual machine using this interface. Furthermore, a VM connected to the SDN can be accessed externally using a Route, or Service with type load balancer, or even have a Network Attachment Definition configured to allow direct access to external networks.</p>
 </div>
 </li>
 </ol>
@@ -449,17 +454,13 @@
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>In the left menu, go back to <strong>Virtualization</strong> &#8594; <strong>VirtualMachines</strong>:</p>
+<p>Click the <strong>Overview</strong> tab to return to the summary screen.</p>
 </li>
 <li>
-<p>Select the <em>Virtual Machine</em> <code>fedora02</code> from the list.</p>
-</li>
-<li>
-<p>Press the top-right dropdown, <strong>Actions</strong>, to list the available
-options:</p>
+<p>In the top right corner you will notice shortcut buttons for running state: stop, restart, and pause. As well as a dropdown menu title <strong>Actions</strong>.</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-00/30_VM_Actions_List.png" alt="30 VM Actions List">
+<img src="_images/module-00/15_VM_State_Actions.png" alt="15 VM State Actions">
 </div>
 </div>
 <div class="olist loweralpha">
@@ -477,10 +478,18 @@ options:</p>
 </div>
 </li>
 <li>
-<p>Press <strong>Stop</strong> and wait till the <em>Virtual Machine</em> is in state <code>Stopped</code>.</p>
+<p>You can also access these options and more by clicking on the <strong>Actions</strong> menu and seeing the options available in the drop down list.</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-00/31_VM_Stopped.png" alt="31 VM Stopped">
+<img src="_images/module-00/16_VM_Actions_Menu.png" alt="16 VM Actions Menu">
+</div>
+</div>
+</li>
+<li>
+<p>Press the <strong>Stop</strong> button and wait till the <em>Virtual Machine</em> is in state <code>Stopped</code>.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-00/17_VM_Stopped.png" alt="17 VM Stopped">
 </div>
 </div>
 </li>
@@ -488,23 +497,23 @@ options:</p>
 <p>Clicking on <strong>Actions</strong>, the option <strong>Start</strong> appears, and the options <strong>Restart</strong> and <strong>Pause</strong> are greyed out.</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-00/32_VM_Actions_List_Stopped.png" alt="32 VM Actions List Stopped">
+<img src="_images/module-00/18_VM_Actions_List_Stopped.png" alt="18 VM Actions List Stopped">
 </div>
 </div>
 </li>
 <li>
-<p>Press <strong>Start</strong>, and wait for the <code>Running</code> status.</p>
+<p>Click <strong>Start</strong>, and wait for the <code>Running</code> status.</p>
 </li>
 <li>
-<p>Using the <strong>Actions</strong> menu, press the <strong>Pause</strong> option. The <em>Virtual Machine</em> state will change to <code>Paused</code>.</p>
+<p>Using the <strong>Actions</strong> menu, or the shortcut button, press the <strong>Pause</strong> option. The <em>Virtual Machine</em> state will change to <code>Paused</code>.</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-00/33_VM_Actions_Paused.png" alt="33 VM Actions Paused">
+<img src="_images/module-00/19_VM_Actions_Paused.png" alt="19 VM Actions Paused">
 </div>
 </div>
 </li>
 <li>
-<p>Unpause the <em>Virtual Machine</em> using <strong>Actions</strong> and the option <strong>Unpause</strong>.</p>
+<p>Unpause the <em>Virtual Machine</em> using the <strong>Actions</strong> menu and the option <strong>Unpause</strong>, or by using the shortcut button.</p>
 </li>
 </ol>
 </div>
@@ -522,7 +531,7 @@ options:</p>
 <p>Navigate to the <strong>Details</strong> tab to see where the worker node is running:</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-00/17_VM_Info_Node.png" alt="17 VM Info Node">
+<img src="_images/module-00/20_VM_Info_Node.png" alt="20 VM Info Node">
 </div>
 </div>
 </li>
@@ -530,7 +539,7 @@ options:</p>
 <p>Using the menu <strong>Actions</strong>, press <strong>Migrate</strong></p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-00/19_VM_Dialog_Migrate.png" alt="19 VM Dialog Migrate">
+<img src="_images/module-00/21_VM_Dialog_Migrate.png" alt="21 VM Dialog Migrate">
 </div>
 </div>
 </li>
@@ -538,7 +547,7 @@ options:</p>
 <p>After a few seconds, the VM will change the status to <code>Migrating</code>. A few seconds later, it will return to the <code>Running</code> status, but on a different node. The VM has been successfully live migrated!</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-00/21_Migrated.png" alt="21 Migrated">
+<img src="_images/module-00/22_Migrated.png" alt="22 Migrated">
 </div>
 </div>
 </li>

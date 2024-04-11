@@ -11,40 +11,40 @@ The *Templates* page displays four types of virtual machine templates:
 
 . Navigate to *Virtualization* -> *Templates* and select *All projects*
 +
-image::images/Create_VM_URL/01_Template_List.png[]
+image::module-04/01_Template_List.png[]
 
 . Press *Create Template* and review auto filled YAML code
 +
-image::images/Create_VM_URL/02_Template_YAML.png[]
+image::module-04/02_Template_YAML.png[]
 +
 [NOTE]
 This default template is using a container disk to run a VM. The data will be ephemeral.
 
 . Scroll down and check the parameters for the template
 +
-image::images/Create_VM_URL/03_Template_YAML_parameters.png[]
+image::module-04/03_Template_YAML_parameters.png[]
 
 . Press *Create* and review the template details
 +
-image::images/Create_VM_URL/04_Template_details.png[]
+image::module-04/04_Template_details.png[]
 
 . Navigate to *Virtualization* -> *Catalog* and filter by keyword `example`. Select the project `vmexamples`
 +
-image::images/Create_VM_URL/05_Catalog.png[]
+image::module-04/05_Catalog.png[]
 
 . Press *Customize VirtualMachine* and specify the name `fedora03` and the password `r3dh4t1!`. Press *Next*
 +
-image::images/Create_VM_URL/06_Catalog_Create_VM.png[]
+image::module-04/06_Catalog_Create_VM.png[]
 
 . Press *Create VirtualMachine* in the next screen.
 +
-image::images/Create_VM_URL/07_Catalog_Create_VM_Review.png[]
+image::module-04/07_Catalog_Create_VM_Review.png[]
 
 . Navigate to *Console* and login with the password defined before.
 
 . Navigate to tab *Configuration* and subtab *Disks*. Review the VM was created with a container disk as the template defined
 +
-image::images/Create_VM_URL/08_Ephemeral_Disk.png[]
+image::module-04/08_Ephemeral_Disk.png[]
 
 . Using the *Actions* menu, delete the VM.
 
@@ -56,24 +56,24 @@ This process can be streamlined after the initial operating system installation 
 
 . From the left menu, navigate to *Virtualization* -> *VirtualMachines*:
 +
-image::images/Create_VM_PVC/09_Left_Menu.png[]
+image::module-04/09_Left_Menu.png[]
 . It will list the VMs running in the current project.
 +
-image::images/Create_VM_PVC/10_List_VMs.png[]
+image::module-04/10_List_VMs.png[]
 . Press on the top-right the button *Create* and select *From template*
 +
-image::images/Create_VM_PVC/11_From_Template.png[]
+image::module-04/11_From_Template.png[]
 . Scroll down and select *Microsoft Windows Server 2019 VM* tile.
 +
-image::images/Create_VM_PVC/12_Windows_2k9_Tile.png[]
+image::module-04/12_Windows_2k9_Tile.png[]
 
 . A dialog will appear showing the default configuration related to the template.
 +
-image::images/Create_VM_PVC/13_Windows_2k9_Dialog.png[]
+image::module-04/13_Windows_2k9_Dialog.png[]
 
 . Press *Customize VirtualMachine* to specify the parameters to be used for the provisioning.
 +
-image::images/Create_VM_PVC/14_Windows_2k9_Parameters.png[]
+image::module-04/14_Windows_2k9_Parameters.png[]
 
 . In this dialog:
 .. Specify the name `windows`
@@ -84,11 +84,11 @@ image::images/Create_VM_PVC/14_Windows_2k9_Parameters.png[]
 
 . Press *Next* after filling in the parameters.
 +
-image::images/Create_VM_PVC/15_Windows_2k9_Parameters_Filled.png[]
+image::module-04/15_Windows_2k9_Parameters_Filled.png[]
 
 . Switch to the *Scripts* tab and press *Edit* on the `Sysprep` section
 +
-image::images/Create_VM_PVC/16_Windows_2k9_Scripts.png[]
+image::module-04/16_Windows_2k9_Scripts.png[]
 
 . Fill the `autounattend.xml` form with the following code
 +
@@ -233,19 +233,19 @@ image::images/Create_VM_PVC/16_Windows_2k9_Scripts.png[]
 
 . Click *Save* on the dialog
 +
-image::images/Create_VM_PVC/17_Windows_2k9_Sysprep.png[]
+image::module-04/17_Windows_2k9_Sysprep.png[]
 
 . Press *Create VirtualMachine*
 +
-image::images/Create_VM_PVC/18_Windows_2k9_Create.png[]
+image::module-04/18_Windows_2k9_Create.png[]
 
 . The Virtual Machine will start the provisioning process by downloading the ISO image, configuring, and starting the instance.
 +
-image::images/Create_VM_PVC/19_Windows_2k9_Provisioning.png[]
+image::module-04/19_Windows_2k9_Provisioning.png[]
 
 . After a few minutes, the Virtual VM will be in `Running` status. Switch to the *Console* tab:
 +
-image::images/Create_VM_PVC/20_Windows_2k9_Console.png[]
+image::module-04/20_Windows_2k9_Console.png[]
 +
 [NOTE]
 It is not necessary for this workshop to wait for the installation to complete. You can continue to the next module.

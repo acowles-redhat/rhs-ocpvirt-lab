@@ -192,7 +192,425 @@
   <div class="content">
 <article class="doc">
 <h1 class="page">Template Management</h1>
-
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Preconfigured Red Hat virtual machine templates are listed in the <strong>Virtualization</strong> &#8594; <strong>Templates</strong> page. These templates are available for different versions of Red Hat Enterprise Linux, Fedora, Microsoft Windows 10, and Microsoft Windows Server. Each Red Hat virtual machine template is preconfigured with the operating system image, default settings for the operating system, flavor (CPU and memory), and workload type (server).</p>
+</div>
+<div class="paragraph">
+<p>The <strong>Templates</strong> page displays four types of virtual machine templates:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Red Hat Supported</strong> templates are fully supported by Red Hat.</p>
+</li>
+<li>
+<p><strong>User Supported</strong> templates are <strong>Red Hat Supported</strong> templates that were cloned and created by users.</p>
+</li>
+<li>
+<p><strong>Red Hat Provided</strong> templates have limited support from Red Hat.</p>
+</li>
+<li>
+<p><strong>User Provided</strong> templates are <strong>Red Hat Provided</strong> templates that were cloned and created by users.</p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Navigate to <strong>Virtualization</strong> &#8594; <strong>Templates</strong> and select <strong>All projects</strong></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-04/01_Template_List.png" alt="01 Template List">
+</div>
+</div>
+</li>
+<li>
+<p>Press <strong>Create Template</strong> and review auto filled YAML code</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-04/02_Template_YAML.png" alt="02 Template YAML">
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This default template is using a container disk to run a VM. The data will be ephemeral.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Scroll down and check the parameters for the template</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-04/03_Template_YAML_parameters.png" alt="03 Template YAML parameters">
+</div>
+</div>
+</li>
+<li>
+<p>Press <strong>Create</strong> and review the template details</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-04/04_Template_details.png" alt="04 Template details">
+</div>
+</div>
+</li>
+<li>
+<p>Navigate to <strong>Virtualization</strong> &#8594; <strong>Catalog</strong> and filter by keyword <code>example</code>. Select the project <code>vmexamples</code></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-04/05_Catalog.png" alt="05 Catalog">
+</div>
+</div>
+</li>
+<li>
+<p>Press <strong>Customize VirtualMachine</strong> and specify the name <code>fedora03</code> and the password <code>r3dh4t1!</code>. Press <strong>Next</strong></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-04/06_Catalog_Create_VM.png" alt="06 Catalog Create VM">
+</div>
+</div>
+</li>
+<li>
+<p>Press <strong>Create VirtualMachine</strong> in the next screen.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-04/07_Catalog_Create_VM_Review.png" alt="07 Catalog Create VM Review">
+</div>
+</div>
+</li>
+<li>
+<p>Navigate to <strong>Console</strong> and login with the password defined before.</p>
+</li>
+<li>
+<p>Navigate to tab <strong>Configuration</strong> and subtab <strong>Disks</strong>. Review the VM was created with a container disk as the template defined</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-04/08_Ephemeral_Disk.png" alt="08 Ephemeral Disk">
+</div>
+</div>
+</li>
+<li>
+<p>Using the <strong>Actions</strong> menu, delete the VM.</p>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_create_a_windows_virtual_machine"><a class="anchor" href="#_create_a_windows_virtual_machine"></a>Create a Windows virtual machine</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this segment, we will install Microsoft Windows Server 2019 using an ISO hosted on a web server. This represents one way to install an operating system to a virtual machine that takes advantage of the ability to source disks from many locations, including a web server, object storage, or other persistent volumes in the cluster.</p>
+</div>
+<div class="paragraph">
+<p>This process can be streamlined after the initial operating system installation by creating a template from the virtual machine. The specific process for preparing the guest operating system to be used as a template will vary, be sure to follow your organization&#8217;s guidelines and requirements when preparing a template OS.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>From the left menu, navigate to <strong>Virtualization</strong> &#8594; <strong>VirtualMachines</strong>:</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-04/09_Left_Menu.png" alt="09 Left Menu">
+</div>
+</div>
+</li>
+<li>
+<p>It will list the VMs running in the current project.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-04/10_List_VMs.png" alt="10 List VMs">
+</div>
+</div>
+</li>
+<li>
+<p>Press on the top-right the button <strong>Create</strong> and select <strong>From template</strong></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-04/11_From_Template.png" alt="11 From Template">
+</div>
+</div>
+</li>
+<li>
+<p>Scroll down and select <strong>Microsoft Windows Server 2019 VM</strong> tile.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-04/12_Windows_2k9_Tile.png" alt="12 Windows 2k9 Tile">
+</div>
+</div>
+</li>
+<li>
+<p>A dialog will appear showing the default configuration related to the template.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-04/13_Windows_2k9_Dialog.png" alt="13 Windows 2k9 Dialog">
+</div>
+</div>
+</li>
+<li>
+<p>Press <strong>Customize VirtualMachine</strong> to specify the parameters to be used for the provisioning.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-04/14_Windows_2k9_Parameters.png" alt="14 Windows 2k9 Parameters">
+</div>
+</div>
+</li>
+<li>
+<p>In this dialog:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Specify the name <code>windows</code></p>
+</li>
+<li>
+<p>Enable the checkbox <strong>Boot from CD</strong> and specify the url: <a href="http://192.168.123.100:81/Windows2019.iso" class="bare">http://192.168.123.100:81/Windows2019.iso</a></p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Reduce the CD disk size to <strong>5 GiB</strong>.</p>
+</li>
+<li>
+<p>Keep the <code>Disk source</code> size disk to the default value <strong>60 GiB</strong></p>
+</li>
+<li>
+<p>Ensure the <code>Mount Windows drivers disk</code> is enabled. This is required to install Windows systems, which will provide the drivers for VirtIO.</p>
+</li>
+<li>
+<p>Press <strong>Next</strong> after filling in the parameters.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-04/15_Windows_2k9_Parameters_Filled.png" alt="15 Windows 2k9 Parameters Filled">
+</div>
+</div>
+</li>
+<li>
+<p>Switch to the <strong>Scripts</strong> tab and press <strong>Edit</strong> on the <code>Sysprep</code> section</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-04/16_Windows_2k9_Scripts.png" alt="16 Windows 2k9 Scripts">
+</div>
+</div>
+</li>
+<li>
+<p>Fill the <code>autounattend.xml</code> form with the following code</p>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;unattend xmlns="urn:schemas-microsoft-com:unattend" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:schemas-microsoft-com:unattend"&gt;
+  &lt;settings pass="windowsPE"&gt;
+    &lt;component name="Microsoft-Windows-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS"&gt;
+      &lt;DiskConfiguration&gt;
+        &lt;Disk wcm:action="add"&gt;
+          &lt;CreatePartitions&gt;
+            &lt;CreatePartition wcm:action="add"&gt;
+              &lt;Order&gt;1&lt;/Order&gt;
+              &lt;Extend&gt;true&lt;/Extend&gt;
+              &lt;Type&gt;Primary&lt;/Type&gt;
+            &lt;/CreatePartition&gt;
+          &lt;/CreatePartitions&gt;
+          &lt;ModifyPartitions&gt;
+            &lt;ModifyPartition wcm:action="add"&gt;
+              &lt;Active&gt;true&lt;/Active&gt;
+              &lt;Format&gt;NTFS&lt;/Format&gt;
+              &lt;Label&gt;System&lt;/Label&gt;
+              &lt;Order&gt;1&lt;/Order&gt;
+              &lt;PartitionID&gt;1&lt;/PartitionID&gt;
+            &lt;/ModifyPartition&gt;
+          &lt;/ModifyPartitions&gt;
+          &lt;DiskID&gt;0&lt;/DiskID&gt;
+          &lt;WillWipeDisk&gt;true&lt;/WillWipeDisk&gt;
+        &lt;/Disk&gt;
+      &lt;/DiskConfiguration&gt;
+      &lt;ImageInstall&gt;
+        &lt;OSImage&gt;
+          &lt;InstallFrom&gt;
+            &lt;MetaData wcm:action="add"&gt;
+              &lt;Key&gt;/IMAGE/NAME&lt;/Key&gt;
+              &lt;Value&gt;Windows Server 2019 SERVERSTANDARD&lt;/Value&gt;
+            &lt;/MetaData&gt;
+          &lt;/InstallFrom&gt;
+          &lt;InstallTo&gt;
+            &lt;DiskID&gt;0&lt;/DiskID&gt;
+            &lt;PartitionID&gt;1&lt;/PartitionID&gt;
+          &lt;/InstallTo&gt;
+        &lt;/OSImage&gt;
+      &lt;/ImageInstall&gt;
+      &lt;UserData&gt;
+        &lt;AcceptEula&gt;true&lt;/AcceptEula&gt;
+        &lt;FullName&gt;Administrator&lt;/FullName&gt;
+        &lt;Organization&gt;My Organization&lt;/Organization&gt;
+      &lt;/UserData&gt;
+      &lt;EnableFirewall&gt;false&lt;/EnableFirewall&gt;
+    &lt;/component&gt;
+    &lt;component name="Microsoft-Windows-International-Core-WinPE" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS"&gt;
+      &lt;SetupUILanguage&gt;
+        &lt;UILanguage&gt;en-US&lt;/UILanguage&gt;
+      &lt;/SetupUILanguage&gt;
+      &lt;InputLocale&gt;en-US&lt;/InputLocale&gt;
+      &lt;SystemLocale&gt;en-US&lt;/SystemLocale&gt;
+      &lt;UILanguage&gt;en-US&lt;/UILanguage&gt;
+      &lt;UserLocale&gt;en-US&lt;/UserLocale&gt;
+    &lt;/component&gt;
+  &lt;/settings&gt;
+  &lt;settings pass="offlineServicing"&gt;
+    &lt;component name="Microsoft-Windows-LUA-Settings" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS"&gt;
+      &lt;EnableLUA&gt;false&lt;/EnableLUA&gt;
+    &lt;/component&gt;
+  &lt;/settings&gt;
+  &lt;settings pass="specialize"&gt;
+    &lt;component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS"&gt;
+      &lt;AutoLogon&gt;
+        &lt;Password&gt;
+          &lt;Value&gt;R3dh4t1!&lt;/Value&gt;
+          &lt;PlainText&gt;true&lt;/PlainText&gt;
+        &lt;/Password&gt;
+        &lt;Enabled&gt;true&lt;/Enabled&gt;
+        &lt;LogonCount&gt;999&lt;/LogonCount&gt;
+        &lt;Username&gt;Administrator&lt;/Username&gt;
+      &lt;/AutoLogon&gt;
+      &lt;OOBE&gt;
+        &lt;HideEULAPage&gt;true&lt;/HideEULAPage&gt;
+        &lt;HideLocalAccountScreen&gt;true&lt;/HideLocalAccountScreen&gt;
+        &lt;HideOnlineAccountScreens&gt;true&lt;/HideOnlineAccountScreens&gt;
+        &lt;HideWirelessSetupInOOBE&gt;true&lt;/HideWirelessSetupInOOBE&gt;
+        &lt;NetworkLocation&gt;Work&lt;/NetworkLocation&gt;
+        &lt;ProtectYourPC&gt;3&lt;/ProtectYourPC&gt;
+        &lt;SkipMachineOOBE&gt;true&lt;/SkipMachineOOBE&gt;
+      &lt;/OOBE&gt;
+      &lt;UserAccounts&gt;
+        &lt;LocalAccounts&gt;
+          &lt;LocalAccount wcm:action="add"&gt;
+            &lt;Description&gt;Local Administrator Account&lt;/Description&gt;
+            &lt;DisplayName&gt;Administrator&lt;/DisplayName&gt;
+            &lt;Group&gt;Administrators&lt;/Group&gt;
+            &lt;Name&gt;Administrator&lt;/Name&gt;
+          &lt;/LocalAccount&gt;
+        &lt;/LocalAccounts&gt;
+      &lt;/UserAccounts&gt;
+      &lt;TimeZone&gt;Eastern Standard Time&lt;/TimeZone&gt;
+    &lt;/component&gt;
+  &lt;/settings&gt;
+  &lt;settings pass="oobeSystem"&gt;
+    &lt;component name="Microsoft-Windows-International-Core" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS"&gt;
+      &lt;InputLocale&gt;en-US&lt;/InputLocale&gt;
+      &lt;SystemLocale&gt;en-US&lt;/SystemLocale&gt;
+      &lt;UILanguage&gt;en-US&lt;/UILanguage&gt;
+      &lt;UserLocale&gt;en-US&lt;/UserLocale&gt;
+    &lt;/component&gt;
+    &lt;component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS"&gt;
+      &lt;AutoLogon&gt;
+        &lt;Password&gt;
+          &lt;Value&gt;R3dh4t1!&lt;/Value&gt;
+          &lt;PlainText&gt;true&lt;/PlainText&gt;
+        &lt;/Password&gt;
+        &lt;Enabled&gt;true&lt;/Enabled&gt;
+        &lt;LogonCount&gt;999&lt;/LogonCount&gt;
+        &lt;Username&gt;Administrator&lt;/Username&gt;
+      &lt;/AutoLogon&gt;
+      &lt;OOBE&gt;
+        &lt;HideEULAPage&gt;true&lt;/HideEULAPage&gt;
+        &lt;HideLocalAccountScreen&gt;true&lt;/HideLocalAccountScreen&gt;
+        &lt;HideOnlineAccountScreens&gt;true&lt;/HideOnlineAccountScreens&gt;
+        &lt;HideWirelessSetupInOOBE&gt;true&lt;/HideWirelessSetupInOOBE&gt;
+        &lt;NetworkLocation&gt;Work&lt;/NetworkLocation&gt;
+        &lt;ProtectYourPC&gt;3&lt;/ProtectYourPC&gt;
+        &lt;SkipMachineOOBE&gt;true&lt;/SkipMachineOOBE&gt;
+      &lt;/OOBE&gt;
+      &lt;UserAccounts&gt;
+        &lt;LocalAccounts&gt;
+          &lt;LocalAccount wcm:action="add"&gt;
+            &lt;Description&gt;Local Administrator Account&lt;/Description&gt;
+            &lt;DisplayName&gt;Administrator&lt;/DisplayName&gt;
+            &lt;Group&gt;Administrators&lt;/Group&gt;
+            &lt;Name&gt;Administrator&lt;/Name&gt;
+          &lt;/LocalAccount&gt;
+        &lt;/LocalAccounts&gt;
+      &lt;/UserAccounts&gt;
+      &lt;TimeZone&gt;Eastern Standard Time&lt;/TimeZone&gt;
+    &lt;/component&gt;
+  &lt;/settings&gt;
+&lt;/unattend&gt;</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Click <strong>Save</strong> on the dialog</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-04/17_Windows_2k9_Sysprep.png" alt="17 Windows 2k9 Sysprep">
+</div>
+</div>
+</li>
+<li>
+<p>Press <strong>Create VirtualMachine</strong></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-04/18_Windows_2k9_Create.png" alt="18 Windows 2k9 Create">
+</div>
+</div>
+</li>
+<li>
+<p>The Virtual Machine will start the provisioning process by downloading the ISO image, configuring, and starting the instance.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-04/19_Windows_2k9_Provisioning.png" alt="19 Windows 2k9 Provisioning">
+</div>
+</div>
+</li>
+<li>
+<p>After a few minutes, the Virtual VM will be in <code>Running</code> status. Switch to the <strong>Console</strong> tab:</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-04/20_Windows_2k9_Console.png" alt="20 Windows 2k9 Console">
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+It is not necessary for this workshop to wait for the installation to complete. You can continue to the next module.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+The VM is marked as "Not migratable" because a CD-ROM disk is attached.
+</td>
+</tr>
+</table>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this section we learned how to modify an existing template, and how to create one that we could use to easily deploy Windows virtual machines on demand.</p>
+</div>
+</div>
+</div>
 <nav class="pagination">
   <span class="prev"><a href="module-03.html" class="query-params-link">4. Network Management</a></span>
   <span class="next"><a href="module-05.html" class="query-params-link">6. Migrating Virtual Machines</a></span>
