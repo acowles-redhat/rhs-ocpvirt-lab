@@ -1,6 +1,6 @@
 = Network Management
 
-== Introduction to Network Management
+== Introduction
 
 By default, all virtual machines are attached to the OpenShift software-defined network (SDN), which enables access from other workloads on the OpenShift cluster, including other VMs and any OpenShift native applications.
 
