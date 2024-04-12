@@ -15,7 +15,7 @@ asciidoc:
     ssh_user: devops
     ssh_password: devops
     ssh_command: ssh devops@bastion.{guid}.example.opentlc.com
-    page-links:
+  page-links:
     - url: https://redhat.com
       text: Red Hat
     - url: https://www.redhat.com/en/summit
