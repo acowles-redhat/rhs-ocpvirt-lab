@@ -205,7 +205,7 @@
 <p>However, virtual machines may also connect directly to one or more external networks, such as VLANs, when needed. This is in addition to the SDN, which means that, for example, the administrator can connect to the VM from an external IP address, but the application communicates across the SDN with other VMs hosted by OpenShift Virtualization.</p>
 </div>
 <div class="paragraph">
-<p>At a high level, this is done by configuring the host networking, such as creating a mode 4 (LACP) bond and a Linux bridge on top. This workshop segment will walk through the next step in that process, creating a network attachment definition to allow VMs to connect to that bridge and, therefore, directly to the external network.</p>
+<p>At a high level, this is done by configuring the host networking, by creating a <strong>NodeNetworkConfigurationPolicy</strong> such as creating a mode 4 (LACP) bond and a OVS bridge on top. With this networking infrastructure set up, we can define <strong>NetworkAttachmentDefinitions</strong> to allow VMs to connect to that bridge, and therefore, directly to the external network. The next section in this lab will cover those steps.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -214,7 +214,7 @@
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The OpenShift environment has already been configured with a Linux Bridge on each compute node your virtual machines will connect to, thus allowing for easy connectivity with/from outside network resources.
+The OpenShift environment has already been configured with an OVS Bridge on each compute node your virtual machines will connect to, thus allowing for easy connectivity with/from outside network resources.
 </td>
 </tr>
 </table>
@@ -236,7 +236,7 @@ The OpenShift environment has already been configured with a Linux Bridge on eac
 <h2 id="_create_network_attachment_definition"><a class="anchor" href="#_create_network_attachment_definition"></a>Create Network Attachment Definition</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In order to use the Linux Bridge with your VM you need to create a <strong>Network Attachment Definition</strong>. This is what tells OpenShift about the network and allows the virtual machines to connect to it. Network Attachment Definitions are specific to the project/namespace they&#8217;re created in, unless they&#8217;re created in the <code>default</code> project. This gives you, the administrator, the ability to control which networks are and aren&#8217;t available to users who have access to manage their own Vms. Once the Network Attachment Definition has been created, it can then be used by virtual machines when configuring their network adapters.</p>
+<p>In order to use the OVS Bridge with your VM you need to create a <strong>Network Attachment Definition</strong>. This is what tells OpenShift about the network and allows the virtual machines to connect to it. Network Attachment Definitions are specific to the project/namespace they&#8217;re created in, unless they&#8217;re created in the <code>default</code> project. This gives you, the administrator, the ability to control which networks are and aren&#8217;t available to users who have access to manage their own VMs. Once the Network Attachment Definition has been created, it can then be used by virtual machines when configuring their network adapters.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -245,7 +245,7 @@ The OpenShift environment has already been configured with a Linux Bridge on eac
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-A network attachment definition instructs openshift to utilise an existing network device. In our case that device was previously created and is named br-flat. You must use that name or OpenShift won’t be able to place your VM on any compute nodes as it can only utilise nodes with that specifically named network device on it.
+A network attachment definition instructs openshift to utilise an existing network device. In our case that device was previously created and is named ovs-br1. You must use that name or OpenShift won’t be able to place your VM on any compute nodes as it can only utilise nodes with that specifically named network device on it.
 </td>
 </tr>
 </table>
@@ -254,7 +254,7 @@ A network attachment definition instructs openshift to utilise an existing netwo
 <p>How is this done?</p>
 </div>
 <div class="paragraph">
-<p>To manage an OpenShift node&#8217;s network configuration you use a tool, available as an operator, called nmstate. With nmstate you can create network interfaces on OpenShift compute nodes using Kubernetes constructs. You can do this following naming that suits your needs and network requirements. For more info about nmstate, and to learn more about the host networking and how to view and manage the configuration, see the ([nmstate documentation](<a href="https://docs.openshift.com/container-platform/latest/networking/k8s_nmstate/k8s-nmstate-observing-node-network-state.html)" class="bare">https://docs.openshift.com/container-platform/latest/networking/k8s_nmstate/k8s-nmstate-observing-node-network-state.html)</a>) or speak with your lab proctors."</p>
+<p>To manage an OpenShift node&#8217;s network configuration you use a tool, available as an operator, called nmstate. With nmstate you can create network interfaces on OpenShift compute nodes using Kubernetes constrcuts or the <strong>NodeNetworkConfigurationPolicy</strong> wizard available in the OpenShift console. You can create devices and customize those so that they follow the naming conventions that suit your needs, and your network requirements. For more info about nmstate, and to learn more about the host networking and how to view and manage the configuration, see the ([nmstate documentation](<a href="https://docs.openshift.com/container-platform/latest/networking/k8s_nmstate/k8s-nmstate-observing-node-network-state.html)" class="bare">https://docs.openshift.com/container-platform/latest/networking/k8s_nmstate/k8s-nmstate-observing-node-network-state.html)</a>) or speak with your lab proctors.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -265,36 +265,36 @@ A network attachment definition instructs openshift to utilise an existing netwo
 <img src="_images/module-03/01_NAD_Dashboard.png" alt="01 NAD Dashboard">
 </div>
 </div>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>Select project <code>vmexamples</code>.</p>
+</li>
+<li>
+<p>Click the <strong>Edit YAML</strong> button at the top of the page.
+image::module-03/02_NAD_Create.png[]</p>
+</li>
+<li>
+<p>Paste in the following yaml snippet, and click the Create button:</p>
+<div class="listingblock">
+<div class="content">
+<pre>apiVersion: k8s.cni.cncf.io/v1
+kind: NetworkAttachmentDefinition
+metadata:
+  annotations:
+    description: l2 connection for vms
+  name: vlan0
+  namespace: vmexamples
+spec:
+  config: |-
+    {
+      "cniVersion": "0.4.0",
+      "name": "vm-network",
+      "type": "ovn-k8s-cni-overlay",
+      "topology": "localnet",
+      "netAttachDefName": "vmexamples/vlan0"
+    }</pre>
 </div>
-</td>
-</tr>
-</table>
 </div>
-</li>
-<li>
-<p>Complete the form for the <code>vmexamples</code> project as follows, then click <strong>Create network attachment definition</strong>:</p>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Name</strong>: <code>flatnetwork</code></p>
-</li>
-<li>
-<p><strong>Network Type</strong>: <code>CNV Linux Bridge</code></p>
-</li>
-<li>
-<p><strong>Bridge Name</strong>: <code>br-flat</code></p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-03/02_NAD_Create.png" alt="02 NAD Create">
+<img src="_images/module-03/03_NAD_YAML.png" alt="03 NAD YAML">
 </div>
 </div>
 <div class="admonitionblock note">
@@ -304,23 +304,17 @@ A network attachment definition instructs openshift to utilise an existing netwo
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The form above has an input for <code>VLAN Tag Number</code>, which is used when connecting to a network that needs to have a VLAN tag assigned. This lab uses an untagged network, so no VLAN number is required here.
+In most cases a single OVS bridge can support many Network Attachment Definitions with each with their own designated <code>VLAN Tag Number</code>. In this lab we use an untagged network, so no VLAN number is required here, as such our Network Attachment Definition is labeled as vlan0.
 </td>
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>A single Linux Bridge on the host can have many different VLANs. In this scenario, you only need to create a Network Attachment Definition for each one, not a separate host interface and bridge.</p>
-</div>
-</li>
-</ul>
-</div>
 </li>
 <li>
-<p>Examine the details of the network attachment definition. Because this was created in the <code>vmexamples</code> project, it will not be available in other projects.</p>
+<p>Examine the details of the network attachment definition. Because this was created in the <code>vmexamples</code> project, it will be available to only attach to VMs that are in that project.</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-03/03_NAD_Created.png" alt="03 NAD Created">
+<img src="_images/module-03/04_NAD_Created.png" alt="04 NAD Created">
 </div>
 </div>
 </li>
@@ -334,60 +328,10 @@ The form above has an input for <code>VLAN Tag Number</code>, which is used when
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Navigate to <strong>Virtualization</strong> &#8594; <strong>VirtualMachines</strong>, select the <code>fedora02</code> VM. Click <strong>Configuration</strong> tab and then click the <strong>Network Interfaces</strong> subtab:</p>
+<p>Navigate to <strong>Virtualization</strong> &#8594; <strong>VirtualMachines</strong>, select the <code>fedora01</code> VM. Click <strong>Configuration</strong> tab and then click the <strong>Network</strong> subtab:</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-03/04_VM_Network_Tab.png" alt="04 VM Network Tab">
-</div>
-</div>
-</li>
-<li>
-<p>Click <strong>Add Network Interface</strong>, complete the form as shown, then click <strong>Save</strong>.</p>
-<div class="paragraph">
-<p>Because this is a bridge connecting to the external network, we don&#8217;t need to rely on any OpenShift features or capabilities to enable access, such as masquerade (NAT) for the virtual machines using the network. As a result, <strong>type</strong> should be <code>Bridge</code> here.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/module-03/05_VM_Network_Attach.png" alt="05 VM Network Attach">
-</div>
-</div>
-</li>
-<li>
-<p>Use the <strong>Actions</strong> menu to restart the VM. After rebooting, navigate to the <strong>Console</strong> tab:</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/module-03/06_VM_Network_Console.png" alt="06 VM Network Console">
-</div>
-</div>
-<div class="paragraph">
-<p>The <code>eth1</code> interface obtains an IP address from the flat network (<code>192.168.3.x/24</code>). That network has a DHCP server providing IPs to that network.</p>
-</div>
-</li>
-<li>
-<p>(Optional) Verify external connectivity of the VM using the OpenShift web terminal.</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Open a terminal by pressing the right-top icon:</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/module-03/07_OCP_Terminal_Icon.png" alt="07 OCP Terminal Icon">
-</div>
-</div>
-</li>
-<li>
-<p>A console in the bottom part of the screen will appear</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/module-03/08_OCP_Terminal.png" alt="08 OCP Terminal">
-</div>
-</div>
-</li>
-<li>
-<p>Type the following command replacing the IP</p>
-<div class="listingblock">
-<div class="content">
-<pre class="nowrap">curl 192.168.3.118:22</pre>
+<img src="_images/module-03/05_VM_Network_Tab.png" alt="05 VM Network Tab">
 </div>
 </div>
 <div class="admonitionblock note">
@@ -397,22 +341,99 @@ The form above has an input for <code>VLAN Tag Number</code>, which is used when
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Replace the IP which the IP assigned to the node.
+Notice that the VM is currently using a single interface <strong>default</strong> which is connected to the  <strong>Pod networking</strong> network, we can choose to modify this existing connection or add a new interface to the VM. Either action currently require a VM restart.
 </td>
 </tr>
 </table>
 </div>
-<div class="listingblock">
-<div class="title">Sample Output</div>
+</li>
+<li>
+<p>Click the three-dot menu at the end of the <strong>default</strong> network adapter line, and click on edit in the drop down menu.</p>
+<div class="imageblock">
 <div class="content">
-<pre class="nowrap">SSH-2.0-OpenSSH_8.7</pre>
+<img src="_images/module-03/06_Edit_Default.png" alt="06 Edit Default">
+</div>
+</div>
+</li>
+<li>
+<p>Click the dropdown menu for the <strong>Network</strong> field, and select the vmexamples/vlan0 network attachment definition that we created. Click on <strong>Save</strong>.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-03/07_VM_Net_Modify.png" alt="07 VM Net Modify">
+</div>
+</div>
+</li>
+<li>
+<p>Use the <strong>Actions</strong> menu or icon in the upper right corner to restart the VM. After rebooting, navigate to the <strong>Overview</strong> tab:</p>
+</li>
+<li>
+<p>Once the machine restarts, you can see in the <strong>Network Interfaces</strong> section of the <strong>Overview</strong> screen that the <code>default</code> interface obtains a DHCP IP address from the flat network (<code>192.168.3.x/24</code>).</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-03/08_New_IP_Address.png" alt="08 New IP Address">
 </div>
 </div>
 </li>
 </ol>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_using_a_multinetwork_policy"><a class="anchor" href="#_using_a_multinetwork_policy"></a>Using a MultiNetwork Policy</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A multinetwork policy allows you to enable multiple networks access to a namespace and to define granular rules allowing ingress and egress from the namespace to enhance security of the applications and VMs that are running in the namespace.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This section of the lab is primarily performed through the CLI. You will need to ssh to your Bastion host where the CLI tools are already installed.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_enable_multinetwork_policy"><a class="anchor" href="#_enable_multinetwork_policy"></a>Enable Multinetwork Policy</h3>
+<div class="paragraph">
+<p>First you must enable multinetwork policy by creating a patch definition and applying it as the cluster administrator.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Copy and paste the following code into a newly created file called multinetwork-enable-patch.yaml</p>
+<div class="listingblock">
+<div class="content">
+<pre>apiVersion: operator.openshift.io/v1
+kind: Network
+metadata:
+  name: cluster
+spec:
+  useMultiNetworkPolicy: true</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Now run the OC patch command to apply the patch.</p>
+<div class="listingblock">
+<div class="content">
+<pre>oc patch network.operator.openshift.io cluster --type=merge --patch-file=multinetwork-enable-patch.yaml</pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/module-03/09_Multinetwork_Enable.png" alt="09 Multinetwork Enable">
+</div>
+</div>
+<div class="paragraph">
+<p>=== Create a MultiNetwork Policy</p>
+</div>
 </li>
 </ol>
+</div>
 </div>
 </div>
 </div>

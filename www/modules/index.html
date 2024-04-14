@@ -312,10 +312,86 @@ The innovation in Kubernetes, serverless, service mesh, Kubernetes Operators, an
 </div>
 </div>
 <div class="sect1">
-<h2 id="_requirements_for_the_lab_environment"><a class="anchor" href="#_requirements_for_the_lab_environment"></a>Requirements for the lab environment</h2>
+<h2 id="_requirements_for_the_lab_environment"><a class="anchor" href="#_requirements_for_the_lab_environment"></a>Requirements for the Lab Environment</h2>
 <div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Participant needs to have own computer with browser and internet access.</p>
+</li>
+<li>
+<p>Chromium based browser is recommended, some copy paste functions don&#8217;t work in Firefox for time being.</p>
+</li>
+<li>
+<p>Remote access console uses US keyboard layout, so it&#8217;s good to know where special characters reside in it for other country layouts. Or use copy paste with recommended browser.</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="_credentials_for_the_openshift_console"><a class="anchor" href="#_credentials_for_the_openshift_console"></a>Credentials for the OpenShift Console</h3>
 <div class="paragraph">
-<p>Participant needs to have own computer with browser and internet access. Chromium based browser is recommended, some copy paste functions don&#8217;t work in Firefox for time being. Remote access console uses US keyboard layout, so good to know where special characters reside in it for other country layouts. Or use copy paste with recommended browser.</p>
+<p>Your OpenShift cluster console is available at: {openshift_console_url}[window=_blank]</p>
+</div>
+<div class="paragraph">
+<p>You can access the workshop at: <a href="https://dashboard-lab-ocp-cns.{openshift_cluster_ingress_domain}" class="bare" target="blank">https://dashboard-lab-ocp-cns.{openshift_cluster_ingress_domain}</a></p>
+</div>
+<div class="paragraph">
+<p>Administrator login is available with:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>User:</strong> admin</p>
+</li>
+<li>
+<p><strong>Password:</strong> {openshift_admin_password}</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The OpenShift API is available at: {openshift_api_url}</p>
+</div>
+<div class="paragraph">
+<p>The <code>oc</code> command line utility is available for download at: {openshift_client_download_url}</p>
+</div>
+<div class="paragraph">
+<p>You can authenticate to the cluster in the terminal using the <strong>oc login</strong> command, like so:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">oc login -u admin -p {openshift_admin_password} {openshift_api_url}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_bastion_access"><a class="anchor" href="#_bastion_access"></a>Bastion Access</h3>
+<div class="paragraph">
+<p>A RHEL bastion host is available with common utilities pre-installed and OpenShift command line access pre-configured.
+For SSH access to the bastion:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Bastion Hostname:</strong> {bastion_public_hostname}</p>
+</li>
+<li>
+<p><strong>Bastion Username:</strong> {bastion_ssh_user_name}</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_vcenter_access"><a class="anchor" href="#_vcenter_access"></a>vCenter Access</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>vcenter_user:</strong> "{{ env_type }}-{{ guid }}"</p>
+</li>
+<li>
+<p><strong>vcenter_password:</strong> "{{ hostvars['jumphost']['vcenter_user_generated_password'] }}"</p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 </div>
