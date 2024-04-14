@@ -20,12 +20,13 @@
 ** xref:module-02.adoc#clone_vm[Clone a Virtual Machine]
 
 * xref:module-03.adoc[4. Network Management]
-** xref:module-03.adoc#prerequisites[Install Prerequisites]
-** xref:module-03.adoc#container[Enable Container]
+** xref:module-03.adoc#create_netattach[Create a Network Attachment Definition]
+** xref:module-03.adoc#connect_external_net[Connect a Virtual Machine to a External Network]
+** xref:module-03.adoc#multinetwork_policy[Using a Multinetwork Policy]
 
 * xref:module-04.adoc[5. Template Management]
-** xref:module-04.adoc#prerequisites[Install Prerequisites]
-** xref:module-04.adoc#container[Enable Container]
+** xref:module-04.adoc#create_template[Create a New Template]
+** xref:module-04.adoc#create_win_vm[Create a Windows Virtual Machine]
 
 * xref:module-05.adoc[6. Migrating Virtual Machines]
 ** xref:module-05.adoc#prerequisites[Prerequisites for the VMware Provider]

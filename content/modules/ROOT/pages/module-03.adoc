@@ -11,8 +11,6 @@ However, virtual machines may also connect directly to one or more external netw
 
 At a high level, this is done by configuring the host networking, by creating a *NodeNetworkConfigurationPolicy* such as creating a mode 4 (LACP) bond and a OVS bridge on top. With this networking infrastructure set up, we can define *NetworkAttachmentDefinitions* to allow VMs to connect to that bridge, and therefore, directly to the external network. The next section in this lab will cover those steps. 
 
-// WKTBD: Maybe add some NetworkPolicy (there is a web console wizard available now in 4.13).
-
 [NOTE]
 The OpenShift environment has already been configured with an OVS Bridge on each compute node your virtual machines will connect to, thus allowing for easy connectivity with/from outside network resources.
 
@@ -20,7 +18,9 @@ The OpenShift environment has already been configured with an OVS Bridge on each
 * Create a network attachment definition
 * Connect a VM to the external network
 
-== Create Network Attachment Definition
+[[create-netattach]]
+
+== Create a Network Attachment Definition
 
 In order to use the OVS Bridge with your VM you need to create a *Network Attachment Definition*. This is what tells OpenShift about the network and allows the virtual machines to connect to it. Network Attachment Definitions are specific to the project/namespace they're created in, unless they're created in the `default` project. This gives you, the administrator, the ability to control which networks are and aren't available to users who have access to manage their own VMs. Once the Network Attachment Definition has been created, it can then be used by virtual machines when configuring their network adapters.
 
@@ -29,7 +29,7 @@ A network attachment definition instructs openshift to utilise an existing netwo
 
 How is this done?
 
-To manage an OpenShift node's network configuration you use a tool, available as an operator, called nmstate. With nmstate you can create network interfaces on OpenShift compute nodes using Kubernetes constrcuts or the *NodeNetworkConfigurationPolicy* wizard available in the OpenShift console. You can create devices and customize those so that they follow the naming conventions that suit your needs, and your network requirements. For more info about nmstate, and to learn more about the host networking and how to view and manage the configuration, see the ([nmstate documentation](https://docs.openshift.com/container-platform/latest/networking/k8s_nmstate/k8s-nmstate-observing-node-network-state.html)) or speak with your lab proctors.
+To manage an OpenShift node's network configuration you use a tool, available as an operator, called nmstate. With nmstate you can create network interfaces on OpenShift compute nodes using Kubernetes constrcuts or the *NodeNetworkConfigurationPolicy* wizard available in the OpenShift console. You can create devices and customize those so that they follow the naming conventions that suit your needs, and your network requirements. For more info about nmstate, and to learn more about the host networking and how to view and manage the configuration, see the https://docs.openshift.com/container-platform/4.15/networking/k8s_nmstate/k8s-nmstate-about-the-k8s-nmstate-operator.html[documentation here] or speak with your lab proctors.
 
 . Navigate to *Networking* -> *Network Attachment Definitions* and click *Create network attachment definition*:
 +
@@ -80,7 +80,8 @@ In most cases a single OVS bridge can support many Network Attachment Definition
 +
 image::module-03/04_NAD_Created.png[]
 
-== Connect a virtual machine to the external network
+[[connect_external_net]]
+== Connect a Virtual Machine to the External Network
 
 . Navigate to *Virtualization* -> *VirtualMachines*, select the `fedora01` VM. Click *Configuration* tab and then click the *Network* subtab:
 +
@@ -95,16 +96,17 @@ image::module-03/06_Edit_Default.png[]
 . Click the dropdown menu for the *Network* field, and select the vmexamples/vlan0 network attachment definition that we created. Click on *Save*.
 +
 image::module-03/07_VM_Net_Modify.png[]
-
++
 . Use the *Actions* menu or icon in the upper right corner to restart the VM. After rebooting, navigate to the *Overview* tab:
 +
 . Once the machine restarts, you can see in the *Network Interfaces* section of the *Overview* screen that the `default` interface obtains a DHCP IP address from the flat network (`192.168.3.x/24`).  
 +
 image::module-03/08_New_IP_Address.png[]
 
+[[multinetwork_policy]]
 == Using a MultiNetwork Policy
 
-A multinetwork policy allows you to enable multiple networks access to a namespace and to define granular rules allowing ingress and egress from the namespace to enhance security of the applications and VMs that are running in the namespace.
+A multinetwork policy allows you to configure network access to a namespace and to define granular rules allowing ingress and egress from the namespace to enhance security of the applications and VMs that are running in the namespace.
 
 NOTE: This section of the lab is primarily performed through the CLI. You will need to ssh to your Bastion host where the CLI tools are already installed.
 
@@ -133,4 +135,7 @@ image::module-03/09_Multinetwork_Enable.png[]
 +
 
 === Create a MultiNetwork Policy
-  
+
+For this section of the lab we are going to create a *MultiNetwork Policy* that prevents all traffic by default from any other namespace from reaching our VM.
+
+// Pick up here - MultiNetwork Policy syntax issue, regular network policy ingress issue, also confirm NAD failures through GUI

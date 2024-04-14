@@ -99,10 +99,13 @@
     <a class="nav-link" href="module-03.html">4. Network Management</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#prerequisites">Install Prerequisites</a>
+    <a class="nav-link" href="#create_netattach">Create a Network Attachment Definition</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#container">Enable Container</a>
+    <a class="nav-link" href="#connect_external_net">Connect a Virtual Machine to a External Network</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#multinetwork_policy">Using a Multinetwork Policy</a>
   </li>
 </ul>
   </li>
@@ -111,10 +114,10 @@
     <a class="nav-link" href="module-04.html">5. Template Management</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="module-04.html#prerequisites">Install Prerequisites</a>
+    <a class="nav-link" href="module-04.html#create_template">Create a New Template</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="module-04.html#container">Enable Container</a>
+    <a class="nav-link" href="module-04.html#create_win_vm">Create a Windows Virtual Machine</a>
   </li>
 </ul>
   </li>
@@ -233,7 +236,7 @@ The OpenShift environment has already been configured with an OVS Bridge on each
 </div>
 </div>
 <div class="sect1">
-<h2 id="_create_network_attachment_definition"><a class="anchor" href="#_create_network_attachment_definition"></a>Create Network Attachment Definition</h2>
+<h2 id="create-netattach"><a class="anchor" href="#create-netattach"></a>Create a Network Attachment Definition</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>In order to use the OVS Bridge with your VM you need to create a <strong>Network Attachment Definition</strong>. This is what tells OpenShift about the network and allows the virtual machines to connect to it. Network Attachment Definitions are specific to the project/namespace they&#8217;re created in, unless they&#8217;re created in the <code>default</code> project. This gives you, the administrator, the ability to control which networks are and aren&#8217;t available to users who have access to manage their own VMs. Once the Network Attachment Definition has been created, it can then be used by virtual machines when configuring their network adapters.</p>
@@ -254,7 +257,7 @@ A network attachment definition instructs openshift to utilise an existing netwo
 <p>How is this done?</p>
 </div>
 <div class="paragraph">
-<p>To manage an OpenShift node&#8217;s network configuration you use a tool, available as an operator, called nmstate. With nmstate you can create network interfaces on OpenShift compute nodes using Kubernetes constrcuts or the <strong>NodeNetworkConfigurationPolicy</strong> wizard available in the OpenShift console. You can create devices and customize those so that they follow the naming conventions that suit your needs, and your network requirements. For more info about nmstate, and to learn more about the host networking and how to view and manage the configuration, see the ([nmstate documentation](<a href="https://docs.openshift.com/container-platform/latest/networking/k8s_nmstate/k8s-nmstate-observing-node-network-state.html)" class="bare">https://docs.openshift.com/container-platform/latest/networking/k8s_nmstate/k8s-nmstate-observing-node-network-state.html)</a>) or speak with your lab proctors.</p>
+<p>To manage an OpenShift node&#8217;s network configuration you use a tool, available as an operator, called nmstate. With nmstate you can create network interfaces on OpenShift compute nodes using Kubernetes constrcuts or the <strong>NodeNetworkConfigurationPolicy</strong> wizard available in the OpenShift console. You can create devices and customize those so that they follow the naming conventions that suit your needs, and your network requirements. For more info about nmstate, and to learn more about the host networking and how to view and manage the configuration, see the <a href="https://docs.openshift.com/container-platform/4.15/networking/k8s_nmstate/k8s-nmstate-about-the-k8s-nmstate-operator.html">documentation here</a> or speak with your lab proctors.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -323,7 +326,7 @@ In most cases a single OVS bridge can support many Network Attachment Definition
 </div>
 </div>
 <div class="sect1">
-<h2 id="_connect_a_virtual_machine_to_the_external_network"><a class="anchor" href="#_connect_a_virtual_machine_to_the_external_network"></a>Connect a virtual machine to the external network</h2>
+<h2 id="connect_external_net"><a class="anchor" href="#connect_external_net"></a>Connect a Virtual Machine to the External Network</h2>
 <div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
@@ -379,10 +382,10 @@ Notice that the VM is currently using a single interface <strong>default</strong
 </div>
 </div>
 <div class="sect1">
-<h2 id="_using_a_multinetwork_policy"><a class="anchor" href="#_using_a_multinetwork_policy"></a>Using a MultiNetwork Policy</h2>
+<h2 id="multinetwork_policy"><a class="anchor" href="#multinetwork_policy"></a>Using a MultiNetwork Policy</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>A multinetwork policy allows you to enable multiple networks access to a namespace and to define granular rules allowing ingress and egress from the namespace to enhance security of the applications and VMs that are running in the namespace.</p>
+<p>A multinetwork policy allows you to configure network access to a namespace and to define granular rules allowing ingress and egress from the namespace to enhance security of the applications and VMs that are running in the namespace.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -433,6 +436,9 @@ spec:
 </div>
 </li>
 </ol>
+</div>
+<div class="paragraph">
+<p>For this section of the lab we are going to create a <strong>MultiNetwork Policy</strong> that prevents all traffic by default from any other namespace from reaching our VM.</p>
 </div>
 </div>
 </div>
