@@ -136,6 +136,93 @@ image::module-03/09_Multinetwork_Enable.png[]
 
 === Create a MultiNetwork Policy
 
-For this section of the lab we are going to create a *MultiNetwork Policy* that prevents all traffic by default from any other namespace from reaching our VM.
+For this section of the lab we are going to create a *MultiNetwork Policy* that prevents all traffic by default from any other namespace from reaching our VM then we are going to apply another policy that allows connections only from a selected host.
 
-// Pick up here - MultiNetwork Policy syntax issue, regular network policy ingress issue, also confirm NAD failures through GUI
+NOTE: The IP addresses of your virtual guests may differ from those in the attached images or examples, verify the correct addresses present in your lab environment.
+
+. From our bastion host where we just enabled our *MultiNetwork Policy* we want to paste the following content into a new file called deny-all.yaml:
++
+----
+apiVersion: k8s.cni.cncf.io/v1beta1
+kind: MultiNetworkPolicy
+metadata:
+  name: deny-by-default
+  annotations:
+    k8s.v1.cni.cncf.io/policy-for: vmexamples/vlan0
+spec:
+  podSelector: {}
+  policyTypes:
+  - Ingress
+  ingress: []
+----
++
+. Once the file is saved, start a ping to the IP address of the `fedora01` virtual machine.
++
+//image here
++
+. Apply the multinetwork policy with the following syntax:
++
+----
+oc apply -f deny-all.yaml -n vmexamples
+----
++
+//image here
++
+. Now try again to ping the IP address of the fedora01 virtual machine, your ping attempts should be blocked.
++
+//image here
++
+. Return to your OpenShift console, and click on your `fedora02` machine from the previous cloning chapter. 
++
+//image here
++
+. Click on the button to open it's web console, and login with the provided credentials.
++
+//image here
++
+. Attempt to ping the ip address for the `fedora01` virtual machine, notice that it is also blocked, even though we are on the same subnet, in the same namespace. Leave the ping running.
++
+//image here
++
+. Return to the bastion host console, and create a new file called allow-host.yaml, and paste in the following content:
++
+----
+apiVersion: k8s.cni.cncf.io/v1beta1
+kind: MultiNetworkPolicy
+metadata:
+  name:  ingress-ipblock
+  annotations:
+    k8s.v1.cni.cncf.io/policy-for: default/vlan0
+spec:
+  podSelector: {}
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - ipBlock:
+        cidr: <IP_ADDR_FROM_FEDORA02>/32
+----
++
+NOTE: Make sure that you substitute the correct IP from the Fedora02 VM.
++
+//image here
++
+. Apply the policy using the following syntax:
++
+----
+oc apply -f allow-host.yaml -n vmexamples
+----
++
+//image here
++
+. Attempt to ping from the bastion host. This attempt should still fail as we have not explictly allowed it.
++
+//image here
++
+. Return to your `fedora02` VM console, you should find that the ping has now resumed successfully.
++
+//image here
+
+== Summary
+
+In this section we learned a little bit more about how networking works in OpenShift Virtualization. We created a network attachment definition so that our VMs have network access outside of the cluster, and we implimented a MultiNetwork Policy to help secure connections to our VMs. 

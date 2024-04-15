@@ -107,6 +107,8 @@ The information shown is similar to the *Nodes* one, with the exception is provi
 
 In many cases it becomes necessary to add additonal physical nodes to a cluster to meet workload demands. In a virtual deployment of OpenShift, this is as simple as clicking on the appropriate machine set and choosing the scale the number of nodes available, and the hypervisor responds by cloning a VM template and spinning up new workers. In a bare metal environment there are a few more steps involved, but it's still a fairly simple process if you have the hardware available and access to the servers through a BMC that supports the IPMI protocol.
 
+NOTE: Ensure that you are in the *openshift-machine-api* project before you begin these steps or machine discovery will not work.
+
 To begin this process we are going to return to the bare metal hosts screen we reviewed earlier:
 
 . Select *Compute* -> *Bare Metal Hosts*:
