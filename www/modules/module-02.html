@@ -197,145 +197,54 @@
 <p>This workshop segment will explore Persistent Volume Claims (PVCs), which are used to request storage from the provider and store a VM disk. Many storage providers also support snapshots and clones of their devices, be sure to check with your vendor to verify the features supported by the CSI driver and storage device.</p>
 </div>
 <div class="paragraph">
-<p>Notably, there are no restrictions on storage protocol (e.g. NFS, iSCSI, FC, etc.) specific to OpenShift Virtualization. The only requirement is that the RWX access mode is available for live migration. Otherwise, the storage that best meets the needs of your VMs and applications is always the right choice.</p>
+<p>Notably, there are no restrictions on storage protocol (e.g. NFS, iSCSI, FC, etc.) specific to OpenShift Virtualization. The only requirement is that the RWX access mode is available to support live migration of VMs within the cluster. Otherwise, the storage that best meets the needs of your VMs and applications is always the right choice.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-02/00_disk_concepts.png" alt="00 disk concepts">
+<a class="image" href="_images/module-02/00_disk_concepts.png" target="blank"><img src="_images/module-02/00_disk_concepts.png" alt="00 disk concepts" width="100%"></a>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="glossary_terms"><a class="anchor" href="#glossary_terms"></a>Glossary of Familiar Terms</h2>
+<h2 id="examine_pvc"><a class="anchor" href="#examine_pvc"></a>Examine the PVC for a VM</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Working with storage in OpenShift Virtualization can be a different experience than working with other hypervisors. Understanding of the following terms may be helpful for this section of the lab:</p>
-</div>
-<div class="paragraph">
-<p><strong>Container Storage Interface (CSI)</strong>: An API specification for the management of container storage across different container orchestration (CO) systems. An OpenShift cluster can have many CSI provisioners from different vendors, and each VM can use storage from multiple vendors without conflicts.</p>
-</div>
-<div class="paragraph">
-<p><strong>Dynamic Provisioning</strong>: The storage framework allows you to create  volumes on-demand, eliminating the need for cluster administrators to pre-provision persistent storage. Each VM disk is stored in a dynamically created storage volume at a 1:1 ratio.</p>
-</div>
-<div class="paragraph">
-<p><strong>Persistent volumes (PV)</strong>: OpenShift Virtualization uses the Kubernetes persistent volume (PV) framework to allow cluster administrators to provision persistent storage for a cluster. VMs use a <em>PVC</em> to request PV resources without having specific knowledge of the underlying storage infrastructure.</p>
-</div>
-<div class="paragraph">
-<p><strong>Persistent volume claims (PVCs)</strong>: A <em>PVC</em> is a request for storage capacity and, when bound to a PV, how the system knows which storage volume to mount for the VM. As a VM user, you&#8217;re able to use the storage without knowing the details of the underlying infrastructure environment.</p>
-</div>
-<div class="paragraph">
-<p><strong>Storage class</strong>: A <em>storage class</em> provides a way for administrators to describe the classes of storage they offer, for example, "gold," "silver," and "bronze". Different classes might map to quality of service levels, backup policies, and arbitrary policies determined by the cluster administrators. These will be specific to your storage vendor.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="default_boot"><a class="anchor" href="#default_boot"></a>Exploring Default Boot Sources</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Persistent virtual machines require persistent storage. This lab environment has OpenShift Data Foundation deployed to provide access to shared persistent volumes to host application data and virtual machine disks. During the installation of the OpenShift Virtualization Operator, some <code>PersistentVolumeClaims</code> were automatically created to hold template disks for various Linux distributions. These include:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Red Hat Enterprise Linux 8</p>
-</li>
-<li>
-<p>Red Hat Enterprise Linux 9</p>
-</li>
-<li>
-<p>Fedora</p>
-</li>
-<li>
-<p>CentOS 7</p>
-</li>
-<li>
-<p>CentOS Stream 8</p>
-</li>
-<li>
-<p>CentOS Stream 9</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Using these OS images is optional, and the creation + download can be disabled via the appropriate setting in the Operator. However, they are a quick and convenient way to get started provisioning virtual machines with OpenShift Virtualization since they use the "cloud" image for each of the respective distributions. This image includes cloud-init and, often, is a reduced OS footprint optimized for virtualization. Additionally, Red Hat provided boot images are automatically updated when new templates are released.</p>
-</div>
-<div class="paragraph">
-<p>In this section, we will examine the PVCs created by the Operator along with PVCs used by a virtual machine.</p>
-</div>
-<div class="paragraph">
-<p>The project <code>openshift-virtualization-os-images</code> contains all available boot sources and is automatically enabled when <strong>OpenShift Virtualization</strong> is installed.</p>
+<p>In this lab, we are going to take a closer look at the storage behind our the virtual machine we just created <code>fedora01</code>.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Navigate to <strong>Storage</strong> &#8594; <strong>PersistentVolumeClaims</strong>:</p>
-<div class="imageblock">
+<p>Start by clicking on the left menu for <code>Storage</code> &#8594; <code>Persistent Volume Claims</code>. Make sure you are in the <code>vmexamples</code> namespace, you should see the <code>fedora01</code> VM from the previous section listed.</p>
+</li>
+<li>
+<p>Click on the <code>fedora01</code> VM and you will be presented with a screen that shows additional details about the storage volume backing the VM.</p>
+</li>
+<li>
+<p>Notice the following information about the persistent volume claim:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>The PVC is currently bound successfuly</p>
+</li>
+<li>
+<p>The PVC has a requested capacity and size of 30GiB</p>
+</li>
+<li>
+<p>The Access mode of the PVC is ReadWriteMany (RWX)</p>
+</li>
+<li>
+<p>The Volume mode of the PVC is Block</p>
+</li>
+<li>
+<p>The volume is using the <code>ocs-storagecluster-ceph-rbd-virtualization</code> storage class.</p>
+<div class="imageblock unresolved">
 <div class="content">
-<img src="_images/module-02/00_Left_Menu.png" alt="00 Left Menu">
+<a class="image" href="module-02/02-Fedora01-PVC-Details.png" target="blank"><img src="module-02/02-Fedora01-PVC-Details.png" alt="02 Fedora01 PVC Details" width="100%"></a>
 </div>
 </div>
 </li>
-<li>
-<p>Press in the dropdown for the projects, enable <code>Show default projects</code>, and select the project <code>openshift-virtualization-os-images</code></p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/module-02/01_Select_Project.png" alt="01 Select Project">
-</div>
-</div>
-</li>
-<li>
-<p>List the boot sources that OpenShift Virtualization automatically created.</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/module-02/02_List_PVCs.png" alt="02 List PVCs">
-</div>
-</div>
-</li>
-<li>
-<p>Select one from the list, for example, <code>fedora-XX</code>, to obtain detailed information.</p>
-<div class="paragraph">
-<p>In this lab, each of the PVCs will come from the <code>ocs-storagecluster-ceph-rbd</code> storage class provided by OpenShift Data Foundation. The details of the PVC show that it is a <code>ReadWriteMany</code> PVC, which is required for live migration and is using <code>block</code> mode. The mode can be <code>block</code> or <code>file</code>, depending on the storage vendor, and either will work equally well so long as <code>RWX</code> mode is available.</p>
-</div>
-<div class="paragraph">
-<p>The capacity should be large enough to hold the base operating system and any packages/software installed that will be used by any VMs created from this template disk. VMs created by cloning the disk can increase the size of the disk but cannot shrink it.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/module-02/03_PVC_Info.png" alt="03 PVC Info">
-</div>
-</div>
-</li>
-<li>
-<p>When a VM is created, the <em>Boot Source</em> image is cloned, and a new disk is created. Switch to the project <code>vmexamples</code> and review the list of the <em>PVCs</em> (disks). You will see a PVC for each of the disks for VMs in this project and a PVC for the Microsoft Windows Server 2019 disk image created in an earlier section of this workshop. This PVC, with the Microsoft Windows ISO, can be reused by other virtual machines to install the operating system if desired.</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/module-02/04_List_PVCs_VMs.png" alt="04 List PVCs VMs">
-</div>
-</div>
-</li>
-<li>
-<p>Select the <code>fedora02</code> to obtain information</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/module-02/05_PVC_VM_Info.png" alt="05 PVC VM Info">
-</div>
-</div>
-</li>
-<li>
-<p>A <em>Persistent Volume Claim</em> will claim to a specific <em>storage class</em> or to the default one to provision a <em>volume</em>. Navigate to <strong>Storage</strong> &#8594; <strong>PersistentVolumes</strong> to obtain a list. Sort by <strong>Claim</strong>.</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/module-02/07_PV_List.png" alt="07 PV List">
-</div>
-</div>
-</li>
-<li>
-<p>Now navigate to <strong>Virtualization</strong> &#8594; <strong>Bootable volumes</strong> to obtain a list of the available volumes</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/module-02/08_List_Bootable_Volumes.png" alt="08 List Bootable Volumes">
-</div>
+</ol>
 </div>
 </li>
 </ol>
@@ -392,18 +301,26 @@
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Navigate back to <strong>Virtualization</strong> &#8594; <strong>VirtualMachines</strong> and select a virtual machine, for example <code>fedora02</code> in the project <code>vmexamples</code>.</p>
+<p>Navigate back to <strong>Virtualization</strong> &#8594; <strong>VirtualMachines</strong> and select the virtual machine, <code>fedora01</code> in the project <code>vmexamples</code>.</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-02/09_VM_Overview.png" alt="09 VM Overview">
+<a class="image" href="_images/module-02/03_VM_Overview.png" target="blank"><img src="_images/module-02/03_VM_Overview.png" alt="03 VM Overview" width="100%"></a>
 </div>
 </div>
 </li>
 <li>
-<p>Navigate to the <strong>Snapshots</strong> tab</p>
+<p>Notice there are currently no snapshots of this VM listed on the overview page.</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-02/10_VM_Snapshots_Tab.png" alt="10 VM Snapshots Tab">
+<a class="image" href="_images/module-02/04_Snapshots_Overview.png" target="blank"><img src="_images/module-02/04_Snapshots_Overview.png" alt="04 Snapshots Overview" width="100%"></a>
+</div>
+</div>
+</li>
+<li>
+<p>Navigate to the <strong>Snapshots</strong> tab.</p>
+<div class="imageblock unresolved">
+<div class="content">
+<a class="image" href="module-02/05_Snapshots_Menu.png" target="blank"><img src="module-02/05_Snapshots_Menu.png" alt="05 Snapshots Menu" width="100%"></a>
 </div>
 </div>
 </li>
@@ -423,7 +340,7 @@ There is a warning about the <code>cloudinitdisk</code> not being included in th
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-02/11_VM_Snapshot_Dialog.png" alt="11 VM Snapshot Dialog">
+<a class="image" href="_images/module-02/11_VM_Snapshot_Dialog.png" target="blank"><img src="_images/module-02/11_VM_Snapshot_Dialog.png" alt="11 VM Snapshot Dialog" width="100%"></a>
 </div>
 </div>
 </li>
@@ -431,7 +348,7 @@ There is a warning about the <code>cloudinitdisk</code> not being included in th
 <p>Press <strong>Save</strong> and wait till the <em>Snapshot</em> has been created and the <strong>status</strong> shows as <code>Succeeded</code></p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-02/12_VM_Snapshot_Taken.png" alt="12 VM Snapshot Taken">
+<a class="image" href="_images/module-02/12_VM_Snapshot_Taken.png" target="blank"><img src="_images/module-02/12_VM_Snapshot_Taken.png" alt="12 VM Snapshot Taken" width="100%"></a>
 </div>
 </div>
 </li>
@@ -439,7 +356,7 @@ There is a warning about the <code>cloudinitdisk</code> not being included in th
 <p>Press the three dots and check that the <strong>Restore</strong> option is greyed out because the VM is running</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-02/13_VM_Restore_Disabled.png" alt="13 VM Restore Disabled">
+<a class="image" href="_images/module-02/13_VM_Restore_Disabled.png" target="blank"><img src="_images/module-02/13_VM_Restore_Disabled.png" alt="13 VM Restore Disabled" width="100%"></a>
 </div>
 </div>
 </li>
@@ -470,7 +387,7 @@ In the previous step, the operating system was shutdown from within the guest. H
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-02/14_VM_Crashed.png" alt="14 VM Crashed">
+<a class="image" href="_images/module-02/14_VM_Crashed.png" target="blank"><img src="_images/module-02/14_VM_Crashed.png" alt="14 VM Crashed" width="100%"></a>
 </div>
 </div>
 </li>
@@ -481,7 +398,7 @@ In the previous step, the operating system was shutdown from within the guest. H
 <p>Navigate back to the <strong>Snapshots</strong> tab and press <strong>Restore</strong> on the previously created snapshot.</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-02/15_VM_Restore.png" alt="15 VM Restore">
+<a class="image" href="_images/module-02/15_VM_Restore.png" target="blank"><img src="_images/module-02/15_VM_Restore.png" alt="15 VM Restore" width="100%"></a>
 </div>
 </div>
 </li>
@@ -489,7 +406,7 @@ In the previous step, the operating system was shutdown from within the guest. H
 <p>In the dialog shown, press <strong>Restore</strong></p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-02/16_VM_Restore_Dialog.png" alt="16 VM Restore Dialog">
+<a class="image" href="_images/module-02/16_VM_Restore_Dialog.png" target="blank"><img src="_images/module-02/16_VM_Restore_Dialog.png" alt="16 VM Restore Dialog" width="100%"></a>
 </div>
 </div>
 </li>
@@ -497,7 +414,7 @@ In the previous step, the operating system was shutdown from within the guest. H
 <p>Wait until the VM is restored, and then start the VM</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-02/17_VM_Restored.png" alt="17 VM Restored">
+<a class="image" href="_images/module-02/17_VM_Restored.png" target="blank"><img src="_images/module-02/17_VM_Restored.png" alt="17 VM Restored" width="100%"></a>
 </div>
 </div>
 </li>
@@ -505,7 +422,7 @@ In the previous step, the operating system was shutdown from within the guest. H
 <p>Verify that the VM is booting correctly again.</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-02/18_VM_Running.png" alt="18 VM Running">
+<a class="image" href="_images/module-02/18_VM_Running.png" target="blank"><img src="_images/module-02/18_VM_Running.png" alt="18 VM Running" width="100%"></a>
 </div>
 </div>
 </li>
@@ -526,7 +443,7 @@ In the previous step, the operating system was shutdown from within the guest. H
 <p>Press <strong>Clone</strong> from the <strong>Actions</strong> menu, and a dialog will open</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-02/19_VM_Clone_Dialog.png" alt="19 VM Clone Dialog">
+<a class="image" href="_images/module-02/19_VM_Clone_Dialog.png" target="blank"><img src="_images/module-02/19_VM_Clone_Dialog.png" alt="19 VM Clone Dialog" width="100%"></a>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -546,7 +463,7 @@ Notice the VM, if is powered on, it will be stopped to perform the clone. If you
 <p>A new VM is created, the disks are cloned and automatically the portal will redirect you to the new VM.</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/module-02/20_VM_Cloned.png" alt="20 VM Cloned">
+<a class="image" href="_images/module-02/20_VM_Cloned.png" target="blank"><img src="_images/module-02/20_VM_Cloned.png" alt="20 VM Cloned" width="100%"></a>
 </div>
 </div>
 <div class="admonitionblock important">

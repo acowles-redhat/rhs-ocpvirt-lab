@@ -33,7 +33,7 @@ To manage an OpenShift node's network configuration you use a tool, available as
 
 . Navigate to *Networking* -> *Network Attachment Definitions* and click *Create network attachment definition*:
 +
-image::module-03/01_NAD_Dashboard.png[]
+image::module-03/01_NAD_Dashboard.png[link=self, window=blank, width=100%]
 +
 ////
 [IMPORTANT]
@@ -48,7 +48,7 @@ Select project `vmexamples`.
 +
 ////
 . Click the *Edit YAML* button at the top of the page.
-image::module-03/02_NAD_Create.png[]
+image::module-03/02_NAD_Create.png[link=self, window=blank, width=100%]
 +
 . Paste in the following yaml snippet, and click the Create button:
 +
@@ -71,37 +71,37 @@ spec:
     }
 ----
 +
-image::module-03/03_NAD_YAML.png[]
+image::module-03/03_NAD_YAML.png[link=self, window=blank, width=100%]
 +
 [NOTE]
 In most cases a single OVS bridge can support many Network Attachment Definitions with each with their own designated `VLAN Tag Number`. In this lab we use an untagged network, so no VLAN number is required here, as such our Network Attachment Definition is labeled as vlan0. 
 +
 . Examine the details of the network attachment definition. Because this was created in the `vmexamples` project, it will be available to only attach to VMs that are in that project.
 +
-image::module-03/04_NAD_Created.png[]
+image::module-03/04_NAD_Created.png[link=self, window=blank, width=100%]
 
 [[connect_external_net]]
 == Connect a Virtual Machine to the External Network
 
 . Navigate to *Virtualization* -> *VirtualMachines*, select the `fedora01` VM. Click *Configuration* tab and then click the *Network* subtab:
 +
-image::module-03/05_VM_Network_Tab.png[]
+image::module-03/05_VM_Network_Tab.png[link=self, window=blank, width=100%]
 +
 NOTE: Notice that the VM is currently using a single interface *default* which is connected to the  *Pod networking* network, we can choose to modify this existing connection or add a new interface to the VM. Either action currently require a VM restart.
 +
 . Click the three-dot menu at the end of the *default* network adapter line, and click on edit in the drop down menu.
 +
-image::module-03/06_Edit_Default.png[]
+image::module-03/06_Edit_Default.png[link=self, window=blank, width=100%]
 +
 . Click the dropdown menu for the *Network* field, and select the vmexamples/vlan0 network attachment definition that we created. Click on *Save*.
 +
-image::module-03/07_VM_Net_Modify.png[]
+image::module-03/07_VM_Net_Modify.png[link=self, window=blank, width=100%]
 +
 . Use the *Actions* menu or icon in the upper right corner to restart the VM. After rebooting, navigate to the *Overview* tab:
 +
 . Once the machine restarts, you can see in the *Network Interfaces* section of the *Overview* screen that the `default` interface obtains a DHCP IP address from the flat network (`192.168.3.x/24`).  
 +
-image::module-03/08_New_IP_Address.png[]
+image::module-03/08_New_IP_Address.png[link=self, window=blank, width=100%]
 
 [[multinetwork_policy]]
 == Using a MultiNetwork Policy
@@ -131,7 +131,7 @@ spec:
 oc patch network.operator.openshift.io cluster --type=merge --patch-file=multinetwork-enable-patch.yaml
 ----
 +
-image::module-03/09_Multinetwork_Enable.png[]
+image::module-03/09_Multinetwork_Enable.png[link=self, window=blank, width=100%]
 +
 
 === Create a MultiNetwork Policy
