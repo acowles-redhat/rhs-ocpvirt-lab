@@ -103,6 +103,7 @@ image::module-03/07_VM_Net_Modify.png[link=self, window=blank, width=100%]
 +
 image::module-03/08_New_IP_Address.png[link=self, window=blank, width=100%]
 
+
 IMPORTANT: For the next section of this lab, it's required that you repeat the same actions to attach the fedora02 VM to the vlan0 network as well.
 
 [[multinetwork_policy]]
@@ -135,7 +136,6 @@ oc patch network.operator.openshift.io cluster --type=merge --patch-file=multine
 ----
 +
 image::module-03/09_Multinetwork_Enable.png[link=self, window=blank, width=100%]
-+
 
 === Create a MultiNetwork Policy
 
