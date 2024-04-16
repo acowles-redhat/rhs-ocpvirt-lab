@@ -87,15 +87,6 @@ Administrator login is available with:
 * *User:* {openshift_admin_user} 
 * *Password:* {openshift_admin_password}
 
-The OpenShift API is available at: {openshift_api_server}
-
-You can authenticate to the cluster in the terminal using the *oc login* command, like so:
-
-[source,sh,role=execute,subs="attributes"]
-----
-oc login -u {openshift_admin_user} -p {openshift_admin_password} {openshift_api_server}
-----
-
 === Bastion Access
 
 A RHEL bastion host is available with common utilities pre-installed and OpenShift command line access pre-configured.
@@ -104,7 +95,7 @@ For SSH access to the bastion execute the following:
 
 [source,sh,role=execute,subs="attributes"]
 ----
-sudo ssh root@{bastion_host_ip}
+sudo ssh root@192.168.123.100
 ----
 
 === vCenter Access

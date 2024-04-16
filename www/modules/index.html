@@ -345,17 +345,6 @@ The innovation in Kubernetes, serverless, service mesh, Kubernetes Operators, an
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p>The OpenShift API is available at: {openshift_api_url}</p>
-</div>
-<div class="paragraph">
-<p>You can authenticate to the cluster in the terminal using the <strong>oc login</strong> command, like so:</p>
-</div>
-<div class="listingblock execute">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">oc login -u {openshift_admin_user} -p {openshift_admin_password} {openshift_api_server}</code></pre>
-</div>
-</div>
 </div>
 <div class="sect2">
 <h3 id="_bastion_access"><a class="anchor" href="#_bastion_access"></a>Bastion Access</h3>
@@ -367,7 +356,7 @@ The innovation in Kubernetes, serverless, service mesh, Kubernetes Operators, an
 </div>
 <div class="listingblock execute">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">sudo ssh root@{bastion_host_ip}</code></pre>
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">sudo ssh root@192.168.123.100</code></pre>
 </div>
 </div>
 </div>

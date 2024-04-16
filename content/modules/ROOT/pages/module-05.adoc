@@ -2,12 +2,12 @@
 
 == Introduction
 
-This portion of our lab uses the https://access.redhat.com/documentation/en-us/migration_toolkit_for_virtualization/[Migration Toolkit for Virtualization] (MTV) to import a virtual machine from VMware vSphere to OpenShift. The migration toolkit supports two "modes" of import:
+This portion of our lab uses the https://access.redhat.com/documentation/en-us/migration_toolkit_for_virtualization/[Migration Toolkit for Virtualization] (MTV) to import virtual machines from VMware vSphere to OpenShift. The migration toolkit supports two "modes" of import:
 
 * Cold migration turns off the source virtual machine before starting the migration. This is the default migration type.
 * Warm migration copies data while the source virtual machine continues to run. Once the bulk of data has been migrated, the VM is shutdown and the final data is copied to the destination. The new VM can then be started, resulting in a much shorter period of downtime for the VM-hosted application.
 
-The migration toolkit has already been deployed to your cluster using the Operator. 
+NOTE: The migration toolkit has already been deployed to your cluster using the Operator available in OperatorHub. 
 
 Documentation for how to install and configure the Operator can be found https://access.redhat.com/documentation/en-us/migration_toolkit_for_virtualization/[here].
 
@@ -49,8 +49,8 @@ A three-tier application has been deployed on VMware for you to migrate to OpenS
 The application consists of the following four virtual machines:
 
 * One HAproxy system that redirects traffic to the web servers
-* Two Microsoft Windows servers with IIS hosting a PHP application connecting to the database
 * One Linux system running a MariaDB database
+* Two Microsoft Windows servers with IIS hosting a PHP application connecting to the database
 
 The application is accessible from the following link: http://webapp.vc.opentlc.com/
 
@@ -58,13 +58,13 @@ You will migrate three of the four virtual machines using cold migration - you w
 
 === Review the VMware environment
 
-To help understand the process of mapping resources, such as datastores and port groups, from vSphere into OpenShift's equivalents, network attachment definitions and storage classes, let's begin by reviewing the source environment for the migrations.
+To help understand the process of mapping resources, such as datastores and port groups, from vSphere into OpenShift's equivalents, storage classes and network attachment definitions, let's begin by reviewing the source environment for the migrations.
 
-// WKTBD: Replace with link to student's individual account
-. Navigate to vCenter via link:https://portal.vc.opentlc.com/ui/app/folder;nav=v/urn:vmomi:Folder:group-d1:ee1bef3e-6179-4c1f-9d2a-004c7b0df4e5/vms/vms[https://portal.vc.opentlc.com^]
+. Navigate to vCenter:  link:https://portal.vc.opentlc.com/ui/app/folder;nav=v/urn:vmomi:Folder:group-d1:ee1bef3e-6179-4c1f-9d2a-004c7b0df4e5/vms/vms[https://portal.vc.opentlc.com^]
 
-// WKTBD: replace with student's credentials
-. Login with the user {vcenter_user} and the password {vcenter_password}.
+. Login with the following credentials:
+*User:* {vcenter_user}
+*Password:* {vcenter_password}
 
 . By default you'll see the VMs and Folders view, where you can see the four VMs representing the application.
 +
@@ -84,7 +84,7 @@ image::module-05/02_vSphere_Datastore.png[link=self, window=blank, width=100%]
 
 === Review the VMware provider to the migration toolkit
 
-The *Migration Toolkit for Virtualization* (*MTV*) uses the VMware Virtual Disk Development Kit (*VDDK*) SDK to transfer virtual disks from VMware vSphere. This VDDK has already been set up for you in this environment.
+The *Migration Toolkit for Virtualization* (*MTV*) uses the VMware Virtual Disk Development Kit (*VDDK*) SDK to transfer virtual disks from VMware vSphere. The VDDK has already been configured for you in this environment.
 
 . Navigate in the left menu to *Migration* -> *Providers for virtualization*
 . Select project `openshift-mtv`
@@ -94,7 +94,7 @@ image::module-05/03_MTV_Providers.png[link=self, window=blank, width=100%]
 [TIP]
 MTV 2.4 and later are project/namespace aware and do not require administrator privileges. You can delegate VM imports to application teams and VM users so that they can self-serve and migrate at their own pace!
 
-. By default, there is a provider called `host` which represents the *OpenShift Virtualization* as a target platform
+. By default, there is a provider called `host` which represents *OpenShift Virtualization* as a target platform.
 +
 image::module-05/04_MTV_Provider_list.png[link=self, window=blank, width=100%]
 
@@ -102,8 +102,6 @@ image::module-05/04_MTV_Provider_list.png[link=self, window=blank, width=100%]
 
 ////
 However, you will need to register the source vCenter system to the Migration Toolkit for Virtualization as a new provider.
-
-
 
 . By default, there is a provider called `host` which represents *OpenShift Virtualization* as a target platform
 +
@@ -113,12 +111,11 @@ image::module-05/04_MTV_Provider_list.png[link=self, window=blank, width=100%]
 +
 image::module-05/05_MTV_Create_Provider.png[link=self, window=blank, width=100%]
 +
-// WKTBD: replace with student's credentials
 . Select *VMware* on the *Provider type* dropdown and fill the following data:
 .. *Name*: `vmware`
 .. *vCenter host name or IP address*: `portal.vc.opentlc.com`
-.. *vCenter user name*: `%vcenter_user%@vc.opentlc.com`
-.. *vCenter password*: `%vcenter_password%`
+.. *vCenter user name*: {vcenter_user}
+.. *vCenter password*: {vcenter_password}
 .. *VDDK init image*: `image-registry.openshift-image-registry.svc:5000/openshift/vddk:latest`
 .. *SHA-1 fingerprint*: `70:2D:52:D2:D1:A5:A2:75:58:8F:3D:07:D5:7E:E9:73:81:BC:88:A2`
 +
@@ -225,13 +222,11 @@ Having many participants performing the same task in parallel can cause this tas
 
 === Review and configure migrated Virtual Machines
 
-The selected VM has now been migrated and can be started on OpenShift Virtualization. You could connect to the VM's console and interact with it, just as you would in VMware vCenter.
-
-
+The selected VMs have now been migrated and can be started on OpenShift Virtualization. You can now connect to the VM's console and interact with it, just as you would in VMware vCenter.
 
 == Summary
 
-In addition to the Migration Toolkit for Virtualization, there are three other migration toolkits. The combination of these can be used to move many workloads into and within OpenShift clusters depending on your organization's needs. 
+In this section we explored the Migration Toolkit for Virtualization, and used it to help migrate existing virtual machines over from a VMware vSphere environment. In addition to the Migration Toolkit for Virtualization, there are three other migration toolkits. The combination of these can be used to move many workloads into and within OpenShift clusters depending on your organization's needs. 
 
 * https://developers.redhat.com/products/mtr/overview[Migration Toolkit for Runtimes] - Assist and accelerate Java application modernization and migration.
 * https://access.redhat.com/documentation/en-us/migration_toolkit_for_applications/[Migration Toolkit for Applications] - Accelerate large-scale application modernization efforts to containers and Kubernetes.
