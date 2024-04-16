@@ -14,8 +14,7 @@
 ** xref:module-01.adoc#scaling_cluster[Scaling the Cluster with a New Bare Metal Host]
 
 * xref:module-02.adoc[3. Storage Management]
-** xref:module-02.adoc#glossary_terms[Glossary of Familiar Terms]
-** xref:module-02.adoc#default_boot[Exploring Default Boot Sources]
+** xref:module-02.adoc#examine_pvc[Examine the PVC for a VM]
 ** xref:module-02.adoc#managing_snapshots[Managing Snapshots]
 ** xref:module-02.adoc#clone_vm[Clone a Virtual Machine]
 
