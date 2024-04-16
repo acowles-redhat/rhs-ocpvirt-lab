@@ -81,10 +81,7 @@
     <a class="nav-link" href="module-02.html">3. Storage Management</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#glossary_terms">Glossary of Familiar Terms</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#default_boot">Exploring Default Boot Sources</a>
+    <a class="nav-link" href="#examine_pvc">Examine the PVC for a VM</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="#managing_snapshots">Managing Snapshots</a>
@@ -238,9 +235,9 @@
 </li>
 <li>
 <p>The volume is using the <code>ocs-storagecluster-ceph-rbd-virtualization</code> storage class.</p>
-<div class="imageblock unresolved">
+<div class="imageblock">
 <div class="content">
-<a class="image" href="module-02/02-Fedora01-PVC-Details.png" target="blank"><img src="module-02/02-Fedora01-PVC-Details.png" alt="02 Fedora01 PVC Details" width="100%"></a>
+<a class="image" href="_images/module-02/02_Fedora01_PVC_Details.png" target="blank"><img src="_images/module-02/02_Fedora01_PVC_Details.png" alt="02 Fedora01 PVC Details" width="100%"></a>
 </div>
 </div>
 </li>
@@ -340,39 +337,64 @@ There is a warning about the <code>cloudinitdisk</code> not being included in th
 </div>
 <div class="imageblock">
 <div class="content">
-<a class="image" href="_images/module-02/11_VM_Snapshot_Dialog.png" target="blank"><img src="_images/module-02/11_VM_Snapshot_Dialog.png" alt="11 VM Snapshot Dialog" width="100%"></a>
+<a class="image" href="_images/module-02/06_VM_Snapshot_Dialog.png" target="blank"><img src="_images/module-02/06_VM_Snapshot_Dialog.png" alt="06 VM Snapshot Dialog" width="100%"></a>
 </div>
 </div>
 </li>
 <li>
-<p>Press <strong>Save</strong> and wait till the <em>Snapshot</em> has been created and the <strong>status</strong> shows as <code>Succeeded</code></p>
+<p>Press <strong>Save</strong> and wait till the <em>Snapshot</em> has been created and the <strong>status</strong> shows as <code>Succeeded</code>.</p>
 <div class="imageblock">
 <div class="content">
-<a class="image" href="_images/module-02/12_VM_Snapshot_Taken.png" target="blank"><img src="_images/module-02/12_VM_Snapshot_Taken.png" alt="12 VM Snapshot Taken" width="100%"></a>
+<a class="image" href="_images/module-02/07_VM_Snapshot_Taken.png" target="blank"><img src="_images/module-02/07_VM_Snapshot_Taken.png" alt="07 VM Snapshot Taken" width="100%"></a>
 </div>
 </div>
 </li>
 <li>
-<p>Press the three dots and check that the <strong>Restore</strong> option is greyed out because the VM is running</p>
+<p>Press the three-dot menu, and see that the <strong>Restore</strong> option is greyed out because the VM is currently running.</p>
 <div class="imageblock">
 <div class="content">
-<a class="image" href="_images/module-02/13_VM_Restore_Disabled.png" target="blank"><img src="_images/module-02/13_VM_Restore_Disabled.png" alt="13 VM Restore Disabled" width="100%"></a>
+<a class="image" href="_images/module-02/08_VM_Restore_Disabled.png" target="blank"><img src="_images/module-02/08_VM_Restore_Disabled.png" alt="08 VM Restore Disabled" width="100%"></a>
 </div>
 </div>
 </li>
 <li>
-<p>Switch to the <strong>Console</strong> tab to perform a modification to your running VM. This small modification will break your VM, and it won&#8217;t be able to boot anymore.</p>
-<div class="paragraph">
-<p>Log in with the user <code>fedora</code> and password <code>ocpVirtIsGre@t</code> (or whatever you used in the previous module). Execute the command:</p>
+<p>Next, switch to the <strong>Console</strong> tab. We are going to login and perform a modification that prevents the VM from being able to boot.</p>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/module-02/09_Console_Login.png" target="blank"><img src="_images/module-02/09_Console_Login.png" alt="09 Console Login" width="100%"></a>
 </div>
+</div>
+</li>
+<li>
+<p>Click on the <code>Guest login credentials</code> dropdown to gather the username and password to log into your console.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+There is a <code>Copy to clipboard</code> button and a <code>Paste</code> button available here, which makes the login process much easier.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Once you are logged in, execute the following command:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">[fedora@fedora02 ~]$ sudo rm -rf /boot/grub2; sudo shutdown -r now</code></pre>
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">[fedora@fedora01 ~]$ sudo rm -rf /boot/grub2; sudo shutdown -r now</code></pre>
 </div>
 </div>
 </li>
 <li>
-<p>The <em>Virtual Machine</em> will not be able to boot.</p>
+<p>The virtual machine will no longer be able to boot.</p>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/module-02/10_Bootloader_Broken.png" target="blank"><img src="_images/module-02/10_Bootloader_Broken.png" alt="10 Bootloader Broken" width="100%"></a>
+</div>
+</div>
 <div class="admonitionblock important">
 <table>
 <tr>
@@ -385,44 +407,55 @@ In the previous step, the operating system was shutdown from within the guest. H
 </tr>
 </table>
 </div>
+</li>
+<li>
+<p>Using the <strong>Actions</strong> dropdown menu or the shortcut button in the top right corner, <strong>Stop</strong> the VM.</p>
+</li>
+<li>
+<p>You can click on the <strong>Overview</strong> tab to confirm that the VM has stopped. You can also see the snapshot we recently took listed in the <strong>Snapshots</strong> tile.</p>
 <div class="imageblock">
 <div class="content">
-<a class="image" href="_images/module-02/14_VM_Crashed.png" target="blank"><img src="_images/module-02/14_VM_Crashed.png" alt="14 VM Crashed" width="100%"></a>
+<a class="image" href="_images/module-02/11_VM_Stopped_Snapshot.png" target="blank"><img src="_images/module-02/11_VM_Stopped_Snapshot.png" alt="11 VM Stopped Snapshot" width="100%"></a>
 </div>
 </div>
 </li>
 <li>
-<p>Using the <strong>Actions</strong> dropdown menu, stop the <em>Virtual Machine</em>. Wait until the VM is stopped.</p>
-</li>
-<li>
-<p>Navigate back to the <strong>Snapshots</strong> tab and press <strong>Restore</strong> on the previously created snapshot.</p>
+<p>Navigate back to the <strong>Snapshots</strong> tab, click the three-dot menu, and with the VM stopped, you will find <strong>Restore</strong> is no longer greyed out. Click it.</p>
 <div class="imageblock">
 <div class="content">
-<a class="image" href="_images/module-02/15_VM_Restore.png" target="blank"><img src="_images/module-02/15_VM_Restore.png" alt="15 VM Restore" width="100%"></a>
+<a class="image" href="_images/module-02/12_VM_Restore.png" target="blank"><img src="_images/module-02/12_VM_Restore.png" alt="12 VM Restore" width="100%"></a>
 </div>
 </div>
 </li>
 <li>
-<p>In the dialog shown, press <strong>Restore</strong></p>
+<p>In the dialog shown, press <strong>Restore</strong>.</p>
 <div class="imageblock">
 <div class="content">
-<a class="image" href="_images/module-02/16_VM_Restore_Dialog.png" target="blank"><img src="_images/module-02/16_VM_Restore_Dialog.png" alt="16 VM Restore Dialog" width="100%"></a>
+<a class="image" href="_images/module-02/13_VM_Restore_Dialog.png" target="blank"><img src="_images/module-02/13_VM_Restore_Dialog.png" alt="13 VM Restore Dialog" width="100%"></a>
 </div>
 </div>
 </li>
 <li>
-<p>Wait until the VM is restored, and then start the VM</p>
+<p>Wait until the VM is restored, the process should be fairly quick.</p>
 <div class="imageblock">
 <div class="content">
-<a class="image" href="_images/module-02/17_VM_Restored.png" target="blank"><img src="_images/module-02/17_VM_Restored.png" alt="17 VM Restored" width="100%"></a>
+<a class="image" href="_images/module-02/14_VM_Restored.png" target="blank"><img src="_images/module-02/14_VM_Restored.png" alt="14 VM Restored" width="100%"></a>
 </div>
 </div>
 </li>
 <li>
-<p>Verify that the VM is booting correctly again.</p>
+<p>Return to <strong>Overview</strong> tab, and start the VM.</p>
 <div class="imageblock">
 <div class="content">
-<a class="image" href="_images/module-02/18_VM_Running.png" target="blank"><img src="_images/module-02/18_VM_Running.png" alt="18 VM Running" width="100%"></a>
+<a class="image" href="_images/module-02/15_VM_Start.png" target="blank"><img src="_images/module-02/15_VM_Start.png" alt="15 VM Start" width="100%"></a>
+</div>
+</div>
+</li>
+<li>
+<p>Click on the console tab to confirm that the VM has now restarted successfully.</p>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/module-02/16_VM_Running.png" target="blank"><img src="_images/module-02/16_VM_Running.png" alt="16 VM Running" width="100%"></a>
 </div>
 </div>
 </li>
@@ -435,35 +468,31 @@ In the previous step, the operating system was shutdown from within the guest. H
 <h2 id="clone_vm"><a class="anchor" href="#clone_vm"></a>Clone a Virtual Machine</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Cloning creates a new VM that uses its disk image for storage, but most of the clone&#8217;s configuration and stored data is identical to the source VM.</p>
+<p>Cloning creates a new VM that uses it&#8217;s own disk image for storage, but most of the clone&#8217;s configuration and stored data is identical to the source VM.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Press <strong>Clone</strong> from the <strong>Actions</strong> menu, and a dialog will open</p>
+<p>Return to the <strong>Overview</strong> screen, and click the <strong>Actions</strong> dropdown menu to see the option to clone the VM.</p>
 <div class="imageblock">
 <div class="content">
-<a class="image" href="_images/module-02/19_VM_Clone_Dialog.png" target="blank"><img src="_images/module-02/19_VM_Clone_Dialog.png" alt="19 VM Clone Dialog" width="100%"></a>
+<a class="image" href="_images/module-02/17_Overview_Actions_Clone.png" target="blank"><img src="_images/module-02/17_Overview_Actions_Clone.png" alt="17 Overview Actions Clone" width="100%"></a>
 </div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Notice the VM, if is powered on, it will be stopped to perform the clone. If you have a snapshot of the VM, you can also create a clone from the snapshot without powering off the VM.
-</td>
-</tr>
-</table>
 </div>
 </li>
 <li>
-<p>A new VM is created, the disks are cloned and automatically the portal will redirect you to the new VM.</p>
+<p>Press <strong>Clone</strong> from the <strong>Actions</strong> menu, and a dialog will open. Name the cloned VM <code>fedora02</code>, and select the check box to <code>Start VirtualMachine on clone</code>.</p>
 <div class="imageblock">
 <div class="content">
-<a class="image" href="_images/module-02/20_VM_Cloned.png" target="blank"><img src="_images/module-02/20_VM_Cloned.png" alt="20 VM Cloned" width="100%"></a>
+<a class="image" href="_images/module-02/18_VM_Clone_Dialog.png" target="blank"><img src="_images/module-02/18_VM_Clone_Dialog.png" alt="18 VM Clone Dialog" width="100%"></a>
+</div>
+</div>
+</li>
+<li>
+<p>A new VM is created, the disks are cloned and automatically the portal will redirect you to the new VM, and you can see the <code>Created</code> time as very recently.</p>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/module-02/19_VM_Cloned.png" target="blank"><img src="_images/module-02/19_VM_Cloned.png" alt="19 VM Cloned" width="100%"></a>
 </div>
 </div>
 <div class="admonitionblock important">

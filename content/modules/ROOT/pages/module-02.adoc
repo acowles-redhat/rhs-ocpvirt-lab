@@ -62,7 +62,7 @@ image::module-02/04_Snapshots_Overview.png[link=self, window=blank, width=100%]
 +
 . Navigate to the *Snapshots* tab.
 +
-image::module-02/05_Snapshots_Menu.png[link=self, window=blank, width=100%]
+image::module-02/05_Snapshot_Menu.png[link=self, window=blank, width=100%]
 
 . Press *Take snapshot* and a dialog will open
 +
