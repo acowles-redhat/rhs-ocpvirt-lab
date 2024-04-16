@@ -114,6 +114,8 @@ A multinetwork policy allows you to configure network access to a namespace and 
 
 NOTE: This section of the lab is primarily performed through the CLI. You will need to ssh to your Bastion host where the CLI tools are already installed.
 
+////
+
 === Enable Multinetwork Policy
 
 First you must enable multinetwork policy by creating a patch definition and applying it as the cluster administrator.
@@ -136,6 +138,8 @@ oc patch network.operator.openshift.io cluster --type=merge --patch-file=multine
 ----
 +
 image::module-03/09_Multinetwork_Enable.png[link=self, window=blank, width=100%]
+
+////
 
 === Create a MultiNetwork Policy
 

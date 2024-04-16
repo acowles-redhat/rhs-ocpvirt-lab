@@ -409,42 +409,6 @@ This section of the lab is primarily performed through the CLI. You will need to
 </table>
 </div>
 <div class="sect2">
-<h3 id="_enable_multinetwork_policy"><a class="anchor" href="#_enable_multinetwork_policy"></a>Enable Multinetwork Policy</h3>
-<div class="paragraph">
-<p>First you must enable multinetwork policy by creating a patch definition and applying it as the cluster administrator.</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Copy and paste the following code into a newly created file called multinetwork-enable-patch.yaml</p>
-<div class="listingblock">
-<div class="content">
-<pre>apiVersion: operator.openshift.io/v1
-kind: Network
-metadata:
-  name: cluster
-spec:
-  useMultiNetworkPolicy: true</pre>
-</div>
-</div>
-</li>
-<li>
-<p>Now run the OC patch command to apply the patch.</p>
-<div class="listingblock">
-<div class="content">
-<pre>oc patch network.operator.openshift.io cluster --type=merge --patch-file=multinetwork-enable-patch.yaml</pre>
-</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<a class="image" href="_images/module-03/09_Multinetwork_Enable.png" target="blank"><img src="_images/module-03/09_Multinetwork_Enable.png" alt="09 Multinetwork Enable" width="100%"></a>
-</div>
-</div>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
 <h3 id="_create_a_multinetwork_policy"><a class="anchor" href="#_create_a_multinetwork_policy"></a>Create a MultiNetwork Policy</h3>
 <div class="paragraph">
 <p>For this section of the lab we are going to create a <strong>MultiNetwork Policy</strong> that prevents all traffic by default from any other namespace from reaching our fedora01 VM, we are then going to apply another policy that allows connections only from a selected host, in this case fedora02.</p>
