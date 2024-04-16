@@ -74,42 +74,45 @@ If you would like to learn more about OpenShift Virtualization, please visit the
 
 == Requirements for the Lab Environment
 
-* Participant needs to have own computer with browser and internet access. 
+* Participant needs to have their own computer with browser and internet access. 
 * Chromium based browser is recommended, some copy paste functions don't work in Firefox for time being. 
 * Remote access console uses US keyboard layout, so it's good to know where special characters reside in it for other country layouts. Or use copy paste with recommended browser.
 
 === Credentials for the OpenShift Console
 
-Your OpenShift cluster console is available at: {openshift_console_url}[window=_blank]
-
-You can access the workshop at: https://dashboard-lab-ocp-cns.{openshift_cluster_ingress_domain}[window=blank]
+Your OpenShift cluster console is available at: {openshift_web_console}[window=_blank]
 
 Administrator login is available with:
 
-* *User:* admin 
+* *User:* {openshift_admin_user} 
 * *Password:* {openshift_admin_password}
 
 The OpenShift API is available at: {openshift_api_url}
-
-The `oc` command line utility is available for download at: {openshift_client_download_url}
 
 You can authenticate to the cluster in the terminal using the *oc login* command, like so:
 
 [source,sh,role=execute,subs="attributes"]
 ----
-oc login -u admin -p {openshift_admin_password} {openshift_api_url}
+oc login -u {openshift_admin_user} -p {openshift_admin_password} {openshift_api_server}
 ----
 
 === Bastion Access
 
 A RHEL bastion host is available with common utilities pre-installed and OpenShift command line access pre-configured.
-For SSH access to the bastion:
 
-* *Bastion Hostname:* {bastion_public_hostname}
-* *Bastion Username:* {bastion_ssh_user_name}
+For SSH access to the bastion execute the following:
+
+[source,sh,role=execute,subs="attributes"]
+----
+sudo ssh root@{bastion_host_ip}
+----
 
 === vCenter Access
 
-* *vcenter_user:* "{{ env_type }}-{{ guid }}"
-* *vcenter_password:* "{{ hostvars['jumphost']['vcenter_user_generated_password'] }}"
+In the migration chapter of the lab, you will be asked to login and examine a VMware vSphere environment.
+
+For access, please use the following credentials:
+
+* *vcenter_user:* {vcenter_user}
+* *vcenter_password:* {vcenter_password}
 
