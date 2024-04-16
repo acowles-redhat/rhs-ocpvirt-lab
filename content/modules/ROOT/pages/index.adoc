@@ -87,7 +87,7 @@ Administrator login is available with:
 * *User:* {openshift_admin_user} 
 * *Password:* {openshift_admin_password}
 
-The OpenShift API is available at: {openshift_api_url}
+The OpenShift API is available at: {openshift_api_server}
 
 You can authenticate to the cluster in the terminal using the *oc login* command, like so:
 
