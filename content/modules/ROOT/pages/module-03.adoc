@@ -48,6 +48,7 @@ Select project `vmexamples`.
 +
 ////
 . Click the *Edit YAML* button at the top of the page.
++
 image::module-03/02_NAD_Create.png[link=self, window=blank, width=100%]
 +
 . Paste in the following yaml snippet, and click the Create button:
@@ -143,13 +144,13 @@ image::module-03/09_Multinetwork_Enable.png[link=self, window=blank, width=100%]
 
 === Create a MultiNetwork Policy
 
-For this section of the lab we are going to create a *MultiNetwork Policy* that prevents all traffic by default from any other namespace from reaching our fedora01 VM, we are then going to apply another policy that allows connections only from a selected host, in this case fedora02.
+For this section of the lab we are going to create a *MultiNetwork Policy* that prevents all network traffice from reaching the VM's that are attached to our vmexamples/vlan0 *Network Attachment Definition* including our VMs fedora01, and fedora02. We will then explictly allow one-way connectivity from fedora02 to fedora01 to show how we can find tune network connections, even within the same namespace.
 
 NOTE: The IP addresses of your virtual guests may differ from those in the attached images or examples, verify the correct addresses present in your lab environment by clicking on the Overview screen for each VM and taking a look at the `Network interfaces` tile.
 
 image::module-03/10_Find_IP_Addresses.png[link=self, window=blank, width=100%]
 
-. From our bastion host where we just enabled our *MultiNetwork Policy* we want to paste the following content into a new file called deny-all.yaml:
+. From our bastion host we want to paste the following content into a new file called deny-all.yaml:
 +
 ----
 apiVersion: k8s.cni.cncf.io/v1beta1
@@ -233,6 +234,7 @@ image::module-03/19_Bastion_Still_Blocked.png[link=self, window=blank, width=100
 +
 image::module-03/20_Fedora02_Ping_Allowed.png[link=self, window=blank, width=100%]
 
+
 == Summary
 
-In this section we learned a little bit more about how networking works in OpenShift Virtualization. We created a network attachment definition so that our VMs have network access from outside of the cluster. We also implemented a MultiNetwork Policy to help secure connections to our VMs by only allowing specified hosts. 
+In this section we learned a little bit more about how networking works in OpenShift Virtualization. We created a network attachment definition so that our VMs have network access from outside of the cluster. We also implemented a MultiNetwork Policy to demonstrate how we can secure connections to our VMs by only allowing specified hosts access. 
