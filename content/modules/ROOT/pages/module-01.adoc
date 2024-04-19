@@ -57,12 +57,7 @@ When deployed using the installer provisioned infrastructure (IPI) method, OpenS
 [[review_nodes]]
 == Review Nodes and Machines
 
-Almost every interaction with Red Hat OpenShift can be done in the OpenShift Console. The console is a full-featured web application that allows administrators and users alike to use the platform in a guided manner. Wizards are provided for most tasks which makes it easy to administer the system.
-
-// WKTBD: Replace with actual password from variable
-. Navigate to %ocp_url% and login with user `admin` and the password `%ocp_password%`.
-
-. From the navigation menu, select *Compute* -> *Nodes*:
+. From the navigation menu on the left, select *Compute* -> *Nodes*:
 +
 image::module-01/01_Compute_Nodes.png[link=self, window=blank, width=100%]
 +
@@ -92,7 +87,7 @@ When using `Baseboard Management Console (BMC)` it is possible to manage the nod
 +
 image::module-01/04_BMHosts.png[link=self, window=blank, width=100%]
 +
-During installation, the *Control Plane* nodes are provisioned by the OpenShift Container Platform installation program (that is why the status is `Externally provisioned`) and when the control plane is ready, the *Worker* nodes are provisioned by cluster itself (hence the status `Provisioned`) and joined to the cluster. While not a part of this lab, it is possible to scale up the cluster by adding new hosts using the *Add Host* button.
+During installation, the *Control Plane* nodes are provisioned by the OpenShift Container Platform installation program (that is why the status is `Externally provisioned`) and when the control plane is ready, the *Worker* nodes are provisioned by cluster itself (hence the status `Provisioned`) and joined to the cluster.
 
 . Click on any of the worker nodes to obtain information about the physical (bare metal) node:
 +
@@ -122,7 +117,7 @@ image::module-01/06_Add_Host_Red.png[link=self, window=blank, width=100%]
 . The dialog menu to add a bare metal host will ask you for the following information:
 +
 * Host Name: *worker4*
-* Boot MAC Address: *de:ad:be:ef:00:07* 
+* Boot MAC Address: *de:ad:be:ef:00:07*
 * BMC Address: *ipmi://192.168.123.1:6237*
 * BMC Username: *admin*
 * BMC Password: *redhat* 
@@ -178,5 +173,5 @@ image::module-01/17_Worker_4_Details.png[link=self, window=blank, width=100%]
 
 == Summary
 
-In this lab, you became familiar with your Red Hat OpenShift cluster and the hardware that makes up this environment. You also used the web console to expand your cluster by discovering an additional bare metal node, and adding it to the cluster machineset used to scale the worker nodes that are available.
+In this lab, you became familiar with your Red Hat OpenShift cluster and the hardware that makes up the environment. You also used the web console to expand your cluster by discovering an additional bare metal node, and adding it to the cluster machineset used to scale the number of worker nodes that are available.
 

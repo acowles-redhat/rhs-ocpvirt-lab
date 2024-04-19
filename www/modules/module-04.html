@@ -99,7 +99,7 @@
     <a class="nav-link" href="module-03.html#create_netattach">Create a Network Attachment Definition</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="module-03.html#connect_external_net">Connect a Virtual Machine to a External Network</a>
+    <a class="nav-link" href="module-03.html#connect_external_net">Connect a Virtual Machine to an External Network</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="module-03.html#multinetwork_policy">Using a Multinetwork Policy</a>
@@ -111,10 +111,10 @@
     <a class="nav-link" href="module-04.html">5. Template Management</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#create_template">Create a New Template</a>
+    <a class="nav-link" href="#clone_customize_template">Clone and Customize a Template</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#create_win_vm">Create a Windows Virtual Machine</a>
+    <a class="nav-link" href="#create_win">Create a Windows VM Template</a>
   </li>
 </ul>
   </li>
@@ -189,7 +189,7 @@
 <h2 id="_introduction"><a class="anchor" href="#_introduction"></a>Introduction</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Preconfigured Red Hat virtual machine templates are listed in the <strong>Virtualization</strong> &#8594; <strong>Templates</strong> page. These templates are available for different versions of Red Hat Enterprise Linux, Fedora, Centos, Microsoft Windows Desktop, and Microsoft Windows Server editions. Each Red Hat virtual machine template is preconfigured with an operating system image, the default settings for the operating system, the flavor (CPU and memory), and the workload type (server).</p>
+<p>Preconfigured Red Hat virtual machine templates are listed in the <strong>Virtualization</strong> &#8594; <strong>Templates</strong> page. These templates are available for different versions of Red Hat Enterprise Linux, Fedora, CentOS, Microsoft Windows Desktop, and Microsoft Windows Server editions. Each Red Hat virtual machine template is preconfigured with an operating system image, the default settings for the operating system, the flavor (CPU and memory), and the workload type (server).</p>
 </div>
 <div class="paragraph">
 <p>The <strong>Templates</strong> page displays four types of virtual machine templates:</p>
@@ -213,12 +213,15 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="create_template"><a class="anchor" href="#create_template"></a>Create a New Template</h2>
+<h2 id="clone_customize_template"><a class="anchor" href="#clone_customize_template"></a>Clone and Customize a Template</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>By default pre-configured templates provided by Red Hat Virtualization cannot be customized. However you can clone a template and make adjustments to it for your particular workload, in order to make it easier to request specific types of virtual machines for specific workloads. In this section of the lab we are going to do just this, by creating a template that will provide a database server on demand for our end users.</p>
+</div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Navigate to <strong>Virtualization</strong> &#8594; <strong>Templates</strong> and select <strong>All projects</strong></p>
+<p>To begin, navigate to <strong>Virtualization</strong> &#8594; <strong>Templates</strong> and select <strong>All projects</strong></p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-04/01_Template_List.png" target="blank"><img src="_images/module-04/01_Template_List.png" alt="01 Template List" width="100%"></a>
@@ -226,85 +229,156 @@
 </div>
 </li>
 <li>
-<p>Press <strong>Create Template</strong> and review auto filled YAML code</p>
+<p>In the search bar type in <code>centos9</code> and in the list of templates that appear find the template for <code>centos-stream9-server-large</code>.</p>
 <div class="imageblock">
 <div class="content">
-<a class="image" href="_images/module-04/02_Template_YAML.png" target="blank"><img src="_images/module-04/02_Template_YAML.png" alt="02 Template YAML" width="100%"></a>
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-This default template is using a container disk to run a VM. The data will be ephemeral.
-</td>
-</tr>
-</table>
-</div>
-</li>
-<li>
-<p>Scroll down and check the parameters for the template, notice it will auto-generate both a name for the VM, and a password.</p>
-<div class="imageblock">
-<div class="content">
-<a class="image" href="_images/module-04/03_Template_YAML_Parameters.png" target="blank"><img src="_images/module-04/03_Template_YAML_Parameters.png" alt="03 Template YAML Parameters" width="100%"></a>
+<a class="image" href="_images/module-04/02_Search_Centos9.png" target="blank"><img src="_images/module-04/02_Search_Centos9.png" alt="02 Search Centos9" width="100%"></a>
 </div>
 </div>
 </li>
 <li>
-<p>Press <strong>Create</strong> and review the template details</p>
+<p>Select the three-dot menu to the far right, and click on the option to <code>Clone</code> from the menu that pops out.</p>
 <div class="imageblock">
 <div class="content">
-<a class="image" href="_images/module-04/04_Template_Details.png" target="blank"><img src="_images/module-04/04_Template_Details.png" alt="04 Template Details" width="100%"></a>
+<a class="image" href="_images/module-04/03_Clone_Template.png" target="blank"><img src="_images/module-04/03_Clone_Template.png" alt="03 Clone Template" width="100%"></a>
 </div>
 </div>
 </li>
 <li>
-<p>Navigate to <strong>Virtualization</strong> &#8594; <strong>Catalog</strong> and click on <strong>User templates</strong> on the left. Select the project <code>vmexamples</code></p>
+<p>A new menu called <strong>Clone template</strong> will appear, fill in the the following values, and when finished click on the <strong>Clone</strong> button.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Template name:</strong> centos-stream9-server-db-xl</p>
+</li>
+<li>
+<p><strong>Template project:</strong> vmexamples</p>
+</li>
+<li>
+<p><strong>Template display name:</strong> CentOS Stream 9 VM - Database XL Template</p>
 <div class="imageblock">
 <div class="content">
-<a class="image" href="_images/module-04/05_Catalog.png" target="blank"><img src="_images/module-04/05_Catalog.png" alt="05 Catalog" width="100%"></a>
+<a class="image" href="_images/module-04/04_Clone_Template_Options.png" target="blank"><img src="_images/module-04/04_Clone_Template_Options.png" alt="04 Clone Template Options" width="100%"></a>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>This will take you to the <strong>Details</strong> page for the template where we will be able to customize some options. Start by finding the CPU and Memory near the bottom of the page, and click on the pencil icon to edit it.</p>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/module-04/05_Clone_Details.png" target="blank"><img src="_images/module-04/05_Clone_Details.png" alt="05 Clone Details" width="100%"></a>
 </div>
 </div>
 </li>
 <li>
-<p>Click on the tile for the <code>example</code> template to bring up it&#8217;s quick configuration screen. On this screen specify the name <code>fedora03</code> and the password <code>r3dh4t1!</code>. Press <strong>Quick create VirtualMachine</strong></p>
+<p>A new window will pop out where you can edit the amount of CPU and Memory. For our XL template set the value of CPUs to 4, and Memory to 16 GiB.</p>
 <div class="imageblock">
 <div class="content">
-<a class="image" href="_images/module-04/06_Catalog_Create_VM.png" target="blank"><img src="_images/module-04/06_Catalog_Create_VM.png" alt="06 Catalog Create VM" width="100%"></a>
+<a class="image" href="_images/module-04/06_Edit_CPU_Mem.png" target="blank"><img src="_images/module-04/06_Edit_CPU_Mem.png" alt="06 Edit CPU Mem" width="100%"></a>
 </div>
 </div>
 </li>
 <li>
-<p>When the VM is created we are taken to the Overview screen. You can see that it&#8217;s created using our <code>example</code> template</p>
+<p>Navigate to the <strong>Network Interfaces</strong> tab, to the right of the <code>default</code> interface, select the three-dot menu and the edit option.</p>
 <div class="imageblock">
 <div class="content">
-<a class="image" href="_images/module-04/07_Catalog_Create_VM_Overview.png" target="blank"><img src="_images/module-04/07_Catalog_Create_VM_Overview.png" alt="07 Catalog Create VM Overview" width="100%"></a>
+<a class="image" href="_images/module-04/07_Edit_Network.png" target="blank"><img src="_images/module-04/07_Edit_Network.png" alt="07 Edit Network" width="100%"></a>
 </div>
 </div>
 </li>
 <li>
-<p>Navigate to tab <strong>Configuration</strong> and subtab <strong>Storage</strong>. Review that the VM was created with an ephemeral container disk as the template defined.</p>
+<p>When the <strong>Edit network interface</strong> menu appears, set the <strong>Network</strong> value to the <code>vmexamples/vlan0</code> network, and click the <strong>Save</strong> button.</p>
 <div class="imageblock">
 <div class="content">
-<a class="image" href="_images/module-04/08_Ephemeral_Disk.png" target="blank"><img src="_images/module-04/08_Ephemeral_Disk.png" alt="08 Ephemeral Disk" width="100%"></a>
+<a class="image" href="_images/module-04/08_Edit_Net_Int.png" target="blank"><img src="_images/module-04/08_Edit_Net_Int.png" alt="08 Edit Net Int" width="100%"></a>
 </div>
 </div>
 </li>
 <li>
-<p>Using the <strong>Actions</strong> menu, delete the VM.</p>
+<p>Next click on the <strong>Scripts</strong> tab at the top, and in the section called <strong>Cloud-init</strong> click the <strong>Edit</strong> button.</p>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/module-04/09_Scripts_CloudInit.png" target="blank"><img src="_images/module-04/09_Scripts_CloudInit.png" alt="09 Scripts CloudInit" width="100%"></a>
+</div>
+</div>
+</li>
+<li>
+<p>When the <strong>Cloud-init</strong> dialog opens, click the radio button to <strong>Configure via: Script</strong> then copy in the following YAML snippet to the end of the script.</p>
+<div class="listingblock">
+<div class="content">
+<pre>packages:
+  - mariadb-server
+runcmd:
+  - systemctl enable mariadb
+  - systemctl start mariadb</pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/module-04/10_Cloud_Init_Script.png" target="blank"><img src="_images/module-04/10_Cloud_Init_Script.png" alt="10 Cloud Init Script" width="100%"></a>
+</div>
+</div>
+</li>
+<li>
+<p>Click the <strong>Save</strong> button, followed by the <strong>Apply</strong> button.</p>
+</li>
+<li>
+<p>Now click on the <strong>Virtualization &#8594; Catalog</strong> menu on the left, select the <strong>Template catalog</strong> option and click on <strong>User templates</strong>. You should see our created template available as a tile.</p>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/module-04/11_User_Templates.png" target="blank"><img src="_images/module-04/11_User_Templates.png" alt="11 User Templates" width="100%"></a>
+</div>
+</div>
+</li>
+<li>
+<p>Click on the tile and you will be prompted with the VM startup screen. Click the <strong>Quick create VirtualMachine</strong> button.</p>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/module-04/12_Quick_Create_Template.png" target="blank"><img src="_images/module-04/12_Quick_Create_Template.png" alt="12 Quick Create Template" width="100%"></a>
+</div>
+</div>
+</li>
+<li>
+<p>When the virtual machine boots you can see on the <strong>Overview</strong> page that it was created from our template, and has the system resources we defined, and is already attached to the <code>vmexamples/vlan0</code> network with an assigned IP address.</p>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/module-04/13_VM_From_Template.png" target="blank"><img src="_images/module-04/13_VM_From_Template.png" alt="13 VM From Template" width="100%"></a>
+</div>
+</div>
+</li>
+<li>
+<p>Click on the <strong>Console</strong> tab at the top and use the <strong>Guest login credentials</strong> option to login to the console of the virtual machine.</p>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/module-04/14_VM_Console.png" target="blank"><img src="_images/module-04/14_VM_Console.png" alt="14 VM Console" width="100%"></a>
+</div>
+</div>
+</li>
+<li>
+<p>Once you are logged into the virtual machine, run the following command to test the install of MariaDB.</p>
+<div class="listingblock">
+<div class="content">
+<pre>sudo mysql -u root</pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/module-04/15_MariaDB_Login.png" target="blank"><img src="_images/module-04/15_MariaDB_Login.png" alt="15 MariaDB Login" width="100%"></a>
+</div>
+</div>
 </li>
 </ol>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_create_a_windows_virtual_machine"><a class="anchor" href="#_create_a_windows_virtual_machine"></a>Create a Windows Virtual Machine</h2>
+<h2 id="create_win"><a class="anchor" href="#create_win"></a>Create a Windows VM Template</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this segment, we will install Microsoft Windows Server 2019 using an ISO hosted on a web server. This represents one way to install an operating system to a virtual machine that takes advantage of the ability to source disks from many locations, including a web server, object storage, or other persistent volumes in the cluster.</p>
+<p>In this segment of our lab, we will install Microsoft Windows Server 2019 using an ISO hosted on a web server. This represents one way to install an operating system to a virtual machine that takes advantage of the ability to source disks from many locations, including a web server, object storage, or other persistent volumes in the cluster.</p>
 </div>
 <div class="paragraph">
 <p>This process can be streamlined after the initial operating system installation by creating a template from the virtual machine. The specific process for preparing the guest operating system to be used as a template will vary, be sure to follow your organization&#8217;s guidelines and requirements when preparing a template OS.</p>
@@ -315,13 +389,13 @@ This default template is using a container disk to run a VM. The data will be ep
 <p>From the left menu, navigate to <strong>Virtualization</strong> &#8594; <strong>Catalog</strong>, and click on the <strong>Template catalog</strong> tab near the top..</p>
 <div class="imageblock">
 <div class="content">
-<a class="image" href="_images/module-04/09_Template_Catalog.png" target="blank"><img src="_images/module-04/09_Template_Catalog.png" alt="09 Template Catalog" width="100%"></a>
+<a class="image" href="_images/module-04/16_Template_Catalog.png" target="blank"><img src="_images/module-04/16_Template_Catalog.png" alt="16 Template Catalog" width="100%"></a>
 </div>
 </div>
 </li>
 <li>
 <p>Scroll down until you find the <strong>Microsoft Windows Server 2019 VM</strong> tile.
-image::module-04/10_Windows_2k19_Tile.png[link=self, window=blank, width=100%]</p>
+image::module-04/17_Windows_2k19_Tile.png[link=self, window=blank, width=100%]</p>
 </li>
 <li>
 <p>A dialog will appear showing the default configuration related to the template.</p>
@@ -332,14 +406,14 @@ image::module-04/10_Windows_2k19_Tile.png[link=self, window=blank, width=100%]</
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Notice that there is no option to quick create this VM, and we must customize the VM to fit our needs.
+Notice that there is intially no option to quick create this VM, and we must customize the VM to fit our needs.
 </td>
 </tr>
 </table>
 </div>
 <div class="imageblock">
 <div class="content">
-<a class="image" href="_images/module-04/11_Windows_2k19_Dialog.png" target="blank"><img src="_images/module-04/11_Windows_2k19_Dialog.png" alt="11 Windows 2k19 Dialog" width="100%"></a>
+<a class="image" href="_images/module-04/18_Windows_2k19_Dialog.png" target="blank"><img src="_images/module-04/18_Windows_2k19_Dialog.png" alt="18 Windows 2k19 Dialog" width="100%"></a>
 </div>
 </div>
 </li>
@@ -363,7 +437,7 @@ Notice that there is no option to quick create this VM, and we must customize th
 <p>Ensure the <code>Mount Windows drivers disk</code> checkbox is enabled. <strong>This is required to install Windows systems, which will provide the drivers for VirtIO.</strong></p>
 <div class="imageblock">
 <div class="content">
-<a class="image" href="_images/module-04/12_Windows_2k19_Parameters.png" target="blank"><img src="_images/module-04/12_Windows_2k19_Parameters.png" alt="12 Windows 2k19 Parameters" width="100%"></a>
+<a class="image" href="_images/module-04/19_Windows_2k19_Parameters.png" target="blank"><img src="_images/module-04/19_Windows_2k19_Parameters.png" alt="19 Windows 2k19 Parameters" width="100%"></a>
 </div>
 </div>
 </li>
@@ -375,13 +449,13 @@ Notice that there is no option to quick create this VM, and we must customize th
 </li>
 <li>
 <p>On the <strong>Customize and create VirtualMachine screen, click on the *Scripts</strong> tab, and then scroll down to the <strong>Sysprep</strong> section and click on the <strong>Edit</strong> button.
-image::module-04/13_Customize_Scripts.png[link=self, window=blank, width=100%]</p>
+image::module-04/20_Customize_Scripts.png[link=self, window=blank, width=100%]</p>
 </li>
 <li>
 <p>A new window will pop up for you to create <strong>Sysprep</strong> actions for your new template.</p>
 <div class="imageblock">
 <div class="content">
-<a class="image" href="_images/module-04/14_Sysprep.png" target="blank"><img src="_images/module-04/14_Sysprep.png" alt="14 Sysprep" width="100%"></a>
+<a class="image" href="_images/module-04/21_Sysprep.png" target="blank"><img src="_images/module-04/21_Sysprep.png" alt="21 Sysprep" width="100%"></a>
 </div>
 </div>
 </li>
@@ -531,18 +605,34 @@ image::module-04/13_Customize_Scripts.png[link=self, window=blank, width=100%]</
 <p>Once the code is pasted, click the <strong>Save</strong> button on the dialog.</p>
 <div class="imageblock">
 <div class="content">
-<a class="image" href="_images/module-04/15_Windows_2k19_Sysprep.png" target="blank"><img src="_images/module-04/15_Windows_2k19_Sysprep.png" alt="15 Windows 2k19 Sysprep" width="100%"></a>
+<a class="image" href="_images/module-04/22_Windows_2k19_Sysprep.png" target="blank"><img src="_images/module-04/22_Windows_2k19_Sysprep.png" alt="22 Windows 2k19 Sysprep" width="100%"></a>
 </div>
 </div>
 </li>
 <li>
-<p>You will be returned to the <strong>Customize and create Virtual Machine</strong> screen, Click on the <strong>Create VirtualMachine</strong> button at the bottom.</p>
+<p>You will be returned to the <strong>Customize and create Virtual Machine</strong> screen, Click on the <strong>Disks</strong> tab, and locate the line for the <code>installation-CDROM</code>, click the three-dot menu on the right, and select <code>Edit</code>.</p>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/module-04/23_Edit_Boot_Media.png" target="blank"><img src="_images/module-04/23_Edit_Boot_Media.png" alt="23 Edit Boot Media" width="100%"></a>
+</div>
+</div>
+</li>
+<li>
+<p>Select the option for <code>Use this disk as a boot source</code>, and click on the <strong>Save</strong> button at the bottom.</p>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/module-04/24_Boot_Source.png" target="blank"><img src="_images/module-04/24_Boot_Source.png" alt="24 Boot Source" width="100%"></a>
+</div>
+</div>
+</li>
+<li>
+<p>When you return to the <strong>Disks</strong> tab, click on the <strong>Create VirtualMachine</strong> button at the bottom.</p>
 </li>
 <li>
 <p>The Virtual Machine will start the provisioning process by downloading the ISO image, configuring, and starting the instance.</p>
 <div class="imageblock">
 <div class="content">
-<a class="image" href="_images/module-04/19_Windows_2k9_Provisioning.png" target="blank"><img src="_images/module-04/19_Windows_2k9_Provisioning.png" alt="19 Windows 2k9 Provisioning" width="100%"></a>
+<a class="image" href="_images/module-04/25_Windows_2k19_Provisioning.png" target="blank"><img src="_images/module-04/25_Windows_2k19_Provisioning.png" alt="25 Windows 2k19 Provisioning" width="100%"></a>
 </div>
 </div>
 </li>
@@ -550,7 +640,7 @@ image::module-04/13_Customize_Scripts.png[link=self, window=blank, width=100%]</
 <p>After a few minutes, the Virtual VM will be in <code>Running</code> status. Switch to the <strong>Console</strong> tab:</p>
 <div class="imageblock">
 <div class="content">
-<a class="image" href="_images/module-04/20_Windows_2k9_Console.png" target="blank"><img src="_images/module-04/20_Windows_2k9_Console.png" alt="20 Windows 2k9 Console" width="100%"></a>
+<a class="image" href="_images/module-04/26_Windows_2k19_Console.png" target="blank"><img src="_images/module-04/26_Windows_2k19_Console.png" alt="26 Windows 2k19 Console" width="100%"></a>
 </div>
 </div>
 <div class="admonitionblock important">
@@ -566,6 +656,14 @@ The VM is marked as "Not migratable" because a CD-ROM disk is attached.
 </table>
 </div>
 </li>
+<li>
+<p>Once the VM installation process is complete, we can take a snapshoot of the rootdisk, and use that to create a bootable volume template that we can use to boot other Windows 2k19 machines.</p>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/module-04/27_Windows_Template.png" target="blank"><img src="_images/module-04/27_Windows_Template.png" alt="27 Windows Template" width="100%"></a>
+</div>
+</div>
+</li>
 </ol>
 </div>
 </div>
@@ -574,7 +672,7 @@ The VM is marked as "Not migratable" because a CD-ROM disk is attached.
 <h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this section we learned how to modify an existing template, and how to create one that we could use to easily deploy Windows virtual machines on demand.</p>
+<p>In this section we learned how to clone and customize and existing template to create one that can be used for specific workloads like databases. We also learned how to configure one of the existing Windows templates without a boot source, and automate it&#8217;s installation process so we can create future like templates.</p>
 </div>
 </div>
 </div>

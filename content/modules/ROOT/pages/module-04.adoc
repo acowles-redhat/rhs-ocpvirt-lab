@@ -28,7 +28,11 @@ image::module-04/02_Search_Centos9.png[link=self, window=blank, width=100%]
 +
 image::module-04/03_Clone_Template.png[link=self, window=blank, width=100%]
 +
-. A new menu called *Clone template* will appear, name the template `centos-stream9-server-db-xl`, select `vmexamples` as the template project, and set the display name to `CentOS Stream 9 VM - Database XL Template`, when finished click the `Clone` button.
+. A new menu called *Clone template* will appear, fill in the the following values, and when finished click on the *Clone* button.
++
+* *Template name:* centos-stream9-server-db-xl
+* *Template project:* vmexamples
+* *Template display name:* CentOS Stream 9 VM - Database XL Template
 +
 image::module-04/04_Clone_Template_Options.png[link=self, window=blank, width=100%]
 +
@@ -40,11 +44,11 @@ image::module-04/05_Clone_Details.png[link=self, window=blank, width=100%]
 +
 image::module-04/06_Edit_CPU_Mem.png[link=self, window=blank, width=100%]
 +
-. Navigate to the Network Interfaces tab, to the right of the `default` interface, select the three-dot menu and the edit option.
+. Navigate to the *Network Interfaces* tab, to the right of the `default` interface, select the three-dot menu and the edit option.
 +
 image::module-04/07_Edit_Network.png[link=self, window=blank, width=100%]
 +
-. When the *Edit network interface* menu appears, set the `Network` value to the vmexamples/vlan0 network, and click the *Save* button.
+. When the *Edit network interface* menu appears, set the *Network* value to the `vmexamples/vlan0` network, and click the *Save* button.
 +
 image::module-04/08_Edit_Net_Int.png[link=self, window=blank, width=100%]
 +
@@ -52,7 +56,7 @@ image::module-04/08_Edit_Net_Int.png[link=self, window=blank, width=100%]
 +
 image::module-04/09_Scripts_CloudInit.png[link=self, window=blank, width=100%]
 +
-. When the Cloud-init dialog options click the radio button to *Configure via: Script* then copy in the following YAML snippet to the end of the script.
+. When the *Cloud-init* dialog opens, click the radio button to *Configure via: Script* then copy in the following YAML snippet to the end of the script.
 +
 ----
 packages:
@@ -73,7 +77,7 @@ image::module-04/11_User_Templates.png[link=self, window=blank, width=100%]
 +
 image::module-04/12_Quick_Create_Template.png[link=self, window=blank, width=100%]
 +
-. When the virtual machine boots you can see on the *Overview* page that it was created from our template, and has the system resources we defined, and is already attached to the vmexamples/vlan0 network.
+. When the virtual machine boots you can see on the *Overview* page that it was created from our template, and has the system resources we defined, and is already attached to the `vmexamples/vlan0` network with an assigned IP address.
 +
 image::module-04/13_VM_From_Template.png[link=self, window=blank, width=100%]
 +
@@ -81,7 +85,7 @@ image::module-04/13_VM_From_Template.png[link=self, window=blank, width=100%]
 +
 image::module-04/14_VM_Console.png[link=self, window=blank, width=100%]
 +
-. Once you are logged into the virtual machine, run the following command to test our install of MariaDB.
+. Once you are logged into the virtual machine, run the following command to test the install of MariaDB.
 +
 ----
 sudo mysql -u root
@@ -292,8 +296,10 @@ image::module-04/26_Windows_2k19_Console.png[link=self, window=blank, width=100%
 [IMPORTANT]
 The VM is marked as "Not migratable" because a CD-ROM disk is attached. 
 +
-. Once the VM installation process is complete we can use a simliar process to the one at the beginning of this chapter to save it as a template that we can easily deploy in the future.
+. Once the VM installation process is complete, we can take a snapshoot of the rootdisk, and use that to create a bootable volume template that we can use to boot other Windows 2k19 machines.
++
+image::module-04/27_Windows_Template.png[link=self, window=blank, width=100%]
 
 == Summary
 
-In this section we learned how to clone and customize and existing template to create one that can be used for specific workloads like databases. We also learned how to configure one of the existing Windows templates without a boot source, and automate it's installation process.
+In this section we learned how to clone and customize and existing template to create one that can be used for specific workloads like databases. We also learned how to configure one of the existing Windows templates without a boot source, and automate it's installation process so we can create future like templates.

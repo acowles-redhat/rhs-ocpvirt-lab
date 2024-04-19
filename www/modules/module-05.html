@@ -99,7 +99,7 @@
     <a class="nav-link" href="module-03.html#create_netattach">Create a Network Attachment Definition</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="module-03.html#connect_external_net">Connect a Virtual Machine to a External Network</a>
+    <a class="nav-link" href="module-03.html#connect_external_net">Connect a Virtual Machine to an External Network</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="module-03.html#multinetwork_policy">Using a Multinetwork Policy</a>
@@ -111,10 +111,10 @@
     <a class="nav-link" href="module-04.html">5. Template Management</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="module-04.html#create_template">Create a New Template</a>
+    <a class="nav-link" href="module-04.html#clone_customize_template">Clone and Customize a Template</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="module-04.html#create_win_vm">Create a Windows Virtual Machine</a>
+    <a class="nav-link" href="module-04.html#create_win">Create a Windows VM Template</a>
   </li>
 </ul>
   </li>
@@ -287,12 +287,20 @@ The migration toolkit has already been deployed to your cluster using the Operat
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Navigate to vCenter:  <a href="https://portal.vc.opentlc.com/ui/app/folder;nav=v/urn:vmomi:Folder:group-d1:ee1bef3e-6179-4c1f-9d2a-004c7b0df4e5/vms/vms" target="_blank" rel="noopener">https://portal.vc.opentlc.com</a></p>
+<p>Navigate to vCenter:  <a href="https://portal.vc.opentlc.com/ui/app/folder;nav=v/urn:vmomi:Folder:group-v1552185:ee1bef3e-6179-4c1f-9d2a-004c7b0df4e5/vms/vms" target="_blank" rel="noopener">https://portal.vc.opentlc.com</a></p>
 </li>
 <li>
-<p>Login with the following credentials:
-<strong>User:</strong> {vcenter_user}
-<strong>Password:</strong> {vcenter_password}</p>
+<p>Login with the following credentials:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>User:</strong> {vcenter_user}</p>
+</li>
+<li>
+<p><strong>Password:</strong> {vcenter_password}</p>
+</li>
+</ul>
+</div>
 </li>
 <li>
 <p>By default you&#8217;ll see the VMs and Folders view, where you can see the four VMs representing the application.</p>
@@ -303,7 +311,7 @@ The migration toolkit has already been deployed to your cluster using the Operat
 </div>
 </li>
 <li>
-<p>Change to the networks view (or click <a href="https://portal.vc.opentlc.com/ui/app/dvportgroup;nav=n/urn:vmomi:DistributedVirtualPortgroup:dvportgroup-1916:ee1bef3e-6179-4c1f-9d2a-004c7b0df4e5/ports" target="_blank" rel="noopener"> this link</a>), then expand the tree to view the port group used by the virtual machines. Note that the name is <code>segment-migrating-to-ocpvirt</code>.</p>
+<p>Change to the networks view (or click <a href="https://portal.vc.opentlc.com/ui/app/dvportgroup;nav=n/urn:vmomi:DistributedVirtualPortgroup:dvportgroup-1916:ee1bef3e-6179-4c1f-9d2a-004c7b0df4e5/summary" target="_blank" rel="noopener"> this link</a>), then expand the tree to view the port group used by the virtual machines. Note that the name is <code>segment-migrating-to-ocpvirt</code>.</p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-05/01_vSphere_Network.png" target="blank"><img src="_images/module-05/01_vSphere_Network.png" alt="01 vSphere Network" width="100%"></a>
@@ -376,7 +384,7 @@ MTV 2.4 and later are project/namespace aware and do not require administrator p
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Navigate in the left menu to <strong>Migration</strong> &#8594; <strong>NetworkMaps for virtualization</strong> and press <strong>Create NetworkMap</strong></p>
+<p>Navigate in the left menu to <strong>Migration</strong> &#8594; <strong>NetworkMaps for virtualization</strong> and click on the <strong>Create NetworkMap</strong> button.</p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-05/08_MTV_NetworkMaps.png" target="blank"><img src="_images/module-05/08_MTV_NetworkMaps.png" alt="08 MTV NetworkMaps" width="100%"></a>
@@ -411,7 +419,7 @@ MTV 2.4 and later are project/namespace aware and do not require administrator p
 </div>
 </li>
 <li>
-<p>Ensure the created mapping has the <strong>Status</strong> <code>Ready</code></p>
+<p>Ensure the created mapping has the <strong>Status</strong> <code>Ready</code>.</p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-05/10_List_VMWARE_Mapping_Network.png" target="blank"><img src="_images/module-05/10_List_VMWARE_Mapping_Network.png" alt="10 List VMWARE Mapping Network" width="100%"></a>
@@ -419,7 +427,7 @@ MTV 2.4 and later are project/namespace aware and do not require administrator p
 </div>
 </li>
 <li>
-<p>Navigate in the left menu to <strong>Migration</strong> &#8594; <strong>StorageMaps for virtualization</strong> and press <strong>Create StorageMap</strong></p>
+<p>Navigate in the left menu to <strong>Migration</strong> &#8594; <strong>StorageMaps for virtualization</strong> and click on the <strong>Create StorageMap</strong> button.</p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-05/11_MTV_StorageMaps.png" target="blank"><img src="_images/module-05/11_MTV_StorageMaps.png" alt="11 MTV StorageMaps" width="100%"></a>
@@ -443,7 +451,7 @@ MTV 2.4 and later are project/namespace aware and do not require administrator p
 <p><strong>Source storage</strong>: <code>WorkloadDatastore</code></p>
 </li>
 <li>
-<p><strong>Target storage classs</strong>: <code>ocs-storagecluster-ceph-rbd (default)</code></p>
+<p><strong>Target storage classs</strong>: <code>ocs-storagecluster-ceph-rbd-virtualization</code></p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-05/12_Add_VMWARE_Mapping_Storage.png" target="blank"><img src="_images/module-05/12_Add_VMWARE_Mapping_Storage.png" alt="12 Add VMWARE Mapping Storage" width="100%"></a>
@@ -454,7 +462,7 @@ MTV 2.4 and later are project/namespace aware and do not require administrator p
 </div>
 </li>
 <li>
-<p>Ensure the created mapping has the <strong>Status</strong> <code>Ready</code></p>
+<p>Ensure the created mapping has the <strong>Status</strong> <code>Ready</code>.</p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-05/13_List_VMWARE_Mapping_Storage.png" target="blank"><img src="_images/module-05/13_List_VMWARE_Mapping_Storage.png" alt="13 List VMWARE Mapping Storage" width="100%"></a>
@@ -472,7 +480,7 @@ MTV 2.4 and later are project/namespace aware and do not require administrator p
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Navigate in the left menu to <strong>Migration</strong> &#8594; <strong>Plans for virtualization</strong> and press <strong>Create plan</strong></p>
+<p>Navigate in the left menu to <strong>Migration</strong> &#8594; <strong>Plans for virtualization</strong> and press <strong>Create plan</strong>.</p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-05/14_Create_VMWARE_Plan.png" target="blank"><img src="_images/module-05/14_Create_VMWARE_Plan.png" alt="14 Create VMWARE Plan" width="100%"></a>
@@ -504,7 +512,7 @@ MTV 2.4 and later are project/namespace aware and do not require administrator p
 </div>
 </li>
 <li>
-<p>On the next step, select <code>All datacenters</code>  and press <strong>Next</strong></p>
+<p>On the next step, select <code>All datacenters</code>  and press <strong>Next</strong>.</p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-05/16_VM_Filter_VMWARE_Plan.png" target="blank"><img src="_images/module-05/16_VM_Filter_VMWARE_Plan.png" alt="16 VM Filter VMWARE Plan" width="100%"></a>
@@ -512,7 +520,7 @@ MTV 2.4 and later are project/namespace aware and do not require administrator p
 </div>
 </li>
 <li>
-<p>On the next step select the three VMs we would like to move. Press <strong>Next</strong>:</p>
+<p>On the next step select the three VMs we would like to move. Press <strong>Next</strong>.</p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-05/17_VM_Select_VMWARE_Plan.png" target="blank"><img src="_images/module-05/17_VM_Select_VMWARE_Plan.png" alt="17 VM Select VMWARE Plan" width="100%"></a>
@@ -520,7 +528,7 @@ MTV 2.4 and later are project/namespace aware and do not require administrator p
 </div>
 </li>
 <li>
-<p>On the <strong>Network mapping</strong> step select <code>mapping-segment</code> and press <strong>Next</strong></p>
+<p>On the <strong>Network mapping</strong> step select <code>mapping-segment</code> and press <strong>Next</strong>.</p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-05/18_Network_VMWARE_Plan.png" target="blank"><img src="_images/module-05/18_Network_VMWARE_Plan.png" alt="18 Network VMWARE Plan" width="100%"></a>
@@ -528,7 +536,7 @@ MTV 2.4 and later are project/namespace aware and do not require administrator p
 </div>
 </li>
 <li>
-<p>On the <strong>Storage mapping</strong> step select <code>mapping-datastore</code> and press <strong>Next</strong></p>
+<p>On the <strong>Storage mapping</strong> step select <code>mapping-datastore</code> and press <strong>Next</strong>.</p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-05/19_Storage_VMWARE_Plan.png" target="blank"><img src="_images/module-05/19_Storage_VMWARE_Plan.png" alt="19 Storage VMWARE Plan" width="100%"></a>
@@ -536,10 +544,10 @@ MTV 2.4 and later are project/namespace aware and do not require administrator p
 </div>
 </li>
 <li>
-<p>Press <strong>Next</strong> on the steps <strong>Type</strong> and <strong>Hooks</strong></p>
+<p>Press <strong>Next</strong> on the steps <strong>Type</strong> and <strong>Hooks</strong>.</p>
 </li>
 <li>
-<p>Review the configuration specified and press <strong>Finish</strong></p>
+<p>Review the configuration specified and press <strong>Finish</strong>.</p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-05/20_Finish_VMWARE_Plan.png" target="blank"><img src="_images/module-05/20_Finish_VMWARE_Plan.png" alt="20 Finish VMWARE Plan" width="100%"></a>
@@ -547,7 +555,7 @@ MTV 2.4 and later are project/namespace aware and do not require administrator p
 </div>
 </li>
 <li>
-<p>Ensure the status of the plan is <strong>Ready</strong></p>
+<p>Ensure the status of the plan is <strong>Ready</strong>.</p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-05/21_Ready_VMWARE_Plan.png" target="blank"><img src="_images/module-05/21_Ready_VMWARE_Plan.png" alt="21 Ready VMWARE Plan" width="100%"></a>
@@ -555,13 +563,10 @@ MTV 2.4 and later are project/namespace aware and do not require administrator p
 </div>
 </li>
 <li>
-<p>Press <strong>Start</strong> to begin the migration of the three VMs</p>
-</li>
-<li>
-<p>After around 10 minutes the migration is completed</p>
+<p>Press <strong>Start</strong> on the right, and again on the confirmation window that pops up to begin the migration of the three VMs.</p>
 <div class="imageblock">
 <div class="content">
-<a class="image" href="_images/module-05/22_Completed_VMWARE_Plan.png" target="blank"><img src="_images/module-05/22_Completed_VMWARE_Plan.png" alt="22 Completed VMWARE Plan" width="100%"></a>
+<a class="image" href="_images/module-05/22_Initialize_VMWARE_Plan.png" target="blank"><img src="_images/module-05/22_Initialize_VMWARE_Plan.png" alt="22 Initialize VMWARE Plan" width="100%"></a>
 </div>
 </div>
 <div class="admonitionblock important">
@@ -579,13 +584,18 @@ MTV 2.4 and later are project/namespace aware and do not require administrator p
 </table>
 </div>
 </li>
+<li>
+<p>After several minutes the migration has completed.</p>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/module-05/23_Completed_VMWARE_Plan.png" target="blank"><img src="_images/module-05/23_Completed_VMWARE_Plan.png" alt="23 Completed VMWARE Plan" width="100%"></a>
+</div>
+</div>
+</li>
+<li>
+<p>The selected VMs have now been migrated and can be started on OpenShift Virtualization. You can now connect to the VM&#8217;s console and interact with it, just as you would have previously in VMware vCenter.</p>
+</li>
 </ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_review_and_configure_migrated_virtual_machines"><a class="anchor" href="#_review_and_configure_migrated_virtual_machines"></a>Review and configure migrated Virtual Machines</h3>
-<div class="paragraph">
-<p>The selected VMs have now been migrated and can be started on OpenShift Virtualization. You can now connect to the VM&#8217;s console and interact with it, just as you would in VMware vCenter.</p>
 </div>
 </div>
 </div>
@@ -594,7 +604,7 @@ MTV 2.4 and later are project/namespace aware and do not require administrator p
 <h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this section we explored the Migration Toolkit for Virtualization, and used it to help migrate existing virtual machines over from a VMware vSphere environment. In addition to the Migration Toolkit for Virtualization, there are three other migration toolkits. The combination of these can be used to move many workloads into and within OpenShift clusters depending on your organization&#8217;s needs.</p>
+<p>In this section we explored the Migration Toolkit for Virtualization, and used it to assist with the migration of existing virtual machines from a VMware vSphere environment to OpenShift Virtualization. In addition to the Migration Toolkit for Virtualization, there are three other migration toolkits. The combination of these can be used to move many types of workloads into and within OpenShift clusters depending on your organization&#8217;s needs.</p>
 </div>
 <div class="ulist">
 <ul>
@@ -605,12 +615,12 @@ MTV 2.4 and later are project/namespace aware and do not require administrator p
 <p><a href="https://access.redhat.com/documentation/en-us/migration_toolkit_for_applications/">Migration Toolkit for Applications</a> - Accelerate large-scale application modernization efforts to containers and Kubernetes.</p>
 </li>
 <li>
-<p><a href="https://docs.openshift.com/container-platform/4.12/migration_toolkit_for_containers/about-mtc.html">Migration Toolkit for Containers</a> - Migrate stateful application workloads between OpenShift clusters.</p>
+<p><a href="https://docs.openshift.com/container-platform/4.15/migration_toolkit_for_containers/about-mtc.html">Migration Toolkit for Containers</a> - Migrate stateful application workloads between OpenShift clusters.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>For more information about these, please reach out to your Red Hat account team.</p>
+<p>For more information about these other migration toolkits, please reach out to your Red Hat account team.</p>
 </div>
 </div>
 </div>

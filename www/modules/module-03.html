@@ -99,7 +99,7 @@
     <a class="nav-link" href="#create_netattach">Create a Network Attachment Definition</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#connect_external_net">Connect a Virtual Machine to a External Network</a>
+    <a class="nav-link" href="#connect_external_net">Connect a Virtual Machine to an External Network</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="#multinetwork_policy">Using a Multinetwork Policy</a>
@@ -111,10 +111,10 @@
     <a class="nav-link" href="module-04.html">5. Template Management</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="module-04.html#create_template">Create a New Template</a>
+    <a class="nav-link" href="module-04.html#clone_customize_template">Clone and Customize a Template</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="module-04.html#create_win_vm">Create a Windows Virtual Machine</a>
+    <a class="nav-link" href="module-04.html#create_win">Create a Windows VM Template</a>
   </li>
 </ul>
   </li>
@@ -233,7 +233,7 @@ The OpenShift environment has already been configured with an OVS Bridge on each
 </div>
 </div>
 <div class="sect1">
-<h2 id="create-netattach"><a class="anchor" href="#create-netattach"></a>Create a Network Attachment Definition</h2>
+<h2 id="create_netattach"><a class="anchor" href="#create_netattach"></a>Create a Network Attachment Definition</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>In order to use the OVS Bridge with your VM you need to create a <strong>Network Attachment Definition</strong>. This is what tells OpenShift about the network and allows the virtual machines to connect to it. Network Attachment Definitions are specific to the project/namespace they&#8217;re created in, unless they&#8217;re created in the <code>default</code> project. This gives you, the administrator, the ability to control which networks are and aren&#8217;t available to users who have access to manage their own VMs. Once the Network Attachment Definition has been created, it can then be used by virtual machines when configuring their network adapters.</p>
@@ -267,8 +267,12 @@ A network attachment definition instructs openshift to utilise an existing netwo
 </div>
 </li>
 <li>
-<p>Click the <strong>Edit YAML</strong> button at the top of the page.
-image::module-03/02_NAD_Create.png[link=self, window=blank, width=100%]</p>
+<p>Click the <strong>Edit YAML</strong> button at the top of the page.</p>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/module-03/02_NAD_Create.png" target="blank"><img src="_images/module-03/02_NAD_Create.png" alt="02 NAD Create" width="100%"></a>
+</div>
+</div>
 </li>
 <li>
 <p>Paste in the following yaml snippet, and click the Create button:</p>
@@ -323,7 +327,7 @@ In most cases a single OVS bridge can support many Network Attachment Definition
 </div>
 </div>
 <div class="sect1">
-<h2 id="connect_external_net"><a class="anchor" href="#connect_external_net"></a>Connect a Virtual Machine to the External Network</h2>
+<h2 id="connect_external_net"><a class="anchor" href="#connect_external_net"></a>Connect a Virtual Machine to an External Network</h2>
 <div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
@@ -411,7 +415,7 @@ This section of the lab is primarily performed through the CLI. You will need to
 <div class="sect2">
 <h3 id="_create_a_multinetwork_policy"><a class="anchor" href="#_create_a_multinetwork_policy"></a>Create a MultiNetwork Policy</h3>
 <div class="paragraph">
-<p>For this section of the lab we are going to create a <strong>MultiNetwork Policy</strong> that prevents all traffic by default from any other namespace from reaching our fedora01 VM, we are then going to apply another policy that allows connections only from a selected host, in this case fedora02.</p>
+<p>For this section of the lab we are going to create a <strong>MultiNetwork Policy</strong> that prevents all network traffice from reaching the VM&#8217;s that are attached to our vmexamples/vlan0 <strong>Network Attachment Definition</strong> including our VMs fedora01, and fedora02. We will then explictly allow one-way connectivity from fedora02 to fedora01 to show how we can find tune network connections, even within the same namespace.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -433,7 +437,7 @@ The IP addresses of your virtual guests may differ from those in the attached im
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>From our bastion host where we just enabled our <strong>MultiNetwork Policy</strong> we want to paste the following content into a new file called deny-all.yaml:</p>
+<p>From our bastion host we want to paste the following content into a new file called deny-all.yaml:</p>
 <div class="listingblock">
 <div class="content">
 <pre>apiVersion: k8s.cni.cncf.io/v1beta1
@@ -579,7 +583,7 @@ Make sure that you substitute the correct IP from the Fedora02 VM.
 <h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this section we learned a little bit more about how networking works in OpenShift Virtualization. We created a network attachment definition so that our VMs have network access from outside of the cluster. We also implemented a MultiNetwork Policy to help secure connections to our VMs by only allowing specified hosts.</p>
+<p>In this section we learned a little bit more about how networking works in OpenShift Virtualization. We created a network attachment definition so that our VMs have network access from outside of the cluster. We also implemented a MultiNetwork Policy to demonstrate how we can secure connections to our VMs by only allowing specified hosts access.</p>
 </div>
 </div>
 </div>

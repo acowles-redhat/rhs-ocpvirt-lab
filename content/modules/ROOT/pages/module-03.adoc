@@ -18,7 +18,7 @@ The OpenShift environment has already been configured with an OVS Bridge on each
 * Create a network attachment definition
 * Connect a VM to the external network
 
-[[create-netattach]]
+[[create_netattach]]
 
 == Create a Network Attachment Definition
 
@@ -82,7 +82,7 @@ In most cases a single OVS bridge can support many Network Attachment Definition
 image::module-03/04_NAD_Created.png[link=self, window=blank, width=100%]
 
 [[connect_external_net]]
-== Connect a Virtual Machine to the External Network
+== Connect a Virtual Machine to an External Network
 
 . Navigate to *Virtualization* -> *VirtualMachines*, select the `fedora01` VM. Click *Configuration* tab and then click the *Network* subtab:
 +
