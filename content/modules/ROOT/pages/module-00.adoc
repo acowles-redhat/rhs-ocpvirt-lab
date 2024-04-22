@@ -12,6 +12,13 @@ The beginning section of this lab will introduce you to the basics of creating a
 * Understand how VM power states are managed using the OpenShift console
 * Live migrate a VM between two hosts
 
+As a reminder, here are your credentials for the OpenShift Console
+Your OpenShift cluster console is available at: {openshift_web_console}[window=_blank]
+
+Administrator login is available with:
+User: {openshift_admin_user}
+Password: {openshift_admin_password}
+
 [[create_project]]
 == Create a New Project
 
