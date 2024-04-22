@@ -12,17 +12,19 @@ The beginning section of this lab will introduce you to the basics of creating a
 * Understand how VM power states are managed using the OpenShift console
 * Live migrate a VM between two hosts
 
-As a reminder, here are your credentials for the OpenShift Console
+As a reminder, here are your credentials for the OpenShift Console:
+
 Your OpenShift cluster console is available at: {openshift_web_console}[window=_blank]
 
 Administrator login is available with:
-User: {openshift_admin_user}
-Password: {openshift_admin_password}
+
+* *User:* {openshift_admin_user} 
+* *Password:* {openshift_admin_password}
 
 [[create_project]]
 == Create a New Project
 
-Like other objects in OpenShift, Projects, which are an abstraction for Kubnernetes namespaces, are the boundaries for permissions and other aspects of using and manaing the resources. Creating a Project is an important first step for any deployment.
+Like other objects in OpenShift, Projects (which are an abstraction for Kubnernetes namespaces), are the boundaries for permissions and other aspects of using and manaing the resources. Creating a Project is an important first step for any deployment.
 
 . Browse to *Virtualization* -> *VirtualMachines* using the left navigation menu:
 +
@@ -33,14 +35,16 @@ image::module-00/01_Left_Menu.png[link=self, window=blank, width=100%]
 The *Virtualization* tab is available only when Red Hat OpenShift Virtualization is installed and properly configured. In this lab environment the installation and configuration has already been performed for us.
 ====
 
-. Examine the *VirtualMachines* dashboard that appears. There are currently several VMs listed, but are not turned on:
+. Examine the *VirtualMachines* dashboard that appears. There are currently several VMs listed, but they are not turned on:
 +
 image::module-00/02_VM_List.png[link=self, window=blank, width=100%]
 
-. Before creating a VM we need to create a new project. Virtual machines are deployed to a specific project, or namespace, where, by default, users without permission to the namespace cannot access, manage, or control them. Administrators can access all projects, and therefore view all virtual machines, however regular users must be given access to projects as needed.
+. Before creating a VM we need to create a new project. Virtual machines are deployed to a specific project, or namespace, where by default, users without permission to the namespace cannot access, manage, or control them. Administrators can access all projects, and therefore view all virtual machines, however regular users must be given access to projects as needed.
 +
-.. Click *Project: All Projects* and then click *Create Project*.
+.. Click *Project: All Projects* at the lop left of the window and then click *Create Project*.
 +
+image::module-00/02_All_Projects.png[link=self, window=blank, width=100%]
+
 .. In the *Name* field, type `vmexamples` to name the project, then click *Create*.
 +
 image::module-00/03_Create_Project.png[link=self, window=blank, width=100%]
