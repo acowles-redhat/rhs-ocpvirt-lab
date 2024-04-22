@@ -12,7 +12,7 @@ image::module-02/00_disk_concepts.png[link=self, window=blank, width=100%]
 
 == Examine the PVC for a VM
 
-In this lab, we are going to take a closer look at the storage behind our the virtual machine we just created `fedora01`. 
+In this lab, we are going to take a closer look at the storage behind the virtual machine we just created `fedora01`. 
 
 . Start by clicking on the left menu for `Storage` -> `Persistent Volume Claims`. Make sure you are in the `vmexamples` namespace, you should see the `fedora01` VM from the previous section listed.
 +
@@ -32,9 +32,9 @@ image::module-02/02_Fedora01_PVC_Details.png[link=self, window=blank, width=100%
 [[managing_snapshots]]
 == Managing Snapshots
 
-OpenShift Virtualization relies on the CSI storage provider's snapshot capability to create disk snapshots for the virtual machine, which can be taken "online" while the VM is running or "offline" while the VM is powered off. If the KVM integrations are installed to the VM, you will also have the option of quiescing the guest operating system (quiescing ensures that the snapshot of the disk represents a consistent state of the guest file systems, e.g., buffers are flushed and the journal is consistent).
+OpenShift Virtualization relies on the CSI storage provider's snapshot capability to create disk snapshots for the virtual machine, which can be taken "online" while the VM is running or "offline" while the VM is powered off. If the KVM integrations are installed on the VM, you will also have the option of quiescing the guest operating system (quiescing ensures that the snapshot of the disk represents a consistent state of the guest file systems, e.g., buffers are flushed and the journal is consistent).
 
-Since disk snapshots are dependent on the storage implementation, abstracted by CSI, performance impact and capacity used will depend on the storage provider. Work with your storage vendor to determine how the system will manage PVC snapshots and the impact they may or may not have.
+Since disk snapshots are dependent on the storage implementation, abstracted by the CSI, performance impact and capacity used will depend on the storage provider. Work with your storage vendor to determine how the system will manage PVC snapshots and the impact they may or may not have.
 
 [IMPORTANT]
 ====
@@ -103,7 +103,7 @@ In the previous step, the operating system was shutdown from within the guest. H
 +
 . Using the *Actions* dropdown menu or the shortcut button in the top right corner, *Stop* the VM.
 +
-. You can click on the *Overview* tab to confirm that the VM has stopped. You can also see the snapshot we recently took listed in the *Snapshots* tile.
+. You can click on the *Overview* tab to confirm that the VM has stopped. You can also see the snapshot we recently took listed in the *Snapshots* tile. (You may need to Force Stop the VM via the dropdown. This is fine as we are about to restore the snapshot.)
 +
 image::module-02/11_VM_Stopped_Snapshot.png[link=self, window=blank, width=100%] 
 +
