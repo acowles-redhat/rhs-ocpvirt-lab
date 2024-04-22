@@ -43,9 +43,9 @@ These are the six main sections that will be covered:
 * OpenShift Virtualization leverages the RHEL KVM hypervisor and allows the VM to be managed by Kubernetes and KubeVirt. An OpenShift Virtualization VM uses Kubernetes scheduling, network, and storage infrastructure.
 * OpenShift Virtualization includes entitlements for **unlimited virtual RHEL guests**. Guest licensing for other supported operating systems will need to be purchased separately.
 * OpenShift Virtualization is SVVP certified with Microsoft for Windows guest support per the same rules that apply to Red Hat’s other KVM virtualization offerings.
-* OpenShift Virtualization is mainly supported on bare metal physical servers, typically on-premises or dedicated hosting. Support for other topologies (OpenShift on virtualized infrastructure like RHV or vSphere) is not available at this time, but we are in the process of adding support for Managed OpenShift Cloud services. Support for AWS / ROSA has already been announced: https://www.redhat.com/en/blog/managing-virtual-machines-and-containers-as-code-with-openshift-virtualization-on-red-hat-openshift-service-on-aws
-
-OpenShift Virtualization allows OpenShift to deploy, manage, and connect virtual machines to an OpenShift cluster. This includes the ability to connect to and manage those VMs using Kubernetes-native methods and take advantage of OpenShift features like Pipelines, GitOps, Service Mesh, and more.
+* OpenShift Virtualization is currently only supported on bare metal physical servers, typically on-premises or through dedicated hosting. Support for other topologies (OpenShift deployed on virtualized infrastructure like RHV or vSphere) is not available at this time. 
+* Support for https://www.redhat.com/en/blog/managing-virtual-machines-and-containers-as-code-with-openshift-virtualization-on-red-hat-openshift-service-on-aws[AWS / ROSA^] has already been announced, and we are in the process of adding support for OpenShift Virtualization in additional Managed OpenShift Cloud services.
+* OpenShift Virtualization allows OpenShift to deploy, manage, and connect virtual machines to an OpenShift cluster. This includes the ability to connect to and manage those VMs using Kubernetes-native methods and take advantage of OpenShift features like Pipelines, GitOps, Service Mesh, and more.
 
 
 == Why switch from a traditional VM platform?
@@ -70,13 +70,13 @@ The innovation in Kubernetes, serverless, service mesh, Kubernetes Operators, an
 
 == Next steps
 
-If you would like to learn more about OpenShift Virtualization, please visit the https://www.redhat.com/en/technologies/cloud-computing/openshift/virtualization[landing page], review the https://docs.openshift.com/container-platform/latest/virt/about_virt/about-virt.html[documentation], or view some of our demo videos on https://www.youtube.com/playlist?list=PLaR6Rq6Z4IqeQeTosfoFzTyE_QmWZW6n_[YouTube].
+If you would like to learn more about OpenShift Virtualization, please visit the https://www.redhat.com/en/technologies/cloud-computing/openshift/virtualization[landing page^], review the https://docs.openshift.com/container-platform/latest/virt/about_virt/about-virt.html[documentation^], or view some of our demo videos on https://www.youtube.com/playlist?list=PLaR6Rq6Z4IqeQeTosfoFzTyE_QmWZW6n_[YouTube^].
 
 == Requirements for the Lab Environment
 
-* Participant needs to have their own computer with browser and internet access. 
-* Chromium based browser is recommended, some copy paste functions don't work in Firefox for the time being. 
-* Remote access console uses US keyboard layout, so it's good to know where special characters reside for other country layouts. Or use copy paste with recommended browser.
+* Participant needs to have their own computer with browser and internet access.
+* Chromium based browser is recommended, some copy/paste functions don't work in Firefox for the time being. 
+* Remote access console uses the US keyboard layout by default, so it's good to know where special characters reside for other country's layouts, or to use the copy/paste function in a supported browser.
 
 === Credentials for the OpenShift Console
 
