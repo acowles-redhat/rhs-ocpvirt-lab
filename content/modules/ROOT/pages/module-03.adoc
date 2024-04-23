@@ -233,7 +233,14 @@ image::module-03/19_Bastion_Still_Blocked.png[link=self, window=blank, width=100
 . Return to your `fedora02` VM console, you should find that the ping has now resumed successfully.
 +
 image::module-03/20_Fedora02_Ping_Allowed.png[link=self, window=blank, width=100%]
-
++
+. Let's clean up the policies for the next section.
++
+IMPORTANT: For the next lab, it's important that we clear out the two network policies we created. Please run the following:
+----
+oc delete multinetworkpolicy.k8s.cni.cncf.io ingress-ipblock -n vmexamples
+oc delete multinetworkpolicy.k8s.cni.cncf.io deny-by-default -n vmexamples
+----
 
 == Summary
 
