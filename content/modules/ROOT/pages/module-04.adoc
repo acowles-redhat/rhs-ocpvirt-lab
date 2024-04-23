@@ -2,7 +2,7 @@
 
 == Introduction
 
-Preconfigured Red Hat virtual machine templates are listed in the *Virtualization* -> *Templates* page. These templates are available for different versions of Red Hat Enterprise Linux, Fedora, CentOS, Microsoft Windows Desktop, and Microsoft Windows Server editions. Each Red Hat virtual machine template is preconfigured with an operating system image, the default settings for the operating system, the flavor (CPU and memory), and the workload type (server).
+Pre-configured Red Hat virtual machine templates are listed in the *Virtualization* -> *Templates* page. These templates are available for different versions of Red Hat Enterprise Linux, Fedora, CentOS, Microsoft Windows Desktop, and Microsoft Windows Server editions. Each Red Hat virtual machine template is preconfigured with an operating system image, the default settings for the operating system, the flavor (CPU and memory), and the workload type (server).
 
 The *Templates* page displays four types of virtual machine templates:
 
@@ -14,7 +14,7 @@ The *Templates* page displays four types of virtual machine templates:
 [[clone_customize_template]]
 == Clone and Customize a Template
 
-By default pre-configured templates provided by Red Hat Virtualization cannot be customized. However you can clone a template and make adjustments to it for your particular workload, in order to make it easier to request specific types of virtual machines for specific workloads. In this section of the lab we are going to do just this, by creating a template that will provide a database server on demand for our end users.
+By default pre-configured templates provided by Red Hat Virtualization cannot be customized. However you can clone a template and make adjustments to it for your particular workload in order to make it easier to request specific types of virtual machines for specific workloads. In this section of the lab we are going to do just this, by creating a template that will provide a database server on demand for our end users.
 
 . To begin, navigate to *Virtualization* -> *Templates* and select *All projects*
 +
@@ -40,7 +40,7 @@ image::module-04/04_Clone_Template_Options.png[link=self, window=blank, width=10
 +
 image::module-04/05_Clone_Details.png[link=self, window=blank, width=100%]
 +
-. A new window will pop out where you can edit the amount of CPU and Memory. For our XL template set the value of CPUs to 4, and Memory to 16 GiB.
+. A new window will pop out where you can edit the amount of CPU and Memory. For our XL template set the value of CPUs to 4, and Memory to 16 GiB, and click the *Save* button.
 +
 image::module-04/06_Edit_CPU_Mem.png[link=self, window=blank, width=100%]
 +
@@ -56,7 +56,7 @@ image::module-04/08_Edit_Net_Int.png[link=self, window=blank, width=100%]
 +
 image::module-04/09_Scripts_CloudInit.png[link=self, window=blank, width=100%]
 +
-. When the *Cloud-init* dialog opens, click the radio button to *Configure via: Script* then copy in the following YAML snippet to the end of the script.
+. When the *Cloud-init* dialog opens, click the radio button to *Configure via: Script* then add the following YAML snippet to the end of the script.
 +
 ----
 packages:
@@ -105,8 +105,9 @@ This process can be streamlined after the initial operating system installation 
 image::module-04/16_Template_Catalog.png[link=self, window=blank, width=100%]
 +
 . Scroll down until you find the *Microsoft Windows Server 2019 VM* tile.
++
 image::module-04/17_Windows_2k19_Tile.png[link=self, window=blank, width=100%]
-
++
 . A dialog will appear showing the default configuration related to the template.
 +
 NOTE: Notice that there is intially no option to quick create this VM, and we must customize the VM to fit our needs.
@@ -125,6 +126,7 @@ image::module-04/19_Windows_2k19_Parameters.png[link=self, window=blank, width=1
 . With the options filled out, we want to click on the *Customize VirtualMachine* button at the bottom to continue configuring our Template.
 +
 . On the *Customize and create VirtualMachine screen, click on the *Scripts* tab, and then scroll down to the *Sysprep* section and click on the *Edit* button.
++
 image::module-04/20_Customize_Scripts.png[link=self, window=blank, width=100%]
 +
 . A new window will pop up for you to create *Sysprep* actions for your new template.
