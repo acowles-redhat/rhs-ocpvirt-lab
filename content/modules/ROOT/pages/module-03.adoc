@@ -29,7 +29,7 @@ A network attachment definition instructs openshift to utilise an existing netwo
 
 How is this done?
 
-To manage an OpenShift node's network configuration you use a tool, available as an operator, called nmstate. With nmstate you can create network interfaces on OpenShift compute nodes using Kubernetes constrcuts or the *NodeNetworkConfigurationPolicy* wizard available in the OpenShift console. You can create devices and customize those so that they follow the naming conventions that suit your needs, and your network requirements. For more info about nmstate, and to learn more about the host networking and how to view and manage the configuration, see the https://docs.openshift.com/container-platform/4.15/networking/k8s_nmstate/k8s-nmstate-about-the-k8s-nmstate-operator.html[documentation here] or speak with your lab proctors.
+To manage an OpenShift node's network configuration you use a tool, available as an operator, called nmstate. With nmstate you can create network interfaces on OpenShift compute nodes using Kubernetes constructs or the *NodeNetworkConfigurationPolicy* wizard available in the OpenShift console. You can create devices and customize those so that they follow the naming conventions that suit your needs, and your network requirements. For more info about nmstate, and to learn more about the host networking and how to view and manage the configuration, see the https://docs.openshift.com/container-platform/4.15/networking/k8s_nmstate/k8s-nmstate-about-the-k8s-nmstate-operator.html[documentation here].
 
 . Navigate to *Networking* -> *Network Attachment Definitions* and click *Create network attachment definition*:
 +
@@ -75,9 +75,9 @@ spec:
 image::module-03/03_NAD_YAML.png[link=self, window=blank, width=100%]
 +
 [NOTE]
-In most cases a single OVS bridge can support many Network Attachment Definitions with each with their own designated `VLAN Tag Number`. In this lab we use an untagged network, so no VLAN number is required here, as such our Network Attachment Definition is labeled as vlan0. 
+In most cases a single OVS bridge can support many Network Attachment Definitions each with their own designated `VLAN Tag Number`. In this lab we use an untagged network, so no VLAN number is required here, as such our Network Attachment Definition is labeled as vlan0. 
 +
-. Examine the details of the network attachment definition. Because this was created in the `vmexamples` project, it will be available to only attach to VMs that are in that project.
+. Examine the details of the network attachment definition. Because this was created in the `vmexamples` project, it will be available only to attach to VMs that are in that project.
 +
 image::module-03/04_NAD_Created.png[link=self, window=blank, width=100%]
 
@@ -88,7 +88,7 @@ image::module-03/04_NAD_Created.png[link=self, window=blank, width=100%]
 +
 image::module-03/05_VM_Network_Tab.png[link=self, window=blank, width=100%]
 +
-NOTE: Notice that the VM is currently using a single interface *default* which is connected to the  *Pod networking* network, we can choose to modify this existing connection or add a new interface to the VM. Either action we choose currently requires a VM restart.
+NOTE: Notice that the VM is currently using a single interface *default* which is connected to the  *Pod networking* network. We can choose to modify this existing connection or add a new interface to the VM. Either action we choose currently requires a VM restart.
 +
 . Click the three-dot menu at the end of the *default* network adapter line, and click on edit in the drop down menu.
 +
@@ -105,7 +105,7 @@ image::module-03/07_VM_Net_Modify.png[link=self, window=blank, width=100%]
 image::module-03/08_New_IP_Address.png[link=self, window=blank, width=100%]
 
 
-IMPORTANT: For the next section of this lab, it's required that you repeat the same actions to attach the fedora02 VM to the vlan0 network as well.
+IMPORTANT: Before the next section of this lab, please repeat the actions to attach the fedora02 VM to the same vlan0 network.
 
 [[multinetwork_policy]]
 
@@ -113,7 +113,7 @@ IMPORTANT: For the next section of this lab, it's required that you repeat the s
 
 A multinetwork policy allows you to configure network access to a namespace and to define granular rules allowing ingress and egress from the namespace to enhance security of the applications and VMs that are running in the namespace.
 
-NOTE: This section of the lab is primarily performed through the CLI. You will need to ssh to your Bastion host where the CLI tools are already installed.
+NOTE: This section of the lab is primarily performed through the CLI. You will need to ssh to your Bastion host where the CLI tools are already installed. Use the SSH Terminal on the right to connect to your bastion host `sudo ssh root@192.168.123.100`
 
 ////
 
