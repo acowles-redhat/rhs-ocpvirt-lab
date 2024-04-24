@@ -141,6 +141,7 @@ image::module-05/08_MTV_NetworkMaps.png[link=self, window=blank, width=100%]
 .. *Name*: `mapping-segment`
 .. *Source provider*: `vmware`
 .. *Target provider*: `host`
+.. Click *Add*
 .. *Source networks*: `segment-migrating-to-ocpvirt`
 .. *Target network*: `Pod network (default)`
 +
@@ -158,6 +159,7 @@ image::module-05/11_MTV_StorageMaps.png[link=self, window=blank, width=100%]
 .. *Name*: `mapping-datastore`
 .. *Source provider*: `vmware`
 .. *Target provider*: `host`
+.. Click *Add*
 .. *Source storage*: `WorkloadDatastore`
 .. *Target storage classs*: `ocs-storagecluster-ceph-rbd-virtualization`
 +
@@ -188,6 +190,9 @@ image::module-05/15_General_VMWARE_Plan.png[link=self, window=blank, width=100%]
 image::module-05/16_VM_Filter_VMWARE_Plan.png[link=self, window=blank, width=100%]
 
 . On the next step select the three VMs we would like to move. Press *Next*.
+.. database
+.. winweb01
+.. winweb02
 +
 image::module-05/17_VM_Select_VMWARE_Plan.png[link=self, window=blank, width=100%]
 
