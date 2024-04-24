@@ -189,7 +189,7 @@
 <h2 id="_introduction"><a class="anchor" href="#_introduction"></a>Introduction</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this lab, you will review the physical environment used during this workshop, including an overview of OpenShift deployed to bare metal hosts. This evironment runs on bare metal hosts in the Equinix cloud. This review will help provide you with an understanding of how the nodes are configured in the cluster, and what their current hardware capabilities are. You will then be tasked with adding an additional machine and scaling the number of cluster nodes using the Red Hat OpenShift web console.</p>
+<p>In this lab, you will review the physical environment used during this workshop, including an overview of OpenShift deployed to bare metal hosts. This environment runs on bare metal hosts in the Equinix cloud. This review will help provide you with an understanding of how the nodes are configured in the cluster, and what their current hardware capabilities are. You will then be tasked with adding an additional machine and scaling the number of cluster nodes using the Red Hat OpenShift web console.</p>
 </div>
 <div class="ulist">
 <div class="title">Goals</div>
@@ -392,7 +392,7 @@ At least one physical node is required for OpenShift Virtualization, "nesting" a
 <h2 id="review_hosts"><a class="anchor" href="#review_hosts"></a>Review Bare Metal Hosts</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>When using <code>Baseboard Management Console (BMC)</code> it is possible to manage the nodes using the <strong>Red Hat OpenShift</strong> console.</p>
+<p>When using <code>Baseboard Management Console (BMC)</code> it is possible to manage the nodes using the <strong>Red Hat OpenShift</strong> console. You may need to change your active project back to "All Projects" to see these nodes. Don&#8217;t forget to change it back later.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -438,7 +438,7 @@ At least one physical node is required for OpenShift Virtualization, "nesting" a
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Ensure that you are in the <strong>openshift-machine-api</strong> project before you begin these steps or machine discovery will not work.
+Ensure that you are in the <strong>openshift-machine-api</strong> project before you begin these steps or machine discovery will not work. You may need to toggle the "Show default projects" switch to see that project.
 </td>
 </tr>
 </table>
@@ -555,7 +555,19 @@ This step may take several minutes to update as it powers up the host, and colle
 </div>
 </li>
 <li>
-<p>Next, click on the <strong>Machines</strong> button on the left to see a list of all the machines, and you should see worker4 in the <strong>Provisioning</strong> state.</p>
+<p>Next, click on the <strong>Machines</strong> button on the left under <strong>Compute</strong> to see a list of all the machines, and you should see worker4 in the <strong>Provisioning</strong> state.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This step will take significant time, don&#8217;t wait for it to finish, just check back at the end of the demo.
+</td>
+</tr>
+</table>
+</div>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-01/14_Worker_4_Provisioning.png" target="blank"><img src="_images/module-01/14_Worker_4_Provisioning.png" alt="14 Worker 4 Provisioning" width="100%"></a>

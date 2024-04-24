@@ -254,7 +254,7 @@ A network attachment definition instructs openshift to utilise an existing netwo
 <p>How is this done?</p>
 </div>
 <div class="paragraph">
-<p>To manage an OpenShift node&#8217;s network configuration you use a tool, available as an operator, called nmstate. With nmstate you can create network interfaces on OpenShift compute nodes using Kubernetes constrcuts or the <strong>NodeNetworkConfigurationPolicy</strong> wizard available in the OpenShift console. You can create devices and customize those so that they follow the naming conventions that suit your needs, and your network requirements. For more info about nmstate, and to learn more about the host networking and how to view and manage the configuration, see the <a href="https://docs.openshift.com/container-platform/4.15/networking/k8s_nmstate/k8s-nmstate-about-the-k8s-nmstate-operator.html">documentation here</a> or speak with your lab proctors.</p>
+<p>To manage an OpenShift node&#8217;s network configuration you use a tool, available as an operator, called nmstate. With nmstate you can create network interfaces on OpenShift compute nodes using Kubernetes constructs or the <strong>NodeNetworkConfigurationPolicy</strong> wizard available in the OpenShift console. You can create devices and customize those so that they follow the naming conventions that suit your needs, and your network requirements. For more info about nmstate, and to learn more about the host networking and how to view and manage the configuration, see the <a href="https://docs.openshift.com/container-platform/4.15/networking/k8s_nmstate/k8s-nmstate-about-the-k8s-nmstate-operator.html">documentation here</a>.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -308,14 +308,14 @@ spec:
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-In most cases a single OVS bridge can support many Network Attachment Definitions with each with their own designated <code>VLAN Tag Number</code>. In this lab we use an untagged network, so no VLAN number is required here, as such our Network Attachment Definition is labeled as vlan0.
+In most cases a single OVS bridge can support many Network Attachment Definitions each with their own designated <code>VLAN Tag Number</code>. In this lab we use an untagged network, so no VLAN number is required here, as such our Network Attachment Definition is labeled as vlan0.
 </td>
 </tr>
 </table>
 </div>
 </li>
 <li>
-<p>Examine the details of the network attachment definition. Because this was created in the <code>vmexamples</code> project, it will be available to only attach to VMs that are in that project.</p>
+<p>Examine the details of the network attachment definition. Because this was created in the <code>vmexamples</code> project, it will be available only to attach to VMs that are in that project.</p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-03/04_NAD_Created.png" target="blank"><img src="_images/module-03/04_NAD_Created.png" alt="04 NAD Created" width="100%"></a>
@@ -345,7 +345,7 @@ In most cases a single OVS bridge can support many Network Attachment Definition
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Notice that the VM is currently using a single interface <strong>default</strong> which is connected to the  <strong>Pod networking</strong> network, we can choose to modify this existing connection or add a new interface to the VM. Either action we choose currently requires a VM restart.
+Notice that the VM is currently using a single interface <strong>default</strong> which is connected to the  <strong>Pod networking</strong> network. We can choose to modify this existing connection or add a new interface to the VM. Either action we choose currently requires a VM restart.
 </td>
 </tr>
 </table>
@@ -387,7 +387,7 @@ Notice that the VM is currently using a single interface <strong>default</strong
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-For the next section of this lab, it&#8217;s required that you repeat the same actions to attach the fedora02 VM to the vlan0 network as well.
+Before the next section of this lab, please repeat the actions to attach the fedora02 VM to the same vlan0 network.
 </td>
 </tr>
 </table>
@@ -407,7 +407,7 @@ For the next section of this lab, it&#8217;s required that you repeat the same a
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-This section of the lab is primarily performed through the CLI. You will need to ssh to your Bastion host where the CLI tools are already installed.
+This section of the lab is primarily performed through the CLI. You will need to ssh to your Bastion host where the CLI tools are already installed. Use the SSH Terminal on the right to connect to your bastion host <code>sudo ssh root@192.168.123.100</code>
 </td>
 </tr>
 </table>
@@ -571,6 +571,30 @@ Make sure that you substitute the correct IP from the Fedora02 VM.
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-03/20_Fedora02_Ping_Allowed.png" target="blank"><img src="_images/module-03/20_Fedora02_Ping_Allowed.png" alt="20 Fedora02 Ping Allowed" width="100%"></a>
+</div>
+</div>
+</li>
+<li>
+<p>Let&#8217;s clean up the policies for the next section.</p>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+For the next lab, it&#8217;s important that we clear out the two network policies we created.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Please run the following two commands:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>oc delete -f allow-host.yaml -n vmexamples
+oc delete -f deny-all.yaml -n vmexamples</pre>
 </div>
 </div>
 </li>

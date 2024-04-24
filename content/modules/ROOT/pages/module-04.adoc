@@ -14,7 +14,7 @@ The *Templates* page displays four types of virtual machine templates:
 [[clone_customize_template]]
 == Clone and Customize a Template
 
-By default pre-configured templates provided by Red Hat Virtualization cannot be customized. However you can clone a template and make adjustments to it for your particular workload in order to make it easier to request specific types of virtual machines for specific workloads. In this section of the lab we are going to do just this, by creating a template that will provide a database server on demand for our end users.
+By default pre-configured templates provided by Red Hat OpenShift Virtualization cannot be customized. However you can clone a template and make adjustments to it for your particular workload in order to make it easier to request specific types of virtual machines for specific workloads. In this section of the lab we are going to do just this, by creating a template that will provide a database server on demand for our end users.
 
 . To begin, navigate to *Virtualization* -> *Templates* and select *All projects*
 +
@@ -40,7 +40,7 @@ image::module-04/04_Clone_Template_Options.png[link=self, window=blank, width=10
 +
 image::module-04/05_Clone_Details.png[link=self, window=blank, width=100%]
 +
-. A new window will pop out where you can edit the amount of CPU and Memory. For our XL template set the value of CPUs to 4, and Memory to 16 GiB, and click the *Save* button.
+. A new window will pop out where you can edit the amount of CPU and Memory. For our XL template set the value of CPUs to 8, and Memory to 16 GiB, and click the *Save* button.
 +
 image::module-04/06_Edit_CPU_Mem.png[link=self, window=blank, width=100%]
 +
