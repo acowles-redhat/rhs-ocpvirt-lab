@@ -82,7 +82,7 @@ The VMs with the suffix `_running` are the active ones. As for the migration hav
 +
 image::module-05/01_vSphere_Network.png[link=self, window=blank, width=100%]
 
-. Finally, review the datastore by browsing to the datastores view (or using link:https://portal.vc.opentlc.com/ui/app/datastore;nav=s/urn:vmomi:Datastore:datastore-48:ee1bef3e-6179-4c1f-9d2a-004c7b0df4e5/vms/vms[this link^]). Expand the tree to see the name of the datastore, `WorkloadDatastore`, and optionally browse to the *VMs* sub-tab to view the capacity used by each virtual machine.
+. Finally, review the datastore by browsing to the datastores view. Expand the tree to see the name of the datastore, `WorkloadDatastore`, and optionally browse to the *VMs* sub-tab to view the capacity used by each virtual machine.
 +
 image::module-05/02_vSphere_Datastore.png[link=self, window=blank, width=100%]
 
