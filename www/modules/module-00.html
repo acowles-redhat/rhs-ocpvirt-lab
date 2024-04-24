@@ -189,7 +189,7 @@
 <h2 id="_introduction"><a class="anchor" href="#_introduction"></a>Introduction</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The beginning section of this lab will introduce you to the basics of creating and managing VMs in OpenShift Virtualization. You will see how the web console guides you through the whole process of creating a virtual machine from a pre-defined template. We will then review the properties of that VM, and do some basic customizations perform actions like live migration, that are often expected of virtual machine administrators.</p>
+<p>The beginning section of this lab will introduce you to the basics of creating and managing VMs in OpenShift Virtualization. You will see how the web console guides you through the whole process of creating a virtual machine from a pre-defined template. We will then review the properties of that VM, do some basic customizations, and perform actions like live migration, that are often expected of virtual machine administrators.</p>
 </div>
 <div class="ulist">
 <div class="title">Goals</div>
@@ -208,13 +208,32 @@
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>As a reminder, here are your credentials for the OpenShift Console:</p>
+</div>
+<div class="paragraph">
+<p>Your OpenShift cluster console is available at: {openshift_web_console}[window=_blank]</p>
+</div>
+<div class="paragraph">
+<p>Administrator login is available with:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>User:</strong> {openshift_admin_user}</p>
+</li>
+<li>
+<p><strong>Password:</strong> {openshift_admin_password}</p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="create_project"><a class="anchor" href="#create_project"></a>Create a New Project</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Like other objects in OpenShift, Projects, which are an abstraction for Kubnernetes namespaces, are the boundaries for permissions and other aspects of using and manaing the resources. Creating a Project is an important first step for any deployment.</p>
+<p>Like other objects in OpenShift, Projects (which are an abstraction for Kubnernetes namespaces), are the boundaries for permissions and other aspects of using and manaing the resources. Creating a Project is an important first step for any deployment.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -241,7 +260,7 @@
 </div>
 </li>
 <li>
-<p>Examine the <strong>VirtualMachines</strong> dashboard that appears. There are currently several VMs listed, but are not turned on:</p>
+<p>Examine the <strong>VirtualMachines</strong> dashboard that appears. There are currently several VMs listed, but they are not turned on:</p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-00/02_VM_List.png" target="blank"><img src="_images/module-00/02_VM_List.png" alt="02 VM List" width="100%"></a>
@@ -249,11 +268,16 @@
 </div>
 </li>
 <li>
-<p>Before creating a VM we need to create a new project. Virtual machines are deployed to a specific project, or namespace, where, by default, users without permission to the namespace cannot access, manage, or control them. Administrators can access all projects, and therefore view all virtual machines, however regular users must be given access to projects as needed.</p>
+<p>Before creating a VM we need to create a new project. Virtual machines are deployed to a specific project, or namespace, where by default, users without permission to the namespace cannot access, manage, or control them. Administrators can access all projects, and therefore view all virtual machines, however regular users must be given access to projects as needed.</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Click <strong>Project: All Projects</strong> and then click <strong>Create Project</strong>.</p>
+<p>Click <strong>Project: All Projects</strong> at the lop left of the window and then click <strong>Create Project</strong>.</p>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/module-00/02_All_Projects.png" target="blank"><img src="_images/module-00/02_All_Projects.png" alt="02 All Projects" width="100%"></a>
+</div>
+</div>
 </li>
 <li>
 <p>In the <strong>Name</strong> field, type <code>vmexamples</code> to name the project, then click <strong>Create</strong>.</p>
@@ -298,7 +322,7 @@ VMs can also be created from an InstanceType wizard as well as created by enteri
 <li>
 <p>The wizard will appear showing the available pre-defined VM templates.</p>
 <div class="paragraph">
-<p>Reviewing the list of available templates you’ll notice that some have a blue badge which indicates "Source available". These are templates which are using the automatically downloaded and stored template disks reviewed in the previous page. If you were deploying in your own environment, you have the option of preventing these from being created and/or removing those source disks, followed by creating and uploading custom disks for your organization.</p>
+<p>Reviewing the list of available templates you’ll notice that some have a blue badge which indicates "Source available". These are templates which are using automatically downloaded and stored template source disks. If you were deploying in your own environment, you have the option of preventing these from being created and/or removing those source disks, followed by creating and uploading custom disks for your organization.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -351,7 +375,7 @@ VMs can also be created from an InstanceType wizard as well as created by enteri
 <li>
 <p>Click the <strong>Overview</strong> tab to return to the primary screen detailing information related to the VM. Note that for this template, the default is 1 CPU and 2 GiB of memory. As the administrator, you can create templates that customize the default configuration of virtual machines. Later in this lab we will have the opportunity to explore the creation of custom templates.</p>
 <div class="paragraph">
-<p>The IP address of the virtual machine on the software-defined network (SDN) is also displayed here, along with information about the boot order, workload profile, the cluster node hosting the virtual machine, and more. By default VMs are attached to the default pod network. Later in this lab we will explore advanced networking options, and how to customize connectivity for VMs.</p>
+<p>The IP address of the virtual machine on the software-defined network (SDN) is also displayed on this page, along with information about the storage devices, system utilization, the cluster node hosting the virtual machine, and more. By default VMs are attached to the default pod network. Later in this lab we will explore advanced networking options, and how to customize connectivity for VMs.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -392,7 +416,7 @@ VMs can also be created from an InstanceType wizard as well as created by enteri
 <p><strong>Details</strong>: This tab presents all of the physical features of the VM in a single panel. From here you can make edits to various descriptors and basic hardware configurations including modifying the cpu or memory, changing the hostname, attaching passthrough devices, and modifying the boot order.</p>
 </li>
 <li>
-<p><strong>Storage</strong>: This tab lists the disks attached to the system and allows to add new disks to the system. If the guest is configured with the agent, it lists the filesystems and the utilization. Here it is possible to attach <em>ConfigMaps</em>, <em>Secrets</em>, and <em>Service Accounts</em> as extra disks. This is useful when passing configuration data to the application(s) running in the virtual machine.</p>
+<p><strong>Storage</strong>: This tab lists the disks attached to the system and allows you to add new disks to the system. If the guest is configured with the agent, it lists the filesystems and the utilization. Here it is possible to attach <em>ConfigMaps</em>, <em>Secrets</em>, and <em>Service Accounts</em> as extra disks. This is useful when passing configuration data to the application(s) running in the virtual machine.</p>
 </li>
 <li>
 <p><strong>Network</strong>: This Tab shows the current network interfaces configured for the VM and allows for you to add new ones.</p>

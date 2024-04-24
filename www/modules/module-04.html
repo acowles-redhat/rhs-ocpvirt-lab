@@ -189,7 +189,7 @@
 <h2 id="_introduction"><a class="anchor" href="#_introduction"></a>Introduction</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Preconfigured Red Hat virtual machine templates are listed in the <strong>Virtualization</strong> &#8594; <strong>Templates</strong> page. These templates are available for different versions of Red Hat Enterprise Linux, Fedora, CentOS, Microsoft Windows Desktop, and Microsoft Windows Server editions. Each Red Hat virtual machine template is preconfigured with an operating system image, the default settings for the operating system, the flavor (CPU and memory), and the workload type (server).</p>
+<p>Pre-configured Red Hat virtual machine templates are listed in the <strong>Virtualization</strong> &#8594; <strong>Templates</strong> page. These templates are available for different versions of Red Hat Enterprise Linux, Fedora, CentOS, Microsoft Windows Desktop, and Microsoft Windows Server editions. Each Red Hat virtual machine template is preconfigured with an operating system image, the default settings for the operating system, the flavor (CPU and memory), and the workload type (server).</p>
 </div>
 <div class="paragraph">
 <p>The <strong>Templates</strong> page displays four types of virtual machine templates:</p>
@@ -216,7 +216,7 @@
 <h2 id="clone_customize_template"><a class="anchor" href="#clone_customize_template"></a>Clone and Customize a Template</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>By default pre-configured templates provided by Red Hat Virtualization cannot be customized. However you can clone a template and make adjustments to it for your particular workload, in order to make it easier to request specific types of virtual machines for specific workloads. In this section of the lab we are going to do just this, by creating a template that will provide a database server on demand for our end users.</p>
+<p>By default pre-configured templates provided by Red Hat OpenShift Virtualization cannot be customized. However you can clone a template and make adjustments to it for your particular workload in order to make it easier to request specific types of virtual machines for specific workloads. In this section of the lab we are going to do just this, by creating a template that will provide a database server on demand for our end users.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -274,7 +274,7 @@
 </div>
 </li>
 <li>
-<p>A new window will pop out where you can edit the amount of CPU and Memory. For our XL template set the value of CPUs to 4, and Memory to 16 GiB.</p>
+<p>A new window will pop out where you can edit the amount of CPU and Memory. For our XL template set the value of CPUs to 8, and Memory to 16 GiB, and click the <strong>Save</strong> button.</p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-04/06_Edit_CPU_Mem.png" target="blank"><img src="_images/module-04/06_Edit_CPU_Mem.png" alt="06 Edit CPU Mem" width="100%"></a>
@@ -306,7 +306,7 @@
 </div>
 </li>
 <li>
-<p>When the <strong>Cloud-init</strong> dialog opens, click the radio button to <strong>Configure via: Script</strong> then copy in the following YAML snippet to the end of the script.</p>
+<p>When the <strong>Cloud-init</strong> dialog opens, click the radio button to <strong>Configure via: Script</strong> then add the following YAML snippet to the end of the script.</p>
 <div class="listingblock">
 <div class="content">
 <pre>packages:
@@ -394,8 +394,12 @@ runcmd:
 </div>
 </li>
 <li>
-<p>Scroll down until you find the <strong>Microsoft Windows Server 2019 VM</strong> tile.
-image::module-04/17_Windows_2k19_Tile.png[link=self, window=blank, width=100%]</p>
+<p>Scroll down until you find the <strong>Microsoft Windows Server 2019 VM</strong> tile.</p>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/module-04/17_Windows_2k19_Tile.png" target="blank"><img src="_images/module-04/17_Windows_2k19_Tile.png" alt="17 Windows 2k19 Tile" width="100%"></a>
+</div>
+</div>
 </li>
 <li>
 <p>A dialog will appear showing the default configuration related to the template.</p>
@@ -448,8 +452,12 @@ Notice that there is intially no option to quick create this VM, and we must cus
 <p>With the options filled out, we want to click on the <strong>Customize VirtualMachine</strong> button at the bottom to continue configuring our Template.</p>
 </li>
 <li>
-<p>On the <strong>Customize and create VirtualMachine screen, click on the *Scripts</strong> tab, and then scroll down to the <strong>Sysprep</strong> section and click on the <strong>Edit</strong> button.
-image::module-04/20_Customize_Scripts.png[link=self, window=blank, width=100%]</p>
+<p>On the <strong>Customize and create VirtualMachine screen, click on the *Scripts</strong> tab, and then scroll down to the <strong>Sysprep</strong> section and click on the <strong>Edit</strong> button.</p>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/module-04/20_Customize_Scripts.png" target="blank"><img src="_images/module-04/20_Customize_Scripts.png" alt="20 Customize Scripts" width="100%"></a>
+</div>
+</div>
 </li>
 <li>
 <p>A new window will pop up for you to create <strong>Sysprep</strong> actions for your new template.</p>

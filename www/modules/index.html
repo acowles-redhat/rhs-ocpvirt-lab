@@ -202,8 +202,7 @@
 <h2 id="_who_will_benefit_most_from_this_lab"><a class="anchor" href="#_who_will_benefit_most_from_this_lab"></a>Who Will Benefit Most from this Lab?</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><strong>Virtual Machine Administrators</strong>&#8201;&#8212;&#8201;Those responsible for day to day management of virtual guests in OpenShift Virtualization. These users will often find themselves responsible for provisioning virtual guests, and day t
-o day management of the guests, and the applications running within.</p>
+<p><strong>Virtual Machine Administrators</strong>&#8201;&#8212;&#8201;Those responsible for day to day management of virtual guests in OpenShift Virtualization. These users will often find themselves responsible for provisioning virtual guests, and day to day management of the guests, and the applications running within.</p>
 </div>
 <div class="paragraph">
 <p><strong>Virtual Infrastructure Administrators</strong>&#8201;&#8212;&#8201;Those responsible for the physical infrastructure hosting the OpenShift Virtualization solution. These users will be responsible for physical hardware, storage, and networking changes to the environment, that will affect the day to day operations of the running virtual machines.</p>
@@ -255,7 +254,7 @@ o day management of the guests, and the applications running within.</p>
 <p>OpenShift Virtualization is based on the “container-native virtualization” technology being developed upstream under the KubeVirt project, a sandbox project in the Cloud Native Computing Foundation (CNCF).</p>
 </li>
 <li>
-<p>It leverages the Red Hat Enterprise Linux KVM hypervisor, which is a mature and highly performant open-source hypervisor used by many organizations and cloud service providers globally and which has been under development for over 15 years.</p>
+<p>It leverages the Red Hat Enterprise Linux KVM hypervisor (RHEL KVM), which is a mature and highly performant open-source hypervisor used by many organizations and cloud service providers globally and which has been under development for over 15 years.</p>
 </li>
 <li>
 <p>OpenShift Virtualization leverages the RHEL KVM hypervisor and allows the VM to be managed by Kubernetes and KubeVirt. An OpenShift Virtualization VM uses Kubernetes scheduling, network, and storage infrastructure.</p>
@@ -267,12 +266,15 @@ o day management of the guests, and the applications running within.</p>
 <p>OpenShift Virtualization is SVVP certified with Microsoft for Windows guest support per the same rules that apply to Red Hat’s other KVM virtualization offerings.</p>
 </li>
 <li>
-<p>OpenShift Virtualization is mainly supported on bare metal physical servers, typically on-premises or dedicated hosting. Support for other topologies (OpenShift on virtualized infrastructure like RHV or vSphere) is not supported at this time, but we are in the process to add support for Managed OpenShift Cloud services. Support for AWS / ROSA has already been announced: <a href="https://www.redhat.com/en/blog/managing-virtual-machines-and-containers-as-code-with-openshift-virtualization-on-red-hat-openshift-service-on-aws" class="bare">https://www.redhat.com/en/blog/managing-virtual-machines-and-containers-as-code-with-openshift-virtualization-on-red-hat-openshift-service-on-aws</a></p>
+<p>OpenShift Virtualization is currently only supported on bare metal physical servers, typically on-premises or through dedicated hosting. Support for other topologies (OpenShift deployed on virtualized infrastructure like RHV or vSphere) is not available at this time.</p>
+</li>
+<li>
+<p>Support for <a href="https://www.redhat.com/en/blog/managing-virtual-machines-and-containers-as-code-with-openshift-virtualization-on-red-hat-openshift-service-on-aws" target="_blank" rel="noopener">AWS / ROSA</a> has already been announced, and we are in the process of adding support for OpenShift Virtualization in additional Managed OpenShift Cloud services.</p>
+</li>
+<li>
+<p>OpenShift Virtualization allows OpenShift to deploy, manage, and connect virtual machines to an OpenShift cluster. This includes the ability to connect to and manage those VMs using Kubernetes-native methods and take advantage of OpenShift features like Pipelines, GitOps, Service Mesh, and more.</p>
 </li>
 </ul>
-</div>
-<div class="paragraph">
-<p>OpenShift Virtualization allows OpenShift to deploy, manage, and connect virtual machines to an OpenShift cluster. This includes the ability to connect to and manage those VMs using Kubernetes-native methods and take advantage of OpenShift features like Pipelines, GitOps, Service Mesh, and more.</p>
 </div>
 </div>
 </div>
@@ -289,8 +291,10 @@ Red Hat OpenShift Dev Spaces (formerly Red Hat CodeReady Workspaces), Runtimes, 
 </div>
 <div class="paragraph">
 <p><strong>Shift infrastructure spend to innovation:</strong>
-OpenShift native architecture changes the heavyweight cost structure from SDDC legacy to lightweight container-native frameworks.
-<strong>Risk mitigation:</strong>
+OpenShift native architecture changes the heavyweight cost structure from SDDC legacy to lightweight container-native frameworks.</p>
+</div>
+<div class="paragraph">
+<p><strong>Risk mitigation:</strong>
 With OpenShift support for on-premises and public cloud options, OpenShift is insurance against public cloud lock-in.</p>
 </div>
 <div class="paragraph">
@@ -307,7 +311,7 @@ The innovation in Kubernetes, serverless, service mesh, Kubernetes Operators, an
 <h2 id="_next_steps"><a class="anchor" href="#_next_steps"></a>Next steps</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>If you would like to learn more about OpenShift Virtualization, please visit the <a href="https://www.redhat.com/en/technologies/cloud-computing/openshift/virtualization">landing page</a>, review the <a href="https://docs.openshift.com/container-platform/latest/virt/about_virt/about-virt.html">documentation</a>, or view some of our demo videos on <a href="https://www.youtube.com/playlist?list=PLaR6Rq6Z4IqeQeTosfoFzTyE_QmWZW6n_">YouTube</a>.</p>
+<p>If you would like to learn more about OpenShift Virtualization, please visit the <a href="https://www.redhat.com/en/technologies/cloud-computing/openshift/virtualization" target="_blank" rel="noopener">landing page</a>, review the <a href="https://docs.openshift.com/container-platform/latest/virt/about_virt/about-virt.html" target="_blank" rel="noopener">documentation</a>, or view some of our demo videos on <a href="https://www.youtube.com/playlist?list=PLaR6Rq6Z4IqeQeTosfoFzTyE_QmWZW6n_" target="_blank" rel="noopener">YouTube</a>.</p>
 </div>
 </div>
 </div>
@@ -320,10 +324,10 @@ The innovation in Kubernetes, serverless, service mesh, Kubernetes Operators, an
 <p>Participant needs to have their own computer with browser and internet access.</p>
 </li>
 <li>
-<p>Chromium based browser is recommended, some copy paste functions don&#8217;t work in Firefox for time being.</p>
+<p>Chromium based browser is recommended, some copy/paste functions don&#8217;t work in Firefox for the time being.</p>
 </li>
 <li>
-<p>Remote access console uses US keyboard layout, so it&#8217;s good to know where special characters reside in it for other country layouts. Or use copy paste with recommended browser.</p>
+<p>Remote access console uses the US keyboard layout by default, so it&#8217;s good to know where special characters reside for other country&#8217;s layouts, or to use the copy/paste function in a supported browser.</p>
 </li>
 </ul>
 </div>
