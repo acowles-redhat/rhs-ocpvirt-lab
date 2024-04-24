@@ -236,10 +236,13 @@ image::module-03/20_Fedora02_Ping_Allowed.png[link=self, window=blank, width=100
 +
 . Let's clean up the policies for the next section.
 +
-IMPORTANT: For the next lab, it's important that we clear out the two network policies we created. Please run the following:
+IMPORTANT: For the next lab, it's important that we clear out the two network policies we created.
++
+Please run the following two commands:
++
 ----
-oc delete multinetworkpolicy.k8s.cni.cncf.io ingress-ipblock -n vmexamples
-oc delete multinetworkpolicy.k8s.cni.cncf.io deny-by-default -n vmexamples
+oc delete -f allow-host.yaml -n vmexamples
+oc delete -f deny-all.yaml -n vmexamples
 ----
 
 == Summary

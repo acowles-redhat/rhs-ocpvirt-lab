@@ -207,7 +207,7 @@
 <h2 id="examine_pvc"><a class="anchor" href="#examine_pvc"></a>Examine the PVC for a VM</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this lab, we are going to take a closer look at the storage behind our the virtual machine we just created <code>fedora01</code>.</p>
+<p>In this lab, we are going to take a closer look at the storage behind the virtual machine we just created <code>fedora01</code>.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -252,10 +252,10 @@
 <h2 id="managing_snapshots"><a class="anchor" href="#managing_snapshots"></a>Managing Snapshots</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>OpenShift Virtualization relies on the CSI storage provider&#8217;s snapshot capability to create disk snapshots for the virtual machine, which can be taken "online" while the VM is running or "offline" while the VM is powered off. If the KVM integrations are installed to the VM, you will also have the option of quiescing the guest operating system (quiescing ensures that the snapshot of the disk represents a consistent state of the guest file systems, e.g., buffers are flushed and the journal is consistent).</p>
+<p>OpenShift Virtualization relies on the CSI storage provider&#8217;s snapshot capability to create disk snapshots for the virtual machine, which can be taken "online" while the VM is running or "offline" while the VM is powered off. If the KVM integrations are installed on the VM, you will also have the option of quiescing the guest operating system (quiescing ensures that the snapshot of the disk represents a consistent state of the guest file systems, e.g., buffers are flushed and the journal is consistent).</p>
 </div>
 <div class="paragraph">
-<p>Since disk snapshots are dependent on the storage implementation, abstracted by CSI, performance impact and capacity used will depend on the storage provider. Work with your storage vendor to determine how the system will manage PVC snapshots and the impact they may or may not have.</p>
+<p>Since disk snapshots are dependent on the storage implementation, abstracted by the CSI, performance impact and capacity used will depend on the storage provider. Work with your storage vendor to determine how the system will manage PVC snapshots and the impact they may or may not have.</p>
 </div>
 <div class="admonitionblock important">
 <table>
@@ -412,7 +412,7 @@ In the previous step, the operating system was shutdown from within the guest. H
 <p>Using the <strong>Actions</strong> dropdown menu or the shortcut button in the top right corner, <strong>Stop</strong> the VM.</p>
 </li>
 <li>
-<p>You can click on the <strong>Overview</strong> tab to confirm that the VM has stopped. You can also see the snapshot we recently took listed in the <strong>Snapshots</strong> tile.</p>
+<p>You can click on the <strong>Overview</strong> tab to confirm that the VM has stopped. You can also see the snapshot we recently took listed in the <strong>Snapshots</strong> tile. (You may need to Force Stop the VM via the dropdown. This is fine as we are about to restore the snapshot.)</p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-02/11_VM_Stopped_Snapshot.png" target="blank"><img src="_images/module-02/11_VM_Stopped_Snapshot.png" alt="11 VM Stopped Snapshot" width="100%"></a>
