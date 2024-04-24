@@ -60,13 +60,17 @@ You will migrate three of the four virtual machines using cold migration - you w
 
 To help understand the process of mapping resources, such as datastores and port groups, from vSphere into OpenShift's equivalents, storage classes and network attachment definitions, let's begin by reviewing the source environment for the migrations.
 
-. Navigate to vCenter:  link:https://portal.vc.opentlc.com/ui/app/folder;nav=v/urn:vmomi:Folder:group-v1552185:ee1bef3e-6179-4c1f-9d2a-004c7b0df4e5/vms/vms[https://portal.vc.opentlc.com^]
+. Navigate to vCenter:  link:https://portal.vc.opentlc.com/ui/app/home[https://portal.vc.opentlc.com^]
 
 . Login with the following credentials:
 - *User:* {vcenter_user}
 - *Password:* {vcenter_password}
 
-. By default you'll see the VMs and Folders view, where you can see the four VMs representing the application.
+. By default you'll see the Home view. You can navicate to the four VMs representing the application by clicking on the *Menu pulldown*, and then *Inventory*.
++
+image::module-05/00_vSphere_Home.png[link=self, window=blank, width=100%]
++
+Now click the *Workloads* icon.
 +
 image::module-05/00_vSphere_VM_List.png[link=self, window=blank, width=100%]
 +
@@ -74,7 +78,7 @@ image::module-05/00_vSphere_VM_List.png[link=self, window=blank, width=100%]
 [NOTE]
 The VMs with the suffix `_running` are the active ones. As for the migration have to be stopped, a clone of the VMs were created for the migration. Those VMs are the ones without that suffix.
 ////
-. Change to the networks view (or click link:https://portal.vc.opentlc.com/ui/app/dvportgroup;nav=n/urn:vmomi:DistributedVirtualPortgroup:dvportgroup-1916:ee1bef3e-6179-4c1f-9d2a-004c7b0df4e5/summary[ this link^]), then expand the tree to view the port group used by the virtual machines. Note that the name is `segment-migrating-to-ocpvirt`.
+. Change to the networks view, then expand the tree to view the port group used by the virtual machines. Note that the name is `segment-migrating-to-ocpvirt`.
 +
 image::module-05/01_vSphere_Network.png[link=self, window=blank, width=100%]
 
@@ -141,6 +145,7 @@ image::module-05/08_MTV_NetworkMaps.png[link=self, window=blank, width=100%]
 .. *Name*: `mapping-segment`
 .. *Source provider*: `vmware`
 .. *Target provider*: `host`
+.. Click *Add*
 .. *Source networks*: `segment-migrating-to-ocpvirt`
 .. *Target network*: `Pod network (default)`
 +
@@ -158,6 +163,7 @@ image::module-05/11_MTV_StorageMaps.png[link=self, window=blank, width=100%]
 .. *Name*: `mapping-datastore`
 .. *Source provider*: `vmware`
 .. *Target provider*: `host`
+.. Click *Add*
 .. *Source storage*: `WorkloadDatastore`
 .. *Target storage classs*: `ocs-storagecluster-ceph-rbd-virtualization`
 +
@@ -188,6 +194,9 @@ image::module-05/15_General_VMWARE_Plan.png[link=self, window=blank, width=100%]
 image::module-05/16_VM_Filter_VMWARE_Plan.png[link=self, window=blank, width=100%]
 
 . On the next step select the three VMs we would like to move. Press *Next*.
+.. database
+.. winweb01
+.. winweb02
 +
 image::module-05/17_VM_Select_VMWARE_Plan.png[link=self, window=blank, width=100%]
 
