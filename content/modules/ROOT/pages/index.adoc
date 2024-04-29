@@ -80,7 +80,7 @@ If you would like to learn more about OpenShift Virtualization, please visit the
 
 === Credentials for the OpenShift Console
 
-Your OpenShift cluster console is available at: {openshift_web_console}[window=_blank]
+Your OpenShift cluster console is available {openshift_web_console}[here^].
 
 Administrator login is available with:
 

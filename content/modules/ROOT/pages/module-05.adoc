@@ -60,7 +60,7 @@ You will migrate three of the four virtual machines using cold migration - you w
 
 To help understand the process of mapping resources, such as datastores and port groups, from vSphere into OpenShift's equivalents, storage classes and network attachment definitions, let's begin by reviewing the source environment for the migrations.
 
-. Navigate to vCenter:  link:https://portal.vc.opentlc.com/ui/app/home[https://portal.vc.opentlc.com^]
+. Navigate to vCenter:  link:https://portal2.vc.opentlc.com/ui/app/home[https://portal2.vc.opentlc.com^]
 
 . Login with the following credentials:
 - *User:* {vcenter_user}

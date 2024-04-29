@@ -287,7 +287,7 @@ The migration toolkit has already been deployed to your cluster using the Operat
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Navigate to vCenter:  <a href="https://portal.vc.opentlc.com/ui/app/folder;nav=v/urn:vmomi:Folder:group-v1552185:ee1bef3e-6179-4c1f-9d2a-004c7b0df4e5/vms/vms" target="_blank" rel="noopener">https://portal.vc.opentlc.com</a></p>
+<p>Navigate to vCenter:  <a href="https://portal2.vc.opentlc.com/ui/app/home" target="_blank" rel="noopener">https://portal2.vc.opentlc.com</a></p>
 </li>
 <li>
 <p>Login with the following credentials:</p>
@@ -303,7 +303,15 @@ The migration toolkit has already been deployed to your cluster using the Operat
 </div>
 </li>
 <li>
-<p>By default you&#8217;ll see the VMs and Folders view, where you can see the four VMs representing the application.</p>
+<p>By default you&#8217;ll see the Home view. You can navicate to the four VMs representing the application by clicking on the <strong>Menu pulldown</strong>, and then <strong>Inventory</strong>.</p>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/module-05/00_vSphere_Home.png" target="blank"><img src="_images/module-05/00_vSphere_Home.png" alt="00 vSphere Home" width="100%"></a>
+</div>
+</div>
+<div class="paragraph">
+<p>Now click the <strong>Workloads</strong> icon.</p>
+</div>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-05/00_vSphere_VM_List.png" target="blank"><img src="_images/module-05/00_vSphere_VM_List.png" alt="00 vSphere VM List" width="100%"></a>
@@ -311,7 +319,7 @@ The migration toolkit has already been deployed to your cluster using the Operat
 </div>
 </li>
 <li>
-<p>Change to the networks view (or click <a href="https://portal.vc.opentlc.com/ui/app/dvportgroup;nav=n/urn:vmomi:DistributedVirtualPortgroup:dvportgroup-1916:ee1bef3e-6179-4c1f-9d2a-004c7b0df4e5/summary" target="_blank" rel="noopener"> this link</a>), then expand the tree to view the port group used by the virtual machines. Note that the name is <code>segment-migrating-to-ocpvirt</code>.</p>
+<p>Change to the networks view, then expand the tree to view the port group used by the virtual machines. Note that the name is <code>segment-migrating-to-ocpvirt</code>.</p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-05/01_vSphere_Network.png" target="blank"><img src="_images/module-05/01_vSphere_Network.png" alt="01 vSphere Network" width="100%"></a>
@@ -319,7 +327,7 @@ The migration toolkit has already been deployed to your cluster using the Operat
 </div>
 </li>
 <li>
-<p>Finally, review the datastore by browsing to the datastores view (or using <a href="https://portal.vc.opentlc.com/ui/app/datastore;nav=s/urn:vmomi:Datastore:datastore-48:ee1bef3e-6179-4c1f-9d2a-004c7b0df4e5/vms/vms" target="_blank" rel="noopener">this link</a>). Expand the tree to see the name of the datastore, <code>WorkloadDatastore</code>, and optionally browse to the <strong>VMs</strong> sub-tab to view the capacity used by each virtual machine.</p>
+<p>Finally, review the datastore by browsing to the datastores view. Expand the tree to see the name of the datastore, <code>WorkloadDatastore</code>, and optionally browse to the <strong>VMs</strong> sub-tab to view the capacity used by each virtual machine.</p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-05/02_vSphere_Datastore.png" target="blank"><img src="_images/module-05/02_vSphere_Datastore.png" alt="02 vSphere Datastore" width="100%"></a>
@@ -405,6 +413,9 @@ MTV 2.4 and later are project/namespace aware and do not require administrator p
 <p><strong>Target provider</strong>: <code>host</code></p>
 </li>
 <li>
+<p>Click <strong>Add</strong></p>
+</li>
+<li>
 <p><strong>Source networks</strong>: <code>segment-migrating-to-ocpvirt</code></p>
 </li>
 <li>
@@ -446,6 +457,9 @@ MTV 2.4 and later are project/namespace aware and do not require administrator p
 </li>
 <li>
 <p><strong>Target provider</strong>: <code>host</code></p>
+</li>
+<li>
+<p>Click <strong>Add</strong></p>
 </li>
 <li>
 <p><strong>Source storage</strong>: <code>WorkloadDatastore</code></p>
@@ -521,10 +535,23 @@ MTV 2.4 and later are project/namespace aware and do not require administrator p
 </li>
 <li>
 <p>On the next step select the three VMs we would like to move. Press <strong>Next</strong>.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>database</p>
+</li>
+<li>
+<p>winweb01</p>
+</li>
+<li>
+<p>winweb02</p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-05/17_VM_Select_VMWARE_Plan.png" target="blank"><img src="_images/module-05/17_VM_Select_VMWARE_Plan.png" alt="17 VM Select VMWARE Plan" width="100%"></a>
 </div>
+</div>
+</li>
+</ol>
 </div>
 </li>
 <li>
