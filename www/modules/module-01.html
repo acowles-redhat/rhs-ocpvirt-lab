@@ -123,30 +123,12 @@
     <a class="nav-link" href="module-05.html">6. Migrating Virtual Machines</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="module-05.html#prerequisites">Prerequisites for the VMware Provider</a>
+    <a class="nav-link" href="module-05.html#prerequisites">Prerequisites for Migrations</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="module-05.html#migrating_vms">Migrating Virtual Machines from VMware</a>
   </li>
 </ul>
-  </li>
-</ul>
-  </li>
-  <li class="nav-item" data-depth="0">
-    <button class="nav-item-toggle"></button>
-    <span class="nav-text">Dev Mode</span>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="orig/index.html">Red Hat Summit 2024</a>
-  </li>
-  <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="orig/module-01.html">Building an Application with rpms</a>
-  </li>
-  <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="orig/module-02.html">Managing an Application from GitHub</a>
-  </li>
-  <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="attrs-page.html">Attributes Page</a>
   </li>
 </ul>
   </li>
@@ -392,7 +374,7 @@ At least one physical node is required for OpenShift Virtualization, "nesting" a
 <h2 id="review_hosts"><a class="anchor" href="#review_hosts"></a>Review Bare Metal Hosts</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>When using <code>Baseboard Management Console (BMC)</code> it is possible to manage the nodes using the <strong>Red Hat OpenShift</strong> console. You may need to change your active project back to "All Projects" to see these nodes. Don&#8217;t forget to change it back later.</p>
+<p>When using <code>Baseboard Management Console (BMC)</code> it is possible to manage the nodes using the <strong>Red Hat OpenShift</strong> console. If you are still in the <strong>vmexamples</strong> project you will not be able to see the nodes, you will need to change your project to <strong>openshift-machine-api</strong> or to <strong>All Projects</strong> to view the nodes currently available in the cluster.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -431,14 +413,14 @@ At least one physical node is required for OpenShift Virtualization, "nesting" a
 <div class="paragraph">
 <p>In many cases it becomes necessary to add additonal physical nodes to a cluster to meet workload demands. In a virtual deployment of OpenShift, this is as simple as clicking on the appropriate machine set and choosing the scale the number of nodes available, and the hypervisor responds by cloning a VM template and spinning up new workers. In a bare metal environment there are a few more steps involved, but it&#8217;s still a fairly simple process if you have the hardware available and access to the servers through a BMC that supports the IPMI protocol.</p>
 </div>
-<div class="admonitionblock note">
+<div class="admonitionblock important">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-note" title="Note"></i>
+<i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-Ensure that you are in the <strong>openshift-machine-api</strong> project before you begin these steps or machine discovery will not work. You may need to toggle the "Show default projects" switch to see that project.
+Ensure that you are in the <strong>openshift-machine-api</strong> project before you begin these steps or machine discovery will not work. You may need to toggle the <strong>Show default projects</strong> switch to see that project.
 </td>
 </tr>
 </table>
@@ -575,7 +557,7 @@ This step will take significant time, don&#8217;t wait for it to finish, just ch
 </div>
 </li>
 <li>
-<p>One provisioning is complete you will see the node listed with the Phase set to <strong>Provisioned as node</strong>.</p>
+<p>Once provisioning is complete you will see the node listed with it&#8217;s Phase set to <strong>Provisioned as node</strong>.</p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-01/15_Provisioned_As_Node.png" target="blank"><img src="_images/module-01/15_Provisioned_As_Node.png" alt="15 Provisioned As Node" width="100%"></a>
@@ -583,7 +565,7 @@ This step will take significant time, don&#8217;t wait for it to finish, just ch
 </div>
 </li>
 <li>
-<p>Since our new host has now been added to the machineset and provisioned as a node, we can click on the <strong>Nodes</strong> menu on the left.</p>
+<p>Since our new host has now been added to the machineset and provisioned as a node, we can now see it available if we click on the <strong>Nodes</strong> menu on the left.</p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-01/16_All_Nodes.png" target="blank"><img src="_images/module-01/16_All_Nodes.png" alt="16 All Nodes" width="100%"></a>
@@ -591,7 +573,7 @@ This step will take significant time, don&#8217;t wait for it to finish, just ch
 </div>
 </li>
 <li>
-<p>We can also click directly on <strong>worker-4</strong> under the <strong>Name</strong> column to see it&#8217;s current status.</p>
+<p>We can also click directly on <strong>worker4</strong> under the <strong>Name</strong> column to see it&#8217;s current status.</p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-01/17_Worker_4_Details.png" target="blank"><img src="_images/module-01/17_Worker_4_Details.png" alt="17 Worker 4 Details" width="100%"></a>
@@ -599,7 +581,7 @@ This step will take significant time, don&#8217;t wait for it to finish, just ch
 </div>
 </li>
 <li>
-<p>The details screen for worker-4 is now populated with hardware information including CPU and Memory utilization, as well as the number of Pods assigned to our new worker node.</p>
+<p>The details screen for worker4 is now populated with hardware information including CPU and Memory utilization, as well as the number of Pods assigned to our new worker node.</p>
 </li>
 </ol>
 </div>

@@ -123,30 +123,12 @@
     <a class="nav-link" href="module-05.html">6. Migrating Virtual Machines</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="module-05.html#prerequisites">Prerequisites for the VMware Provider</a>
+    <a class="nav-link" href="module-05.html#prerequisites">Prerequisites for Migrations</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="module-05.html#migrating_vms">Migrating Virtual Machines from VMware</a>
   </li>
 </ul>
-  </li>
-</ul>
-  </li>
-  <li class="nav-item" data-depth="0">
-    <button class="nav-item-toggle"></button>
-    <span class="nav-text">Dev Mode</span>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="orig/index.html">Red Hat Summit 2024</a>
-  </li>
-  <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="orig/module-01.html">Building an Application with rpms</a>
-  </li>
-  <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="orig/module-02.html">Managing an Application from GitHub</a>
-  </li>
-  <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="attrs-page.html">Attributes Page</a>
   </li>
 </ul>
   </li>
@@ -274,7 +256,7 @@
 </div>
 </li>
 <li>
-<p>A new window will pop out where you can edit the amount of CPU and Memory. For our XL template set the value of CPUs to 8, and Memory to 16 GiB, and click the <strong>Save</strong> button.</p>
+<p>A new window will pop out where you can edit the amount of CPU and Memory. For our XL template set the value of CPUs to 4, and Memory to 16 GiB, and click the <strong>Save</strong> button.</p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-04/06_Edit_CPU_Mem.png" target="blank"><img src="_images/module-04/06_Edit_CPU_Mem.png" alt="06 Edit CPU Mem" width="100%"></a>
@@ -665,10 +647,29 @@ The VM is marked as "Not migratable" because a CD-ROM disk is attached.
 </div>
 </li>
 <li>
-<p>Once the VM installation process is complete, we can take a snapshoot of the rootdisk, and use that to create a bootable volume template that we can use to boot other Windows 2k19 machines.</p>
+<p>Once the VM installation process is complete, we can take a snapshot of the rootdisk, and use that to create a bootable volume template that we can use to boot other Windows 2k19 machines.</p>
+</li>
+<li>
+<p>Click on <strong>Storage</strong> &#8594; <strong>PersistentVolumeClaims</strong> to see a list of PVCs available in the vmexamples namespace.</p>
 <div class="imageblock">
 <div class="content">
-<a class="image" href="_images/module-04/27_Windows_Template.png" target="blank"><img src="_images/module-04/27_Windows_Template.png" alt="27 Windows Template" width="100%"></a>
+<a class="image" href="_images/module-04/27_Windows_PVC.png" target="blank"><img src="_images/module-04/27_Windows_PVC.png" alt="27 Windows PVC" width="100%"></a>
+</div>
+</div>
+</li>
+<li>
+<p>Find the <strong>windows</strong> PVC that is listed and using the three-dot menu on the right select <strong>Clone PVC</strong>. On the menu that pops up, name the new PVC <strong>windows-2k19-template</strong>.</p>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/module-04/28_Clone_Windows_PVC.png" target="blank"><img src="_images/module-04/28_Clone_Windows_PVC.png" alt="28 Clone Windows PVC" width="100%"></a>
+</div>
+</div>
+</li>
+<li>
+<p>Once this is saved, you can return to the <strong>Virtualization &#8594; Catalog</strong> menu, and use this cloned PVC as a future boot source for creating new Virtual Machines by selecting the <strong>PVC (clone PVC)</strong> as the <strong>Disk source</strong> and selecting the <strong>Windows-2k19-Template</strong> PVC as the <strong>PVC name</strong> to clone.</p>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/module-04/29_Windows_Template.png" target="blank"><img src="_images/module-04/29_Windows_Template.png" alt="29 Windows Template" width="100%"></a>
 </div>
 </div>
 </li>
@@ -680,7 +681,7 @@ The VM is marked as "Not migratable" because a CD-ROM disk is attached.
 <h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this section we learned how to clone and customize and existing template to create one that can be used for specific workloads like databases. We also learned how to configure one of the existing Windows templates without a boot source, and automate it&#8217;s installation process so we can create future like templates.</p>
+<p>In this section we learned how to clone and customize and existing template to create one that can be used for specific workloads like databases. We also learned how to configure one of the existing Windows templates that exists without a boot source, and automate it&#8217;s installation process, so we can create future templates by cloning the installation PVC that is created with that VM.</p>
 </div>
 </div>
 </div>

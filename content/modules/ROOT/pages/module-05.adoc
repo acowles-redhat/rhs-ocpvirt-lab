@@ -66,7 +66,7 @@ NOTE: You will not need to migrate the HAproxy (load balancer) VM because OpenSh
 
 To help understand the process of mapping resources, such as datastores and port groups, from vSphere into OpenShift's equivalents, storage classes and network attachment definitions, let's begin by reviewing the source environment for the migrations.
 
-. Navigate to vCenter: {vcenter_console}[vCenter Console^]
+. Navigate to vCenter: link:{vcenter_console}[vCenter Console^]
 
 . Login with the following credentials:
 - *User:* {vcenter_user}
@@ -178,42 +178,37 @@ image::module-05/13_List_VMWARE_Mapping_Storage.png[link=self, window=blank, wid
 
 === Create a Migration Plan
 
-Now that you have the virtualization provider and the two mappings (network & storage) you can create a Migration Plan - this plan selects which VMs to migrate from VMware vSphere to Red Hat OpenShift Virtualization and how to execute the migration (cold/warm, network mapping, storage mapping, pre-/post-hooks, etc.).
+Now that we have reviewed our environment, and have our providers created, it is time for us to create a Migration Plan. This plan selects which VMs to migrate from VMware vSphere to Red Hat OpenShift Virtualization and specifics about how to execute the migration.
 
 . Navigate in the left menu to *Migration* -> *Plans for virtualization* and press *Create plan*.
 +
 image::module-05/14_Create_VMWARE_Plan.png[link=self, window=blank, width=100%]
 +
 . You will be asked to select the source provider that you intend to migrate from. Click on the *VMware* tile.
-////
-. On the wizard fill the following information on the *General settings* step. Press *Next* when done.
-.. *Plan name*: `move-webapp-vmware`
-.. *Source provider*: `vmware`
-.. *Target provider*: `host`
-.. *Target namespace*: `vmexamples`
 +
-image::module-05/15_General_VMWARE_Plan.png[link=self, window=blank, width=100%]
-////
 image::module-05/16_VMware_Source_Provider.png[link=self, window=blank, width=100%]
 +
-. On the next step select the three VMs we would like to move. Press *Next*.
+. On the next page select the three VMs you would like to move:
+
 * database
 * winweb01
 * winweb02
+
+. Click *Next*.
 +
 image::module-05/17_VM_Select_VMWARE_Plan.png[link=self, window=blank, width=100%]
 +
-. On the next screen you will be tasked with providing details for your migration plan. Several details will already be filled in for your but you will have to make a few minor modifications to ensure that VMs land in the correct namespace, and that the networks and storage options map correctly. 
-
+. On the next screen you will be tasked with providing details for your migration plan. Several details will already be filled in for you, but you will have to make a few minor modifications to ensure that the VMs land in the correct namespace, and that the networks and storage options map correctly. 
++
 Please fill in your migration plan with the following values:
 
 * Plan name: *move-webapp-vmware*
 * Target namespace: *vmexamples*
 * Network map: *Pod Networking*
 * Storage map: *ocs-storagecluster-ceph-rbd-virtualization*
- 
-NOTE: Both the Network and Storage map will automatically detect the Network and Datastore that the discovered virtual machines reside on you just need to make sure that their respective values are set correctly on the OpenShift side. 
-
++
+NOTE: Both the Network and Storage map will automatically detect the Network and Datastore that the discovered virtual machines currently make use of on the source provider. You will just need to make sure that their respective values are set correctly on the OpenShift side. 
++
 . Click *Create migration plan*.
 +
 image::module-05/18_Create_Migration_Plan.png[link=self, window=blank, width=100%]
@@ -248,7 +243,7 @@ IMPORTANT: Having many participants performing the same task in parallel can cau
 +
 image::module-05/25_Completed_VMWARE_Plan.png[link=self, window=blank, width=100%]
 +
-. The selected VMs have now been migrated and can be started on OpenShift Virtualization. You can now connect to the VM's console and interact with it, just as you would have previously in VMware vCenter.
+. The selected VMs have now been migrated and can be started on OpenShift Virtualization. 
 
 == Summary
 
