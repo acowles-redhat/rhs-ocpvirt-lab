@@ -12,20 +12,20 @@ image::module-02/00_disk_concepts.png[link=self, window=blank, width=100%]
 
 == Examine the PVC for a VM
 
-In this lab, we are going to take a closer look at the storage behind the virtual machine we just created `fedora01`. 
+In this lab, we are going to take a closer look at the storage behind the virtual machine we just created *fedora01*. 
 
-. Start by clicking on the left menu for `Storage` -> `Persistent Volume Claims`. Make sure you are in the `vmexamples` namespace, you should see the `fedora01` VM from the previous section listed.
+. Start by clicking on the left menu for *Storage* -> *Persistent Volume Claims*. Make sure you are in the *vmexamples* namespace, you should see the *fedora01* VM from the previous section listed.
 +
 //add image
 +
-. Click on the `fedora01` VM and you will be presented with a screen that shows additional details about the storage volume backing the VM. 
+. Click on the *fedora01* VM and you will be presented with a screen that shows additional details about the storage volume backing the VM. 
 +
 . Notice the following information about the persistent volume claim:
 .. The PVC is currently bound successfuly
 .. The PVC has a requested capacity and size of 30GiB
 .. The Access mode of the PVC is ReadWriteMany (RWX)
 .. The Volume mode of the PVC is Block
-.. The volume is using the `ocs-storagecluster-ceph-rbd-virtualization` storage class. 
+.. The volume is using the *ocs-storagecluster-ceph-rbd-virtualization* storage class. 
 +
 image::module-02/02_Fedora01_PVC_Details.png[link=self, window=blank, width=100%]
 
@@ -52,7 +52,7 @@ With the VM snapshots feature, cluster administrators and application developers
 
 === Creating and Using Snapshots
 
-. Navigate back to *Virtualization* -> *VirtualMachines* and select the virtual machine, `fedora01` in the project `vmexamples`.
+. Navigate back to *Virtualization* -> *VirtualMachines* and select the virtual machine, *fedora01* in the project *vmexamples*.
 +
 image::module-02/03_VM_Overview.png[link=self, window=blank, width=100%]
 +
@@ -67,11 +67,11 @@ image::module-02/05_Snapshot_Menu.png[link=self, window=blank, width=100%]
 . Press *Take snapshot* and a dialog will open
 +
 [NOTE]
-There is a warning about the `cloudinitdisk` not being included in the snapshot. This is expected and happens because it is an ephemeral disk.
+There is a warning about the *cloudinitdisk* not being included in the snapshot. This is expected and happens because it is an ephemeral disk.
 +
 image::module-02/06_VM_Snapshot_Dialog.png[link=self, window=blank, width=100%]
 
-. Press *Save* and wait till the _Snapshot_ has been created and the *status* shows as `Succeeded`.
+. Press *Save* and wait till the _Snapshot_ has been created and the *status* shows as *Succeeded*.
 +
 image::module-02/07_VM_Snapshot_Taken.png[link=self, window=blank, width=100%]
 
@@ -83,9 +83,9 @@ image::module-02/08_VM_Restore_Disabled.png[link=self, window=blank, width=100%]
 +
 image::module-02/09_Console_Login.png[link=self, window=blank, width=100%]
 +
-. Click on the `Guest login credentials` dropdown to gather the username and password to log into your console.
+. Click on the *Guest login credentials* dropdown to gather the username and password to log into your console.
 +
-NOTE: There is a `Copy to clipboard` button and a `Paste` button available here, which makes the login process much easier.
+NOTE: There is a *Copy to clipboard* button and a *Paste* button available here, which makes the login process much easier.
 +
 . Once you are logged in, execute the following command: 
 +
@@ -135,11 +135,11 @@ Cloning creates a new VM that uses it's own disk image for storage, but most of 
 . Return to the *Overview* screen, and click the *Actions* dropdown menu to see the option to clone the VM.
 +
 image::module-02/17_Overview_Actions_Clone.png[link=self, window=blank, width=100%]
-. Press *Clone* from the *Actions* menu, and a dialog will open. Name the cloned VM `fedora02`, and select the check box to `Start VirtualMachine on clone`.
+. Press *Clone* from the *Actions* menu, and a dialog will open. Name the cloned VM *fedora02*, and select the check box to *Start VirtualMachine on clone*.
 +
 image::module-02/18_VM_Clone_Dialog.png[link=self, window=blank, width=100%]
 +
-. A new VM is created, the disks are cloned and automatically the portal will redirect you to the new VM, and you can see the `Created` time as very recently.
+. A new VM is created, the disks are cloned and automatically the portal will redirect you to the new VM, and you can see the *Created* time as very recently.
 +
 image::module-02/19_VM_Cloned.png[link=self, window=blank, width=100%]
 +

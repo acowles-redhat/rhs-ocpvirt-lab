@@ -34,14 +34,14 @@ Before you install OpenShift Virtualization for Red Hat OpenShift Container Plat
 * Storage requirements:
 ** Supported by OpenShift
 ** A CSI provisioner is strongly encouraged
-** `ReadWriteMany` (RWX) PVCs are required for live migration
+** *ReadWriteMany* (RWX) PVCs are required for live migration
 ** A CSI provisioner that supports accelerated volume creation via CSI clones or snapshots makes creating VMs from templates much faster. If one is not available, OpenShift Virtualization will fallback to using a host copy
 
 * OpenShift cluster node requirements:
 ** Red Hat Enterprise Linux CoreOS (RHCOS) installed on worker nodes
 ** CPU, memory, and network capacity sufficient to host your virtual machine workload
 
-Review the documentation https://docs.openshift.com/container-platform/4.15/virt/install/preparing-cluster-for-virt.html[here^]]for specific requirements and guidance on hardware for use with OpenShift Virtualization.
+Review the documentation https://docs.openshift.com/container-platform/4.15/virt/install/preparing-cluster-for-virt.html[here^] for specific requirements and guidance on hardware for use with OpenShift Virtualization.
 
 NOTE: If your cluster uses worker nodes with different CPUs, e.g. Intel and AMD, live migration failures can occur because different CPUs have different capabilities. 
 
@@ -60,7 +60,7 @@ When deployed using the installer provisioned infrastructure (IPI) method, OpenS
 +
 image::module-01/01_Compute_Nodes.png[link=self, window=blank, width=100%]
 +
-There are three control plane nodes and three worker nodes in the OpenShift 4 Cluster. In addition, the `ipmi` (Intelligent Platform Management Interface) is being used to manage the bare metal nodes.
+There are three control plane nodes and three worker nodes in the OpenShift 4 Cluster. In addition, *ipmi* (Intelligent Platform Management Interface) is being used to manage the bare metal nodes.
 +
 A node is a virtual or bare metal machine in an OpenShift cluster. Worker nodes host virtual machines and other workloads. The control plane nodes run services that are required to control and manage the OpenShift cluster.
 
@@ -79,19 +79,19 @@ image::module-01/03_Worker0_Details.png[link=self, window=blank, width=100%]
 [[review_hosts]]
 == Review Bare Metal Hosts
 
-When using `Baseboard Management Console (BMC)` it is possible to manage the nodes using the *Red Hat OpenShift* console. If you are still in the *vmexamples* project you will not be able to see the nodes, you will need to change your project to *openshift-machine-api* or to *All Projects* to view the nodes currently available in the cluster.
+When using *Baseboard Management Controller (BMC)* it is possible to manage the nodes using the *Red Hat OpenShift* console. If you are still in the *vmexamples* project you will not be able to see the nodes, you will need to change your project to *openshift-machine-api* or to *All Projects* to view the nodes currently available in the cluster.
 
 . Select *Compute* -> *Bare Metal Hosts*:
 +
 image::module-01/04_BMHosts.png[link=self, window=blank, width=100%]
 +
-During installation, the *Control Plane* nodes are provisioned by the OpenShift Container Platform installation program (that is why the status is `Externally provisioned`) and when the control plane is ready, the *Worker* nodes are provisioned by cluster itself (hence the status `Provisioned`) and joined to the cluster.
+During installation, the *Control Plane* nodes are provisioned by the OpenShift Container Platform installation program (that is why the status is *Externally provisioned*) and when the control plane is ready, the *Worker* nodes are provisioned by cluster itself (hence the status *Provisioned*) and joined to the cluster.
 
 . Click on any of the worker nodes to obtain information about the physical (bare metal) node:
 +
 image::module-01/05_Worker0_BMHost.png[link=self, window=blank, width=100%]
 +
-The information shown is similar to the *Nodes* one, with the exception is providing information related to the hardware and the physical status of the bare metal node. Using the *Actions* menu, it is possible to manage aspects of the bare metal host, such as restarting or stopping the system using `BMC`.
+The information shown is similar to the *Nodes* one, with the exception is providing information related to the hardware and the physical status of the bare metal node. Using the *Actions* menu, it is possible to manage aspects of the bare metal host, such as restarting or stopping the system using *BMC*.
 
 . Explore the other tabs in the interface to see more details about the hosts, including the network interfaces and disks. Additionally, the host can be *Deprovisioned*, which will result in it being removed from the cluster, RHCOS removed, and the machine marked as ready to configure.
 

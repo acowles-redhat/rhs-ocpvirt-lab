@@ -20,11 +20,11 @@ By default pre-configured templates provided by Red Hat OpenShift Virtualization
 +
 image::module-04/01_Template_List.png[link=self, window=blank, width=100%]
 +
-. In the search bar type in `centos9` and in the list of templates that appear find the template for `centos-stream9-server-large`. 
+. In the search bar type in *centos9* and in the list of templates that appear find the template for *centos-stream9-server-large*. 
 +
 image::module-04/02_Search_Centos9.png[link=self, window=blank, width=100%]
 +
-. Select the three-dot menu to the far right, and click on the option to `Clone` from the menu that pops out.
+. Select the three-dot menu to the far right, and click on the option to *Clone* from the menu that pops out.
 +
 image::module-04/03_Clone_Template.png[link=self, window=blank, width=100%]
 +
@@ -44,11 +44,11 @@ image::module-04/05_Clone_Details.png[link=self, window=blank, width=100%]
 +
 image::module-04/06_Edit_CPU_Mem.png[link=self, window=blank, width=100%]
 +
-. Navigate to the *Network Interfaces* tab, to the right of the `default` interface, select the three-dot menu and the edit option.
+. Navigate to the *Network Interfaces* tab, to the right of the *default* interface, select the three-dot menu and the edit option.
 +
 image::module-04/07_Edit_Network.png[link=self, window=blank, width=100%]
 +
-. When the *Edit network interface* menu appears, set the *Network* value to the `vmexamples/vlan0` network, and click the *Save* button.
+. When the *Edit network interface* menu appears, set the *Network* value to the *vmexamples/vlan0* network, and click the *Save* button.
 +
 image::module-04/08_Edit_Net_Int.png[link=self, window=blank, width=100%]
 +
@@ -77,7 +77,7 @@ image::module-04/11_User_Templates.png[link=self, window=blank, width=100%]
 +
 image::module-04/12_Quick_Create_Template.png[link=self, window=blank, width=100%]
 +
-. When the virtual machine boots you can see on the *Overview* page that it was created from our template, and has the system resources we defined, and is already attached to the `vmexamples/vlan0` network with an assigned IP address.
+. When the virtual machine boots you can see on the *Overview* page that it was created from our template, and has the system resources we defined, and is already attached to the *vmexamples/vlan0* network with an assigned IP address.
 +
 image::module-04/13_VM_From_Template.png[link=self, window=blank, width=100%]
 +
@@ -115,11 +115,11 @@ NOTE: Notice that there is intially no option to quick create this VM, and we mu
 image::module-04/18_Windows_2k19_Dialog.png[link=self, window=blank, width=100%]
 +
 . In this dialog:
-.. Specify the name `windows`
+.. Specify the name *windows*
 .. Enable the checkbox *Boot from CD* and specify the url: http://192.168.123.100:81/Windows2019.iso
 .. Reduce the CD disk size to *5 GiB*.
-.. Keep the `Disk source` size disk to the default value *60 GiB*
-.. Ensure the `Mount Windows drivers disk` checkbox is enabled. **This is required to install Windows systems, which will provide the drivers for VirtIO.**
+.. Keep the *Disk source* size disk to the default value *60 GiB*
+.. Ensure the *Mount Windows drivers disk* checkbox is enabled. **This is required to install Windows systems, which will provide the drivers for VirtIO.**
 +
 image::module-04/19_Windows_2k19_Parameters.png[link=self, window=blank, width=100%]
 +
@@ -133,7 +133,7 @@ image::module-04/20_Customize_Scripts.png[link=self, window=blank, width=100%]
 +
 image::module-04/21_Sysprep.png[link=self, window=blank, width=100%]
 +
-. Copy and paste the following code block into the `autounattend.xml` section:
+. Copy and paste the following code block into the *autounattend.xml* section:
 +
 [source,xml,role=copy]
 ----
@@ -278,11 +278,11 @@ image::module-04/21_Sysprep.png[link=self, window=blank, width=100%]
 +
 image::module-04/22_Windows_2k19_Sysprep.png[link=self, window=blank, width=100%]
 +
-. You will be returned to the *Customize and create Virtual Machine* screen, Click on the *Disks* tab, and locate the line for the `installation-CDROM`, click the three-dot menu on the right, and select `Edit`.
+. You will be returned to the *Customize and create Virtual Machine* screen, Click on the *Disks* tab, and locate the line for the *installation-CDROM*, click the three-dot menu on the right, and select *Edit*.
 +
 image::module-04/23_Edit_Boot_Media.png[link=self, window=blank, width=100%]
 +
-. Select the option for `Use this disk as a boot source`, and click on the *Save* button at the bottom.
+. Select the option for *Use this disk as a boot source*, and click on the *Save* button at the bottom.
 +
 image::module-04/24_Boot_Source.png[link=self, window=blank, width=100%]
 +
@@ -291,7 +291,7 @@ image::module-04/24_Boot_Source.png[link=self, window=blank, width=100%]
 +
 image::module-04/25_Windows_2k19_Provisioning.png[link=self, window=blank, width=100%]
 +
-. After a few minutes, the Virtual VM will be in `Running` status. Switch to the *Console* tab:
+. After a few minutes, the Virtual VM will be in *Running* status. Switch to the *Console* tab:
 +
 image::module-04/26_Windows_2k19_Console.png[link=self, window=blank, width=100%]
 +

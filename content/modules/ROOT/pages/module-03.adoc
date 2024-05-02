@@ -4,7 +4,7 @@
 
 By default, all virtual machines are attached to the OpenShift software-defined network (SDN), which enables access from other workloads on the OpenShift cluster, including other VMs and any OpenShift native applications.
 
-* The SDN provides additional features for abstracting, connecting, and exposing applications in a controlled manner, whether deployed as VMs or Pods in the cluster. These include the `Service` and `Route` features of OpenShift.
+* The SDN provides additional features for abstracting, connecting, and exposing applications in a controlled manner, whether deployed as VMs or Pods in the cluster. These include the *Service* and *Route* features of OpenShift.
 * OpenShift's network policy engine allows the VM user or administrator to create rules which allow or deny network traffic to and from individual VMs or entire projects/namespaces.
 
 However, virtual machines may also connect directly to one or more external networks, such as VLANs, when needed. This is in addition to the SDN, which means that, for example, the administrator can connect to the VM from an external IP address, but the application communicates across the SDN with other VMs hosted by OpenShift Virtualization.
@@ -22,7 +22,7 @@ The OpenShift environment has already been configured with an OVS Bridge on each
 
 == Create a Network Attachment Definition
 
-In order to use the OVS Bridge with your VM you need to create a *Network Attachment Definition*. This is what tells OpenShift about the network and allows the virtual machines to connect to it. Network Attachment Definitions are specific to the project/namespace they're created in, unless they're created in the `default` project. This gives you, the administrator, the ability to control which networks are and aren't available to users who have access to manage their own VMs. Once the Network Attachment Definition has been created, it can then be used by virtual machines when configuring their network adapters.
+In order to use the OVS Bridge with your VM you need to create a *Network Attachment Definition*. This is what tells OpenShift about the network and allows the virtual machines to connect to it. Network Attachment Definitions are specific to the project/namespace they're created in, unless they're created in the *default* project. This gives you, the administrator, the ability to control which networks are and aren't available to users who have access to manage their own VMs. Once the Network Attachment Definition has been created, it can then be used by virtual machines when configuring their network adapters.
 
 [NOTE]
 A network attachment definition instructs openshift to utilise an existing network device. In our case that device was previously created and is named ovs-br1. You must use that name or OpenShift won’t be able to place your VM on any compute nodes as it can only utilise nodes with that specifically named network device on it.
@@ -38,13 +38,13 @@ image::module-03/01_NAD_Dashboard.png[link=self, window=blank, width=100%]
 ////
 [IMPORTANT]
 ====
-Select project `vmexamples`.
+Select project *vmexamples*.
 ====
 
-. Complete the form for the `vmexamples` project as follows, then click *Create network attachment definition*:
-* *Name*: `flatnetwork`
-* *Network Type*: `CNV Linux Bridge`
-* *Bridge Name*: `br-flat`
+. Complete the form for the *vmexamples* project as follows, then click *Create network attachment definition*:
+* *Name*: *flatnetwork*
+* *Network Type*: *CNV Linux Bridge*
+* *Bridge Name*: *br-flat*
 +
 ////
 . Click the *Edit YAML* button at the top of the page.
@@ -75,16 +75,16 @@ spec:
 image::module-03/03_NAD_YAML.png[link=self, window=blank, width=100%]
 +
 [NOTE]
-In most cases a single OVS bridge can support many Network Attachment Definitions each with their own designated `VLAN Tag Number`. In this lab we use an untagged network, so no VLAN number is required here, as such our Network Attachment Definition is labeled as vlan0. 
+In most cases a single OVS bridge can support many Network Attachment Definitions each with their own designated *VLAN Tag Number*. In this lab we use an untagged network, so no VLAN number is required here, as such our Network Attachment Definition is labeled as vlan0. 
 +
-. Examine the details of the network attachment definition. Because this was created in the `vmexamples` project, it will be available only to attach to VMs that are in that project.
+. Examine the details of the network attachment definition. Because this was created in the *vmexamples* project, it will be available only to attach to VMs that are in that project.
 +
 image::module-03/04_NAD_Created.png[link=self, window=blank, width=100%]
 
 [[connect_external_net]]
 == Connect a Virtual Machine to an External Network
 
-. Navigate to *Virtualization* -> *VirtualMachines*, select the `fedora01` VM. Click *Configuration* tab and then click the *Network* subtab:
+. Navigate to *Virtualization* -> *VirtualMachines*, select the *fedora01* VM. Click *Configuration* tab and then click the *Network* subtab:
 +
 image::module-03/05_VM_Network_Tab.png[link=self, window=blank, width=100%]
 +
@@ -100,7 +100,7 @@ image::module-03/07_VM_Net_Modify.png[link=self, window=blank, width=100%]
 +
 . Use the *Actions* menu or icon in the upper right corner to restart the VM. After rebooting, navigate to the *Overview* tab:
 +
-. Once the machine restarts, you can see in the *Network Interfaces* section of the *Overview* screen that the `default` interface obtains a DHCP IP address from the flat network (`192.168.3.x/24`).  
+. Once the machine restarts, you can see in the *Network Interfaces* section of the *Overview* screen that the *default* interface obtains a DHCP IP address from the flat network (*192.168.3.x/24*).  
 +
 image::module-03/08_New_IP_Address.png[link=self, window=blank, width=100%]
 
@@ -113,7 +113,7 @@ IMPORTANT: Before the next section of this lab, please repeat the actions to att
 
 A multinetwork policy allows you to configure network access to a namespace and to define granular rules allowing ingress and egress from the namespace to enhance security of the applications and VMs that are running in the namespace.
 
-NOTE: This section of the lab is primarily performed through the CLI. You will need to ssh to your Bastion host where the CLI tools are already installed. Use the SSH Terminal on the right to connect to your bastion host `sudo ssh root@192.168.123.100`
+NOTE: This section of the lab is primarily performed through the CLI. You will need to ssh to your Bastion host where the CLI tools are already installed. Use the SSH Terminal on the right to connect to your bastion host *sudo ssh root@192.168.123.100*
 
 ////
 
@@ -146,7 +146,7 @@ image::module-03/09_Multinetwork_Enable.png[link=self, window=blank, width=100%]
 
 For this section of the lab we are going to create a *MultiNetwork Policy* that prevents all network traffice from reaching the VM's that are attached to our vmexamples/vlan0 *Network Attachment Definition* including our VMs fedora01, and fedora02. We will then explictly allow one-way connectivity from fedora02 to fedora01 to show how we can find tune network connections, even within the same namespace.
 
-NOTE: The IP addresses of your virtual guests may differ from those in the attached images or examples, verify the correct addresses present in your lab environment by clicking on the Overview screen for each VM and taking a look at the `Network interfaces` tile.
+NOTE: The IP addresses of your virtual guests may differ from those in the attached images or examples, verify the correct addresses present in your lab environment by clicking on the Overview screen for each VM and taking a look at the *Network interfaces* tile.
 
 image::module-03/10_Find_IP_Addresses.png[link=self, window=blank, width=100%]
 
@@ -166,7 +166,7 @@ spec:
   ingress: []
 ----
 +
-. Once the file is saved, start a ping to the IP address of the `fedora01` virtual machine to confirm that you can currently connect.
+. Once the file is saved, start a ping to the IP address of the *fedora01* virtual machine to confirm that you can currently connect.
 +
 image::module-03/11_Bastion_Ping.png[link=self, window=blank, width=100%]
 +
@@ -182,7 +182,7 @@ image::module-03/12_Deny_All_Applied.png[link=self, window=blank, width=100%]
 +
 image::module-03/13_Bastion_Ping_Fail.png[link=self, window=blank, width=100%]
 +
-. Return to your OpenShift console, and click on `Virtualization -> VirtualMachines` and select your `fedora02` machine. 
+. Return to your OpenShift console, and click on *Virtualization -> VirtualMachines* and select your *fedora02* machine. 
 +
 image::module-03/14_Fedora02_Overview.png[link=self, window=blank, width=100%]
 +
@@ -190,7 +190,7 @@ image::module-03/14_Fedora02_Overview.png[link=self, window=blank, width=100%]
 +
 image::module-03/15_Fedora02_Console.png[link=self, window=blank, width=100%]
 +
-. Attempt to ping the ip address for the `fedora01` virtual machine, notice that it is also blocked, even though we are on the same subnet, in the same namespace. *Leave the ping running.*
+. Attempt to ping the ip address for the *fedora01* virtual machine, notice that it is also blocked, even though we are on the same subnet, in the same namespace. *Leave the ping running.*
 +
 image::module-03/16_Fedora02_Ping_Fail.png[link=self, window=blank, width=100%]
 +
@@ -230,7 +230,7 @@ image::module-03/18_Allow_Host_Applied.png[link=self, window=blank, width=100%]
 +
 image::module-03/19_Bastion_Still_Blocked.png[link=self, window=blank, width=100%]
 +
-. Return to your `fedora02` VM console, you should find that the ping has now resumed successfully.
+. Return to your *fedora02* VM console, you should find that the ping has now resumed successfully.
 +
 image::module-03/20_Fedora02_Ping_Allowed.png[link=self, window=blank, width=100%]
 +
