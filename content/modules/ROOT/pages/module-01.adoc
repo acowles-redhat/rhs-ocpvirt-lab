@@ -14,9 +14,9 @@ Today, OpenShift virtualization is fully supported in the following environments
 
 * Self-managed _bare metal servers_ on-premises or at a hosted site that provides bare metal resources. The lab you're using today is an OpenShift cluster deployed to an Equinix colocation facility.
 
-* Amazon Web Services (AWS) bare metal instances, as well as ROSA (Red Hat OpenShift Services on AWS) with bare metal instances, are fully supported. See link:https://www.redhat.com/en/blog/managing-virtual-machines-and-containers-as-code-with-openshift-virtualization-on-red-hat-openshift-service-on-aws[OpenShift Virtualization on ROSA]. 
+* Amazon Web Services (AWS) bare metal instances, as well as ROSA (Red Hat OpenShift Services on AWS) with bare metal instances, are fully supported. See link:https://www.redhat.com/en/blog/managing-virtual-machines-and-containers-as-code-with-openshift-virtualization-on-red-hat-openshift-service-on-aws[OpenShift Virtualization on ROSA^]. 
 
-* IBM Cloud Bare Metal Servers are currently _tech preview_. See link:https://access.redhat.com/articles/6738731[Deploy OpenShift Virtualization on IBM Cloud Bare Metal Nodes for details].
+* IBM Cloud Bare Metal Servers are currently _tech preview_. See link:https://access.redhat.com/articles/6738731[Deploy OpenShift Virtualization on IBM Cloud Bare Metal Nodes^] for details.
 
 [NOTE]
 Installing OpenShift Virtualization on IBM Cloud Bare Metal Servers is a Technology Preview feature only. Technology Preview features are not supported with Red Hat production service level agreements (SLAs) and might not be functionally complete. Red Hat does not recommend using them in production. Technology previews provide early access to upcoming product features, enabling customers to test functionality and provide feedback during the development process.
@@ -25,26 +25,25 @@ Installing OpenShift Virtualization on IBM Cloud Bare Metal Servers is a Technol
 
 Before you install OpenShift Virtualization for Red Hat OpenShift Container Platform, make sure that your Red Hat OpenShift Container Platform cluster meets the following requirements.
 
-* CPU requirements
+* CPU requirements:
 ** Supported by Red Hat Enterprise Linux (RHEL) 8/9
 ** Support for Intel 64 or AMD64 CPU extensions
 ** Intel VT or AMD-V hardware virtualization extensions enabled
 ** NX (no execute) flag enabled
 
-* Storage requirements
+* Storage requirements:
 ** Supported by OpenShift
 ** A CSI provisioner is strongly encouraged
 ** `ReadWriteMany` (RWX) PVCs are required for live migration
 ** A CSI provisioner that supports accelerated volume creation via CSI clones or snapshots makes creating VMs from templates much faster. If one is not available, OpenShift Virtualization will fallback to using a host copy
 
-* OpenShift cluster node requirements
+* OpenShift cluster node requirements:
 ** Red Hat Enterprise Linux CoreOS (RHCOS) installed on worker nodes
 ** CPU, memory, and network capacity sufficient to host your virtual machine workload
 
 Review the documentation https://docs.openshift.com/container-platform/4.15/virt/install/preparing-cluster-for-virt.html[here^]]for specific requirements and guidance on hardware for use with OpenShift Virtualization.
 
-[NOTE]
-If your cluster uses worker nodes with different CPUs, e.g. Intel and AMD, live migration failures can occur because different CPUs have different capabilities. 
+NOTE: If your cluster uses worker nodes with different CPUs, e.g. Intel and AMD, live migration failures can occur because different CPUs have different capabilities. 
 
 === Review Red Hat OpenShift Cluster
 
@@ -71,8 +70,7 @@ image::module-01/02_Worker0_Information.png[link=self, window=blank, width=100%]
 +
 The *Overview* tab is showing useful information about the utilization of the resources, such as CPU and memory. It also shows all the applications (*Pods*) that are running inside on this node.
 
-[NOTE]
-At least one physical node is required for OpenShift Virtualization, "nesting" and emulation are not supported. However, other nodes in the cluster can be virtual machines, for example control plane and infrastructure nodes.
+NOTE: At least one physical node is required for OpenShift Virtualization, "nesting" and emulation are not supported. However, other nodes in the cluster can be virtual machines, for example control plane and infrastructure nodes.
 
 . Navigate to the tab *Details* to obtain more information about the operating system.
 +
@@ -130,8 +128,7 @@ image::module-01/07_Create_Host_Red.png[link=self, window=blank, width=100%]
 +
 image::module-01/08_Worker4_Summary_1.png[link=self, window=blank, width=100%]
 +
-[NOTE]
-This step may take several minutes to update as it powers up the host, and collects hardware information.
+NOTE: This step may take several minutes to update as it powers up the host, and collects hardware information.
 +
 . When host discovery and hardware inspection is complete you will see that it shows it's status as *Available*.
 +
@@ -155,8 +152,7 @@ image::module-01/13_Machine_Count_3_4.png[link=self, window=blank, width=100%]
 +
 . Next, click on the *Machines* button on the left under *Compute* to see a list of all the machines, and you should see worker4 in the *Provisioning* state. 
 +
-[NOTE]
-This step will take significant time, don't wait for it to finish, just check back at the end of the demo.
+NOTE: This step can take significant time, as the node reboots several times during the installation process. Do not wait for it to finish, just check back at the end of the lab.
 +
 image::module-01/14_Worker_4_Provisioning.png[link=self, window=blank, width=100%]
 +
