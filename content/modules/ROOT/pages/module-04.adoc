@@ -40,7 +40,7 @@ image::module-04/04_Clone_Template_Options.png[link=self, window=blank, width=10
 +
 image::module-04/05_Clone_Details.png[link=self, window=blank, width=100%]
 +
-. A new window will pop out where you can edit the amount of CPU and Memory. For our XL template set the value of CPUs to 8, and Memory to 16 GiB, and click the *Save* button.
+. A new window will pop out where you can edit the amount of CPU and Memory. For our XL template set the value of CPUs to 4, and Memory to 16 GiB, and click the *Save* button.
 +
 image::module-04/06_Edit_CPU_Mem.png[link=self, window=blank, width=100%]
 +
@@ -298,10 +298,20 @@ image::module-04/26_Windows_2k19_Console.png[link=self, window=blank, width=100%
 [IMPORTANT]
 The VM is marked as "Not migratable" because a CD-ROM disk is attached. 
 +
-. Once the VM installation process is complete, we can take a snapshoot of the rootdisk, and use that to create a bootable volume template that we can use to boot other Windows 2k19 machines.
+. Once the VM installation process is complete, we can take a snapshot of the rootdisk, and use that to create a bootable volume template that we can use to boot other Windows 2k19 machines.
 +
-image::module-04/27_Windows_Template.png[link=self, window=blank, width=100%]
+. Click on *Storage* -> *PersistentVolumeClaims* to see a list of PVCs available in the vmexamples namespace.
++
+image::module-04/27_Windows_PVC.png[link=self, window=blank, width=100%]
++
+. Find the *windows* PVC that is listed and using the three-dot menu on the right select *Clone PVC*. On the menu that pops up, name the new PVC *windows-2k19-template*.
++
+image::module-04/28_Clone_Windows_PVC.png[link=self, window=blank, width=100%]
++
+. Once this is saved, you can return to the *Virtualization -> Catalog* menu, and use this cloned PVC as a future boot source for creating new Virtual Machines by selecting the *PVC (clone PVC)* as the *Disk source* and selecting the *Windows-2k19-Template* PVC as the *PVC name* to clone.
++
+image::module-04/29_Windows_Template.png[link=self, window=blank, width=100%]
 
 == Summary
 
-In this section we learned how to clone and customize and existing template to create one that can be used for specific workloads like databases. We also learned how to configure one of the existing Windows templates without a boot source, and automate it's installation process so we can create future like templates.
+In this section we learned how to clone and customize and existing template to create one that can be used for specific workloads like databases. We also learned how to configure one of the existing Windows templates that exists without a boot source, and automate it's installation process, so we can create future templates by cloning the installation PVC that is created with that VM.

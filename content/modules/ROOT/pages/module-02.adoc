@@ -101,7 +101,7 @@ image::module-02/10_Bootloader_Broken.png[link=self, window=blank, width=100%]
 [IMPORTANT]
 In the previous step, the operating system was shutdown from within the guest. However, OpenShift Virtualization will restart it automatically by default. This behavior can be changed globally or on a per-VM basis.
 +
-. Using the *Actions* dropdown menu or the shortcut button in the top right corner, *Stop* the VM.
+. Using the *Actions* dropdown menu or the shortcut button in the top right corner, *Stop* the VM. This process can take a long time since it attempts a graceful shutdown and the machine is in an unstable state. If you click on the *Actions* dropdown menu again you will have the option to *Force stop*. Please make use of this option in order to continue with the lab. 
 +
 . You can click on the *Overview* tab to confirm that the VM has stopped. You can also see the snapshot we recently took listed in the *Snapshots* tile. (You may need to Force Stop the VM via the dropdown. This is fine as we are about to restore the snapshot.)
 +

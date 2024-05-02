@@ -81,7 +81,7 @@ image::module-01/03_Worker0_Details.png[link=self, window=blank, width=100%]
 [[review_hosts]]
 == Review Bare Metal Hosts
 
-When using `Baseboard Management Console (BMC)` it is possible to manage the nodes using the *Red Hat OpenShift* console. You may need to change your active project back to "All Projects" to see these nodes. Don't forget to change it back later.
+When using `Baseboard Management Console (BMC)` it is possible to manage the nodes using the *Red Hat OpenShift* console. If you are still in the *vmexamples* project you will not be able to see the nodes, you will need to change your project to *openshift-machine-api* or to *All Projects* to view the nodes currently available in the cluster.
 
 . Select *Compute* -> *Bare Metal Hosts*:
 +
@@ -102,7 +102,7 @@ The information shown is similar to the *Nodes* one, with the exception is provi
 
 In many cases it becomes necessary to add additonal physical nodes to a cluster to meet workload demands. In a virtual deployment of OpenShift, this is as simple as clicking on the appropriate machine set and choosing the scale the number of nodes available, and the hypervisor responds by cloning a VM template and spinning up new workers. In a bare metal environment there are a few more steps involved, but it's still a fairly simple process if you have the hardware available and access to the servers through a BMC that supports the IPMI protocol.
 
-NOTE: Ensure that you are in the *openshift-machine-api* project before you begin these steps or machine discovery will not work. You may need to toggle the "Show default projects" switch to see that project.
+IMPORTANT: Ensure that you are in the *openshift-machine-api* project before you begin these steps or machine discovery will not work. You may need to toggle the *Show default projects* switch to see that project.
 
 To begin this process we are going to return to the bare metal hosts screen we reviewed earlier:
 
@@ -160,19 +160,19 @@ This step will take significant time, don't wait for it to finish, just check ba
 +
 image::module-01/14_Worker_4_Provisioning.png[link=self, window=blank, width=100%]
 +
-. One provisioning is complete you will see the node listed with the Phase set to *Provisioned as node*.
+. Once provisioning is complete you will see the node listed with it's Phase set to *Provisioned as node*.
 +
 image::module-01/15_Provisioned_As_Node.png[link=self, window=blank, width=100%]
 +
-. Since our new host has now been added to the machineset and provisioned as a node, we can click on the *Nodes* menu on the left.
+. Since our new host has now been added to the machineset and provisioned as a node, we can now see it available if we click on the *Nodes* menu on the left.
 +
 image::module-01/16_All_Nodes.png[link=self, window=blank, width=100%]
 +
-. We can also click directly on *worker-4* under the *Name* column to see it's current status.
+. We can also click directly on *worker4* under the *Name* column to see it's current status.
 +
 image::module-01/17_Worker_4_Details.png[link=self, window=blank, width=100%]
 +
-. The details screen for worker-4 is now populated with hardware information including CPU and Memory utilization, as well as the number of Pods assigned to our new worker node.
+. The details screen for worker4 is now populated with hardware information including CPU and Memory utilization, as well as the number of Pods assigned to our new worker node.
 
 == Summary
 
