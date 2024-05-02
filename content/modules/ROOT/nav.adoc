@@ -28,5 +28,5 @@
 ** xref:module-04.adoc#create_win[Create a Windows VM Template]
 
 * xref:module-05.adoc[6. Migrating Virtual Machines]
-** xref:module-05.adoc#prerequisites[Prerequisites for the VMware Provider]
+** xref:module-05.adoc#prerequisites[Prerequisites for Migrations]
 ** xref:module-05.adoc#migrating_vms[Migrating Virtual Machines from VMware]

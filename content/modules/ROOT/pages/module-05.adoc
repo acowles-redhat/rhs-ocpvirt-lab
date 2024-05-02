@@ -14,11 +14,11 @@ Documentation for how to install and configure the Operator can be found https:/
 If you would like to learn more about how to configure the Migration Toolkit for Virtualization for your own needs, please see the documentation at the following links for:
 
 * https://access.redhat.com/documentation/en-us/migration_toolkit_for_virtualization/2.6/html/installing_and_using_the_migration_toolkit_for_virtualization/prerequisites_mtv#openstack-prerequisites_mtv[OpenStack^]
-* https://access.redhat.com/documentation/en-us/migration_toolkit_for_virtualization/2.6/html/installing_and_using_the_migration_toolkit_for_virtualization/prerequisites#rhv-prerequisites_mtv[Red Hat Virtualization^]
+* https://access.redhat.com/documentation/en-us/migration_toolkit_for_virtualization/2.6/html/installing_and_using_the_migration_toolkit_for_virtualization/prerequisites_mtv#rhv-prerequisites_mtv[Red Hat Virtualization^]
 * https://access.redhat.com/documentation/en-us/migration_toolkit_for_virtualization/2.6/html/installing_and_using_the_migration_toolkit_for_virtualization/prerequisites_mtv#vmware-prerequisites_mtv[VMware vSphere^]
 
 [[prerequisites]]
-== Prerequisites for the VMware Provider
+== Prerequisites for Migrations
 
 ////
 The firewalls must enable traffic over the following ports:
@@ -56,15 +56,17 @@ The application consists of the following four virtual machines:
 * One Linux system running a MariaDB database
 * Two Microsoft Windows servers with IIS hosting a PHP application connecting to the database
 
-The application is accessible from the following link: http://webapp.vc.opentlc.com/
+The application is accessible from the following link: http://webapp.vc.opentlc.com/[WebApp^]
 
-You will migrate three of the four virtual machines using cold migration - you will not need to migrate the HAproxy (load balancer) VM because OpenShift handles network traffic and load balancing natively for VMs connected to the SDN using a `Service`.
+For this lab, you will be tasked with migrating three of the four virtual machines using cold migration.
+
+NOTE: You will not need to migrate the HAproxy (load balancer) VM because OpenShift handles network traffic and load balancing natively for VMs connected to the SDN using a `Service`.
 
 === Review the VMware environment
 
 To help understand the process of mapping resources, such as datastores and port groups, from vSphere into OpenShift's equivalents, storage classes and network attachment definitions, let's begin by reviewing the source environment for the migrations.
 
-. Navigate to vCenter:  {vcenter_console}
+. Navigate to vCenter:  {vcenter_console}[vCenter Console^]
 
 . Login with the following credentials:
 - *User:* {vcenter_user}
@@ -78,10 +80,6 @@ Now click the *Workloads* icon.
 +
 image::module-05/00_vSphere_VM_List.png[link=self, window=blank, width=100%]
 +
-////
-[NOTE]
-The VMs with the suffix `_running` are the active ones. As for the migration have to be stopped, a clone of the VMs were created for the migration. Those VMs are the ones without that suffix.
-////
 . Change to the networks view, then expand the tree to view the port group used by the virtual machines. Note that the name is `segment-migrating-to-ocpvirt`.
 +
 image::module-05/01_vSphere_Network.png[link=self, window=blank, width=100%]
