@@ -39,7 +39,7 @@ The following prerequisites apply to all migrations:
 
 * ISO/CD-ROM disks must be unmounted.
 * Each NIC must contain one IPv4 and/or one IPv6 address.
-* The VM operating system must be certified and supported for use as a link:https://access.redhat.com/articles/973163#ocpvirt[guest operating system with OpenShift Virtualization].
+* The VM operating system must be certified and supported for use as a guest operating system for https://access.redhat.com/articles/973163#ocpvirt[OpenShift Virtualization^].
 * VM names must contain only lowercase letters (a-z), numbers (0-9), or hyphens (-), up to a maximum of 253 characters. The first and last characters must be alphanumeric. The name must not contain uppercase letters, spaces, periods (.), or special characters.
 * VM names must not duplicate the name of an existing VM in the OpenShift Virtualization environment.
 
@@ -50,13 +50,13 @@ NOTE: The *Migration Toolkit for Virtualization* will automatically assign a new
 
 A three-tier application has been deployed on VMware for you to migrate to OpenShift.
 
+The application is accessible from the following link: http://webapp.vc.opentlc.com/[WebApp^]. It will display a visitor counter, and the hostname of the webserver that returned your request.
+
 The application consists of the following four virtual machines:
 
 * One HAproxy system that redirects traffic to the web servers
 * One Linux system running a MariaDB database
 * Two Microsoft Windows servers with IIS hosting a PHP application connecting to the database
-
-The application is accessible from the following link: http://webapp.vc.opentlc.com/[WebApp^]
 
 For this lab, you will be tasked with migrating three of the four virtual machines using cold migration.
 
@@ -66,25 +66,21 @@ NOTE: You will not need to migrate the HAproxy (load balancer) VM because OpenSh
 
 To help understand the process of mapping resources, such as datastores and port groups, from vSphere into OpenShift's equivalents, storage classes and network attachment definitions, let's begin by reviewing the source environment for the migrations.
 
-. Navigate to vCenter:  {vcenter_console}[vCenter Console^]
+. Navigate to vCenter: {vcenter_console}[vCenter Console^]
 
 . Login with the following credentials:
 - *User:* {vcenter_user}
 - *Password:* {vcenter_password}
 
-. By default you'll see the Home view. You can navicate to the four VMs representing the application by clicking on the *Menu pulldown*, and then *Inventory*.
+. By default you'll land in the *Inventory* view at the top of the navigation tree. Click the *Workloads* icon and expand the navigation tree until you see the folder that matches your username, and the 4 VMs under it. Click the *VMs* tab at the top of the screen to view the VM details.
 +
-image::module-05/00_vSphere_Home.png[link=self, window=blank, width=100%]
+image::module-05/00_Workload_VM_List.png[link=self, window=blank, width=100%]
 +
-Now click the *Workloads* icon.
-+
-image::module-05/00_vSphere_VM_List.png[link=self, window=blank, width=100%]
-+
-. Change to the networks view, then expand the tree to view the port group used by the virtual machines. Note that the name is `segment-migrating-to-ocpvirt`.
+. Change to the *Networks* view, then expand the tree to view the port group used by the virtual machines. Note that the name is `segment-migrating-to-ocpvirt`.
 +
 image::module-05/01_vSphere_Network.png[link=self, window=blank, width=100%]
 
-. Finally, review the datastore by browsing to the datastores view. Expand the tree to see the name of the datastore, `WorkloadDatastore`, and optionally browse to the *VMs* sub-tab to view the capacity used by each virtual machine.
+. Finally, review the datastores in use by browsing to the *Datastores* view. Expand the tree to see the datastores that are attached to the *SDDC-Datacenter*, and optionally browse to the *VMs* sub-tab to view the capacity used by each virtual machine.
 +
 image::module-05/02_vSphere_Datastore.png[link=self, window=blank, width=100%]
 
@@ -102,9 +98,9 @@ MTV 2.4 and later are project/namespace aware and do not require administrator p
 
 . By default, there is a provider called `host` which represents *OpenShift Virtualization* as a target platform.
 +
-image::module-05/04_MTV_Provider_list.png[link=self, window=blank, width=100%]
-
-. The lab is already configured with the VMWare provider named `vmware`.
+image::module-05/04_MTV_Provider_List.png[link=self, window=blank, width=100%]
++
+. The lab is already configured with the VMWare provider named `vmware` and it is marked as a migration source.
 
 ////
 However, you will need to register the source vCenter system to the Migration Toolkit for Virtualization as a new provider.
@@ -132,6 +128,10 @@ image::module-05/07_MTV_Provider_Added.png[link=self, window=blank, width=100%]
 
 Now MTV knows about your VMware vSphere environment and can connect to it.
 ////
+
+////
+
+2.6 MADE THIS YAML ONLY, SKIPPING IN LAB FOR NOW, CONTENT STILL HERE IF NEEDED LATER.
 
 === Create storage and network mappings
 
@@ -174,6 +174,7 @@ image::module-05/12_Add_VMWARE_Mapping_Storage.png[link=self, window=blank, widt
 . Ensure the created mapping has the *Status* `Ready`.
 +
 image::module-05/13_List_VMWARE_Mapping_Storage.png[link=self, window=blank, width=100%]
+////
 
 === Create a Migration Plan
 
@@ -182,7 +183,9 @@ Now that you have the virtualization provider and the two mappings (network & st
 . Navigate in the left menu to *Migration* -> *Plans for virtualization* and press *Create plan*.
 +
 image::module-05/14_Create_VMWARE_Plan.png[link=self, window=blank, width=100%]
-
++
+. You will be asked to select the source provider that you intend to migrate from. Click on the *VMware* tile.
+////
 . On the wizard fill the following information on the *General settings* step. Press *Next* when done.
 .. *Plan name*: `move-webapp-vmware`
 .. *Source provider*: `vmware`
@@ -190,48 +193,60 @@ image::module-05/14_Create_VMWARE_Plan.png[link=self, window=blank, width=100%]
 .. *Target namespace*: `vmexamples`
 +
 image::module-05/15_General_VMWARE_Plan.png[link=self, window=blank, width=100%]
-
-. On the next step, select `All datacenters`  and press *Next*.
+////
+image::module-05/16_VMware_Source_Provider.png[link=self, window=blank, width=100%]
 +
-image::module-05/16_VM_Filter_VMWARE_Plan.png[link=self, window=blank, width=100%]
-
 . On the next step select the three VMs we would like to move. Press *Next*.
-.. database
-.. winweb01
-.. winweb02
+* database
+* winweb01
+* winweb02
 +
 image::module-05/17_VM_Select_VMWARE_Plan.png[link=self, window=blank, width=100%]
-
-. On the *Network mapping* step select `mapping-segment` and press *Next*.
 +
-image::module-05/18_Network_VMWARE_Plan.png[link=self, window=blank, width=100%]
+. On the next screen you will be tasked with providing details for your migration plan. Several details will already be filled in for your but you will have to make a few minor modifications to ensure that VMs land in the correct namespace, and that the networks and storage options map correctly. 
 
-. On the *Storage mapping* step select `mapping-datastore` and press *Next*.
-+
-image::module-05/19_Storage_VMWARE_Plan.png[link=self, window=blank, width=100%]
+Please fill in your migration plan with the following values:
 
-. Press *Next* on the steps *Type* and *Hooks*.
+* Plan name: *move-webapp-vmware*
+* Target namespace: *vmexamples*
+* Network map: *Pod Networking*
+* Storage map: *ocs-storagecluster-ceph-rbd-virtualization*
+ 
+NOTE: Both the Network and Storage map will automatically detect the Network and Datastore that the discovered virtual machines reside on you just need to make sure that their respective values are set correctly on the OpenShift side. 
 
-. Review the configuration specified and press *Finish*.
+. Click *Create migration plan*.
 +
-image::module-05/20_Finish_VMWARE_Plan.png[link=self, window=blank, width=100%]
-
-. Ensure the status of the plan is *Ready*.
+image::module-05/18_Create_Migration_Plan.png[link=self, window=blank, width=100%]
 +
-image::module-05/21_Ready_VMWARE_Plan.png[link=self, window=blank, width=100%]
-
-. Press *Start* on the right, and again on the confirmation window that pops up to begin the migration of the three VMs.
+. You will be taken to a new screen where you will see that the plan for migration is being made ready.
 +
-image::module-05/22_Initialize_VMWARE_Plan.png[link=self, window=blank, width=100%]
+image::module-05/19_Migration_Plan_Unready.png[link=self, window=blank, width=100%]
 +
-[IMPORTANT]
-====
-Having many participants performing the same task in parallel can cause this task to perform slower than in a real environment. Please be patient.
-====
+. After a few moments the plan will become *Ready*, click on the green "Play" button in the center of the window to start the migration process.
++
+image::module-05/20_Migration_Plan_Ready.png[link=self, window=blank, width=100%]
++
+. You will be presented with a confirmation box to begin the migration, click on the *Start* button.
++
+image::module-05/21_Confirm_Migrate_Start.png[link=self, window=blank, width=100%]
++
+. A progress bar will appear in the center of the screen along with the status of *0 of 3 VMs migrated*.
++
+image::module-05/22_VMs_Migrating.png[link=self, window=blank, width=100%]
++
+. Click on the *0 of 3 VMs migrated* link and you will be presented with a page with more details about the migration process.
++
+image::module-05/23_VMs_Migrating_Details.png[link=self, window=blank, width=100%]
++
+. You can click the drop-down arrow next to the name of each VM being migrated to get additional details about the stages of the migration process.
++
+image::module-05/24_VM_Migration_Stages.png[link=self, window=blank, width=100%]
++
+IMPORTANT: Having many participants performing the same task in parallel can cause this task to perform slower than in a real environment. For the Red Hat Summit Lab instance we have limited the number of in-flight VMs to 1 at a time. Please be patient with this process.
 +
 . After several minutes the migration has completed.
 +
-image::module-05/23_Completed_VMWARE_Plan.png[link=self, window=blank, width=100%]
+image::module-05/25_Completed_VMWARE_Plan.png[link=self, window=blank, width=100%]
 +
 . The selected VMs have now been migrated and can be started on OpenShift Virtualization. You can now connect to the VM's console and interact with it, just as you would have previously in VMware vCenter.
 
@@ -239,8 +254,8 @@ image::module-05/23_Completed_VMWARE_Plan.png[link=self, window=blank, width=100
 
 In this section we explored the Migration Toolkit for Virtualization, and used it to assist with the migration of existing virtual machines from a VMware vSphere environment to OpenShift Virtualization. In addition to the Migration Toolkit for Virtualization, there are three other migration toolkits. The combination of these can be used to move many types of workloads into and within OpenShift clusters depending on your organization's needs. 
 
-* https://developers.redhat.com/products/mtr/overview[Migration Toolkit for Runtimes] - Assist and accelerate Java application modernization and migration.
-* https://access.redhat.com/documentation/en-us/migration_toolkit_for_applications/[Migration Toolkit for Applications] - Accelerate large-scale application modernization efforts to containers and Kubernetes.
-* https://docs.openshift.com/container-platform/4.15/migration_toolkit_for_containers/about-mtc.html[Migration Toolkit for Containers] - Migrate stateful application workloads between OpenShift clusters.
+* https://developers.redhat.com/products/mtr/overview[Migration Toolkit for Runtimes^] - Assist and accelerate Java application modernization and migration.
+* https://access.redhat.com/documentation/en-us/migration_toolkit_for_applications/[Migration Toolkit for Applications^] - Accelerate large-scale application modernization efforts to containers and Kubernetes.
+* https://docs.openshift.com/container-platform/4.15/migration_toolkit_for_containers/about-mtc.html[Migration Toolkit for Containers^] - Migrate stateful application workloads between OpenShift clusters.
 
 For more information about these other migration toolkits, please reach out to your Red Hat account team.
