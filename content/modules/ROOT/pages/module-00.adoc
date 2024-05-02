@@ -14,7 +14,7 @@ The beginning section of this lab will introduce you to the basics of creating a
 
 As a reminder, here are your credentials for the OpenShift Console:
 
-Your OpenShift cluster console is available at: {openshift_web_console}[window=_blank]
+Your OpenShift cluster console is available {openshift_web_console}[here^].
 
 Administrator login is available with:
 
