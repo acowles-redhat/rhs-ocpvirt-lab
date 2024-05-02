@@ -41,18 +41,18 @@ Before you install OpenShift Virtualization for Red Hat OpenShift Container Plat
 ** Red Hat Enterprise Linux CoreOS (RHCOS) installed on worker nodes
 ** CPU, memory, and network capacity sufficient to host your virtual machine workload
 
-Review https://docs.openshift.com/container-platform/4.15/virt/install/preparing-cluster-for-virt.html[the documentation] for specific requirements and guidance on hardware for use with OpenShift Virtualization.
+Review the documentation https://docs.openshift.com/container-platform/4.15/virt/install/preparing-cluster-for-virt.html[here^]]for specific requirements and guidance on hardware for use with OpenShift Virtualization.
 
 [NOTE]
 If your cluster uses worker nodes with different CPUs, e.g. Intel and AMD, live migration failures can occur because different CPUs have different capabilities. 
 
 === Review Red Hat OpenShift Cluster
 
-When deployed using the installer provisioned infrastructure (IPI) method, OpenShift uses https://metal3.io/[Metal3] to manage the hardware using the out-of-band management controller. This results in the hardware being represented in three different ways in the cluster:
+When deployed using the installer provisioned infrastructure (IPI) method, OpenShift uses https://metal3.io/[Metal3^] to manage the hardware using the out-of-band management controller. This results in the hardware being represented in three different ways in the cluster:
 
-. https://docs.openshift.com/container-platform/4.13/nodes/index.html[`Node`] - The node is viewed and used by the Kubernetes scheduler. This is the object which represents the usable resources in the cluster.
-. https://docs.openshift.com/container-platform/4.13/machine_management/index.html[`Machine`] - An object managed by an infrastructure provider. In this lab, and when using OpenShift Virtualization, this is a physical server that is abstracted by the Metal3 Operator. These are grouped and managed as a set via the `MachineSet` paradigm.
-. `BareMetalHost` - This is the lowest level and direct interaction with the management of the physical server.
+. https://docs.openshift.com/container-platform/4.15/nodes/index.html[Node^] - The node is viewed and used by the Kubernetes scheduler. This is the object which represents the usable resources in the cluster.
+. https://docs.openshift.com/container-platform/4.15/machine_management/index.html[Machine^] - An object managed by an infrastructure provider. In this lab, and when using OpenShift Virtualization, this is a physical server that is abstracted by the Metal3 Operator. These are grouped and managed as a set via the https://docs.openshift.com/container-platform/4.15/machine_management/creating_machinesets/creating-machineset-bare-metal.html[MachineSet^] paradigm.
+. https://docs.openshift.com/container-platform/4.15/scalability_and_performance/managing-bare-metal-hosts.html[BareMetalHost^] - This is the lowest level and direct interaction with the management of the physical server.
 
 [[review_nodes]]
 == Review Nodes and Machines
