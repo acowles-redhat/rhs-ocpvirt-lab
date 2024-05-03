@@ -308,7 +308,7 @@ image::module-04/27_Windows_PVC.png[link=self, window=blank, width=100%]
 +
 image::module-04/28_Clone_Windows_PVC.png[link=self, window=blank, width=100%]
 +
-. Once this is saved, you can return to the *Virtualization -> Catalog* menu, and use this cloned PVC as a future boot source for creating new Virtual Machines by selecting the *PVC (clone PVC)* as the *Disk source* and selecting the *Windows-2k19-Template* PVC as the *PVC name* to clone.
+. Once this is saved, you can return to the *Virtualization -> Catalog* menu, and use this cloned PVC as a future boot source for creating new Virtual Machines by selecting the option for *PVC (clone PVC)* as the *Disk source*, and selecting the *Windows-2k19-Template* PVC as the *PVC name* to clone.
 +
 image::module-04/29_Windows_Template.png[link=self, window=blank, width=100%]
 

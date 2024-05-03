@@ -100,7 +100,7 @@ sudo ssh root@192.168.123.100
 
 === vCenter Access
 
-In the migration chapter of the lab, you will be asked to login and examine a VMware vSphere environment.
+In the migration chapter of the lab, you will be asked to login and examine a https://{vcenter_console}[VMware vSphere^] environment.
 
 For access, please use the following credentials:
 
