@@ -98,9 +98,9 @@ The information shown is similar to the *Nodes* one, with the exception is provi
 [[scaling_cluster]]
 == Scaling the Cluster with a New Bare Metal Host
 
-In many cases it becomes necessary to add additonal physical nodes to a cluster to meet workload demands. In a virtual deployment of OpenShift, this is as simple as clicking on the appropriate machine set and choosing the scale the number of nodes available, and the hypervisor responds by cloning a VM template and spinning up new workers. In a bare metal environment there are a few more steps involved, but it's still a fairly simple process if you have the hardware available and access to the servers through a BMC that supports the IPMI protocol.
+IMPORTANT: Before you begin this section of the lab, you need to switch to the *openshift-machine-api* project or you will not be able to see the machines, and  machine discovery will not work. You may need to toggle the *Show default projects* switch to see the project in the drop-down list.
 
-IMPORTANT: Ensure that you are in the *openshift-machine-api* project before you begin these steps or machine discovery will not work. You may need to toggle the *Show default projects* switch to see that project.
+In many cases it becomes necessary to add additonal physical nodes to a cluster to meet workload demands. In a virtual deployment of OpenShift, this is as simple as clicking on the appropriate machine set and choosing the scale the number of nodes available, and the hypervisor responds by cloning a VM template and spinning up new workers. In a bare metal environment there are a few more steps involved, but it's still a fairly simple process if you have the hardware available and access to the servers through a BMC that supports the IPMI protocol.
 
 To begin this process we are going to return to the bare metal hosts screen we reviewed earlier:
 
@@ -134,6 +134,15 @@ NOTE: This step may take several minutes to update as it powers up the host, and
 +
 image::module-01/09_Worker4_Summary_2.png[link=self, window=blank, width=100%]
 +
+. Because this lab is being hosted in a virtualized environment we need to make a small configuration change before continuing. Click on the *YAML* tab at the top, and add the following two lines to the end of the *spec:* section to modify the type of hard disk present on the machine. Click the *Save* button.
++
+----
+rootDeviceHints:
+  deviceName: /dev/vda
+----
++
+image::module-01/09a_Worker4_Yaml_Edit.png[link=self, window=blank, width=100%]
++
 . Once a host has been physically discovered the next step is to add it as a machine to be used by OpenShift. Click on the menu for *MachineSets* on the left under *Compute*.
 +
 image::module-01/10_Machinesets.png[link=self, window=blank, width=100%]
@@ -152,7 +161,7 @@ image::module-01/13_Machine_Count_3_4.png[link=self, window=blank, width=100%]
 +
 . Next, click on the *Machines* button on the left under *Compute* to see a list of all the machines, and you should see worker4 in the *Provisioning* state. 
 +
-NOTE: This step can take significant time, as the node reboots several times during the installation process. Do not wait for it to finish, just check back at the end of the lab.
+NOTE: This step can take a few minutes to complete, as the node reboots several times during the installation process. Please be patient.
 +
 image::module-01/14_Worker_4_Provisioning.png[link=self, window=blank, width=100%]
 +

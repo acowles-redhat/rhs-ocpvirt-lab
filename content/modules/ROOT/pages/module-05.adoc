@@ -20,21 +20,6 @@ If you would like to learn more about how to configure the Migration Toolkit for
 [[prerequisites]]
 == Prerequisites for Migrations
 
-////
-The firewalls must enable traffic over the following ports:
-
-. Network ports required for migrating from VMware vSphere
-+
-[cols="1,1,1,1,1"]
-|===
-|*Port*|*Protocol*|*Source*|*Destination*|*Purpose*
-|443|TCP|OpenShift nodes|VMware vCenter|VMware provider inventory
-Disk transfer authentication
-|443|TCP|OpenShift nodes|VMware ESXi hosts|Disk transfer authentication
-|902|TCP|OpenShift nodes|VMware ESXi hosts|Disk transfer data copy
-|===
-////
-
 The following prerequisites apply to all migrations:
 
 * ISO/CD-ROM disks must be unmounted.

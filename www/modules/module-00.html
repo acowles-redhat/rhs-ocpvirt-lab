@@ -262,7 +262,7 @@
 </div>
 </li>
 <li>
-<p>In the <strong>Name</strong> field, type <code>vmexamples</code> to name the project, then click <strong>Create</strong>.</p>
+<p>In the <strong>Name</strong> field, type <strong>vmexamples</strong> to name the project, then click <strong>Create</strong>.</p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-00/03_Create_Project.png" target="blank"><img src="_images/module-00/03_Create_Project.png" alt="03 Create Project" width="100%"></a>
@@ -321,7 +321,7 @@ VMs can also be created from an InstanceType wizard as well as created by enteri
 </div>
 </li>
 <li>
-<p>Change the name to <code>fedora01</code> and press <strong>Quick create VirtualMachine</strong>:</p>
+<p>Change the name to <strong>fedora01</strong> and press <strong>Quick create VirtualMachine</strong>:</p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-00/07_Create_VM_Quick_Name.png" target="blank"><img src="_images/module-00/07_Create_VM_Quick_Name.png" alt="07 Create VM Quick Name" width="100%"></a>
@@ -329,7 +329,7 @@ VMs can also be created from an InstanceType wizard as well as created by enteri
 </div>
 </li>
 <li>
-<p>After a few seconds, expect to see the VM is <code>Running</code>. During this time, the storage provider has cloned the template disk so that it can be used by the newly created virtual machine. The amount of time this takes can vary based on the storage provider being used to create the boot disk.</p>
+<p>After a few seconds, expect to see the VM is <strong>Running</strong>. During this time, the storage provider has cloned the template disk so that it can be used by the newly created virtual machine. The amount of time this takes can vary based on the storage provider being used to create the boot disk.</p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-00/08_Fedora_Running.png" target="blank"><img src="_images/module-00/08_Fedora_Running.png" alt="08 Fedora Running" width="100%"></a>
@@ -426,7 +426,7 @@ VMs can also be created from an InstanceType wizard as well as created by enteri
 </div>
 </div>
 <div class="paragraph">
-<p>In this environment, the default StorageClass, which defines the source and type of storage used for the disk, is called <code>ocs-storagecluster-ceph-rbd-virtualization</code>. This storage is the default type provided by OpenShift Data Foundation (ODF) for running virtual machines. Each storage provider has different storage classes that define the characteristics of the storage backing the VM disk.</p>
+<p>In this environment, the default StorageClass, which defines the source and type of storage used for the disk, is called <strong>ocs-storagecluster-ceph-rbd-virtualization</strong>. This storage is the default type provided by OpenShift Data Foundation (ODF) for running virtual machines. Each storage provider has different storage classes that define the characteristics of the storage backing the VM disk.</p>
 </div>
 </li>
 <li>
@@ -437,7 +437,7 @@ VMs can also be created from an InstanceType wizard as well as created by enteri
 </div>
 </div>
 <div class="paragraph">
-<p>When a VM is created, an interface on the <code>PodNetworking</code> network of type <code>masquerade</code> is created by default. This connects the VM to the SDN and provides access from the VM to outside the OpenShift cluster. Other VMs, and Pods, in the cluster can access the virtual machine using this interface. Furthermore, a VM connected to the SDN can be accessed externally using a Route, or Service with type load balancer, or even have a Network Attachment Definition configured to allow direct access to external networks.</p>
+<p>When a VM is created, an interface on the <strong>PodNetworking</strong> network of type <strong>masquerade</strong> is created by default. This connects the VM to the SDN and provides access from the VM to outside the OpenShift cluster. Other VMs, and Pods, in the cluster can access the virtual machine using this interface. Furthermore, a VM connected to the SDN can be accessed externally using a Route, or Service with type load balancer, or even have a Network Attachment Definition configured to allow direct access to external networks.</p>
 </div>
 </li>
 </ol>
@@ -465,10 +465,10 @@ VMs can also be created from an InstanceType wizard as well as created by enteri
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p><strong>Stop</strong>: Starts a graceful shutdown of the <em>Virtual Machine</em>.</p>
+<p><strong>Stop</strong>: Starts a graceful shutdown of the Virtual Machine.</p>
 </li>
 <li>
-<p><strong>Restart</strong>: This will send a signal to the operating system to reboot the <em>Virtual Machine</em>. Guest integrations are needed for this to work properly.</p>
+<p><strong>Restart</strong>: This will send a signal to the operating system to reboot the Virtual Machine. Guest integrations are needed for this to work properly.</p>
 </li>
 <li>
 <p><strong>Pause</strong>: The process is frozen without further access to CPU resources and I/O, but the memory used by the VM at the hypervisor level will stay allocated.</p>
@@ -485,7 +485,7 @@ VMs can also be created from an InstanceType wizard as well as created by enteri
 </div>
 </li>
 <li>
-<p>Press the <strong>Stop</strong> button and wait till the <em>Virtual Machine</em> is in state <code>Stopped</code>.</p>
+<p>Press the <strong>Stop</strong> button and wait until the Virtual Machine is in state <strong>Stopped</strong>.</p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-00/17_VM_Stopped.png" target="blank"><img src="_images/module-00/17_VM_Stopped.png" alt="17 VM Stopped" width="100%"></a>
@@ -501,10 +501,10 @@ VMs can also be created from an InstanceType wizard as well as created by enteri
 </div>
 </li>
 <li>
-<p>Click <strong>Start</strong>, and wait for the <code>Running</code> status.</p>
+<p>Click <strong>Start</strong>, and wait for the <strong>Running</strong> status.</p>
 </li>
 <li>
-<p>Using the <strong>Actions</strong> menu, or the shortcut button, press the <strong>Pause</strong> option. The <em>Virtual Machine</em> state will change to <code>Paused</code>.</p>
+<p>Using the <strong>Actions</strong> menu, or the shortcut button, press the <strong>Pause</strong> option. The Virtual Machine state will change to <strong>Paused</strong>.</p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-00/19_VM_Actions_Paused.png" target="blank"><img src="_images/module-00/19_VM_Actions_Paused.png" alt="19 VM Actions Paused" width="100%"></a>
@@ -512,7 +512,7 @@ VMs can also be created from an InstanceType wizard as well as created by enteri
 </div>
 </li>
 <li>
-<p>Unpause the <em>Virtual Machine</em> using the <strong>Actions</strong> menu and the option <strong>Unpause</strong>, or by using the shortcut button.</p>
+<p>Unpause the Virtual Machine using the <strong>Actions</strong> menu and the option <strong>Unpause</strong>, or by using the shortcut button.</p>
 </li>
 </ol>
 </div>
@@ -522,7 +522,7 @@ VMs can also be created from an InstanceType wizard as well as created by enteri
 <h2 id="live_migrate"><a class="anchor" href="#live_migrate"></a>Live Migrate a Virtual Machine</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this section, we will migrate the VM from one OpenShift node to another without shutting down the VM. Live migration requires <code>ReadWriteMany</code> (RWX) storage so that the VM disks can be mounted on both the source and destination nodes at the same time. OpenShift Virtualization, unlike other virtualization solutions, does not use monolithic datastores mounted to each cluster member that hold many VM disks for many different VMs. Instead, each VM disk is stored in its own volume that is only mounted when and where it&#8217;s needed.</p>
+<p>In this section, we will migrate the VM from one OpenShift node to another without shutting down the VM. Live migration requires <strong>ReadWriteMany</strong> (RWX) storage so that the VM disks can be mounted on both the source and destination nodes at the same time. OpenShift Virtualization, unlike other virtualization solutions, does not use monolithic datastores mounted to each cluster member that hold many VM disks for many different VMs. Instead, each VM disk is stored in its own volume that is only mounted when and where it&#8217;s needed.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -543,7 +543,7 @@ VMs can also be created from an InstanceType wizard as well as created by enteri
 </div>
 </li>
 <li>
-<p>After a few seconds, the VM will change the status to <code>Migrating</code>. A few seconds later, it will return to the <code>Running</code> status, but on a new node. The VM has been successfully live migrated!</p>
+<p>After a few seconds, the VM will change the status to <strong>Migrating</strong>. A few seconds later, it will return to the <strong>Running</strong> status, but on a new node. The VM has been successfully live migrated!</p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-00/22_Migrated.png" target="blank"><img src="_images/module-00/22_Migrated.png" alt="22 Migrated" width="100%"></a>

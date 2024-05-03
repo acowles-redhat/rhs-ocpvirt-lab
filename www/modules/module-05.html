@@ -289,7 +289,7 @@ The <strong>Migration Toolkit for Virtualization</strong> will automatically ass
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-You will not need to migrate the HAproxy (load balancer) VM because OpenShift handles network traffic and load balancing natively for VMs connected to the SDN using a <code>Service</code>.
+You will not need to migrate the HAproxy (load balancer) VM because OpenShift handles network traffic and load balancing natively for VMs connected to the SDN using a <strong>Service</strong>.
 </td>
 </tr>
 </table>
@@ -302,7 +302,7 @@ You will not need to migrate the HAproxy (load balancer) VM because OpenShift ha
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Navigate to vCenter: {vcenter_console}[vCenter Console^]</p>
+<p>Navigate to VMware vCenter: <a href="https://{vcenter_console}" target="_blank" rel="noopener">vCenter Console</a></p>
 </li>
 <li>
 <p>Login with the following credentials:</p>
@@ -326,7 +326,7 @@ You will not need to migrate the HAproxy (load balancer) VM because OpenShift ha
 </div>
 </li>
 <li>
-<p>Change to the <strong>Networks</strong> view, then expand the tree to view the port group used by the virtual machines. Note that the name is <code>segment-migrating-to-ocpvirt</code>.</p>
+<p>Change to the <strong>Networks</strong> view, then expand the tree to view the port group used by the virtual machines. Note that the name is <strong>segment-migrating-to-ocpvirt</strong>.</p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-05/01_vSphere_Network.png" target="blank"><img src="_images/module-05/01_vSphere_Network.png" alt="01 vSphere Network" width="100%"></a>
@@ -355,7 +355,7 @@ You will not need to migrate the HAproxy (load balancer) VM because OpenShift ha
 <p>Navigate in the left menu to <strong>Migration</strong> &#8594; <strong>Providers for virtualization</strong></p>
 </li>
 <li>
-<p>Select project <code>openshift-mtv</code></p>
+<p>Select project <strong>openshift-mtv</strong></p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-05/03_MTV_Providers.png" target="blank"><img src="_images/module-05/03_MTV_Providers.png" alt="03 MTV Providers" width="100%"></a>
@@ -375,7 +375,7 @@ MTV 2.4 and later are project/namespace aware and do not require administrator p
 </div>
 </li>
 <li>
-<p>By default, there is a provider called <code>host</code> which represents <strong>OpenShift Virtualization</strong> as a target platform.</p>
+<p>By default, there is a provider called <strong>host</strong> which represents <strong>OpenShift Virtualization</strong> as a target platform.</p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-05/04_MTV_Provider_List.png" target="blank"><img src="_images/module-05/04_MTV_Provider_List.png" alt="04 MTV Provider List" width="100%"></a>
@@ -383,7 +383,7 @@ MTV 2.4 and later are project/namespace aware and do not require administrator p
 </div>
 </li>
 <li>
-<p>The lab is already configured with the VMWare provider named <code>vmware</code> and it is marked as a migration source.</p>
+<p>The lab is already configured with the VMWare provider named <strong>vmware</strong> and it is marked as a migration source.</p>
 </li>
 </ol>
 </div>
@@ -539,14 +539,14 @@ Having many participants performing the same task in parallel can cause this tas
 </li>
 <li>
 <p>After several minutes the migration has completed.</p>
-<div class="imageblock unresolved">
+<div class="imageblock">
 <div class="content">
-<a class="image" href="module-05/25_Completed_VMWARE_Plan.png" target="blank"><img src="module-05/25_Completed_VMWARE_Plan.png" alt="25 Completed VMWARE Plan" width="100%"></a>
+<a class="image" href="_images/module-05/25_Completed_VMWARE_Plan.png" target="blank"><img src="_images/module-05/25_Completed_VMWARE_Plan.png" alt="25 Completed VMWARE Plan" width="100%"></a>
 </div>
 </div>
 </li>
 <li>
-<p>The selected VMs have now been migrated and can be started on OpenShift Virtualization. You can now connect to the VM&#8217;s console and interact with it, just as you would have previously in VMware vCenter.</p>
+<p>The selected VMs have now been migrated and can be started on OpenShift Virtualization.</p>
 </li>
 </ol>
 </div>

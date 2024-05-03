@@ -58,6 +58,7 @@ image::module-04/09_Scripts_CloudInit.png[link=self, window=blank, width=100%]
 +
 . When the *Cloud-init* dialog opens, click the radio button to *Configure via: Script* then add the following YAML snippet to the end of the script.
 +
+[source,yaml,role=copy]
 ----
 packages:
   - mariadb-server
@@ -87,6 +88,7 @@ image::module-04/14_VM_Console.png[link=self, window=blank, width=100%]
 +
 . Once you are logged into the virtual machine, run the following command to test the install of MariaDB.
 +
+[source,sh,role=copy]
 ----
 sudo mysql -u root
 ----
@@ -116,8 +118,10 @@ image::module-04/18_Windows_2k19_Dialog.png[link=self, window=blank, width=100%]
 +
 . In this dialog:
 .. Specify the name *windows*
-.. Enable the checkbox *Boot from CD* and specify the url: http://192.168.123.100:81/Windows2019.iso
-.. Reduce the CD disk size to *5 GiB*.
+.. Enable the checkbox *Boot from CD*
+.. Choose URL *(creates PVC)* from the drop-down menu
+.. Specify the url: http://192.168.123.100:81/Windows2019.iso
+.. Reduce the CD disk size to *5 GiB*
 .. Keep the *Disk source* size disk to the default value *60 GiB*
 .. Ensure the *Mount Windows drivers disk* checkbox is enabled. **This is required to install Windows systems, which will provide the drivers for VirtIO.**
 +
@@ -295,10 +299,9 @@ image::module-04/25_Windows_2k19_Provisioning.png[link=self, window=blank, width
 +
 image::module-04/26_Windows_2k19_Console.png[link=self, window=blank, width=100%]
 +
-[IMPORTANT]
-The VM is marked as "Not migratable" because a CD-ROM disk is attached. 
+IMPORTANT: The VM is marked as "Not migratable" because a CD-ROM disk is attached. 
 +
-. Once the VM installation process is complete, we can take a snapshot of the rootdisk, and use that to create a bootable volume template that we can use to boot other Windows 2k19 machines.
+. Once the VM installation process is complete, go ahead and power it off with the stop button. We can now take a snapshot of the root disk, and use that to create a bootable volume template that we can use to boot other Windows 2k19 machines.
 +
 . Click on *Storage* -> *PersistentVolumeClaims* to see a list of PVCs available in the vmexamples namespace.
 +

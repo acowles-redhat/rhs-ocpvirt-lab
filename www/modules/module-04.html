@@ -211,7 +211,7 @@
 </div>
 </li>
 <li>
-<p>In the search bar type in <code>centos9</code> and in the list of templates that appear find the template for <code>centos-stream9-server-large</code>.</p>
+<p>In the search bar type in <strong>centos9</strong> and in the list of templates that appear find the template for <strong>centos-stream9-server-large</strong>.</p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-04/02_Search_Centos9.png" target="blank"><img src="_images/module-04/02_Search_Centos9.png" alt="02 Search Centos9" width="100%"></a>
@@ -219,7 +219,7 @@
 </div>
 </li>
 <li>
-<p>Select the three-dot menu to the far right, and click on the option to <code>Clone</code> from the menu that pops out.</p>
+<p>Select the three-dot menu to the far right, and click on the option to <strong>Clone</strong> from the menu that pops out.</p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-04/03_Clone_Template.png" target="blank"><img src="_images/module-04/03_Clone_Template.png" alt="03 Clone Template" width="100%"></a>
@@ -264,7 +264,7 @@
 </div>
 </li>
 <li>
-<p>Navigate to the <strong>Network Interfaces</strong> tab, to the right of the <code>default</code> interface, select the three-dot menu and the edit option.</p>
+<p>Navigate to the <strong>Network Interfaces</strong> tab, to the right of the <strong>default</strong> interface, select the three-dot menu and the edit option.</p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-04/07_Edit_Network.png" target="blank"><img src="_images/module-04/07_Edit_Network.png" alt="07 Edit Network" width="100%"></a>
@@ -272,7 +272,7 @@
 </div>
 </li>
 <li>
-<p>When the <strong>Edit network interface</strong> menu appears, set the <strong>Network</strong> value to the <code>vmexamples/vlan0</code> network, and click the <strong>Save</strong> button.</p>
+<p>When the <strong>Edit network interface</strong> menu appears, set the <strong>Network</strong> value to the <strong>vmexamples/vlan0</strong> network, and click the <strong>Save</strong> button.</p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-04/08_Edit_Net_Int.png" target="blank"><img src="_images/module-04/08_Edit_Net_Int.png" alt="08 Edit Net Int" width="100%"></a>
@@ -289,13 +289,13 @@
 </li>
 <li>
 <p>When the <strong>Cloud-init</strong> dialog opens, click the radio button to <strong>Configure via: Script</strong> then add the following YAML snippet to the end of the script.</p>
-<div class="listingblock">
+<div class="listingblock copy">
 <div class="content">
-<pre>packages:
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">packages:
   - mariadb-server
 runcmd:
   - systemctl enable mariadb
-  - systemctl start mariadb</pre>
+  - systemctl start mariadb</code></pre>
 </div>
 </div>
 <div class="imageblock">
@@ -324,7 +324,7 @@ runcmd:
 </div>
 </li>
 <li>
-<p>When the virtual machine boots you can see on the <strong>Overview</strong> page that it was created from our template, and has the system resources we defined, and is already attached to the <code>vmexamples/vlan0</code> network with an assigned IP address.</p>
+<p>When the virtual machine boots you can see on the <strong>Overview</strong> page that it was created from our template, and has the system resources we defined, and is already attached to the <strong>vmexamples/vlan0</strong> network with an assigned IP address.</p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-04/13_VM_From_Template.png" target="blank"><img src="_images/module-04/13_VM_From_Template.png" alt="13 VM From Template" width="100%"></a>
@@ -341,9 +341,9 @@ runcmd:
 </li>
 <li>
 <p>Once you are logged into the virtual machine, run the following command to test the install of MariaDB.</p>
-<div class="listingblock">
+<div class="listingblock copy">
 <div class="content">
-<pre>sudo mysql -u root</pre>
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">sudo mysql -u root</code></pre>
 </div>
 </div>
 <div class="imageblock">
@@ -408,19 +408,25 @@ Notice that there is intially no option to quick create this VM, and we must cus
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Specify the name <code>windows</code></p>
+<p>Specify the name <strong>windows</strong></p>
 </li>
 <li>
-<p>Enable the checkbox <strong>Boot from CD</strong> and specify the url: <a href="http://192.168.123.100:81/Windows2019.iso" class="bare">http://192.168.123.100:81/Windows2019.iso</a></p>
+<p>Enable the checkbox <strong>Boot from CD</strong></p>
 </li>
 <li>
-<p>Reduce the CD disk size to <strong>5 GiB</strong>.</p>
+<p>Choose URL <strong>(creates PVC)</strong> from the drop-down menu</p>
 </li>
 <li>
-<p>Keep the <code>Disk source</code> size disk to the default value <strong>60 GiB</strong></p>
+<p>Specify the url: <a href="http://192.168.123.100:81/Windows2019.iso" class="bare">http://192.168.123.100:81/Windows2019.iso</a></p>
 </li>
 <li>
-<p>Ensure the <code>Mount Windows drivers disk</code> checkbox is enabled. <strong>This is required to install Windows systems, which will provide the drivers for VirtIO.</strong></p>
+<p>Reduce the CD disk size to <strong>5 GiB</strong></p>
+</li>
+<li>
+<p>Keep the <strong>Disk source</strong> size disk to the default value <strong>60 GiB</strong></p>
+</li>
+<li>
+<p>Ensure the <strong>Mount Windows drivers disk</strong> checkbox is enabled. <strong>This is required to install Windows systems, which will provide the drivers for VirtIO.</strong></p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-04/19_Windows_2k19_Parameters.png" target="blank"><img src="_images/module-04/19_Windows_2k19_Parameters.png" alt="19 Windows 2k19 Parameters" width="100%"></a>
@@ -450,7 +456,7 @@ Notice that there is intially no option to quick create this VM, and we must cus
 </div>
 </li>
 <li>
-<p>Copy and paste the following code block into the <code>autounattend.xml</code> section:</p>
+<p>Copy and paste the following code block into the <strong>autounattend.xml</strong> section:</p>
 <div class="listingblock copy">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0" encoding="utf-8"?&gt;
@@ -600,7 +606,7 @@ Notice that there is intially no option to quick create this VM, and we must cus
 </div>
 </li>
 <li>
-<p>You will be returned to the <strong>Customize and create Virtual Machine</strong> screen, Click on the <strong>Disks</strong> tab, and locate the line for the <code>installation-CDROM</code>, click the three-dot menu on the right, and select <code>Edit</code>.</p>
+<p>You will be returned to the <strong>Customize and create Virtual Machine</strong> screen, Click on the <strong>Disks</strong> tab, and locate the line for the <strong>installation-CDROM</strong>, click the three-dot menu on the right, and select <strong>Edit</strong>.</p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-04/23_Edit_Boot_Media.png" target="blank"><img src="_images/module-04/23_Edit_Boot_Media.png" alt="23 Edit Boot Media" width="100%"></a>
@@ -608,7 +614,7 @@ Notice that there is intially no option to quick create this VM, and we must cus
 </div>
 </li>
 <li>
-<p>Select the option for <code>Use this disk as a boot source</code>, and click on the <strong>Save</strong> button at the bottom.</p>
+<p>Select the option for <strong>Use this disk as a boot source</strong>, and click on the <strong>Save</strong> button at the bottom.</p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-04/24_Boot_Source.png" target="blank"><img src="_images/module-04/24_Boot_Source.png" alt="24 Boot Source" width="100%"></a>
@@ -627,7 +633,7 @@ Notice that there is intially no option to quick create this VM, and we must cus
 </div>
 </li>
 <li>
-<p>After a few minutes, the Virtual VM will be in <code>Running</code> status. Switch to the <strong>Console</strong> tab:</p>
+<p>After a few minutes, the Virtual VM will be in <strong>Running</strong> status. Switch to the <strong>Console</strong> tab:</p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-04/26_Windows_2k19_Console.png" target="blank"><img src="_images/module-04/26_Windows_2k19_Console.png" alt="26 Windows 2k19 Console" width="100%"></a>
@@ -647,7 +653,7 @@ The VM is marked as "Not migratable" because a CD-ROM disk is attached.
 </div>
 </li>
 <li>
-<p>Once the VM installation process is complete, we can take a snapshot of the rootdisk, and use that to create a bootable volume template that we can use to boot other Windows 2k19 machines.</p>
+<p>Once the VM installation process is complete, go ahead and power it off with the stop button. We can now take a snapshot of the root disk, and use that to create a bootable volume template that we can use to boot other Windows 2k19 machines.</p>
 </li>
 <li>
 <p>Click on <strong>Storage</strong> &#8594; <strong>PersistentVolumeClaims</strong> to see a list of PVCs available in the vmexamples namespace.</p>
@@ -666,7 +672,7 @@ The VM is marked as "Not migratable" because a CD-ROM disk is attached.
 </div>
 </li>
 <li>
-<p>Once this is saved, you can return to the <strong>Virtualization &#8594; Catalog</strong> menu, and use this cloned PVC as a future boot source for creating new Virtual Machines by selecting the <strong>PVC (clone PVC)</strong> as the <strong>Disk source</strong> and selecting the <strong>Windows-2k19-Template</strong> PVC as the <strong>PVC name</strong> to clone.</p>
+<p>Once this is saved, you can return to the <strong>Virtualization &#8594; Catalog</strong> menu, and use this cloned PVC as a future boot source for creating new Virtual Machines by selecting the option for <strong>PVC (clone PVC)</strong> as the <strong>Disk source</strong>, and selecting the <strong>Windows-2k19-Template</strong> PVC as the <strong>PVC name</strong> to clone.</p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-04/29_Windows_Template.png" target="blank"><img src="_images/module-04/29_Windows_Template.png" alt="29 Windows Template" width="100%"></a>

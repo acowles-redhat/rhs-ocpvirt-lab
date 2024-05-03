@@ -35,24 +35,13 @@ To manage an OpenShift node's network configuration you use a tool, available as
 +
 image::module-03/01_NAD_Dashboard.png[link=self, window=blank, width=100%]
 +
-////
-[IMPORTANT]
-====
-Select project *vmexamples*.
-====
-
-. Complete the form for the *vmexamples* project as follows, then click *Create network attachment definition*:
-* *Name*: *flatnetwork*
-* *Network Type*: *CNV Linux Bridge*
-* *Bridge Name*: *br-flat*
-+
-////
 . Click the *Edit YAML* button at the top of the page.
 +
 image::module-03/02_NAD_Create.png[link=self, window=blank, width=100%]
 +
 . Paste in the following yaml snippet, and click the Create button:
 +
+[source,yaml,role=copy]
 ----
 apiVersion: k8s.cni.cncf.io/v1
 kind: NetworkAttachmentDefinition
@@ -74,8 +63,7 @@ spec:
 +
 image::module-03/03_NAD_YAML.png[link=self, window=blank, width=100%]
 +
-[NOTE]
-In most cases a single OVS bridge can support many Network Attachment Definitions each with their own designated *VLAN Tag Number*. In this lab we use an untagged network, so no VLAN number is required here, as such our Network Attachment Definition is labeled as vlan0. 
+NOTE: In most cases a single OVS bridge can support many Network Attachment Definitions each with their own designated *VLAN Tag Number*. In this lab we use an untagged network, so no VLAN number is required here, as such our Network Attachment Definition is labeled as vlan0. 
 +
 . Examine the details of the network attachment definition. Because this was created in the *vmexamples* project, it will be available only to attach to VMs that are in that project.
 +
@@ -104,7 +92,6 @@ image::module-03/07_VM_Net_Modify.png[link=self, window=blank, width=100%]
 +
 image::module-03/08_New_IP_Address.png[link=self, window=blank, width=100%]
 
-
 IMPORTANT: Before the next section of this lab, please repeat the actions to attach the fedora02 VM to the same vlan0 network.
 
 [[multinetwork_policy]]
@@ -114,33 +101,6 @@ IMPORTANT: Before the next section of this lab, please repeat the actions to att
 A multinetwork policy allows you to configure network access to a namespace and to define granular rules allowing ingress and egress from the namespace to enhance security of the applications and VMs that are running in the namespace.
 
 NOTE: This section of the lab is primarily performed through the CLI. You will need to ssh to your Bastion host where the CLI tools are already installed. Use the SSH Terminal on the right to connect to your bastion host *sudo ssh root@192.168.123.100*
-
-////
-
-=== Enable Multinetwork Policy
-
-First you must enable multinetwork policy by creating a patch definition and applying it as the cluster administrator.
-
-. Copy and paste the following code into a newly created file called multinetwork-enable-patch.yaml
-+
-----
-apiVersion: operator.openshift.io/v1
-kind: Network
-metadata:
-  name: cluster
-spec:
-  useMultiNetworkPolicy: true
-----
-+
-. Now run the OC patch command to apply the patch.
-+
-----
-oc patch network.operator.openshift.io cluster --type=merge --patch-file=multinetwork-enable-patch.yaml
-----
-+
-image::module-03/09_Multinetwork_Enable.png[link=self, window=blank, width=100%]
-
-////
 
 === Create a MultiNetwork Policy
 
@@ -152,6 +112,7 @@ image::module-03/10_Find_IP_Addresses.png[link=self, window=blank, width=100%]
 
 . From our bastion host we want to paste the following content into a new file called deny-all.yaml:
 +
+[source,yaml,role=copy]
 ----
 apiVersion: k8s.cni.cncf.io/v1beta1
 kind: MultiNetworkPolicy
@@ -172,6 +133,7 @@ image::module-03/11_Bastion_Ping.png[link=self, window=blank, width=100%]
 +
 . Apply the multinetwork policy with the following syntax:
 +
+[source,sh,role=execute]
 ----
 oc apply -f deny-all.yaml -n vmexamples
 ----
@@ -196,6 +158,7 @@ image::module-03/16_Fedora02_Ping_Fail.png[link=self, window=blank, width=100%]
 +
 . Return to the bastion host console, and create a new file called allow-host.yaml, and paste in the following content:
 +
+[source,yaml,role=copy]
 ----
 apiVersion: k8s.cni.cncf.io/v1beta1
 kind: MultiNetworkPolicy
@@ -213,12 +176,13 @@ spec:
         cidr: <IP_ADDR_FROM_FEDORA02>/32
 ----
 +
-NOTE: Make sure that you substitute the correct IP from the Fedora02 VM.
+IMPORTANT: Make sure that you substitute the correct IP from the Fedora02 VM.
 +
 image::module-03/17_Allow_Host_Syntax.png[link=self, window=blank, width=100%]
 +
 . Apply the policy using the following syntax:
 +
+[source,sh,role=execute]
 ----
 oc apply -f allow-host.yaml -n vmexamples
 ----
@@ -240,6 +204,7 @@ IMPORTANT: For the next lab, it's important that we clear out the two network po
 +
 Please run the following two commands:
 +
+[source,sh,role=execute]
 ----
 oc delete -f allow-host.yaml -n vmexamples
 oc delete -f deny-all.yaml -n vmexamples

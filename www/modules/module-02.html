@@ -189,15 +189,15 @@
 <h2 id="examine_pvc"><a class="anchor" href="#examine_pvc"></a>Examine the PVC for a VM</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this lab, we are going to take a closer look at the storage behind the virtual machine we just created <code>fedora01</code>.</p>
+<p>In this lab, we are going to take a closer look at the storage behind the virtual machine we just created <strong>fedora01</strong>.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Start by clicking on the left menu for <code>Storage</code> &#8594; <code>Persistent Volume Claims</code>. Make sure you are in the <code>vmexamples</code> namespace, you should see the <code>fedora01</code> VM from the previous section listed.</p>
+<p>Start by clicking on the left menu for <strong>Storage</strong> &#8594; <strong>Persistent Volume Claims</strong>. Make sure you are in the <strong>vmexamples</strong> namespace, you should see the <strong>fedora01</strong> VM from the previous section listed.</p>
 </li>
 <li>
-<p>Click on the <code>fedora01</code> VM and you will be presented with a screen that shows additional details about the storage volume backing the VM.</p>
+<p>Click on the <strong>fedora01</strong> VM and you will be presented with a screen that shows additional details about the storage volume backing the VM.</p>
 </li>
 <li>
 <p>Notice the following information about the persistent volume claim:</p>
@@ -216,7 +216,7 @@
 <p>The Volume mode of the PVC is Block</p>
 </li>
 <li>
-<p>The volume is using the <code>ocs-storagecluster-ceph-rbd-virtualization</code> storage class.</p>
+<p>The volume is using the <strong>ocs-storagecluster-ceph-rbd-virtualization</strong> storage class.</p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-02/02_Fedora01_PVC_Details.png" target="blank"><img src="_images/module-02/02_Fedora01_PVC_Details.png" alt="02 Fedora01 PVC Details" width="100%"></a>
@@ -280,7 +280,7 @@
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Navigate back to <strong>Virtualization</strong> &#8594; <strong>VirtualMachines</strong> and select the virtual machine, <code>fedora01</code> in the project <code>vmexamples</code>.</p>
+<p>Navigate back to <strong>Virtualization</strong> &#8594; <strong>VirtualMachines</strong> and select the virtual machine, <strong>fedora01</strong> in the project <strong>vmexamples</strong>.</p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-02/03_VM_Overview.png" target="blank"><img src="_images/module-02/03_VM_Overview.png" alt="03 VM Overview" width="100%"></a>
@@ -312,7 +312,7 @@
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-There is a warning about the <code>cloudinitdisk</code> not being included in the snapshot. This is expected and happens because it is an ephemeral disk.
+There is a warning about the <strong>cloudinitdisk</strong> not being included in the snapshot. This is expected and happens because it is an ephemeral disk.
 </td>
 </tr>
 </table>
@@ -324,7 +324,7 @@ There is a warning about the <code>cloudinitdisk</code> not being included in th
 </div>
 </li>
 <li>
-<p>Press <strong>Save</strong> and wait till the <em>Snapshot</em> has been created and the <strong>status</strong> shows as <code>Succeeded</code>.</p>
+<p>Press <strong>Save</strong> and wait till the <em>Snapshot</em> has been created and the <strong>status</strong> shows as <strong>Succeeded</strong>.</p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-02/07_VM_Snapshot_Taken.png" target="blank"><img src="_images/module-02/07_VM_Snapshot_Taken.png" alt="07 VM Snapshot Taken" width="100%"></a>
@@ -348,7 +348,7 @@ There is a warning about the <code>cloudinitdisk</code> not being included in th
 </div>
 </li>
 <li>
-<p>Click on the <code>Guest login credentials</code> dropdown to gather the username and password to log into your console.</p>
+<p>Click on the <strong>Guest login credentials</strong> dropdown to gather the username and password to log into your console.</p>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -356,7 +356,7 @@ There is a warning about the <code>cloudinitdisk</code> not being included in th
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-There is a <code>Copy to clipboard</code> button and a <code>Paste</code> button available here, which makes the login process much easier.
+There is a <strong>Copy to clipboard</strong> button and a <strong>Paste</strong> button available here, which makes the login process much easier.
 </td>
 </tr>
 </table>
@@ -364,9 +364,9 @@ There is a <code>Copy to clipboard</code> button and a <code>Paste</code> button
 </li>
 <li>
 <p>Once you are logged in, execute the following command:</p>
-<div class="listingblock">
+<div class="listingblock copy">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">[fedora@fedora01 ~]$ sudo rm -rf /boot/grub2; sudo shutdown -r now</code></pre>
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">sudo rm -rf /boot/grub2; sudo shutdown -r now</code></pre>
 </div>
 </div>
 </li>
@@ -463,7 +463,7 @@ In the previous step, the operating system was shutdown from within the guest. H
 </div>
 </li>
 <li>
-<p>Press <strong>Clone</strong> from the <strong>Actions</strong> menu, and a dialog will open. Name the cloned VM <code>fedora02</code>, and select the check box to <code>Start VirtualMachine on clone</code>.</p>
+<p>Press <strong>Clone</strong> from the <strong>Actions</strong> menu, and a dialog will open. Name the cloned VM <strong>fedora02</strong>, and select the check box to <strong>Start VirtualMachine on clone</strong>.</p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-02/18_VM_Clone_Dialog.png" target="blank"><img src="_images/module-02/18_VM_Clone_Dialog.png" alt="18 VM Clone Dialog" width="100%"></a>
@@ -471,7 +471,7 @@ In the previous step, the operating system was shutdown from within the guest. H
 </div>
 </li>
 <li>
-<p>A new VM is created, the disks are cloned and automatically the portal will redirect you to the new VM, and you can see the <code>Created</code> time as very recently.</p>
+<p>A new VM is created, the disks are cloned and automatically the portal will redirect you to the new VM, and you can see the <strong>Created</strong> time as very recently.</p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-02/19_VM_Cloned.png" target="blank"><img src="_images/module-02/19_VM_Cloned.png" alt="19 VM Cloned" width="100%"></a>

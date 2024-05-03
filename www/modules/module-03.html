@@ -176,7 +176,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p>The SDN provides additional features for abstracting, connecting, and exposing applications in a controlled manner, whether deployed as VMs or Pods in the cluster. These include the <code>Service</code> and <code>Route</code> features of OpenShift.</p>
+<p>The SDN provides additional features for abstracting, connecting, and exposing applications in a controlled manner, whether deployed as VMs or Pods in the cluster. These include the <strong>Service</strong> and <strong>Route</strong> features of OpenShift.</p>
 </li>
 <li>
 <p>OpenShift&#8217;s network policy engine allows the VM user or administrator to create rules which allow or deny network traffic to and from individual VMs or entire projects/namespaces.</p>
@@ -218,7 +218,7 @@ The OpenShift environment has already been configured with an OVS Bridge on each
 <h2 id="create_netattach"><a class="anchor" href="#create_netattach"></a>Create a Network Attachment Definition</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In order to use the OVS Bridge with your VM you need to create a <strong>Network Attachment Definition</strong>. This is what tells OpenShift about the network and allows the virtual machines to connect to it. Network Attachment Definitions are specific to the project/namespace they&#8217;re created in, unless they&#8217;re created in the <code>default</code> project. This gives you, the administrator, the ability to control which networks are and aren&#8217;t available to users who have access to manage their own VMs. Once the Network Attachment Definition has been created, it can then be used by virtual machines when configuring their network adapters.</p>
+<p>In order to use the OVS Bridge with your VM you need to create a <strong>Network Attachment Definition</strong>. This is what tells OpenShift about the network and allows the virtual machines to connect to it. Network Attachment Definitions are specific to the project/namespace they&#8217;re created in, unless they&#8217;re created in the <strong>default</strong> project. This gives you, the administrator, the ability to control which networks are and aren&#8217;t available to users who have access to manage their own VMs. Once the Network Attachment Definition has been created, it can then be used by virtual machines when configuring their network adapters.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -258,9 +258,9 @@ A network attachment definition instructs openshift to utilise an existing netwo
 </li>
 <li>
 <p>Paste in the following yaml snippet, and click the Create button:</p>
-<div class="listingblock">
+<div class="listingblock copy">
 <div class="content">
-<pre>apiVersion: k8s.cni.cncf.io/v1
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: k8s.cni.cncf.io/v1
 kind: NetworkAttachmentDefinition
 metadata:
   annotations:
@@ -275,7 +275,7 @@ spec:
       "type": "ovn-k8s-cni-overlay",
       "topology": "localnet",
       "netAttachDefName": "vmexamples/vlan0"
-    }</pre>
+    }</code></pre>
 </div>
 </div>
 <div class="imageblock">
@@ -290,14 +290,14 @@ spec:
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-In most cases a single OVS bridge can support many Network Attachment Definitions each with their own designated <code>VLAN Tag Number</code>. In this lab we use an untagged network, so no VLAN number is required here, as such our Network Attachment Definition is labeled as vlan0.
+In most cases a single OVS bridge can support many Network Attachment Definitions each with their own designated <strong>VLAN Tag Number</strong>. In this lab we use an untagged network, so no VLAN number is required here, as such our Network Attachment Definition is labeled as vlan0.
 </td>
 </tr>
 </table>
 </div>
 </li>
 <li>
-<p>Examine the details of the network attachment definition. Because this was created in the <code>vmexamples</code> project, it will be available only to attach to VMs that are in that project.</p>
+<p>Examine the details of the network attachment definition. Because this was created in the <strong>vmexamples</strong> project, it will be available only to attach to VMs that are in that project.</p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-03/04_NAD_Created.png" target="blank"><img src="_images/module-03/04_NAD_Created.png" alt="04 NAD Created" width="100%"></a>
@@ -314,7 +314,7 @@ In most cases a single OVS bridge can support many Network Attachment Definition
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Navigate to <strong>Virtualization</strong> &#8594; <strong>VirtualMachines</strong>, select the <code>fedora01</code> VM. Click <strong>Configuration</strong> tab and then click the <strong>Network</strong> subtab:</p>
+<p>Navigate to <strong>Virtualization</strong> &#8594; <strong>VirtualMachines</strong>, select the <strong>fedora01</strong> VM. Click <strong>Configuration</strong> tab and then click the <strong>Network</strong> subtab:</p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-03/05_VM_Network_Tab.png" target="blank"><img src="_images/module-03/05_VM_Network_Tab.png" alt="05 VM Network Tab" width="100%"></a>
@@ -353,7 +353,7 @@ Notice that the VM is currently using a single interface <strong>default</strong
 <p>Use the <strong>Actions</strong> menu or icon in the upper right corner to restart the VM. After rebooting, navigate to the <strong>Overview</strong> tab:</p>
 </li>
 <li>
-<p>Once the machine restarts, you can see in the <strong>Network Interfaces</strong> section of the <strong>Overview</strong> screen that the <code>default</code> interface obtains a DHCP IP address from the flat network (<code>192.168.3.x/24</code>).</p>
+<p>Once the machine restarts, you can see in the <strong>Network Interfaces</strong> section of the <strong>Overview</strong> screen that the <strong>default</strong> interface obtains a DHCP IP address from the flat network (<strong>192.168.3.x/24</strong>).</p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-03/08_New_IP_Address.png" target="blank"><img src="_images/module-03/08_New_IP_Address.png" alt="08 New IP Address" width="100%"></a>
@@ -389,7 +389,7 @@ Before the next section of this lab, please repeat the actions to attach the fed
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-This section of the lab is primarily performed through the CLI. You will need to ssh to your Bastion host where the CLI tools are already installed. Use the SSH Terminal on the right to connect to your bastion host <code>sudo ssh root@192.168.123.100</code>
+This section of the lab is primarily performed through the CLI. You will need to ssh to your Bastion host where the CLI tools are already installed. Use the SSH Terminal on the right to connect to your bastion host <strong>sudo ssh root@192.168.123.100</strong>
 </td>
 </tr>
 </table>
@@ -406,7 +406,7 @@ This section of the lab is primarily performed through the CLI. You will need to
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The IP addresses of your virtual guests may differ from those in the attached images or examples, verify the correct addresses present in your lab environment by clicking on the Overview screen for each VM and taking a look at the <code>Network interfaces</code> tile.
+The IP addresses of your virtual guests may differ from those in the attached images or examples, verify the correct addresses present in your lab environment by clicking on the Overview screen for each VM and taking a look at the <strong>Network interfaces</strong> tile.
 </td>
 </tr>
 </table>
@@ -420,9 +420,9 @@ The IP addresses of your virtual guests may differ from those in the attached im
 <ol class="arabic">
 <li>
 <p>From our bastion host we want to paste the following content into a new file called deny-all.yaml:</p>
-<div class="listingblock">
+<div class="listingblock copy">
 <div class="content">
-<pre>apiVersion: k8s.cni.cncf.io/v1beta1
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: k8s.cni.cncf.io/v1beta1
 kind: MultiNetworkPolicy
 metadata:
   name: deny-by-default
@@ -432,12 +432,12 @@ spec:
   podSelector: {}
   policyTypes:
   - Ingress
-  ingress: []</pre>
+  ingress: []</code></pre>
 </div>
 </div>
 </li>
 <li>
-<p>Once the file is saved, start a ping to the IP address of the <code>fedora01</code> virtual machine to confirm that you can currently connect.</p>
+<p>Once the file is saved, start a ping to the IP address of the <strong>fedora01</strong> virtual machine to confirm that you can currently connect.</p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-03/11_Bastion_Ping.png" target="blank"><img src="_images/module-03/11_Bastion_Ping.png" alt="11 Bastion Ping" width="100%"></a>
@@ -446,9 +446,9 @@ spec:
 </li>
 <li>
 <p>Apply the multinetwork policy with the following syntax:</p>
-<div class="listingblock">
+<div class="listingblock execute">
 <div class="content">
-<pre>oc apply -f deny-all.yaml -n vmexamples</pre>
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">oc apply -f deny-all.yaml -n vmexamples</code></pre>
 </div>
 </div>
 <div class="imageblock">
@@ -466,7 +466,7 @@ spec:
 </div>
 </li>
 <li>
-<p>Return to your OpenShift console, and click on <code>Virtualization &#8594; VirtualMachines</code> and select your <code>fedora02</code> machine.</p>
+<p>Return to your OpenShift console, and click on <strong>Virtualization &#8594; VirtualMachines</strong> and select your <strong>fedora02</strong> machine.</p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-03/14_Fedora02_Overview.png" target="blank"><img src="_images/module-03/14_Fedora02_Overview.png" alt="14 Fedora02 Overview" width="100%"></a>
@@ -482,7 +482,7 @@ spec:
 </div>
 </li>
 <li>
-<p>Attempt to ping the ip address for the <code>fedora01</code> virtual machine, notice that it is also blocked, even though we are on the same subnet, in the same namespace. <strong>Leave the ping running.</strong></p>
+<p>Attempt to ping the ip address for the <strong>fedora01</strong> virtual machine, notice that it is also blocked, even though we are on the same subnet, in the same namespace. <strong>Leave the ping running.</strong></p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-03/16_Fedora02_Ping_Fail.png" target="blank"><img src="_images/module-03/16_Fedora02_Ping_Fail.png" alt="16 Fedora02 Ping Fail" width="100%"></a>
@@ -491,9 +491,9 @@ spec:
 </li>
 <li>
 <p>Return to the bastion host console, and create a new file called allow-host.yaml, and paste in the following content:</p>
-<div class="listingblock">
+<div class="listingblock copy">
 <div class="content">
-<pre>apiVersion: k8s.cni.cncf.io/v1beta1
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: k8s.cni.cncf.io/v1beta1
 kind: MultiNetworkPolicy
 metadata:
   name:  ingress-ipblock
@@ -506,14 +506,14 @@ spec:
   ingress:
   - from:
     - ipBlock:
-        cidr: &lt;IP_ADDR_FROM_FEDORA02&gt;/32</pre>
+        cidr: &lt;IP_ADDR_FROM_FEDORA02&gt;/32</code></pre>
 </div>
 </div>
-<div class="admonitionblock note">
+<div class="admonitionblock important">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-note" title="Note"></i>
+<i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
 Make sure that you substitute the correct IP from the Fedora02 VM.
@@ -529,9 +529,9 @@ Make sure that you substitute the correct IP from the Fedora02 VM.
 </li>
 <li>
 <p>Apply the policy using the following syntax:</p>
-<div class="listingblock">
+<div class="listingblock execute">
 <div class="content">
-<pre>oc apply -f allow-host.yaml -n vmexamples</pre>
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">oc apply -f allow-host.yaml -n vmexamples</code></pre>
 </div>
 </div>
 <div class="imageblock">
@@ -549,7 +549,7 @@ Make sure that you substitute the correct IP from the Fedora02 VM.
 </div>
 </li>
 <li>
-<p>Return to your <code>fedora02</code> VM console, you should find that the ping has now resumed successfully.</p>
+<p>Return to your <strong>fedora02</strong> VM console, you should find that the ping has now resumed successfully.</p>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/module-03/20_Fedora02_Ping_Allowed.png" target="blank"><img src="_images/module-03/20_Fedora02_Ping_Allowed.png" alt="20 Fedora02 Ping Allowed" width="100%"></a>
@@ -573,10 +573,10 @@ For the next lab, it&#8217;s important that we clear out the two network policie
 <div class="paragraph">
 <p>Please run the following two commands:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock execute">
 <div class="content">
-<pre>oc delete -f allow-host.yaml -n vmexamples
-oc delete -f deny-all.yaml -n vmexamples</pre>
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">oc delete -f allow-host.yaml -n vmexamples
+oc delete -f deny-all.yaml -n vmexamples</code></pre>
 </div>
 </div>
 </li>
