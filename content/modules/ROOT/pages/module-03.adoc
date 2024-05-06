@@ -41,7 +41,7 @@ image::module-03/02_NAD_Create.png[link=self, window=blank, width=100%]
 +
 . Paste in the following yaml snippet, and click the Create button:
 +
-[source,yaml,role=copy]
+[source,yaml,role=execute]
 ----
 apiVersion: k8s.cni.cncf.io/v1
 kind: NetworkAttachmentDefinition
@@ -112,7 +112,7 @@ image::module-03/10_Find_IP_Addresses.png[link=self, window=blank, width=100%]
 
 . From our bastion host we want to paste the following content into a new file called deny-all.yaml:
 +
-[source,yaml,role=copy]
+[source,yaml,role=execute]
 ----
 apiVersion: k8s.cni.cncf.io/v1beta1
 kind: MultiNetworkPolicy
@@ -158,7 +158,7 @@ image::module-03/16_Fedora02_Ping_Fail.png[link=self, window=blank, width=100%]
 +
 . Return to the bastion host console, and create a new file called allow-host.yaml, and paste in the following content:
 +
-[source,yaml,role=copy]
+[source,yaml,role=execute]
 ----
 apiVersion: k8s.cni.cncf.io/v1beta1
 kind: MultiNetworkPolicy

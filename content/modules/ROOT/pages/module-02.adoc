@@ -89,7 +89,7 @@ NOTE: There is a *Copy to clipboard* button and a *Paste* button available here,
 +
 . Once you are logged in, execute the following command: 
 +
-[source,sh,role=copy]
+[source,sh,role=execute]
 ----
 sudo rm -rf /boot/grub2; sudo shutdown -r now
 ----

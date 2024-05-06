@@ -258,7 +258,7 @@ A network attachment definition instructs openshift to utilise an existing netwo
 </li>
 <li>
 <p>Paste in the following yaml snippet, and click the Create button:</p>
-<div class="listingblock copy">
+<div class="listingblock execute">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: k8s.cni.cncf.io/v1
 kind: NetworkAttachmentDefinition
@@ -420,7 +420,7 @@ The IP addresses of your virtual guests may differ from those in the attached im
 <ol class="arabic">
 <li>
 <p>From our bastion host we want to paste the following content into a new file called deny-all.yaml:</p>
-<div class="listingblock copy">
+<div class="listingblock execute">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: k8s.cni.cncf.io/v1beta1
 kind: MultiNetworkPolicy
@@ -491,7 +491,7 @@ spec:
 </li>
 <li>
 <p>Return to the bastion host console, and create a new file called allow-host.yaml, and paste in the following content:</p>
-<div class="listingblock copy">
+<div class="listingblock execute">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: k8s.cni.cncf.io/v1beta1
 kind: MultiNetworkPolicy

@@ -58,7 +58,7 @@ image::module-04/09_Scripts_CloudInit.png[link=self, window=blank, width=100%]
 +
 . When the *Cloud-init* dialog opens, click the radio button to *Configure via: Script* then add the following YAML snippet to the end of the script.
 +
-[source,yaml,role=copy]
+[source,yaml,role=execute]
 ----
 packages:
   - mariadb-server
@@ -88,7 +88,7 @@ image::module-04/14_VM_Console.png[link=self, window=blank, width=100%]
 +
 . Once you are logged into the virtual machine, run the following command to test the install of MariaDB.
 +
-[source,sh,role=copy]
+[source,sh,role=execute]
 ----
 sudo mysql -u root
 ----
@@ -139,7 +139,7 @@ image::module-04/21_Sysprep.png[link=self, window=blank, width=100%]
 +
 . Copy and paste the following code block into the *autounattend.xml* section:
 +
-[source,xml,role=copy]
+[source,xml,role=execute]
 ----
 <?xml version="1.0" encoding="utf-8"?>
 <unattend xmlns="urn:schemas-microsoft-com:unattend" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:schemas-microsoft-com:unattend">
