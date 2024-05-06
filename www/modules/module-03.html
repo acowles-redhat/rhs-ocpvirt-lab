@@ -575,8 +575,7 @@ For the next lab, it&#8217;s important that we clear out the two network policie
 </div>
 <div class="listingblock execute">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">oc delete -f allow-host.yaml -n vmexamples
-oc delete -f deny-all.yaml -n vmexamples</code></pre>
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">oc delete -f allow-host.yaml -f deny-all.yaml -n vmexamples</code></pre>
 </div>
 </div>
 </li>

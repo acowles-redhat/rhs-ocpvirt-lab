@@ -60,11 +60,11 @@ image::module-04/09_Scripts_CloudInit.png[link=self, window=blank, width=100%]
 +
 [source,yaml,role=execute]
 ----
-packages:
-  - mariadb-server
-runcmd:
-  - systemctl enable mariadb
-  - systemctl start mariadb
+  packages:
+    - mariadb-server
+  runcmd:
+    - systemctl enable mariadb
+    - systemctl start mariadb
 ----
 +
 image::module-04/10_Cloud_Init_Script.png[link=self, window=blank, width=100%]

@@ -291,11 +291,11 @@
 <p>When the <strong>Cloud-init</strong> dialog opens, click the radio button to <strong>Configure via: Script</strong> then add the following YAML snippet to the end of the script.</p>
 <div class="listingblock execute">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">packages:
-  - mariadb-server
-runcmd:
-  - systemctl enable mariadb
-  - systemctl start mariadb</code></pre>
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">  packages:
+    - mariadb-server
+  runcmd:
+    - systemctl enable mariadb
+    - systemctl start mariadb</code></pre>
 </div>
 </div>
 <div class="imageblock">

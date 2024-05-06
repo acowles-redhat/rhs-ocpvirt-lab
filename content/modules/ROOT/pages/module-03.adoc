@@ -206,8 +206,7 @@ Please run the following two commands:
 +
 [source,sh,role=execute]
 ----
-oc delete -f allow-host.yaml -n vmexamples
-oc delete -f deny-all.yaml -n vmexamples
+oc delete -f allow-host.yaml -f deny-all.yaml -n vmexamples
 ----
 
 == Summary
