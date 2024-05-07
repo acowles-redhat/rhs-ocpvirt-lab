@@ -136,9 +136,10 @@ image::module-01/09_Worker4_Summary_2.png[link=self, window=blank, width=100%]
 +
 . Because this lab is being hosted in a virtualized environment we need to make a small configuration change before continuing. Click on the *YAML* tab at the top, and add the following two lines to the end of the *spec:* section to modify the type of hard disk present on the machine. Click the *Save* button.
 +
+[source,yaml,role=execute]
 ----
-rootDeviceHints:
-  deviceName: /dev/vda
+  rootDeviceHints:
+    deviceName: /dev/vda
 ----
 +
 image::module-01/09a_Worker4_Yaml_Edit.png[link=self, window=blank, width=100%]

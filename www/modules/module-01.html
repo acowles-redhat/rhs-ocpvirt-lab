@@ -506,10 +506,10 @@ This step may take several minutes to update as it powers up the host, and colle
 </li>
 <li>
 <p>Because this lab is being hosted in a virtualized environment we need to make a small configuration change before continuing. Click on the <strong>YAML</strong> tab at the top, and add the following two lines to the end of the <strong>spec:</strong> section to modify the type of hard disk present on the machine. Click the <strong>Save</strong> button.</p>
-<div class="listingblock">
+<div class="listingblock execute">
 <div class="content">
-<pre>rootDeviceHints:
-  deviceName: /dev/vda</pre>
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">  rootDeviceHints:
+    deviceName: /dev/vda</code></pre>
 </div>
 </div>
 <div class="imageblock">
