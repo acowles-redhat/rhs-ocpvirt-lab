@@ -1,45 +1,32 @@
 
 * xref:index.adoc[Introduction]
 
-* xref:module-01-intro.adoc[1. Virtual Machine Management ]
+* xref:module-01-intro.adoc[Virtual Machine Management ]
 ** xref:module-01-intro.adoc#create_project[Create a New Project]
 ** xref:module-01-intro.adoc#create_vm[Create a Linux Virtual Machine]
 ** xref:module-01-intro.adoc#admin_vms[Administering Virtual Machines]
 ** xref:module-01-intro.adoc#vm_state[Controlling Virtual Machine State]
 ** xref:module-01-intro.adoc#live_migrate[Live Migrate a Virtual Machine]
 
-* xref:module-02-mtv.adoc[2. Migrating Existing Virtual Machines]
+* xref:module-02-mtv.adoc[Migrating Existing Virtual Machines]
 ** xref:module-02-mtv.adoc#prerequisites[Prerequisites for Migrations]
 ** xref:module-02-mtv.adoc#migrating_vms[Migrating Virtual Machines from VMware]
 
-* xref:module-03-baremetal.adoc[3. Bare Metal Infrastructure Management ]
-** xref:module-03-baremetal.adoc#review_nodes[Review Nodes and Machines]
-** xref:module-03-baremetal.adoc#review_hosts[Review Bare Metal Hosts]
-** xref:module-03-baremetal.adoc#scaling_cluster[Scaling the Cluster with a New Bare Metal Host]
-
-* xref:module-04-storage.adoc[4. Storage Management]
+* xref:module-04-storage.adoc[Storage Management]
 ** xref:module-04-storage.adoc#examine_pvc[Examine the PVC for a VM]
 ** xref:module-04-storage.adoc#managing_snapshots[Managing Snapshots]
 ** xref:module-04-storage.adoc#clone_vm[Clone a Virtual Machine]
 
-* xref:module-05-bcdr.adoc[5. Backup and Recovery for Virtual Machines]
+* xref:module-05-bcdr.adoc[Backup and Recovery for Virtual Machines]
 ** xref:module-05-bcdr.adoc#review_operator[Review the OADP Operator]
 ** xref:module-05-bcdr.adoc#create_backup[Create a Virtual Machine Backup]
 ** xref:module-05-bcdr.adoc#restore_backup[Restore From a Backup]
 
-* xref:module-06-network.adoc[6. Network Management]
-** xref:module-06-network.adoc#create_netattach[Create a Network Attachment Definition]
-** xref:module-06-network.adoc#connect_external_net[Connect a Virtual Machine to an External Network]
-** xref:module-06-network.adoc#multinetwork_policy[Using a Multinetwork Policy]
-
-* xref:module-07-tempinst.adoc[7. Template and InstanceType Management]
+* xref:module-07-tempinst.adoc[Template and InstanceType Management]
 ** xref:module-07-tempinst.adoc#clone_customize_template[Clone and Customize a Template]
 ** xref:module-07-tempinst.adoc#create_win[Create a Windows VM Template]
 ** xref:module-07-tempinst.adoc#instance_types[Introduction to Instance Types]
 
-* xref:module-08-workingvms.adoc[8. Working with Virtual Machines and Applications]
-** xref:module-08-workingvms.adoc#lb_concepts[Load Balancer Concepts]
-** xref:module-08-workingvms.adoc#lb_config[Load Balancer Configuration]
+* xref:module-08-workingvms.adoc[Working with Virtual Machines and Applications]
 ** xref:module-08-workingvms.adoc#service_route[Exposing an Application with a Service/Route]
 ** xref:module-08-workingvms.adoc#expose_db[Expose the Database Externally]
-
